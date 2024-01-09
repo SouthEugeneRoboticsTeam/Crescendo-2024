@@ -26,5 +26,25 @@
       <option name="name" value="WPILocal" />
       <option name="url" value="file:/$PROJECT_DIR$/../../../Public/wpilib/2024/maven" />
     </remote-repository>
+    <remote-repository>
+      <option name="id" value="WPIcb311d09-36e9-4143-a032-55bb2b94443b_0Release" />
+      <option name="name" value="WPIcb311d09-36e9-4143-a032-55bb2b94443b_0Release" />
+      <option name="url" value="https://dev.studica.com/maven/release/2024/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="WPIFRCMavenVendorCacheRelease" />
+      <option name="name" value="WPIFRCMavenVendorCacheRelease" />
+      <option name="url" value="https://frcmaven.wpi.edu/artifactory/vendor-mvn-release" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="WPILocal" />
+      <option name="name" value="WPILocal" />
+      <option name="url" value="file:$USER_HOME$/wpilib/2024/maven" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="WPI3f48eb8c-50fe-43a6-9cb7-44c86353c4cb_0Release" />
+      <option name="name" value="WPI3f48eb8c-50fe-43a6-9cb7-44c86353c4cb_0Release" />
+      <option name="url" value="https://maven.revrobotics.com/" />
+    </remote-repository>
   </component>
 </project>
