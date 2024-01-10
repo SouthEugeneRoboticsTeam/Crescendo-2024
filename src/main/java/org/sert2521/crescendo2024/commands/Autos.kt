@@ -1,52 +1,41 @@
 package org.sert2521.crescendo2024.commands
 
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser
-import edu.wpi.first.wpilibj2.command.CommandBase
+import edu.wpi.first.wpilibj2.command.SubsystemBase
+import com.pathplanner.lib.auto.AutoBuilder
+import com.pathplanner.lib.util.HolonomicPathFollowerConfig
+import com.pathplanner.lib.util.PIDConstants
+import com.pathplanner.lib.util.ReplanningConfig
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard
 import edu.wpi.first.wpilibj2.command.Command
-import edu.wpi.first.wpilibj2.command.Commands
-import edu.wpi.first.wpilibj2.command.PrintCommand
-import org.sert2521.crescendo2024.subsystems.ExampleSubsystem
+import org.sert2521.crescendo2024.SwerveConstants
+import org.sert2521.crescendo2024.subsystems.Drivetrain
 
-object Autos
-{
-    private val autoModeChooser = SendableChooser<AutoMode>().apply {
-        AutoMode.values().forEach { addOption(it.optionName, it) }
-        setDefaultOption(AutoMode.default.optionName, AutoMode.default)
+
+object Autos : SubsystemBase() {
+    val autoChooser = AutoBuilder.buildAutoChooser()
+    val defaultAutoCommand = null
+
+
+    init {
+        AutoBuilder.configureHolonomic(
+            Drivetrain::getPose,
+            Drivetrain::setNewPose,
+            Drivetrain::getReletiveSpeeds,
+            Drivetrain::drive,
+            HolonomicPathFollowerConfig(PIDConstants(SwerveConstants.AUTO_POWER_P, SwerveConstants.AUTO_POWER_I, SwerveConstants.AUTO_POWER_D),
+                PIDConstants(SwerveConstants.AUTO_ANGLE_P, SwerveConstants.AUTO_ANGLE_I, SwerveConstants.AUTO_ANGLE_D),
+                SwerveConstants.MAX_AUTO_SPEED,
+                SwerveConstants.DRIVE_BASE_RADIUS,
+                ReplanningConfig(false, true, SwerveConstants.AUTO_REPLANNING_TOTAL_ERROR, SwerveConstants.AUTO_REPLANNING_SPIKE)
+            ),
+            {false},
+            Drivetrain
+        )
+
+        SmartDashboard.putData("Auto Chooser", autoChooser)
     }
 
-    val defaultAutonomousCommand: Command
-        get() = AutoMode.default.command
-
-    val selectedAutonomousCommand: Command
-        get() = autoModeChooser.selected?.command ?: defaultAutonomousCommand
-
-    /** Example static factory for an autonomous command.  */
-    private fun exampleAuto(): CommandBase =
-        Commands.sequence(ExampleSubsystem.exampleMethodCommand(), ExampleCommand())
-
-    private fun exampleAuto2() = PrintCommand("An example Auto Mode that just prints a value")
-
-    /**
-     * An enumeration of the available autonomous modes. It provides an easy
-     * way to manage all our autonomous modes. The [autoModeChooser] iterates
-     * over its values, adding each value to the chooser.
-     *
-     * @param optionName The name for the [autoModeChooser] option.
-     * @param command The [Command] to run for this mode.
-     */
-    @Suppress("unused")
-    private enum class AutoMode(val optionName: String, val command: Command)
-    {
-        // TODO: Replace with real auto modes and their corresponding commands
-        CUSTOM_AUTO_1("Custom Auto Mode 1", exampleAuto()),
-        CUSTOM_AUTO_2("Custom Auto Mode 2", exampleAuto2()),
-        CUSTOM_AUTO_3("Custom Auto Mode 3", ExampleCommand()),
-        ;
-
-        companion object
-        {
-            /** The default auto mode. */
-            val default = CUSTOM_AUTO_1
-        }
+    fun getAuto(): Command?{
+        return autoChooser.selected
     }
 }

@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj2.command.Command
 import edu.wpi.first.wpilibj2.command.CommandScheduler
 import org.sert2521.crescendo2024.commands.Autos
 
+
 /**
  * The VM is configured to automatically run this object (which basically functions as a singleton class),
  * and to call the functions corresponding to each mode, as described in the TimedRobot documentation.
@@ -22,7 +23,7 @@ object Robot : TimedRobot()
      * the [autonomousInit] method will set it to the value selected in
      *the  AutoChooser on the dashboard.
      */
-    private var autonomousCommand: Command = Autos.defaultAutonomousCommand
+    private var autonomousCommand: Command? = Autos.defaultAutoCommand
 
 
     /**
@@ -31,9 +32,7 @@ object Robot : TimedRobot()
      */
     override fun robotInit()
     {
-        // Access the RobotContainer object so that it is initialized. This will perform all our
-        // button bindings, and put our autonomous chooser on the dashboard.
-        RobotContainer
+
     }
 
     /**
@@ -68,8 +67,8 @@ object Robot : TimedRobot()
     {
         // We store the command as a Robot property in the rare event that the selector on the dashboard
         // is modified while the command is running since we need to access it again in teleopInit()
-        autonomousCommand = Autos.selectedAutonomousCommand
-        autonomousCommand.schedule()
+        autonomousCommand = Autos.getAuto()
+        autonomousCommand?.schedule()
     }
 
     /** This method is called periodically during autonomous.  */
@@ -81,36 +80,12 @@ object Robot : TimedRobot()
     {
         // This makes sure that the autonomous stops running when teleop starts running. If you want the
         // autonomous to continue until interrupted by another command, remove this line or comment it out.
-        autonomousCommand.cancel()
-    }
-
-    /** This method is called periodically during operator control.  */
-    override fun teleopPeriodic()
-    {
-
+        autonomousCommand?.cancel()
     }
 
     override fun testInit()
     {
         // Cancels all running commands at the start of test mode.
         CommandScheduler.getInstance().cancelAll()
-    }
-
-    /** This method is called periodically during test mode.  */
-    override fun testPeriodic()
-    {
-
-    }
-
-    /** This method is called once when the robot is first started up.  */
-    override fun simulationInit()
-    {
-
-    }
-
-    /** This method is called periodically whilst in simulation.  */
-    override fun simulationPeriodic()
-    {
-
     }
 }
