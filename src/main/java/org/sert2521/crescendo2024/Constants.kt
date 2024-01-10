@@ -13,6 +13,8 @@ class SwerveModuleData(val position: Translation2d, val powerMotorID: Int, val a
 object PhysicalConstants{
     const val HALF_SIDE_LENGTH = 0.0
 
+    const val WRIST_ENCODER_MULTIPLY = 0.0
+    const val WRIST_ENCODER_OFFSET = 0.0
 }
 
 object ConfigConstants{
@@ -50,7 +52,6 @@ object SwerveConstants{
             SwerveModuleData(Translation2d(-HALF_SIDE_LENGTH, -HALF_SIDE_LENGTH), -1, -1, -1, 0.0, true), //Back Right
             SwerveModuleData(Translation2d(HALF_SIDE_LENGTH, HALF_SIDE_LENGTH), -1, -1, -1, 0.0, true), //Front Left
             SwerveModuleData(Translation2d(-HALF_SIDE_LENGTH, HALF_SIDE_LENGTH), -1, -1, -1, 0.0, true)) //Front Right
-
 }
 
 
