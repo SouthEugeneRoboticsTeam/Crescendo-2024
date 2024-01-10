@@ -1,6 +1,7 @@
 package org.sert2521.crescendo2024
 
 import edu.wpi.first.math.geometry.Translation2d
+import kotlin.math.PI
 
 /*
  * The Constants file provides a convenient place for teams to hold robot-wide
@@ -12,6 +13,7 @@ class SwerveModuleData(val position: Translation2d, val powerMotorID: Int, val a
 
 object PhysicalConstants{
     const val HALF_SIDE_LENGTH = 0.0
+
 
 }
 
@@ -28,6 +30,8 @@ object ConfigConstants{
     //Acceleration of drivetrain
     const val DRIVE_ACCEL = 30.0
     const val DRIVE_DECCEL = 36.0
+
+    const val DRIVE_OPTIMIZED = true
 }
 
 object SwerveConstants{
@@ -51,6 +55,12 @@ object SwerveConstants{
             SwerveModuleData(Translation2d(HALF_SIDE_LENGTH, HALF_SIDE_LENGTH), -1, -1, -1, 0.0, true), //Front Left
             SwerveModuleData(Translation2d(-HALF_SIDE_LENGTH, HALF_SIDE_LENGTH), -1, -1, -1, 0.0, true)) //Front Right
 
+    // Pi * diameter / gear ratio
+    const val POWER_ENCODER_MULTIPLY_POSITION = PI * 0.1016 / 8.14
+    // Velocity is in rpm so needs / 60
+    const val POWER_ENCODER_MULTIPLY_VELOCITY = POWER_ENCODER_MULTIPLY_POSITION / 60.0
+
+    const val ANGLE_ENCODER_MULTIPLY = 0.01745329251
 }
 
 object ElectronicIDs{

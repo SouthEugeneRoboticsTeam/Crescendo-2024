@@ -1,6 +1,6 @@
 package org.sert2521.crescendo2024.subsystems
 
-//import com.ctre.phoenix.sensors.CANCoder
+import com.ctre.phoenix6.hardware.CANcoder
 import com.kauailabs.navx.frc.AHRS
 import com.revrobotics.CANSparkBase
 import com.revrobotics.CANSparkMax
@@ -24,7 +24,7 @@ class SwerveModule(private val powerMotor: CANSparkMax,
                    private val powerFeedforward: SimpleMotorFeedforward,
                    private val powerPID: PIDController,
                    private val angleMotor: CANSparkMax,
-                   private val angleEncoder: CANCoder,
+                   private val angleEncoder: CANcoder,
                    private val angleOffset: Double,
                    private val anglePID: PIDController,
                    private val centerRotation: Rotation2d,
@@ -49,17 +49,17 @@ class SwerveModule(private val powerMotor: CANSparkMax,
 
         powerMotor.inverted = inverted
 
-        powerMotor.encoder.positionConversionFactor = PhysicalConstants.powerEncoderMultiplierPosition
-        powerMotor.encoder.velocityConversionFactor = PhysicalConstants.powerEncoderMultiplierVelocity
+        powerMotor.encoder.positionConversionFactor = SwerveConstants.POWER_ENCODER_MULTIPLY_POSITION
+        powerMotor.encoder.velocityConversionFactor = SwerveConstants.POWER_ENCODER_MULTIPLY_VELOCITY
 
         position = SwerveModulePosition(powerMotor.encoder.position, getAngle())
     }
 
     fun getAngle(): Rotation2d {
         return if (inverted) {
-            Rotation2d(-(angleEncoder.absolutePosition * PhysicalConstants.angleEncoderMultiplier - angleOffset))
+            Rotation2d(-(angleEncoder.absolutePosition.valueAsDouble * SwerveConstants.ANGLE_ENCODER_MULTIPLY - angleOffset))
         } else {
-            Rotation2d(angleEncoder.absolutePosition * PhysicalConstants.angleEncoderMultiplier - angleOffset)
+            Rotation2d(angleEncoder.absolutePosition.valueAsDouble * SwerveConstants.ANGLE_ENCODER_MULTIPLY - angleOffset)
         }
     }
 
@@ -148,7 +148,7 @@ object Drivetrain : SubsystemBase() {
         private set
 
     // False is broken
-    var doesOptimize = ConfigConstants.drivetrainOptimized
+    var doesOptimize = ConfigConstants.DRIVE_OPTIMIZED
         private set
 
     init {
@@ -156,7 +156,7 @@ object Drivetrain : SubsystemBase() {
         val modulesList = mutableListOf<SwerveModule>()
 
         // Maybe the module should create the motors
-        for (moduleData in ElectronicIDs.swerveModuleData) {
+        for (moduleData in SwerveConstants.swerveModuleData) {
             val powerMotor = CANSparkMax(moduleData.powerMotorID, CANSparkLowLevel.MotorType.kBrushless)
             val angleMotor = CANSparkMax(moduleData.angleMotorID, CANSparkLowLevel.MotorType.kBrushless)
 
@@ -200,7 +200,7 @@ object Drivetrain : SubsystemBase() {
             SimpleMotorFeedforward(SwerveConstants.POWER_S, SwerveConstants.POWER_V, SwerveConstants.POWER_A),
             PIDController(SwerveConstants.POWER_P, SwerveConstants.POWER_I, SwerveConstants.POWER_D),
             angleMotor,
-            CANCoder(moduleData.angleEncoderID),
+            CANcoder(moduleData.angleEncoderID),
             moduleData.angleOffset,
             PIDController(SwerveConstants.ANGLE_P, SwerveConstants.ANGLE_I, SwerveConstants.ANGLE_D),
             Rotation2d(atan2(moduleData.position.y, moduleData.position.x)),
