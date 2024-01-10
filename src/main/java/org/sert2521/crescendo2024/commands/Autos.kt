@@ -5,12 +5,15 @@ import com.pathplanner.lib.auto.AutoBuilder
 import com.pathplanner.lib.util.HolonomicPathFollowerConfig
 import com.pathplanner.lib.util.PIDConstants
 import com.pathplanner.lib.util.ReplanningConfig
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard
+import edu.wpi.first.wpilibj2.command.Command
 import org.sert2521.crescendo2024.SwerveConstants
 import org.sert2521.crescendo2024.subsystems.Drivetrain
 
 
 object Autos : SubsystemBase() {
-    val paths = AutoBuilder.buildAutoChooser()
+    val autoChooser = AutoBuilder.buildAutoChooser()
+    val defaultAutoCommand = null
 
 
     init {
@@ -29,5 +32,10 @@ object Autos : SubsystemBase() {
             Drivetrain
         )
 
+        SmartDashboard.putData("Auto Chooser", autoChooser)
+    }
+
+    fun getAuto(): Command?{
+        return autoChooser.selected
     }
 }
