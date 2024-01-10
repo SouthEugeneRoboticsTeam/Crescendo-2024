@@ -53,5 +53,9 @@ object SwerveConstants{
 
 }
 
+object ElectronicIDs{
+
+}
+
 
 
