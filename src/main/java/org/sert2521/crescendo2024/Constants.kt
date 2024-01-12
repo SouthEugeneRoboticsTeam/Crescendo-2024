@@ -36,6 +36,7 @@ object ConfigConstants{
 
 object SwerveConstants{
     const val HALF_SIDE_LENGTH = 0.0
+    const val DRIVE_BASE_RADIUS = 0.0
 
     const val POWER_S = 0.0
     const val POWER_V = 0.0
@@ -61,6 +62,19 @@ object SwerveConstants{
     const val POWER_ENCODER_MULTIPLY_VELOCITY = POWER_ENCODER_MULTIPLY_POSITION / 60.0
 
     const val ANGLE_ENCODER_MULTIPLY = 0.01745329251
+
+    const val MAX_AUTO_SPEED = 0.0
+
+    const val AUTO_POWER_P = 0.0
+    const val AUTO_POWER_I = 0.0
+    const val AUTO_POWER_D = 0.0
+
+    const val AUTO_ANGLE_P = 0.0
+    const val AUTO_ANGLE_I = 0.0
+    const val AUTO_ANGLE_D = 0.0
+
+    const val AUTO_REPLANNING_TOTAL_ERROR = 0.0
+    const val AUTO_REPLANNING_SPIKE = 0.0
 }
 
 object ElectronicIDs{
