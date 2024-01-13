@@ -78,7 +78,11 @@ object SwerveConstants{
 }
 
 object ElectronicIDs{
+    const val intakeMotorID = -1
+}
 
+object RuntimeConstants{
+    var motorSpeed = 0.0
 }
 
 
