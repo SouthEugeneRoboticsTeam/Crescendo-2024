@@ -18,14 +18,14 @@ class RunWrist : Command() {
     init {
         // each subsystem used by the command must be passed into the addRequirements() method
         addRequirements(Wrist)
-        pid.enableContinuousInput(-PI, PI)
+
     }
 
     override fun initialize() {}
 
     override fun execute() {
         wristAngle = Wrist.getRadians()
-        Wrist.setVoltage(feedForward.calculate(wristAngle, 0.0) + pid.calculate(wristAngle, RuntimeConstants.wristSetPoint))
+        Wrist.setVoltage(feedForward.calculate(wristAngle, 0.0) + pid.calculate(wristAngle+2*PI, RuntimeConstants.wristSetPoint+2*PI))
     }
 
     override fun isFinished(): Boolean {

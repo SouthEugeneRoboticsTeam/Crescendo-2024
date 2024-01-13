@@ -3,6 +3,7 @@ package org.sert2521.crescendo2024.subsystems
 import com.revrobotics.CANSparkMax
 import com.revrobotics.CANSparkLowLevel
 import edu.wpi.first.wpilibj.DutyCycleEncoder
+import edu.wpi.first.wpilibj.Timer
 import edu.wpi.first.wpilibj2.command.SubsystemBase
 import org.sert2521.crescendo2024.ElectronicIDs
 import org.sert2521.crescendo2024.PhysicalConstants
@@ -15,6 +16,9 @@ object Wrist : SubsystemBase() {
     val encoder = motorOne.encoder
     val absEncoder = DutyCycleEncoder(-1)
     val motorSpeed = 0.0
+    var prevRot = 0.0
+    var deltaTime = Timer.getFPGATimestamp()
+    var vel = 0.0
 
     init{
         //motorOne.setSmartCurrentLimit(40)
@@ -22,6 +26,12 @@ object Wrist : SubsystemBase() {
         //motor.inverted = true
 
         absEncoder.distancePerRotation = PhysicalConstants.WRIST_ENCODER_MULTIPLY
+        prevRot = getRadians()
+    }
+
+    override fun periodic(){
+        //val time = Timer.getFPGATimestamp()
+        //vel = time
     }
     fun setSpeed(speed:Double){
         motorOne.set(speed)
@@ -43,6 +53,10 @@ object Wrist : SubsystemBase() {
 
 
         return wristAngle
+    }
+
+    fun getVelocity():Double{
+        return getRadians()- prevRot
     }
 
     fun resetEncoder(){
