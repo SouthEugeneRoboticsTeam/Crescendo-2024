@@ -16,6 +16,11 @@ object PhysicalConstants{
 
     const val WRIST_ENCODER_MULTIPLY = 0.0
     const val WRIST_ENCODER_OFFSET = 0.0
+
+    //ESTIMATES
+    const val WRIST_SETPOINT_STOW = 0.89
+    const val WRIST_SETPOINT_SHOOT = 0.89
+    const val WRIST_SETPOINT_AMP = -0.80
 }
 
 object ConfigConstants{
@@ -90,13 +95,13 @@ object RuntimeConstants{
 }
 
 object TuningConstants {
-    const val WRIST_P = 0.01
+    const val WRIST_P = 0.0
     const val WRIST_I = 0.0
     const val WRIST_D = 0.0
 
     //ESTIMATIONS
     const val WRIST_S = 0.0
-    const val WRIST_G = 0.3
+    const val WRIST_G = 0.0
     const val WRIST_V = 0.0
     const val WRIST_A = 0.0
 }
