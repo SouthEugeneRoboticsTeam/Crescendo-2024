@@ -79,7 +79,9 @@ object SwerveConstants{
 }
 
 object ElectronicIDs{
-    const val intakeMotorID = -1
+    const val INTAKE_MOTOR_ID = -1
+    const val WRIST_ONE_ID = -1
+    const val WRIST_TWO_ID = -1
 }
 
 object RuntimeConstants{
