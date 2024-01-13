@@ -63,7 +63,7 @@ object SwerveConstants{
             SwerveModuleData(Translation2d(-HALF_SIDE_LENGTH, HALF_SIDE_LENGTH), -1, -1, -1, 0.0, true)) //Front Right
 
     // Pi * diameter / gear ratio
-    const val POWER_ENCODER_MULTIPLY_POSITION = PI * 0.1016 / 8.14
+    const val POWER_ENCODER_MULTIPLY_POSITION = PI * 0.1016 / 6.75
     // Velocity is in rpm so needs / 60
     const val POWER_ENCODER_MULTIPLY_VELOCITY = POWER_ENCODER_MULTIPLY_POSITION / 60.0
 

@@ -138,7 +138,6 @@ object Drivetrain : SubsystemBase() {
     private val poseEstimator: SwerveDrivePoseEstimator
 
     private var pose = Pose2d()
-    private var visionPose = Pose2d()
 
     private var prevPose = Pose2d()
     private var prevTime = Timer.getFPGATimestamp()
@@ -191,9 +190,6 @@ object Drivetrain : SubsystemBase() {
     }
 
     // Fix this nonsense
-    fun getVisionPose(): Pose2d {
-        return Pose2d(visionPose.y, visionPose.x, -visionPose.rotation)
-    }
 
     private fun createModule(powerMotor: CANSparkMax, angleMotor: CANSparkMax, moduleData: SwerveModuleData): SwerveModule {
         return SwerveModule(powerMotor,
