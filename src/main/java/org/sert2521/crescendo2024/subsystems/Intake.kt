@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase
 import org.sert2521.crescendo2024.ElectronicIDs
 
 object Intake : SubsystemBase() {
-    private val intakeMotor = CANSparkMax(ElectronicIDs.intakeMotorID, CANSparkLowLevel.MotorType.kBrushless)
+    private val intakeMotor = CANSparkMax(ElectronicIDs.INTAKE_MOTOR_ID, CANSparkLowLevel.MotorType.kBrushless)
 
     init {
         intakeMotor.idleMode = CANSparkBase.IdleMode.kBrake
