@@ -1,6 +1,7 @@
 package org.sert2521.crescendo2024
 
 import edu.wpi.first.math.geometry.Translation2d
+import edu.wpi.first.math.trajectory.TrapezoidProfile
 import kotlin.math.PI
 
 /*
@@ -104,6 +105,8 @@ object TuningConstants {
     const val WRIST_G = 0.0
     const val WRIST_V = 0.0
     const val WRIST_A = 0.0
+
+    val trapConstraints = TrapezoidProfile.Constraints(1.0, 1.0)
 }
 
 
