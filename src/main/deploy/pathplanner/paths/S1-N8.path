@@ -3,29 +3,45 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 0.5,
-        "y": 7.3
+        "x": 0.7,
+        "y": 6.69
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.7738413084968672,
-        "y": 6.381526859745832
+        "x": 2.8182810564094414,
+        "y": 6.465082039578838
       },
       "isLocked": false,
-      "linkedName": "B1"
+      "linkedName": "S1"
     },
     {
       "anchor": {
-        "x": 0.7294015605842922,
-        "y": 4.39709133871194
+        "x": 5.185733666410081,
+        "y": 4.209598471569717
       },
       "prevControl": {
-        "x": 2.2500921931588413,
-        "y": 4.39709133871194
+        "x": 3.658232906476104,
+        "y": 4.792480041822743
+      },
+      "nextControl": {
+        "x": 7.04826203545537,
+        "y": 3.4988731555071255
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 8.270256540513081,
+        "y": 0.7728854134553063
+      },
+      "prevControl": {
+        "x": 8.020256540513081,
+        "y": 2.272885413455306
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "N8"
     }
   ],
   "rotationTargets": [],
@@ -33,7 +49,7 @@
   "eventMarkers": [
     {
       "name": "New Event Marker",
-      "waypointRelativePos": 1.0,
+      "waypointRelativePos": 1.65,
       "command": {
         "type": "parallel",
         "data": {
@@ -41,7 +57,7 @@
             {
               "type": "named",
               "data": {
-                "name": "OuttakeHigh"
+                "name": "Intake"
               }
             }
           ]
@@ -57,11 +73,11 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 120.0,
+    "rotation": -80.5376777919742,
     "rotateFast": false
   },
   "reversed": false,
-  "folder": "B1-SX",
+  "folder": "S1-NX",
   "previewStartingState": null,
   "useDefaultConstraints": false
 }

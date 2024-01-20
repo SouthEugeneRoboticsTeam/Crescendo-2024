@@ -3,16 +3,32 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 0.5,
+        "x": 8.291145335471334,
         "y": 4.1046482092964185
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.157621857228448,
-        "y": 3.551095142902754
+        "x": 9.043141953968387,
+        "y": 3.300429603403737
       },
       "isLocked": false,
-      "linkedName": "B2"
+      "linkedName": "N6"
+    },
+    {
+      "anchor": {
+        "x": 5.262270066524867,
+        "y": 3.8748714647482267
+      },
+      "prevControl": {
+        "x": 6.873125647161459,
+        "y": 4.808700786856395
+      },
+      "nextControl": {
+        "x": 3.8209432144055144,
+        "y": 3.039319666418167
+      },
+      "isLocked": false,
+      "linkedName": null
     },
     {
       "anchor": {
@@ -20,41 +36,17 @@
         "y": 4.365758146274563
       },
       "prevControl": {
-        "x": 1.3247322168944597,
-        "y": 4.188203389129424
+        "x": 2.181172810182772,
+        "y": 1.9635467260682153
       },
       "nextControl": null,
       "isLocked": false,
       "linkedName": "S3"
     }
   ],
-  "rotationTargets": [
-    {
-      "waypointRelativePos": 1,
-      "rotationDegrees": 120.0,
-      "rotateFast": false
-    }
-  ],
+  "rotationTargets": [],
   "constraintZones": [],
-  "eventMarkers": [
-    {
-      "name": "New Event Marker",
-      "waypointRelativePos": 1.0,
-      "command": {
-        "type": "parallel",
-        "data": {
-          "commands": [
-            {
-              "type": "named",
-              "data": {
-                "name": "OuttakeHigh"
-              }
-            }
-          ]
-        }
-      }
-    }
-  ],
+  "eventMarkers": [],
   "globalConstraints": {
     "maxVelocity": 3.0,
     "maxAcceleration": 3.0,
@@ -67,7 +59,7 @@
     "rotateFast": false
   },
   "reversed": false,
-  "folder": "B2-SX",
+  "folder": "NX-S3",
   "previewStartingState": null,
   "useDefaultConstraints": false
 }

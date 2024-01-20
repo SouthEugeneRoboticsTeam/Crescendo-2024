@@ -8,47 +8,29 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 9.816027367423692,
-        "y": 6.506859629495342
+        "x": 9.680250200195058,
+        "y": 6.694858784119604
       },
       "isLocked": false,
       "linkedName": "N4"
     },
     {
       "anchor": {
-        "x": 0.7,
-        "y": 6.69
+        "x": 1.3665098068109631,
+        "y": 5.5981970488114
       },
       "prevControl": {
-        "x": 2.494504734556543,
-        "y": 6.444193244620586
+        "x": 2.6825038891808064,
+        "y": 5.702641023602658
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "S1"
+      "linkedName": "S2"
     }
   ],
   "rotationTargets": [],
   "constraintZones": [],
-  "eventMarkers": [
-    {
-      "name": "New Event Marker",
-      "waypointRelativePos": 1.0,
-      "command": {
-        "type": "parallel",
-        "data": {
-          "commands": [
-            {
-              "type": "named",
-              "data": {
-                "name": "OuttakeHigh"
-              }
-            }
-          ]
-        }
-      }
-    }
-  ],
+  "eventMarkers": [],
   "globalConstraints": {
     "maxVelocity": 3.0,
     "maxAcceleration": 3.0,
@@ -57,11 +39,11 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -120.0,
+    "rotation": 180.0,
     "rotateFast": false
   },
   "reversed": false,
-  "folder": "NX-S1",
+  "folder": "NX-S2",
   "previewStartingState": null,
   "useDefaultConstraints": false
 }

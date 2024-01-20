@@ -3,29 +3,29 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 0.5,
-        "y": 7.3
+        "x": 2.922725031200699,
+        "y": 5.535530663936646
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.7738413084968672,
-        "y": 6.381526859745832
+        "x": 3.3822785202822323,
+        "y": 5.232643137042
       },
       "isLocked": false,
-      "linkedName": "B1"
+      "linkedName": "N2"
     },
     {
       "anchor": {
-        "x": 0.7294015605842922,
-        "y": 4.39709133871194
+        "x": 0.6667351757095377,
+        "y": 4.365758146274563
       },
       "prevControl": {
-        "x": 2.2500921931588413,
-        "y": 4.39709133871194
+        "x": 1.7633969110177412,
+        "y": 3.7913162849226465
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "S3"
     }
   ],
   "rotationTargets": [],
@@ -61,7 +61,7 @@
     "rotateFast": false
   },
   "reversed": false,
-  "folder": "B1-SX",
+  "folder": "NX-S3",
   "previewStartingState": null,
   "useDefaultConstraints": false
 }

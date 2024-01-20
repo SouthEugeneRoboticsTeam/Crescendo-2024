@@ -3,29 +3,45 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 0.5,
-        "y": 7.3
+        "x": 8.30158973295046,
+        "y": 2.412655817678048
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.7738413084968672,
-        "y": 6.381526859745832
+        "x": 9.293807493467405,
+        "y": 0.7624410159761787
       },
       "isLocked": false,
-      "linkedName": "B1"
+      "linkedName": "N7"
     },
     {
       "anchor": {
-        "x": 0.7294015605842922,
-        "y": 4.39709133871194
+        "x": 5.053382116942352,
+        "y": 4.511979710982323
       },
       "prevControl": {
-        "x": 2.2500921931588413,
-        "y": 4.39709133871194
+        "x": 7.215372395121381,
+        "y": 3.603317130298383
+      },
+      "nextControl": {
+        "x": 2.563187611210074,
+        "y": 5.558583198898788
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 0.7,
+        "y": 6.69
+      },
+      "prevControl": {
+        "x": 1.3769542042900886,
+        "y": 7.405077812700155
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "S1"
     }
   ],
   "rotationTargets": [],
@@ -33,7 +49,7 @@
   "eventMarkers": [
     {
       "name": "New Event Marker",
-      "waypointRelativePos": 1.0,
+      "waypointRelativePos": 2.0,
       "command": {
         "type": "parallel",
         "data": {
@@ -57,11 +73,11 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 120.0,
+    "rotation": -120.0,
     "rotateFast": false
   },
   "reversed": false,
-  "folder": "B1-SX",
+  "folder": "NX-S1",
   "previewStartingState": null,
   "useDefaultConstraints": false
 }
