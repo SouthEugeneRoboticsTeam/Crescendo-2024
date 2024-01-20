@@ -8,8 +8,8 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.8391698513676933,
-        "y": 5.556419458894899
+        "x": 1.4664695916582786,
+        "y": 5.595361310234171
       },
       "isLocked": false,
       "linkedName": "S2"
@@ -20,8 +20,8 @@
         "y": 5.535530663936646
       },
       "prevControl": {
-        "x": 1.5858421538726035,
-        "y": 5.493753074020143
+        "x": 2.8227738235919912,
+        "y": 5.5324071886988735
       },
       "nextControl": null,
       "isLocked": false,
@@ -58,7 +58,7 @@
   "goalEndState": {
     "velocity": 0,
     "rotation": 4.763641690726252,
-    "rotateFast": false
+    "rotateFast": true
   },
   "reversed": false,
   "folder": "S2-NX",
