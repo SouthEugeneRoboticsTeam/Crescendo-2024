@@ -4,31 +4,37 @@
     {
       "anchor": {
         "x": 0.5,
-        "y": 7.3
+        "y": 4.1046482092964185
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.700730526137765,
-        "y": 7.258856247987173
+        "x": 1.6380641412682322,
+        "y": 3.822649477360024
       },
       "isLocked": false,
-      "linkedName": "B1"
+      "linkedName": "B2"
     },
     {
       "anchor": {
-        "x": 2.922725031200699,
-        "y": 6.99
+        "x": 1.3665098068109631,
+        "y": 5.5981970488114
       },
       "prevControl": {
-        "x": 1.4352651374895304,
-        "y": 7.306169360629303
+        "x": 2.6825038891808064,
+        "y": 5.493753074020143
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "N1"
+      "linkedName": "S2"
     }
   ],
-  "rotationTargets": [],
+  "rotationTargets": [
+    {
+      "waypointRelativePos": 0,
+      "rotationDegrees": 0,
+      "rotateFast": false
+    }
+  ],
   "constraintZones": [],
   "eventMarkers": [],
   "globalConstraints": {
@@ -39,11 +45,11 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -16.31385242671581,
+    "rotation": 180.0,
     "rotateFast": false
   },
   "reversed": false,
-  "folder": null,
+  "folder": "B2-SX",
   "previewStartingState": null,
   "useDefaultConstraints": false
 }

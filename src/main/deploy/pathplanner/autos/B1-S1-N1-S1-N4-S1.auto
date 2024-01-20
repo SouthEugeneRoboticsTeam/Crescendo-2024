@@ -6,33 +6,98 @@
     "data": {
       "commands": [
         {
-          "type": "path",
+          "type": "sequential",
           "data": {
-            "pathName": "B1-S1"
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "B1-S1"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "OuttakeHigh"
+                }
+              }
+            ]
           }
         },
         {
-          "type": "named",
+          "type": "parallel",
           "data": {
-            "name": "OuttakeHigh"
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "S1-N1"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "Intake"
+                }
+              }
+            ]
           }
         },
         {
-          "type": "path",
+          "type": "sequential",
           "data": {
-            "pathName": "S1-N1"
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "N1-S1"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "OuttakeHigh"
+                }
+              }
+            ]
           }
         },
         {
-          "type": "named",
+          "type": "parallel",
           "data": {
-            "name": "Intake"
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "S1-N4"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "Intake"
+                }
+              }
+            ]
           }
         },
         {
-          "type": "path",
+          "type": "sequential",
           "data": {
-            "pathName": "N1-S1"
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "N4-S1"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "OuttakeHigh"
+                }
+              }
+            ]
           }
         }
       ]
