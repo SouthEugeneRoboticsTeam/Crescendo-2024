@@ -12,21 +12,9 @@
           }
         },
         {
-          "type": "named",
-          "data": {
-            "name": "OuttakeHigh"
-          }
-        },
-        {
           "type": "path",
           "data": {
             "pathName": "S1-N1"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "Intake"
           }
         },
         {
