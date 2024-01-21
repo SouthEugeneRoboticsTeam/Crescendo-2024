@@ -12,7 +12,7 @@ import org.sert2521.crescendo2024.subsystems.Drivetrain
 
 
 object Autos : SubsystemBase() {
-    val autoChooser = AutoBuilder.buildAutoChooser()
+    private val autoChooser = AutoBuilder.buildAutoChooser()
     val defaultAutoCommand = null
 
 
