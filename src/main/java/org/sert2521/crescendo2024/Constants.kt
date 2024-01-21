@@ -106,6 +106,7 @@ object TuningConstants {
     const val WRIST_V = 0.0
     const val WRIST_A = 0.0
 
+    const val WRIST_ANGLE_TOLERANCE = 0.0
     val trapConstraints = TrapezoidProfile.Constraints(1.0, 1.0)
 }
 
