@@ -4,13 +4,14 @@
   "holonomicMode": true,
   "pathFolders": [
     "A-NX",
-    "BX-A",
     "B1-SX",
     "B2-SX",
     "B3-SX",
+    "BX-A",
     "NX-S1",
     "NX-S2",
     "NX-S3",
+    "NX-A",
     "S1-NX",
     "S2-NX",
     "S3-NX"

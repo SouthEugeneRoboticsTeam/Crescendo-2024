@@ -1,0 +1,49 @@
+{
+  "version": 1.0,
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 8.291145335471334,
+        "y": 4.1046482092964185
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 7.163150407725753,
+        "y": 2.23510106053291
+      },
+      "isLocked": false,
+      "linkedName": "N6"
+    },
+    {
+      "anchor": {
+        "x": 1.7842857059759927,
+        "y": 7.707965339594802
+      },
+      "prevControl": {
+        "x": 1.6485085387473581,
+        "y": 6.2457496925171965
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": "A"
+    }
+  ],
+  "rotationTargets": [],
+  "constraintZones": [],
+  "eventMarkers": [],
+  "globalConstraints": {
+    "maxVelocity": 3.0,
+    "maxAcceleration": 3.0,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": -90.0,
+    "rotateFast": false
+  },
+  "reversed": false,
+  "folder": "NX-A",
+  "previewStartingState": null,
+  "useDefaultConstraints": false
+}
