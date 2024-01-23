@@ -8,47 +8,45 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.4500649866439688,
-        "y": 3.425762373153246
+        "x": 2.1602840152245197,
+        "y": 3.227318821049857
       },
       "isLocked": false,
       "linkedName": "B3"
     },
     {
       "anchor": {
-        "x": 1.3560654093318372,
-        "y": 5.514641868978395
+        "x": 2.212506002620149,
+        "y": 5.65041903620703
       },
       "prevControl": {
-        "x": 1.5962865513517286,
-        "y": 3.9375378496304085
+        "x": 2.1602840152245197,
+        "y": 4.041981824421665
+      },
+      "nextControl": {
+        "x": 2.2484978887093536,
+        "y": 6.758969127754534
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 1.7842857059759927,
+        "y": 7.707965339594802
+      },
+      "prevControl": {
+        "x": 2.0036180530376333,
+        "y": 6.767969566473484
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "S2"
+      "linkedName": null
     }
   ],
   "rotationTargets": [],
   "constraintZones": [],
-  "eventMarkers": [
-    {
-      "name": "New Event Marker",
-      "waypointRelativePos": 1.0,
-      "command": {
-        "type": "parallel",
-        "data": {
-          "commands": [
-            {
-              "type": "named",
-              "data": {
-                "name": "OuttakeHigh"
-              }
-            }
-          ]
-        }
-      }
-    }
-  ],
+  "eventMarkers": [],
   "globalConstraints": {
     "maxVelocity": 3.0,
     "maxAcceleration": 3.0,
@@ -57,11 +55,11 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 0.0,
+    "rotation": -90.0,
     "rotateFast": false
   },
   "reversed": false,
-  "folder": "B3-SX",
+  "folder": "BX-A",
   "previewStartingState": null,
   "useDefaultConstraints": false
 }

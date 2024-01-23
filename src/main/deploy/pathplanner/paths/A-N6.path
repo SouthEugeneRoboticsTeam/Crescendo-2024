@@ -3,29 +3,29 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 0.698068368146915,
-        "y": 6.653081194203101
+        "x": 1.7842857059759927,
+        "y": 7.707965339594802
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.343689379999626,
-        "y": 7.420380994298885
+        "x": 2.7451702740555612,
+        "y": 6.830635951348238
       },
       "isLocked": false,
-      "linkedName": "S1"
+      "linkedName": "A"
     },
     {
       "anchor": {
-        "x": 5.638268375773393,
-        "y": 6.517304026974466
+        "x": 6.1604882497296805,
+        "y": 6.3188604748710775
       },
       "prevControl": {
-        "x": 4.297289405206224,
-        "y": 7.218549910665555
+        "x": 5.05368525393881,
+        "y": 7.004895389617484
       },
       "nextControl": {
-        "x": 6.7767077009981,
-        "y": 5.921973370664299
+        "x": 7.424260344703896,
+        "y": 5.5355306639366475
       },
       "isLocked": false,
       "linkedName": null
@@ -36,8 +36,8 @@
         "y": 4.1046482092964185
       },
       "prevControl": {
-        "x": 8.041145335471334,
-        "y": 5.6046482092964185
+        "x": 7.413815947224771,
+        "y": 5.587752651332275
       },
       "nextControl": null,
       "isLocked": false,
@@ -46,25 +46,7 @@
   ],
   "rotationTargets": [],
   "constraintZones": [],
-  "eventMarkers": [
-    {
-      "name": "New Event Marker",
-      "waypointRelativePos": 1.65,
-      "command": {
-        "type": "parallel",
-        "data": {
-          "commands": [
-            {
-              "type": "named",
-              "data": {
-                "name": "Intake"
-              }
-            }
-          ]
-        }
-      }
-    }
-  ],
+  "eventMarkers": [],
   "globalConstraints": {
     "maxVelocity": 3.0,
     "maxAcceleration": 3.0,
@@ -73,11 +55,11 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -67.83365417791757,
+    "rotation": -57.600159826080784,
     "rotateFast": false
   },
   "reversed": false,
-  "folder": "S1-NX",
+  "folder": "A-NX",
   "previewStartingState": null,
   "useDefaultConstraints": false
 }

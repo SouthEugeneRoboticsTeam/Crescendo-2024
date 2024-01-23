@@ -3,29 +3,45 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 0.698068368146915,
-        "y": 6.653081194203101
+        "x": 1.7842857059759927,
+        "y": 7.707965339594802
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.816349424556356,
-        "y": 6.428163233781938
+        "x": 5.022048924504975,
+        "y": 7.41552221017928
       },
       "isLocked": false,
-      "linkedName": "S1"
+      "linkedName": "A"
     },
     {
       "anchor": {
-        "x": 5.185733666410081,
-        "y": 4.209598471569717
+        "x": 6.7453745085607215,
+        "y": 6.06819493537206
       },
       "prevControl": {
-        "x": 3.658232906476104,
-        "y": 4.792480041822743
+        "x": 6.773160175332667,
+        "y": 7.540835274285212
       },
       "nextControl": {
-        "x": 7.04826203545537,
-        "y": 3.4988731555071255
+        "x": 6.714041316123345,
+        "y": 4.407535736191065
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 7.194483600163131,
+        "y": 1.7859919689305035
+      },
+      "prevControl": {
+        "x": 6.8218526269289885,
+        "y": 2.2897338401544363
+      },
+      "nextControl": {
+        "x": 7.758481064035921,
+        "y": 1.0235509529543236
       },
       "isLocked": false,
       "linkedName": null
@@ -36,8 +52,8 @@
         "y": 0.7728854134553063
       },
       "prevControl": {
-        "x": 8.020256540513081,
-        "y": 2.272885413455306
+        "x": 7.748036666556794,
+        "y": 1.1697725176620835
       },
       "nextControl": null,
       "isLocked": false,
@@ -46,25 +62,7 @@
   ],
   "rotationTargets": [],
   "constraintZones": [],
-  "eventMarkers": [
-    {
-      "name": "New Event Marker",
-      "waypointRelativePos": 1.65,
-      "command": {
-        "type": "parallel",
-        "data": {
-          "commands": [
-            {
-              "type": "named",
-              "data": {
-                "name": "Intake"
-              }
-            }
-          ]
-        }
-      }
-    }
-  ],
+  "eventMarkers": [],
   "globalConstraints": {
     "maxVelocity": 3.0,
     "maxAcceleration": 3.0,
@@ -73,11 +71,11 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -80.5376777919742,
+    "rotation": -36.19320730556465,
     "rotateFast": false
   },
   "reversed": false,
-  "folder": "S1-NX",
+  "folder": "A-NX",
   "previewStartingState": null,
   "useDefaultConstraints": false
 }

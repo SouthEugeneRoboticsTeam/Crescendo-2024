@@ -3,29 +3,29 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 8.280700937992206,
-        "y": 7.446855402616658
+        "x": 1.7842857059759927,
+        "y": 7.707965339594802
       },
       "prevControl": null,
       "nextControl": {
-        "x": 9.680250200195058,
-        "y": 6.694858784119604
+        "x": 3.3091677379283513,
+        "y": 6.778413963952611
       },
       "isLocked": false,
-      "linkedName": "N4"
+      "linkedName": "A"
     },
     {
       "anchor": {
-        "x": 1.3560654093318372,
-        "y": 5.514641868978395
+        "x": 8.312034130429584,
+        "y": 5.744418613519161
       },
       "prevControl": {
-        "x": 2.6720594917016802,
-        "y": 5.619085843769653
+        "x": 6.609597341332088,
+        "y": 6.1621945126841915
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "S2"
+      "linkedName": "N5"
     }
   ],
   "rotationTargets": [],
@@ -39,11 +39,11 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 180.0,
+    "rotation": 0,
     "rotateFast": false
   },
   "reversed": false,
-  "folder": "NX-S2",
+  "folder": "A-NX",
   "previewStartingState": null,
   "useDefaultConstraints": false
 }

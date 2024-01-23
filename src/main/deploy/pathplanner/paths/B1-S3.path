@@ -16,19 +16,25 @@
     },
     {
       "anchor": {
-        "x": 0.7294015605842922,
-        "y": 4.39709133871194
+        "x": 0.6876239706677894,
+        "y": 4.386646941232814
       },
       "prevControl": {
-        "x": 2.2500921931588413,
-        "y": 4.39709133871194
+        "x": 2.2083146032423384,
+        "y": 4.386646941232814
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "S3"
     }
   ],
-  "rotationTargets": [],
+  "rotationTargets": [
+    {
+      "waypointRelativePos": 1,
+      "rotationDegrees": -60.0,
+      "rotateFast": false
+    }
+  ],
   "constraintZones": [],
   "eventMarkers": [
     {
@@ -57,7 +63,7 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 120.0,
+    "rotation": -60.0,
     "rotateFast": false
   },
   "reversed": false,

@@ -3,12 +3,14 @@
   "robotLength": 0.9,
   "holonomicMode": true,
   "pathFolders": [
+    "A-NX",
+    "BX-A",
     "B1-SX",
     "B2-SX",
     "B3-SX",
     "NX-S1",
-    "NX-S3",
     "NX-S2",
+    "NX-S3",
     "S1-NX",
     "S2-NX",
     "S3-NX"

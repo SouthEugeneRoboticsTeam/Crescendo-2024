@@ -3,45 +3,45 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 8.312034130429584,
-        "y": 5.744418613519161
+        "x": 1.7842857059759927,
+        "y": 7.707965339594802
       },
       "prevControl": null,
       "nextControl": {
-        "x": 8.24936774555483,
-        "y": 3.853982669797401
+        "x": 2.784285705975993,
+        "y": 7.207965339594802
       },
       "isLocked": false,
-      "linkedName": "N5"
+      "linkedName": "A"
     },
     {
       "anchor": {
-        "x": 5.136937296775358,
-        "y": 4.365758146274563
+        "x": 6.097821864854926,
+        "y": 6.329304872350202
       },
       "prevControl": {
-        "x": 6.0704671383498034,
-        "y": 3.454455205689985
+        "x": 4.9907157320675966,
+        "y": 6.726191976556979
       },
       "nextControl": {
-        "x": 3.3822785202822323,
-        "y": 6.078639332851185
+        "x": 7.437247528078221,
+        "y": 5.849133408175815
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 0.6876239706677894,
-        "y": 4.386646941232814
+        "x": 8.30158973295046,
+        "y": 2.412655817678048
       },
       "prevControl": {
-        "x": 1.5022869740395974,
-        "y": 4.156870196692047
+        "x": 6.734930111081597,
+        "y": 3.5302063479445023
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "S3"
+      "linkedName": "N7"
     }
   ],
   "rotationTargets": [],
@@ -55,11 +55,11 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 120.0,
+    "rotation": -38.15722658736913,
     "rotateFast": false
   },
   "reversed": false,
-  "folder": "NX-S3",
+  "folder": "A-NX",
   "previewStartingState": null,
   "useDefaultConstraints": false
 }
