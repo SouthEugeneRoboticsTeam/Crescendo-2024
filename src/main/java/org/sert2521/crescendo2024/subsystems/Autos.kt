@@ -30,7 +30,6 @@ object Autos : SubsystemBase() {
             {false},
             Drivetrain
         )
-
         SmartDashboard.putData("Auto Chooser", autoChooser)
     }
 
