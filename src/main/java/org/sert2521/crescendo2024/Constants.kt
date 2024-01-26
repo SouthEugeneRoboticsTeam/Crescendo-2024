@@ -85,9 +85,13 @@ object SwerveConstants{
 }
 
 object ElectronicIDs{
-    const val INTAKE_MOTOR_ID = 3
-    const val WRIST_ONE_ID = 2
-    const val WRIST_TWO_ID = 1
+    const val INTAKE_MOTOR_ID = -1
+    const val INTAKE_ALIGNMENT_MOTOR_ID = -1
+    const val WRIST_ONE_ID = -1
+    const val WRIST_TWO_ID = -1
+    const val INDEXER_MOTOR_ID = -1
+    const val BEAMBREAK_ID = -1
+
 }
 
 object RuntimeConstants{
