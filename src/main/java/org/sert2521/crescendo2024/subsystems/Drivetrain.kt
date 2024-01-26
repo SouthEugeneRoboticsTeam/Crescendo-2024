@@ -5,6 +5,7 @@ import com.kauailabs.navx.frc.AHRS
 import com.revrobotics.CANSparkBase
 import com.revrobotics.CANSparkMax
 import com.revrobotics.CANSparkLowLevel
+import com.revrobotics.SparkPIDController
 import edu.wpi.first.math.controller.PIDController
 import edu.wpi.first.math.controller.SimpleMotorFeedforward
 import edu.wpi.first.math.estimator.SwerveDrivePoseEstimator
@@ -39,6 +40,14 @@ class SwerveModule(private val powerMotor: CANSparkMax,
 
 
     init {
+        powerMotor.pidController.p = powerPID.p
+        powerMotor.pidController.i = powerPID.i
+        powerMotor.pidController.d = powerPID.d
+
+        angleMotor.pidController.p = anglePID.p
+        angleMotor.pidController.i = anglePID.i
+        angleMotor.pidController.d = anglePID.d
+
         if (doesOptimize) {
             anglePID.enableContinuousInput(-PI, PI)
         } else {
@@ -91,6 +100,7 @@ class SwerveModule(private val powerMotor: CANSparkMax,
 
         val feedforward = powerFeedforward.calculate(optimized.speedMetersPerSecond)
         val pid = if (inverted) {
+
             powerPID.calculate(-state.speedMetersPerSecond, optimized.speedMetersPerSecond)
         } else {
             powerPID.calculate(state.speedMetersPerSecond, optimized.speedMetersPerSecond)
