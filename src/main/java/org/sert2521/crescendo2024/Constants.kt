@@ -20,7 +20,6 @@ object PhysicalConstants{
 
     //ESTIMATES
     const val WRIST_SETPOINT_STOW = 0.89
-    const val WRIST_SETPOINT_SHOOT = 0.89
     const val WRIST_SETPOINT_AMP = -0.80
 
     const val FLYWHEEL_GEAR_RATIO = 2.0/3.0
@@ -41,6 +40,9 @@ object ConfigConstants{
     const val DRIVE_DECCEL = 36.0
 
     const val DRIVE_OPTIMIZED = true
+
+    const val FLYWHEEL_IDLE_SPEED = 0.0
+    const val FLYWHEEL_SHOOT_SPEED = 0.0
 }
 
 object SwerveConstants{
@@ -101,6 +103,7 @@ object ElectronicIDs{
 object RuntimeConstants{
     var motorSpeed = 0.0
     var wristSetPoint = 0.0
+    var flywheelRevved = false
 }
 
 object TuningConstants {
@@ -126,5 +129,5 @@ object TuningConstants {
     const val FLYWHEEL_KV = 0.0
     const val FLYWHEEL_KA = 0.0
 
-    const val FLYWHEEL_IDLE_SPEED = 0.0
+
 }
