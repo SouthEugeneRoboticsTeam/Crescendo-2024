@@ -22,6 +22,8 @@ object PhysicalConstants{
     const val WRIST_SETPOINT_STOW = 0.89
     const val WRIST_SETPOINT_SHOOT = 0.89
     const val WRIST_SETPOINT_AMP = -0.80
+
+    const val FLYWHEEL_GEAR_RATIO = 2.0/3.0
 }
 
 object ConfigConstants{
@@ -82,6 +84,7 @@ object SwerveConstants{
 
     const val AUTO_REPLANNING_TOTAL_ERROR = 0.0
     const val AUTO_REPLANNING_SPIKE = 0.0
+
 }
 
 object ElectronicIDs{
@@ -91,6 +94,7 @@ object ElectronicIDs{
     const val WRIST_TWO_ID = -1
     const val INDEXER_MOTOR_ID = -1
     const val BEAMBREAK_ID = -1
+    const val FLYWHEEL_MOTOR = -1
 
 }
 
@@ -112,7 +116,15 @@ object TuningConstants {
 
     const val WRIST_ANGLE_TOLERANCE = 0.0
     val trapConstraints = TrapezoidProfile.Constraints(1.0, 1.0)
+
+
+    const val FLYWHEEL_P = 0.0
+    const val FLYWHEEL_I = 0.0
+    const val FLYWHEEL_D = 0.0
+
+    const val FLYWHEEL_KS = 0.0
+    const val FLYWHEEL_KV = 0.0
+    const val FLYWHEEL_KA = 0.0
+
+    const val FLYWHEEL_IDLE_SPEED = 0.0
 }
-
-
-
