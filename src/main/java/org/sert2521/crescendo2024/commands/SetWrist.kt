@@ -1,7 +1,6 @@
 package org.sert2521.crescendo2024.commands
 
 
-import edu.wpi.first.math.controller.PIDController
 import edu.wpi.first.math.controller.ArmFeedforward
 import edu.wpi.first.math.controller.ProfiledPIDController
 import edu.wpi.first.wpilibj2.command.Command
@@ -11,7 +10,7 @@ import org.sert2521.crescendo2024.subsystems.Wrist
 import kotlin.math.PI
 import kotlin.math.abs
 
-class RunWrist(private val goal:Double, private val ends:Boolean) : Command() {
+class SetWrist(private val goal:Double, private val ends:Boolean) : Command() {
 
 
     private var wristAngle = Wrist.getRadians()

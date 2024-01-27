@@ -3,8 +3,11 @@ package org.sert2521.crescendo2024.commands
 import edu.wpi.first.math.controller.PIDController
 import edu.wpi.first.math.controller.SimpleMotorFeedforward
 import edu.wpi.first.wpilibj2.command.Command
+import org.sert2521.crescendo2024.ConfigConstants
+import org.sert2521.crescendo2024.RuntimeConstants
 import org.sert2521.crescendo2024.TuningConstants
 import org.sert2521.crescendo2024.subsystems.Flywheel
+import java.io.ObjectInputFilter.Config
 
 class SetFlywheel(private val rpm:Double) : Command() {
     val pid = PIDController(TuningConstants.FLYWHEEL_P, TuningConstants.FLYWHEEL_I, TuningConstants.FLYWHEEL_D)
@@ -19,6 +22,7 @@ class SetFlywheel(private val rpm:Double) : Command() {
 
     override fun execute() {
         Flywheel.setVoltage(pid.calculate(rpm, Flywheel.getSpeed()) + feedForward.calculate(rpm))
+        RuntimeConstants.flywheelRevved =  Flywheel.getSpeed() > ConfigConstants.FLYWHEEL_SHOOT_SPEED-10.0
     }
 
     override fun isFinished(): Boolean {

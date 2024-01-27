@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj.Timer
 import edu.wpi.first.wpilibj2.command.SubsystemBase
 import org.sert2521.crescendo2024.ElectronicIDs
 import org.sert2521.crescendo2024.PhysicalConstants
-import org.sert2521.crescendo2024.commands.RunWrist
+import org.sert2521.crescendo2024.commands.SetWrist
 import kotlin.math.PI
 
 object Wrist : SubsystemBase() {
@@ -28,7 +28,7 @@ object Wrist : SubsystemBase() {
 
         absEncoder.distancePerRotation = PhysicalConstants.WRIST_ENCODER_MULTIPLY
         prevRot = getRadians()
-        defaultCommand = RunWrist(getRadians(), false)
+        defaultCommand = SetWrist(getRadians(), false)
     }
 
     override fun periodic(){
