@@ -129,5 +129,6 @@ object TuningConstants {
     const val FLYWHEEL_KV = 0.0
     const val FLYWHEEL_KA = 0.0
 
+    const val FLYWHEEL_IDLE_SPEED = 0.0
 
 }
