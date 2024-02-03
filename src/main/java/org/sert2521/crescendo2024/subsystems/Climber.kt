@@ -6,8 +6,8 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import org.sert2521.crescendo2024.ElectronicIDs
 
 object Climber : SubsystemBase() {
-    val climberMotorOne = CANSparkMax(ElectronicIDs.CLIMBER_MOTOR_ONE, CANSparkLowLevel.MotorType.kBrushless)
-    val climberMotorTwo = CANSparkMax(ElectronicIDs.CLIMBER_MOTOR_TWO, CANSparkLowLevel.MotorType.kBrushless)
+    private val climberMotorOne = CANSparkMax(ElectronicIDs.CLIMBER_MOTOR_ONE, CANSparkLowLevel.MotorType.kBrushless)
+    private val climberMotorTwo = CANSparkMax(ElectronicIDs.CLIMBER_MOTOR_TWO, CANSparkLowLevel.MotorType.kBrushless)
     init{
 
     }
