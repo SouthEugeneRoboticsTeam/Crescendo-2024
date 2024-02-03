@@ -97,6 +97,8 @@ object ElectronicIDs{
     const val INDEXER_MOTOR_ID = -1
     const val BEAMBREAK_ID = -1
     const val FLYWHEEL_MOTOR = -1
+    const val CLIMBER_MOTOR_ONE = -1
+    const val CLIMBER_MOTOR_TWO = -1
 
 }
 
