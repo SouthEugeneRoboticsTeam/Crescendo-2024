@@ -1,0 +1,10 @@
+[
+  {
+    "name": "/Preferences/Auto Chooser",
+    "type": "string",
+    "value": "\"None\"",
+    "properties": {
+      "persistent": true
+    }
+  }
+]

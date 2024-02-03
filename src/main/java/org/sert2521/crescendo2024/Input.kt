@@ -1,7 +1,9 @@
 package org.sert2521.crescendo2024
 
+import edu.wpi.first.wpilibj.DriverStation
 import edu.wpi.first.wpilibj.Joystick
 import edu.wpi.first.wpilibj.XboxController
+import java.sql.Driver
 
 
 object Input {
@@ -28,5 +30,13 @@ object Input {
 
     fun getRot(): Double {
         return -driverController.rightX
+    }
+
+    fun getColor(): DriverStation.Alliance {
+        return if (DriverStation.getAlliance().isEmpty){
+            DriverStation.Alliance.Blue
+        } else {
+            DriverStation.getAlliance().get()
+        }
     }
 }

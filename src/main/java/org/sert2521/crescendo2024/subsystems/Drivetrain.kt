@@ -11,9 +11,12 @@ import edu.wpi.first.math.estimator.SwerveDrivePoseEstimator
 import edu.wpi.first.math.geometry.*
 import edu.wpi.first.math.kinematics.*
 import edu.wpi.first.math.util.Units
+import edu.wpi.first.wpilibj.DriverStation
 import edu.wpi.first.wpilibj.MotorSafety
 import edu.wpi.first.wpilibj.Timer
 import edu.wpi.first.wpilibj2.command.SubsystemBase
+import org.photonvision.PhotonCamera
+import org.photonvision.PhotonPoseEstimator
 //import org.photonvision.PhotonCamera
 //import org.photonvision.PhotonPoseEstimator
 import org.sert2521.crescendo2024.*
@@ -132,12 +135,16 @@ class SwerveModule(private val powerMotor: CANSparkMax,
 object Drivetrain : SubsystemBase() {
     private val imu = AHRS()
 
+    private val cams: Array<PhotonCamera>
+    private val photonPoseEstimators: Array<PhotonPoseEstimator>
+
     private val kinematics: SwerveDriveKinematics
     private var modules: Array<SwerveModule>
     private val odometry: SwerveDriveOdometry
     private val poseEstimator: SwerveDrivePoseEstimator
 
     private var pose = Pose2d()
+    private var visionPose = Pose2d()
 
     private var prevPose = Pose2d()
     private var prevTime = Timer.getFPGATimestamp()
@@ -180,6 +187,17 @@ object Drivetrain : SubsystemBase() {
         odometry = SwerveDriveOdometry(kinematics, -imu.rotation2d, positionsArray, Pose2d())
         poseEstimator = SwerveDrivePoseEstimator(kinematics, -imu.rotation2d, positionsArray, Pose2d())
 
+        val camsList = mutableListOf<PhotonCamera>()
+        val photonPoseEstimatorsList = mutableListOf<PhotonPoseEstimator>()
+        for (camData in ElectronicIDs.camData) {
+            val cam = PhotonCamera(camData.first)
+            camsList.add(cam)
+            // Field gets updated before run so it can be null
+            photonPoseEstimatorsList.add(PhotonPoseEstimator(PhysicalConstants.field, PhotonPoseEstimator.PoseStrategy.AVERAGE_BEST_TARGETS, cam, camData.second))
+        }
+
+        cams = camsList.toTypedArray()
+        photonPoseEstimators = photonPoseEstimatorsList.toTypedArray()
 
         Drivetrain.defaultCommand = JoystickDrive(true)
     }
@@ -187,6 +205,10 @@ object Drivetrain : SubsystemBase() {
     // Fix this nonsense
     fun getPose(): Pose2d {
         return Pose2d(pose.y, pose.x, -pose.rotation)
+    }
+
+    fun getVisionPose(): Pose2d {
+        return Pose2d(visionPose.y, visionPose.x, -visionPose.rotation)
     }
 
     // Fix this nonsense
@@ -219,6 +241,22 @@ object Drivetrain : SubsystemBase() {
         val positionsArray = positions.toTypedArray()
 
         pose = odometry.update(-imu.rotation2d, positionsArray)
+        visionPose = poseEstimator.update(-imu.rotation2d, positionsArray)
+
+        for (photonPoseEstimator in photonPoseEstimators) {
+            val poseOutput = photonPoseEstimator.update()
+            if (poseOutput.isPresent) {
+                val currVisionPoseData = poseOutput.get()
+                val currVisionPose = currVisionPoseData.estimatedPose.toPose2d()
+
+                val color = Input.getColor()
+                if (color == DriverStation.Alliance.Blue) {
+                    poseEstimator.addVisionMeasurement(Pose2d(currVisionPose.y, currVisionPose.x, -currVisionPose.rotation), currVisionPoseData.timestampSeconds)
+                } else if (color == DriverStation.Alliance.Red) {
+                    poseEstimator.addVisionMeasurement(Pose2d(PhysicalConstants.FIELD_WIDTH - currVisionPose.y, PhysicalConstants.FIELD_LENGTH - currVisionPose.x, Rotation2d(PI) - currVisionPose.rotation), currVisionPoseData.timestampSeconds)
+                }
+            }
+        }
 
         val currTime = Timer.getFPGATimestamp()
         val deltaTime = currTime - prevTime
@@ -250,6 +288,41 @@ object Drivetrain : SubsystemBase() {
         val positionsArray = positions.toTypedArray()
 
         odometry.resetPosition(-imu.rotation2d, positionsArray, pose)
+    }
+    fun setNewVisionPose(newPose: Pose2d) {
+        visionPose = Pose2d(newPose.y, newPose.x, -newPose.rotation)
+
+        val positions = mutableListOf<SwerveModulePosition>()
+
+        for (module in modules) {
+            module.updateState()
+            positions.add(module.position)
+        }
+
+        val positionsArray = positions.toTypedArray()
+
+        poseEstimator.resetPosition(-imu.rotation2d, positionsArray, visionPose)
+    }
+
+    fun setVisionStandardDeviations() {
+        poseEstimator.setVisionMeasurementStdDevs(TuningConstants.defaultVisionDeviations)
+    }
+
+    fun setVisionAlignDeviations() {
+        poseEstimator.setVisionMeasurementStdDevs(TuningConstants.alignVisionDeviations)
+    }
+
+    fun visionSeeingThings(): Boolean {
+        val time = Timer.getFPGATimestamp()
+        if (camerasConnected()) {
+            return cams.any { time - it.latestResult.timestampSeconds < TuningConstants.VISION_TIMEOUT }
+        }
+
+        return false
+    }
+
+    fun camerasConnected(): Boolean {
+        return cams.all { it.isConnected }
     }
 
     fun getReletiveSpeeds():ChassisSpeeds{

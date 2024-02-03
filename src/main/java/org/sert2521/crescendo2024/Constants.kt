@@ -1,7 +1,18 @@
 package org.sert2521.crescendo2024
 
+import edu.wpi.first.apriltag.AprilTagFieldLayout
+import edu.wpi.first.apriltag.AprilTagFields
+import edu.wpi.first.math.MatBuilder.fill
+import edu.wpi.first.math.Matrix
+import edu.wpi.first.math.Nat
+import edu.wpi.first.math.geometry.Rotation3d
+import edu.wpi.first.math.geometry.Transform3d
 import edu.wpi.first.math.geometry.Translation2d
+import edu.wpi.first.math.geometry.Translation3d
+import edu.wpi.first.math.numbers.N1
+import edu.wpi.first.math.numbers.N3
 import edu.wpi.first.math.trajectory.TrapezoidProfile
+import edu.wpi.first.math.util.Units
 import kotlin.math.PI
 
 /*
@@ -22,6 +33,17 @@ object PhysicalConstants{
     const val WRIST_SETPOINT_STOW = 0.89
     const val WRIST_SETPOINT_SHOOT = 0.89
     const val WRIST_SETPOINT_AMP = -0.80
+
+    val field: AprilTagFieldLayout = AprilTagFields.k2023ChargedUp.loadAprilTagLayoutField()
+    const val FIELD_WIDTH = 8.21
+    const val FIELD_LENGTH = 16.54
+
+
+    val rightPose = Transform3d(Translation3d(Units.inchesToMeters(-11.26), Units.inchesToMeters(-6.04), Units.inchesToMeters(9.25)), Rotation3d(0.0, 0.0, Units.degreesToRadians(-105.0)))
+    val leftPose = Transform3d(Translation3d(Units.inchesToMeters(-11.26), Units.inchesToMeters(7.794),  Units.inchesToMeters(9.25)), Rotation3d(0.0, 0.0,  Units.degreesToRadians(105.0)))
+    val centerPose = Transform3d(Translation3d(Units.inchesToMeters(-10.059), Units.inchesToMeters(6.081), Units.inchesToMeters(11.521)), Rotation3d(0.0, 0.349, PI))
+
+
 }
 
 object ConfigConstants{
@@ -88,6 +110,8 @@ object ElectronicIDs{
     const val INTAKE_MOTOR_ID = 3
     const val WRIST_ONE_ID = 2
     const val WRIST_TWO_ID = 1
+
+    val camData = listOf(Pair("Center", PhysicalConstants.centerPose), Pair("Right2", PhysicalConstants.rightPose), Pair("Left2", PhysicalConstants.leftPose))
 }
 
 object RuntimeConstants{
@@ -96,6 +120,11 @@ object RuntimeConstants{
 }
 
 object TuningConstants {
+    val defaultVisionDeviations: Matrix<N3, N1> = fill(Nat.N3(), Nat.N1(), 1.0, 1.0, 1000.0)
+    val alignVisionDeviations: Matrix<N3, N1> = fill(Nat.N3(), Nat.N1(),3.0, 3.0, 1000.0)
+
+    const val VISION_TIMEOUT = 0.1
+
     const val WRIST_P = 0.0
     const val WRIST_I = 0.0
     const val WRIST_D = 0.0
