@@ -31,7 +31,6 @@ object PhysicalConstants{
 
     //ESTIMATES
     const val WRIST_SETPOINT_STOW = 0.89
-    const val WRIST_SETPOINT_SHOOT = 0.89
     const val WRIST_SETPOINT_AMP = -0.80
 
     val field: AprilTagFieldLayout = AprilTagFields.k2023ChargedUp.loadAprilTagLayoutField()
@@ -43,6 +42,8 @@ object PhysicalConstants{
     val leftPose = Transform3d(Translation3d(Units.inchesToMeters(-11.26), Units.inchesToMeters(7.794),  Units.inchesToMeters(9.25)), Rotation3d(0.0, 0.0,  Units.degreesToRadians(105.0)))
     val centerPose = Transform3d(Translation3d(Units.inchesToMeters(-10.059), Units.inchesToMeters(6.081), Units.inchesToMeters(11.521)), Rotation3d(0.0, 0.349, PI))
 
+
+    const val FLYWHEEL_GEAR_RATIO = 2.0/3.0
 
 }
 
@@ -61,6 +62,9 @@ object ConfigConstants{
     const val DRIVE_DECCEL = 36.0
 
     const val DRIVE_OPTIMIZED = true
+
+    const val FLYWHEEL_IDLE_SPEED = 0.0
+    const val FLYWHEEL_SHOOT_SPEED = 0.0
 }
 
 object SwerveConstants{
@@ -107,9 +111,13 @@ object SwerveConstants{
 }
 
 object ElectronicIDs{
-    const val INTAKE_MOTOR_ID = 3
-    const val WRIST_ONE_ID = 2
-    const val WRIST_TWO_ID = 1
+    const val INTAKE_MOTOR_ID = -1
+    const val INTAKE_ALIGNMENT_MOTOR_ID = -1
+    const val WRIST_ONE_ID = -1
+    const val WRIST_TWO_ID = -1
+    const val INDEXER_MOTOR_ID = -1
+    const val BEAMBREAK_ID = -1
+    const val FLYWHEEL_MOTOR = -1
 
     val camData = listOf(Pair("Center", PhysicalConstants.centerPose), Pair("Right2", PhysicalConstants.rightPose), Pair("Left2", PhysicalConstants.leftPose))
 }
@@ -117,6 +125,7 @@ object ElectronicIDs{
 object RuntimeConstants{
     var motorSpeed = 0.0
     var wristSetPoint = 0.0
+    var flywheelRevved = false
 }
 
 object TuningConstants {
@@ -137,7 +146,14 @@ object TuningConstants {
 
     const val WRIST_ANGLE_TOLERANCE = 0.0
     val trapConstraints = TrapezoidProfile.Constraints(1.0, 1.0)
+
+    const val FLYWHEEL_P = 0.0
+    const val FLYWHEEL_I = 0.0
+    const val FLYWHEEL_D = 0.0
+
+    const val FLYWHEEL_KS = 0.0
+    const val FLYWHEEL_KV = 0.0
+    const val FLYWHEEL_KA = 0.0
+
+    const val FLYWHEEL_IDLE_SPEED = 0.0
 }
-
-
-
