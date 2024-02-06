@@ -2,10 +2,13 @@ package org.sert2521.crescendo2024.subsystems
 
 import com.ctre.phoenix6.hardware.CANcoder
 import com.kauailabs.navx.frc.AHRS
+import com.revrobotics.AbsoluteEncoder
 import com.revrobotics.CANSparkBase
 import com.revrobotics.CANSparkMax
 import com.revrobotics.CANSparkLowLevel
+import com.revrobotics.MotorFeedbackSensor
 import com.revrobotics.SparkPIDController
+import edu.wpi.first.math.Vector
 import edu.wpi.first.math.controller.PIDController
 import edu.wpi.first.math.controller.SimpleMotorFeedforward
 import edu.wpi.first.math.estimator.SwerveDrivePoseEstimator
@@ -25,39 +28,33 @@ import org.sert2521.crescendo2024.commands.JoystickDrive
 import kotlin.math.*
 
 class SwerveModule(private val powerMotor: CANSparkMax,
-                   private val powerFeedforward: SimpleMotorFeedforward,
-                   private val powerPID: PIDController,
                    private val angleMotor: CANSparkMax,
                    private val angleEncoder: CANcoder,
                    private val angleOffset: Double,
-                   private val anglePID: PIDController,
-                   private val centerRotation: Rotation2d,
                    private val inverted: Boolean,
                    var state: SwerveModuleState,
-                   shouldOptimize: Boolean,
                    brakeMode: Boolean) : MotorSafety() {
-    var doesOptimize = shouldOptimize
-        private set
+
 
     var position: SwerveModulePosition
 
-
     init {
-        powerMotor.pidController.p = powerPID.p
-        powerMotor.pidController.i = powerPID.i
-        powerMotor.pidController.d = powerPID.d
+        powerMotor.pidController.p = SwerveConstants.POWER_P
+        powerMotor.pidController.i = SwerveConstants.POWER_I
+        powerMotor.pidController.d = SwerveConstants.POWER_D
+        powerMotor.pidController.ff = SwerveConstants.POWER_V
 
-        angleMotor.pidController.p = anglePID.p
-        angleMotor.pidController.i = anglePID.i
-        angleMotor.pidController.d = anglePID.d
+        angleMotor.pidController.p = SwerveConstants.ANGLE_P
+        angleMotor.pidController.i = SwerveConstants.ANGLE_I
+        angleMotor.pidController.d = SwerveConstants.ANGLE_D
 
-        if (doesOptimize) {
-            anglePID.enableContinuousInput(-PI, PI)
-        } else {
-            anglePID.enableContinuousInput(-PI * 2, PI * 2)
-        }
+        angleMotor.encoder.setPosition(angleEncoder.absolutePosition.valueAsDouble* SwerveConstants.ANGLE_ENCODER_MULTIPLY - angleOffset)
+        angleMotor.encoder.positionConversionFactor = 2*PI
+        angleMotor.encoder.velocityConversionFactor = (2*PI)/60.0
 
-        setMotorMode(!brakeMode)
+        angleMotor.pidController.positionPIDWrappingEnabled = true
+        angleMotor.pidController.positionPIDWrappingMinInput = -PI
+        angleMotor.pidController.positionPIDWrappingMaxInput = PI
 
         powerMotor.inverted = inverted
 
@@ -65,25 +62,12 @@ class SwerveModule(private val powerMotor: CANSparkMax,
         powerMotor.encoder.velocityConversionFactor = SwerveConstants.POWER_ENCODER_MULTIPLY_VELOCITY
 
         position = SwerveModulePosition(powerMotor.encoder.position, getAngle())
+
+        setMotorMode(!brakeMode)
     }
 
     fun getAngle(): Rotation2d {
-        return if (inverted) {
-            Rotation2d(-(angleEncoder.absolutePosition.valueAsDouble * SwerveConstants.ANGLE_ENCODER_MULTIPLY - angleOffset))
-        } else {
-            Rotation2d(angleEncoder.absolutePosition.valueAsDouble * SwerveConstants.ANGLE_ENCODER_MULTIPLY - angleOffset)
-        }
-    }
-
-    fun setOptimize(value: Boolean) {
-        doesOptimize = value
-
-        // Should these be halved
-        if (doesOptimize) {
-            anglePID.enableContinuousInput(-PI, PI)
-        } else {
-            anglePID.enableContinuousInput(-PI * 2, PI * 2)
-        }
+        return Rotation2d(angleMotor.encoder.position)
     }
 
     // Should be called in periodic
@@ -95,12 +79,8 @@ class SwerveModule(private val powerMotor: CANSparkMax,
 
     fun set(wanted: SwerveModuleState) {
         // Using state because it should be updated and getVelocity and getAngle (probably) spend time over CAN
-        val optimized = if (doesOptimize) {
-            SwerveModuleState.optimize(wanted, state.angle)
-        } else {
-            wanted
-        }
-
+        val optimized = SwerveModuleState.optimize(wanted, state.angle)
+        /*
         val feedforward = powerFeedforward.calculate(optimized.speedMetersPerSecond)
         val pid = if (inverted) {
 
@@ -115,11 +95,13 @@ class SwerveModule(private val powerMotor: CANSparkMax,
         } else {
             powerMotor.set(-(feedforward + pid) / 12.0)
         }
-        angleMotor.set(anglePID.calculate(state.angle.radians, optimized.angle.radians))
-    }
 
-    fun enterBrakePos() {
-        set(SwerveModuleState(0.0, centerRotation))
+         */
+
+        powerMotor.pidController.setReference(optimized.speedMetersPerSecond, CANSparkBase.ControlType.kVelocity)
+
+        //maybe -angleOffset
+        angleMotor.pidController.setReference(optimized.angle.radians, CANSparkBase.ControlType.kPosition)
     }
 
     fun setMotorMode(coast: Boolean) {
@@ -225,16 +207,11 @@ object Drivetrain : SubsystemBase() {
 
     private fun createModule(powerMotor: CANSparkMax, angleMotor: CANSparkMax, moduleData: SwerveModuleData): SwerveModule {
         return SwerveModule(powerMotor,
-            SimpleMotorFeedforward(SwerveConstants.POWER_S, SwerveConstants.POWER_V, SwerveConstants.POWER_A),
-            PIDController(SwerveConstants.POWER_P, SwerveConstants.POWER_I, SwerveConstants.POWER_D),
             angleMotor,
             CANcoder(moduleData.angleEncoderID),
             moduleData.angleOffset,
-            PIDController(SwerveConstants.ANGLE_P, SwerveConstants.ANGLE_I, SwerveConstants.ANGLE_D),
-            Rotation2d(atan2(moduleData.position.y, moduleData.position.x)),
             moduleData.inverted,
             SwerveModuleState(),
-            doesOptimize,
             true
         )
     }
@@ -275,14 +252,6 @@ object Drivetrain : SubsystemBase() {
 
         prevPose = pose
         prevTime = currTime
-    }
-
-    fun setOptimize(value: Boolean) {
-        doesOptimize = value
-
-        for (module in modules) {
-            module.setOptimize(doesOptimize)
-        }
     }
 
     fun setNewPose(newPose: Pose2d) {
@@ -373,15 +342,8 @@ object Drivetrain : SubsystemBase() {
     }
 
     fun getTilt(): Double {
+
         return atan(sqrt(tan(Units.degreesToRadians(imu.pitch.toDouble())).pow(2) + tan(Units.degreesToRadians(imu.roll.toDouble())).pow(2)))
-    }
-
-    fun enterBrakePos() {
-        for (module in modules) {
-            module.enterBrakePos()
-        }
-
-        feed()
     }
 
     fun setMode(coast: Boolean) {
