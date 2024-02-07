@@ -303,6 +303,10 @@ object Drivetrain : SubsystemBase() {
         return atan(sqrt(tan(Units.degreesToRadians(imu.pitch.toDouble())).pow(2) + tan(Units.degreesToRadians(imu.roll.toDouble())).pow(2)))
     }
 
+    fun getRoll(): Double{
+        return Units.degreesToRadians(imu.roll.toDouble())
+    }
+
     fun enterBrakePos() {
         for (module in modules) {
             module.enterBrakePos()

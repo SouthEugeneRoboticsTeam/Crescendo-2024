@@ -23,6 +23,10 @@ object PhysicalConstants{
     const val WRIST_SETPOINT_AMP = -0.80
 
     const val FLYWHEEL_GEAR_RATIO = 2.0/3.0
+
+    const val CLIMBER_ENCODER_TO_METERS = 0.0
+
+    const val CLIMBER_BETWEEN_DISTANCE = 0.0
 }
 
 object ConfigConstants{
@@ -132,4 +136,15 @@ object TuningConstants {
     const val FLYWHEEL_KA = 0.0
 
     const val FLYWHEEL_IDLE_SPEED = 0.0
+
+    const val CLIMBER_FILTER = 0.0
+
+    const val CLIMBER_TOLERANCE_ANGLE = 0.0
+    const val CLIMBER_RESTING_TOLERANCE = 0.0
+
+    const val CLIMBER_TOLERANCE_ENCODER = 0.0
+
+    const val CLIMBER_STALL_TOLERANCE = 0.0
+    const val CLIMBER_STALL_TRY_POWER = 0.0
+    const val CLIMBER_STALL_SPEED = 0.0
 }
