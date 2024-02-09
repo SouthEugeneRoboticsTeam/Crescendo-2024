@@ -15,6 +15,8 @@ import edu.wpi.first.math.trajectory.TrapezoidProfile
 import edu.wpi.first.math.util.Units
 import kotlin.math.PI
 
+
+//gear ratio means (1/gear ratio) equals positionConversionFactor
 /*
  * The Constants file provides a convenient place for teams to hold robot-wide
  * numerical or boolean constants. This file should not be used for any other purpose.
@@ -24,14 +26,12 @@ import kotlin.math.PI
 class SwerveModuleData(val position: Translation2d, val powerMotorID: Int, val angleMotorID: Int, val angleEncoderID: Int, val angleOffset: Double, val inverted: Boolean)
 
 object PhysicalConstants{
-    const val HALF_SIDE_LENGTH = 0.0
-
-    const val WRIST_ENCODER_MULTIPLY = 0.0
+    const val WRIST_ENCODER_MULTIPLY = 2*PI
     const val WRIST_ENCODER_OFFSET = 0.0
 
     //ESTIMATES
-    const val WRIST_SETPOINT_STOW = 0.89
-    const val WRIST_SETPOINT_AMP = -0.80
+    const val WRIST_SETPOINT_STOW = 0.0
+    const val WRIST_SETPOINT_AMP = 0.80
 
     val field: AprilTagFieldLayout = AprilTagFields.k2023ChargedUp.loadAprilTagLayoutField()
     const val FIELD_WIDTH = 8.21
@@ -43,8 +43,7 @@ object PhysicalConstants{
     val centerPose = Transform3d(Translation3d(Units.inchesToMeters(-10.059), Units.inchesToMeters(6.081), Units.inchesToMeters(11.521)), Rotation3d(0.0, 0.349, PI))
 
 
-    const val FLYWHEEL_GEAR_RATIO = 2.0/3.0
-
+    const val FLYWHEEL_GEAR_RATIO = 3.0/2.0
 }
 
 object ConfigConstants{
@@ -68,8 +67,8 @@ object ConfigConstants{
 }
 
 object SwerveConstants{
-    const val HALF_SIDE_LENGTH = 0.0
-    const val DRIVE_BASE_RADIUS = 0.0
+    const val HALF_SIDE_LENGTH = 0.263525
+    const val DRIVE_BASE_RADIUS = 0.37268
 
     const val POWER_S = 0.0
     const val POWER_V = 0.0
@@ -90,9 +89,10 @@ object SwerveConstants{
             SwerveModuleData(Translation2d(-HALF_SIDE_LENGTH, HALF_SIDE_LENGTH), 7, 8, 15, 0.0, true)) //Front Right
 
     // Pi * diameter / gear ratio
-    const val POWER_ENCODER_MULTIPLY_POSITION = PI * 0.1016 / 6.75
+    const val POWER_ENCODER_MULTIPLY_POSITION = PI * 0.1016 / 5.903
     // Velocity is in rpm so needs / 60
     const val POWER_ENCODER_MULTIPLY_VELOCITY = POWER_ENCODER_MULTIPLY_POSITION / 60.0
+
 
     const val ANGLE_ENCODER_MULTIPLY = 0.01745329251
 
@@ -111,13 +111,14 @@ object SwerveConstants{
 }
 
 object ElectronicIDs{
-    const val INTAKE_MOTOR_ID = -1
-    const val INTAKE_ALIGNMENT_MOTOR_ID = -1
-    const val WRIST_ONE_ID = -1
-    const val WRIST_TWO_ID = -1
-    const val INDEXER_MOTOR_ID = -1
+    const val INTAKE_MOTOR_ID = 11
+    const val INTAKE_ALIGNMENT_MOTOR_ID = 13
+    const val WRIST_ONE_ID = 17
+    const val WRIST_TWO_ID = 4
+    const val INDEXER_MOTOR_ID = 9
     const val BEAMBREAK_ID = -1
-    const val FLYWHEEL_MOTOR = -1
+    const val FLYWHEEL_MOTOR_ONE_ID = 8
+    const val FLYWHEEL_MOTOR_TWO_ID = 2
 
     val camData = listOf(Pair("Center", PhysicalConstants.centerPose), Pair("Right2", PhysicalConstants.rightPose), Pair("Left2", PhysicalConstants.frontPose))
 }
