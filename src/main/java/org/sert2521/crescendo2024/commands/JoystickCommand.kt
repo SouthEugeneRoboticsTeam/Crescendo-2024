@@ -7,6 +7,7 @@ import org.sert2521.crescendo2024.ConfigConstants
 import org.sert2521.crescendo2024.Input
 import kotlin.math.abs
 import kotlin.math.pow
+import kotlin.math.sign
 import kotlin.math.sqrt
 
 abstract class JoystickCommand : Command() {
@@ -30,8 +31,8 @@ abstract class JoystickCommand : Command() {
         prevTime = currentTime
 
         val fast = Input.getSecondarySpeed()
-        var currX = Input.getX()
-        var currY = Input.getY()
+        var currX = (Input.getX()).pow(2) * Input.getX().sign
+        var currY = (Input.getY()).pow(2) * Input.getY().sign
 
         // Checks if the joystick is outputting a magnitude greater than 1 and if it is it normalizes the input
         // Otherwise it deadbands the input

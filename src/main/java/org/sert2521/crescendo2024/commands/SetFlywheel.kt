@@ -15,7 +15,7 @@ class SetFlywheel(private val rpm:Double) : Command() {
 
     init {
         // each subsystem used by the command must be passed into the addRequirements() method
-        addRequirements()
+        addRequirements(Flywheel)
     }
 
     override fun initialize() {}
@@ -30,5 +30,7 @@ class SetFlywheel(private val rpm:Double) : Command() {
         return false
     }
 //36:24
-    override fun end(interrupted: Boolean) {}
+    override fun end(interrupted: Boolean) {
+        SetFlywheel(ConfigConstants.FLYWHEEL_IDLE_SPEED)
+    }
 }

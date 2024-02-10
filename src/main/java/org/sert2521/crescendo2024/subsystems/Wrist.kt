@@ -50,7 +50,7 @@ object Wrist : SubsystemBase() {
     }
 
     fun getRadians():Double{
-        var wristAngle = (absEncoder.distance+PI).mod(2*PI) - PI + PhysicalConstants.WRIST_ENCODER_OFFSET
+        var wristAngle = (absEncoder.distance+PI/2).mod(2*PI) - PI/2 + PhysicalConstants.WRIST_ENCODER_OFFSET
 
 
 
