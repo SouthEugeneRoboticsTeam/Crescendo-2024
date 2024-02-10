@@ -83,10 +83,10 @@ object SwerveConstants{
     const val ANGLE_D = 0.0
 
     val swerveModuleData = listOf(
-            SwerveModuleData(Translation2d(HALF_SIDE_LENGTH, -HALF_SIDE_LENGTH), 4, 11, 12, 0.0, true), //Back Left
-            SwerveModuleData(Translation2d(-HALF_SIDE_LENGTH, -HALF_SIDE_LENGTH), 5, 10, 13, 0.0, true), //Back Right
-            SwerveModuleData(Translation2d(HALF_SIDE_LENGTH, HALF_SIDE_LENGTH), 6, 9, 14, 0.0, true), //Front Left
-            SwerveModuleData(Translation2d(-HALF_SIDE_LENGTH, HALF_SIDE_LENGTH), 7, 8, 15, 0.0, true)) //Front Right
+            SwerveModuleData(Translation2d(HALF_SIDE_LENGTH, -HALF_SIDE_LENGTH), 5, 7, 12 , 0.0, true), //Back Left
+            SwerveModuleData(Translation2d(-HALF_SIDE_LENGTH, -HALF_SIDE_LENGTH), 1, 2, 13 , 0.0, true), //Back Right
+            SwerveModuleData(Translation2d(HALF_SIDE_LENGTH, HALF_SIDE_LENGTH), 15, 16, 14 , 0.0, true), //Front Left
+            SwerveModuleData(Translation2d(-HALF_SIDE_LENGTH, HALF_SIDE_LENGTH), 3, 12, 15 , 0.0, true)) //Front Right
 
     // Pi * diameter / gear ratio
     const val POWER_ENCODER_MULTIPLY_POSITION = PI * 0.1016 / 5.903
