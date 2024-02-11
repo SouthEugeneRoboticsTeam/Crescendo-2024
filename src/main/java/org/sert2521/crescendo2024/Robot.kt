@@ -32,7 +32,7 @@ object Robot : TimedRobot()
      */
     override fun robotInit()
     {
-
+        Input
     }
 
     /**
@@ -67,8 +67,8 @@ object Robot : TimedRobot()
     {
         // We store the command as a Robot property in the rare event that the selector on the dashboard
         // is modified while the command is running since we need to access it again in teleopInit()
-        autonomousCommand = Autos.getAuto()
-        autonomousCommand?.schedule()
+        //autonomousCommand = Autos.getAuto()
+        //autonomousCommand?.schedule()
     }
 
     /** This method is called periodically during autonomous.  */
@@ -80,7 +80,7 @@ object Robot : TimedRobot()
     {
         // This makes sure that the autonomous stops running when teleop starts running. If you want the
         // autonomous to continue until interrupted by another command, remove this line or comment it out.
-        autonomousCommand?.cancel()
+        //autonomousCommand?.cancel()
     }
 
     override fun testInit()
