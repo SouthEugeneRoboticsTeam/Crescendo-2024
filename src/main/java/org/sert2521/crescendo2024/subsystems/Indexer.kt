@@ -13,9 +13,10 @@ object Indexer : Subsystem{
     init{
         indexerMotor.idleMode = CANSparkBase.IdleMode.kBrake
         indexerMotor.setSmartCurrentLimit(10, 45)
+        indexerMotor.inverted = true
     }
     fun getBeamBreak():Boolean{
-        return beamBreakSensor.get()
+        return !beamBreakSensor.get()
     }
     fun setMotor(speed:Double){
         indexerMotor.set(speed)

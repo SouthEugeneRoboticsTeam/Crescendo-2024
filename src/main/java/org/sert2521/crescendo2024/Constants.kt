@@ -111,14 +111,14 @@ object SwerveConstants{
 }
 
 object ElectronicIDs{
-    const val INTAKE_MOTOR_ID = 11
+    const val INTAKE_MOTOR_ID = 10
     const val INTAKE_ALIGNMENT_MOTOR_ID = 13
     const val WRIST_ONE_ID = 17
     const val WRIST_TWO_ID = 4
     const val INDEXER_MOTOR_ID = 9
-    const val BEAMBREAK_ID = -1
-    const val FLYWHEEL_MOTOR_ONE_ID = 8
-    const val FLYWHEEL_MOTOR_TWO_ID = 2
+    const val BEAMBREAK_ID = 1
+    const val FLYWHEEL_MOTOR_ONE_ID = -1
+    const val FLYWHEEL_MOTOR_TWO_ID = -1
 
     val camData = listOf(Pair("Center", PhysicalConstants.centerPose), Pair("Right2", PhysicalConstants.rightPose), Pair("Left2", PhysicalConstants.frontPose))
 }

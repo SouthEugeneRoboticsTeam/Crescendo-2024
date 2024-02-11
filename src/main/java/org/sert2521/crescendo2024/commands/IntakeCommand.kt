@@ -14,7 +14,7 @@ class IntakeCommand : Command() {
     }
 
     override fun initialize() {
-        Intake.setMotor(0.7)
+        Intake.setMotor(0.9)
         Indexer.setMotor(0.7)
     }
 
@@ -22,10 +22,12 @@ class IntakeCommand : Command() {
 
     override fun isFinished(): Boolean {
         // TODO: Make this return true when this Command no longer needs to run execute(
-        return Indexer.getBeamBreak()
+        //return Indexer.getBeamBreak()
+        return false
     }
 
     override fun end(interrupted: Boolean) {
         Intake.stop()
+        Indexer.stop()
     }
 }

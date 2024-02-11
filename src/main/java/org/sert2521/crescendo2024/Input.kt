@@ -30,17 +30,17 @@ object Input {
     private val secondarySpeedButton = JoystickButton(driverController, 2)
     init{
         intake.whileTrue(IntakeCommand())
-        rev.whileTrue(SetFlywheel(ConfigConstants.FLYWHEEL_SHOOT_SPEED))
-        outtake.whileTrue(Outtake())
-        wristStow.whileTrue(SetWrist(PhysicalConstants.WRIST_SETPOINT_STOW, true))
-        wristAmp.whileTrue(SetWrist(PhysicalConstants.WRIST_SETPOINT_AMP, true))
+        //rev.whileTrue(SetFlywheel(ConfigConstants.FLYWHEEL_SHOOT_SPEED))
+        //outtake.whileTrue(Outtake())
+        //wristStow.whileTrue(SetWrist(PhysicalConstants.WRIST_SETPOINT_STOW, true))
+        //wristAmp.whileTrue(SetWrist(PhysicalConstants.WRIST_SETPOINT_AMP, true))
         // Make these do stuff
         // manualUp.whileTrue()
         // manualDown.whileTrue()
         // visionAlign.whileTrue()
-        resetAngle.onTrue(InstantCommand({ Drivetrain.setNewPose(Pose2d())}))
-        secondarySpeedButton.onTrue(InstantCommand({ secondarySpeedMode = !secondarySpeedMode }))
-        secondarySpeedButton.onFalse(InstantCommand({ secondarySpeedMode = !secondarySpeedMode }))
+        //resetAngle.onTrue(InstantCommand({ Drivetrain.setNewPose(Pose2d())}))
+        //secondarySpeedButton.onTrue(InstantCommand({ secondarySpeedMode = !secondarySpeedMode }))
+        //secondarySpeedButton.onFalse(InstantCommand({ secondarySpeedMode = !secondarySpeedMode }))
     }
 
     var secondarySpeedMode = false
