@@ -78,15 +78,15 @@ object SwerveConstants{
     const val POWER_I = 0.0
     const val POWER_D = 0.0
 
-    const val ANGLE_P = 0.0
+    const val ANGLE_P = 1.4
     const val ANGLE_I = 0.0
     const val ANGLE_D = 0.0
 
     val swerveModuleData = listOf(
-            SwerveModuleData(Translation2d(HALF_SIDE_LENGTH, -HALF_SIDE_LENGTH), 5, 7, 12 , 0.0, true), //Back Left
-            SwerveModuleData(Translation2d(-HALF_SIDE_LENGTH, -HALF_SIDE_LENGTH), 1, 2, 13 , 0.0, true), //Back Right
-            SwerveModuleData(Translation2d(HALF_SIDE_LENGTH, HALF_SIDE_LENGTH), 15, 16, 14 , 0.0, true), //Front Left
-            SwerveModuleData(Translation2d(-HALF_SIDE_LENGTH, HALF_SIDE_LENGTH), 3, 12, 15 , 0.0, true)) //Front Right
+            SwerveModuleData(Translation2d(HALF_SIDE_LENGTH, -HALF_SIDE_LENGTH), 5, 7, 16, 1.509-9.031, false), //Back Left
+            SwerveModuleData(Translation2d(-HALF_SIDE_LENGTH, -HALF_SIDE_LENGTH), 1, 2, 15, 0.6289-9.28, false), //Back Right
+            SwerveModuleData(Translation2d(HALF_SIDE_LENGTH, HALF_SIDE_LENGTH), 16, 15, 14, 0.7724-9.24, false), //Front Left
+            SwerveModuleData(Translation2d(-HALF_SIDE_LENGTH, HALF_SIDE_LENGTH), 3, 12, 13, 3.474-8.46, false)) //Front Right
 
     // Pi * diameter / gear ratio
     const val POWER_ENCODER_MULTIPLY_POSITION = PI * 0.1016 / 5.903
@@ -95,6 +95,8 @@ object SwerveConstants{
 
 
     const val ANGLE_ENCODER_MULTIPLY = 0.01745329251
+
+    const val ANGLE_MOTOR_ENCODER_MULTIPLY = 1/21.4285714 * (2*PI)
 
     const val MAX_AUTO_SPEED = 0.0
 
@@ -116,11 +118,11 @@ object ElectronicIDs{
     const val WRIST_ONE_ID = 17
     const val WRIST_TWO_ID = 4
     const val INDEXER_MOTOR_ID = 9
-    const val BEAMBREAK_ID = 1
+    const val BEAMBREAK_ID = 0
     const val FLYWHEEL_MOTOR_ONE_ID = -1
     const val FLYWHEEL_MOTOR_TWO_ID = -1
 
-    val camData = listOf(Pair("Center", PhysicalConstants.centerPose), Pair("Right2", PhysicalConstants.rightPose), Pair("Left2", PhysicalConstants.frontPose))
+    //val camData:Pair<String, Translation3d> = listOf(/*Pair("Center", PhysicalConstants.centerPose), Pair("Right2", PhysicalConstants.rightPose), Pair("Left2", PhysicalConstants.frontPose)*/)
 }
 
 object RuntimeConstants{

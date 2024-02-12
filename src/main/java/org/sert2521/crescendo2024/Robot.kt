@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.TimedRobot
 import edu.wpi.first.wpilibj2.command.Command
 import edu.wpi.first.wpilibj2.command.CommandScheduler
 import org.sert2521.crescendo2024.subsystems.Autos
+import org.sert2521.crescendo2024.subsystems.Drivetrain
 
 
 /**
@@ -33,6 +34,8 @@ object Robot : TimedRobot()
     override fun robotInit()
     {
         Input
+        Output
+        Drivetrain
     }
 
     /**
@@ -49,6 +52,8 @@ object Robot : TimedRobot()
         // and running subsystem periodic() methods.  This must be called from the robot's periodic
         // block in order for anything in the Command-based framework to work.
         CommandScheduler.getInstance().run()
+        Output.update()
+
     }
 
     /** This method is called once each time the robot enters Disabled mode.  */

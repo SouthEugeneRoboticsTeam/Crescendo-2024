@@ -22,8 +22,8 @@ class IntakeCommand : Command() {
 
     override fun isFinished(): Boolean {
         // TODO: Make this return true when this Command no longer needs to run execute(
-        //return Indexer.getBeamBreak()
-        return false
+        return Indexer.getBeamBreak()
+        //return false
     }
 
     override fun end(interrupted: Boolean) {
