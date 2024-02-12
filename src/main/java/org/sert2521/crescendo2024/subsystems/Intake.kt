@@ -15,7 +15,7 @@ object Intake : SubsystemBase() {
         intakeMotor.setSmartCurrentLimit(40)
         intakeMotor.inverted = false
         alignmentMotor.idleMode = CANSparkBase.IdleMode.kBrake
-        alignmentMotor.setSmartCurrentLimit(40)
+        alignmentMotor.setSmartCurrentLimit(30)
     }
     fun setMotor(speed:Double) {
         intakeMotor.set(speed)

@@ -39,6 +39,12 @@ class SwerveModule(private val powerMotor: CANSparkMax,
     var position: SwerveModulePosition
 
     init {
+        powerMotor.restoreFactoryDefaults()
+        angleMotor.restoreFactoryDefaults()
+
+        powerMotor.idleMode = CANSparkBase.IdleMode.kBrake
+        angleMotor.idleMode = CANSparkBase.IdleMode.kBrake
+
         powerMotor.pidController.p = SwerveConstants.POWER_P
         powerMotor.pidController.i = SwerveConstants.POWER_I
         powerMotor.pidController.d = SwerveConstants.POWER_D
@@ -49,14 +55,15 @@ class SwerveModule(private val powerMotor: CANSparkMax,
         angleMotor.pidController.d = SwerveConstants.ANGLE_D
 
         angleMotor.encoder.setPosition(angleEncoder.absolutePosition.valueAsDouble* SwerveConstants.ANGLE_ENCODER_MULTIPLY - angleOffset)
-        angleMotor.encoder.positionConversionFactor = 2*PI
-        angleMotor.encoder.velocityConversionFactor = (2*PI)/60.0
+        angleMotor.encoder.positionConversionFactor = SwerveConstants.ANGLE_MOTOR_ENCODER_MULTIPLY
+        angleMotor.encoder.velocityConversionFactor = SwerveConstants.ANGLE_MOTOR_ENCODER_MULTIPLY / 60.0
 
         angleMotor.pidController.positionPIDWrappingEnabled = true
         angleMotor.pidController.positionPIDWrappingMinInput = -PI
         angleMotor.pidController.positionPIDWrappingMaxInput = PI
 
         powerMotor.inverted = inverted
+        angleMotor.inverted = inverted
 
         powerMotor.encoder.positionConversionFactor = SwerveConstants.POWER_ENCODER_MULTIPLY_POSITION
         powerMotor.encoder.velocityConversionFactor = SwerveConstants.POWER_ENCODER_MULTIPLY_VELOCITY
@@ -67,7 +74,7 @@ class SwerveModule(private val powerMotor: CANSparkMax,
     }
 
     fun getAngle(): Rotation2d {
-        return Rotation2d(angleMotor.encoder.position)
+        return Rotation2d((angleMotor.encoder.position- PI)%(2*PI)+ PI)
     }
 
     // Should be called in periodic
@@ -127,8 +134,8 @@ class SwerveModule(private val powerMotor: CANSparkMax,
 object Drivetrain : SubsystemBase() {
     private val imu = AHRS()
 
-    private val cams: Array<PhotonCamera>
-    private val photonPoseEstimators: Array<PhotonPoseEstimator>
+    //private val cams: Array<PhotonCamera>
+    //private val photonPoseEstimators: Array<PhotonPoseEstimator>
 
     private val kinematics: SwerveDriveKinematics
     private var modules: Array<SwerveModule>
@@ -178,7 +185,7 @@ object Drivetrain : SubsystemBase() {
         kinematics = SwerveDriveKinematics(*modulePositions.toTypedArray())
         odometry = SwerveDriveOdometry(kinematics, -imu.rotation2d, positionsArray, Pose2d())
         poseEstimator = SwerveDrivePoseEstimator(kinematics, -imu.rotation2d, positionsArray, Pose2d())
-
+        /*
         val camsList = mutableListOf<PhotonCamera>()
         val photonPoseEstimatorsList = mutableListOf<PhotonPoseEstimator>()
         for (camData in ElectronicIDs.camData) {
@@ -190,7 +197,7 @@ object Drivetrain : SubsystemBase() {
 
         cams = camsList.toTypedArray()
         photonPoseEstimators = photonPoseEstimatorsList.toTypedArray()
-
+         */
         Drivetrain.defaultCommand = JoystickDrive(true)
     }
 
@@ -223,13 +230,13 @@ object Drivetrain : SubsystemBase() {
             module.updateState()
             positions.add(module.position)
         }
-        //println(listOf(modules[0].getAngle().radians, modules[1].getAngle().radians, modules[2].getAngle().radians, modules[3].getAngle().radians))
+        println(listOf(modules[0].getAngle().radians, modules[1].getAngle().radians, modules[2].getAngle().radians, modules[3].getAngle().radians))
 
         val positionsArray = positions.toTypedArray()
 
         pose = odometry.update(-imu.rotation2d, positionsArray)
         visionPose = poseEstimator.update(-imu.rotation2d, positionsArray)
-
+        /*
         for (photonPoseEstimator in photonPoseEstimators) {
             val poseOutput = photonPoseEstimator.update()
             if (poseOutput.isPresent) {
@@ -244,6 +251,8 @@ object Drivetrain : SubsystemBase() {
                 }
             }
         }
+
+         */
 
         val currTime = Timer.getFPGATimestamp()
         val deltaTime = currTime - prevTime
@@ -290,7 +299,7 @@ object Drivetrain : SubsystemBase() {
     fun setVisionAlignDeviations() {
         poseEstimator.setVisionMeasurementStdDevs(TuningConstants.alignVisionDeviations)
     }
-
+    /*
     fun visionSeeingThings(): Boolean {
         val time = Timer.getFPGATimestamp()
         if (camerasConnected()) {
@@ -303,6 +312,8 @@ object Drivetrain : SubsystemBase() {
     fun camerasConnected(): Boolean {
         return cams.all { it.isConnected }
     }
+
+     */
 
     fun getReletiveSpeeds():ChassisSpeeds{
         return kinematics.toChassisSpeeds(modules[0].state, modules[1].state, modules[2].state, modules[3].state)
