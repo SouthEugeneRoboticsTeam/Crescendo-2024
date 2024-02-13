@@ -10,13 +10,14 @@ import org.sert2521.crescendo2024.TuningConstants
 import org.sert2521.crescendo2024.commands.SetFlywheel
 
 object Flywheel : SubsystemBase(){
-    val flywheelMotorOne = CANSparkMax(ElectronicIDs.FLYWHEEL_MOTOR_ONE_ID, CANSparkLowLevel.MotorType.kBrushless)
-    val flywheelMotorTwo = CANSparkMax(ElectronicIDs.FLYWHEEL_MOTOR_TWO_ID, CANSparkLowLevel.MotorType.kBrushless)
+    private val flywheelMotorOne = CANSparkMax(ElectronicIDs.FLYWHEEL_MOTOR_ONE_ID, CANSparkLowLevel.MotorType.kBrushless) //Top
+    private val flywheelMotorTwo = CANSparkMax(ElectronicIDs.FLYWHEEL_MOTOR_TWO_ID, CANSparkLowLevel.MotorType.kBrushless) //Bottom
 
     init{
         flywheelMotorOne.encoder.positionConversionFactor = PhysicalConstants.FLYWHEEL_GEAR_RATIO
         flywheelMotorOne.encoder.velocityConversionFactor = PhysicalConstants.FLYWHEEL_GEAR_RATIO / 60
         flywheelMotorOne.idleMode = CANSparkBase.IdleMode.kCoast
+        flywheelMotorOne.inverted = true
         flywheelMotorTwo.encoder.positionConversionFactor = PhysicalConstants.FLYWHEEL_GEAR_RATIO
         flywheelMotorTwo.encoder.velocityConversionFactor = PhysicalConstants.FLYWHEEL_GEAR_RATIO / 60
         flywheelMotorTwo.idleMode = CANSparkBase.IdleMode.kCoast

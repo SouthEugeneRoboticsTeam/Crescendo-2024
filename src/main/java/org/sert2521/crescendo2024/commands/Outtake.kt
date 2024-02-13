@@ -11,6 +11,7 @@ class Outtake : Command() {
     private var wasRevved = false
 
     init {
+        println("ran")
         // each subsystem used by the command must be passed into the addRequirements() method
         addRequirements(Indexer, Intake)
     }
@@ -20,8 +21,10 @@ class Outtake : Command() {
     override fun execute() {
         if(RuntimeConstants.flywheelRevved != false||wasRevved == true){
             wasRevved = true
+            println("set")
             Indexer.setMotor(0.5)
         }
+        Indexer.setMotor(0.5)
     }
 
     override fun isFinished(): Boolean {
