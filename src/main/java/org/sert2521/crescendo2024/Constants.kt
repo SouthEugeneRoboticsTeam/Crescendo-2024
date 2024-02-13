@@ -57,13 +57,13 @@ object ConfigConstants{
     const val ROT_SECONDARY_SPEED = 2.75
 
     //Acceleration of drivetrain
-    const val DRIVE_ACCEL = 30.0
-    const val DRIVE_DECCEL = 36.0
+    const val DRIVE_ACCEL = 35.0
+    const val DRIVE_DECCEL = 40.0
 
     const val DRIVE_OPTIMIZED = true
 
     const val FLYWHEEL_IDLE_SPEED = 0.0
-    const val FLYWHEEL_SHOOT_SPEED = 0.0
+    const val FLYWHEEL_SHOOT_SPEED = 4000.0
 }
 
 object SwerveConstants{
@@ -71,10 +71,10 @@ object SwerveConstants{
     const val DRIVE_BASE_RADIUS = 0.37268
 
     const val POWER_S = 0.0
-    const val POWER_V = 0.0
+    const val POWER_V = 0.1
     const val POWER_A = 0.0
 
-    const val POWER_P = 0.0
+    const val POWER_P = 0.1
     const val POWER_I = 0.0
     const val POWER_D = 0.0
 
@@ -83,10 +83,10 @@ object SwerveConstants{
     const val ANGLE_D = 0.0
 
     val swerveModuleData = listOf(
-            SwerveModuleData(Translation2d(HALF_SIDE_LENGTH, -HALF_SIDE_LENGTH), 5, 7, 16, 1.509-9.031, false), //Back Left
-            SwerveModuleData(Translation2d(-HALF_SIDE_LENGTH, -HALF_SIDE_LENGTH), 1, 2, 15, 0.6289-9.28, false), //Back Right
-            SwerveModuleData(Translation2d(HALF_SIDE_LENGTH, HALF_SIDE_LENGTH), 16, 15, 14, 0.7724-9.24, false), //Front Left
-            SwerveModuleData(Translation2d(-HALF_SIDE_LENGTH, HALF_SIDE_LENGTH), 3, 12, 13, 3.474-8.46, false)) //Front Right
+            SwerveModuleData(Translation2d(HALF_SIDE_LENGTH, -HALF_SIDE_LENGTH), 5, 7, 16, -0.355-PI/2, false), //Back Left
+            SwerveModuleData(Translation2d(-HALF_SIDE_LENGTH, -HALF_SIDE_LENGTH), 1, 2, 15, -0.138-PI/2, false), //Back Right
+            SwerveModuleData(Translation2d(HALF_SIDE_LENGTH, HALF_SIDE_LENGTH), 16, 15, 14, 2.41-PI/2, false), //Front Left
+            SwerveModuleData(Translation2d(-HALF_SIDE_LENGTH, HALF_SIDE_LENGTH), 3, 12, 13, 0.059-PI/2, false)) //Front Right
 
     // Pi * diameter / gear ratio
     const val POWER_ENCODER_MULTIPLY_POSITION = PI * 0.1016 / 5.903
@@ -94,7 +94,7 @@ object SwerveConstants{
     const val POWER_ENCODER_MULTIPLY_VELOCITY = POWER_ENCODER_MULTIPLY_POSITION / 60.0
 
 
-    const val ANGLE_ENCODER_MULTIPLY = 0.01745329251
+    const val ANGLE_ENCODER_MULTIPLY = 2* PI
 
     const val ANGLE_MOTOR_ENCODER_MULTIPLY = 1/21.4285714 * (2*PI)
 
@@ -119,8 +119,8 @@ object ElectronicIDs{
     const val WRIST_TWO_ID = 4
     const val INDEXER_MOTOR_ID = 9
     const val BEAMBREAK_ID = 0
-    const val FLYWHEEL_MOTOR_ONE_ID = -1
-    const val FLYWHEEL_MOTOR_TWO_ID = -1
+    const val FLYWHEEL_MOTOR_ONE_ID = 8
+    const val FLYWHEEL_MOTOR_TWO_ID = 11
 
     //val camData:Pair<String, Translation3d> = listOf(/*Pair("Center", PhysicalConstants.centerPose), Pair("Right2", PhysicalConstants.rightPose), Pair("Left2", PhysicalConstants.frontPose)*/)
 }
@@ -150,12 +150,12 @@ object TuningConstants {
     const val WRIST_ANGLE_TOLERANCE = 0.0
     val trapConstraints = TrapezoidProfile.Constraints(1.0, 1.0)
 
-    const val FLYWHEEL_P = 0.0
+    const val FLYWHEEL_P = 0.0001
     const val FLYWHEEL_I = 0.0
     const val FLYWHEEL_D = 0.0
 
     const val FLYWHEEL_KS = 0.0
-    const val FLYWHEEL_KV = 0.0
+    const val FLYWHEEL_KV = 0.0013
     const val FLYWHEEL_KA = 0.0
 
     const val FLYWHEEL_IDLE_SPEED = 0.0

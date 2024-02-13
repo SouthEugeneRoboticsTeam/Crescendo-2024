@@ -14,6 +14,7 @@ class SetFlywheel(private val rpm:Double) : Command() {
     val feedForward = SimpleMotorFeedforward(TuningConstants.FLYWHEEL_KS, TuningConstants.FLYWHEEL_KV, TuningConstants.FLYWHEEL_KA)
 
     init {
+        println("ran rev")
         // each subsystem used by the command must be passed into the addRequirements() method
         addRequirements(Flywheel)
     }
@@ -21,7 +22,9 @@ class SetFlywheel(private val rpm:Double) : Command() {
     override fun initialize() {}
 
     override fun execute() {
-        Flywheel.setVoltage(pid.calculate(rpm, Flywheel.getSpeed()) + feedForward.calculate(rpm))
+        println("set rev")
+        println(-pid.calculate(rpm, Flywheel.getSpeed())+ feedForward.calculate(rpm))
+        Flywheel.setVoltage(-pid.calculate(rpm, Flywheel.getSpeed()) + feedForward.calculate(rpm))
         RuntimeConstants.flywheelRevved =  Flywheel.getSpeed() > ConfigConstants.FLYWHEEL_SHOOT_SPEED-10.0
     }
 

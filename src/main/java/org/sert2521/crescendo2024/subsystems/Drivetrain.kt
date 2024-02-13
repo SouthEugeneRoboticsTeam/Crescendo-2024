@@ -43,7 +43,7 @@ class SwerveModule(private val powerMotor: CANSparkMax,
         angleMotor.restoreFactoryDefaults()
 
         powerMotor.idleMode = CANSparkBase.IdleMode.kBrake
-        angleMotor.idleMode = CANSparkBase.IdleMode.kBrake
+        angleMotor.idleMode = CANSparkBase.IdleMode.kCoast
 
         powerMotor.pidController.p = SwerveConstants.POWER_P
         powerMotor.pidController.i = SwerveConstants.POWER_I
@@ -54,19 +54,22 @@ class SwerveModule(private val powerMotor: CANSparkMax,
         angleMotor.pidController.i = SwerveConstants.ANGLE_I
         angleMotor.pidController.d = SwerveConstants.ANGLE_D
 
-        angleMotor.encoder.setPosition(angleEncoder.absolutePosition.valueAsDouble* SwerveConstants.ANGLE_ENCODER_MULTIPLY - angleOffset)
         angleMotor.encoder.positionConversionFactor = SwerveConstants.ANGLE_MOTOR_ENCODER_MULTIPLY
         angleMotor.encoder.velocityConversionFactor = SwerveConstants.ANGLE_MOTOR_ENCODER_MULTIPLY / 60.0
+
 
         angleMotor.pidController.positionPIDWrappingEnabled = true
         angleMotor.pidController.positionPIDWrappingMinInput = -PI
         angleMotor.pidController.positionPIDWrappingMaxInput = PI
 
-        powerMotor.inverted = inverted
+        powerMotor.inverted = !inverted
         angleMotor.inverted = inverted
 
         powerMotor.encoder.positionConversionFactor = SwerveConstants.POWER_ENCODER_MULTIPLY_POSITION
         powerMotor.encoder.velocityConversionFactor = SwerveConstants.POWER_ENCODER_MULTIPLY_VELOCITY
+
+        powerMotor.setSmartCurrentLimit(20, 60)
+        angleMotor.setSmartCurrentLimit(30)
 
         position = SwerveModulePosition(powerMotor.encoder.position, getAngle())
 
@@ -74,7 +77,13 @@ class SwerveModule(private val powerMotor: CANSparkMax,
     }
 
     fun getAngle(): Rotation2d {
-        return Rotation2d((angleMotor.encoder.position- PI)%(2*PI)+ PI)
+        if (inverted){
+            angleMotor.encoder.setPosition(angleEncoder.absolutePosition.valueAsDouble* SwerveConstants.ANGLE_ENCODER_MULTIPLY - angleOffset)
+        } else {
+            angleMotor.encoder.setPosition(-(angleEncoder.absolutePosition.valueAsDouble* SwerveConstants.ANGLE_ENCODER_MULTIPLY - angleOffset))
+        }
+
+        return Rotation2d(((angleMotor.encoder.position+ PI).mod(2*PI)- 2*PI)+PI)
     }
 
     // Should be called in periodic
@@ -230,7 +239,7 @@ object Drivetrain : SubsystemBase() {
             module.updateState()
             positions.add(module.position)
         }
-        println(listOf(modules[0].getAngle().radians, modules[1].getAngle().radians, modules[2].getAngle().radians, modules[3].getAngle().radians))
+        //println(listOf(modules[0].getAngle().radians, modules[1].getAngle().radians, modules[2].getAngle().radians, modules[3].getAngle().radians))
 
         val positionsArray = positions.toTypedArray()
 
