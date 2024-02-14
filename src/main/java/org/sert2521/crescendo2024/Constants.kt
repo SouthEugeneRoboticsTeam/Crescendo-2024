@@ -26,12 +26,16 @@ import kotlin.math.PI
 class SwerveModuleData(val position: Translation2d, val powerMotorID: Int, val angleMotorID: Int, val angleEncoderID: Int, val angleOffset: Double, val inverted: Boolean)
 
 object PhysicalConstants{
-    const val WRIST_ENCODER_MULTIPLY = 2*PI
-    const val WRIST_ENCODER_OFFSET = 0.0
+    const val WRIST_ENCODER_MULTIPLY = -2*PI
+    const val WRIST_ENCODER_OFFSET = -1.789203
+
+
+    //3.36
+    //
 
     //ESTIMATES
-    const val WRIST_SETPOINT_STOW = 0.0
-    const val WRIST_SETPOINT_AMP = 0.80
+    const val WRIST_SETPOINT_STOW = -0.15
+    const val WRIST_SETPOINT_AMP = 1.35
 
     val field: AprilTagFieldLayout = AprilTagFields.k2023ChargedUp.loadAprilTagLayoutField()
     const val FIELD_WIDTH = 8.21
@@ -143,19 +147,19 @@ object TuningConstants {
 
     //ESTIMATIONS
     const val WRIST_S = 0.0
-    const val WRIST_G = 0.0
+    const val WRIST_G = 0.365
     const val WRIST_V = 0.0
     const val WRIST_A = 0.0
 
-    const val WRIST_ANGLE_TOLERANCE = 0.0
-    val trapConstraints = TrapezoidProfile.Constraints(1.0, 1.0)
+    const val WRIST_ANGLE_TOLERANCE = 0.1
+    val trapConstraints = TrapezoidProfile.Constraints(0.5, 0.25)
 
-    const val FLYWHEEL_P = 0.0001
+    const val FLYWHEEL_P = 0.0
     const val FLYWHEEL_I = 0.0
     const val FLYWHEEL_D = 0.0
 
     const val FLYWHEEL_KS = 0.0
-    const val FLYWHEEL_KV = 0.0013
+    const val FLYWHEEL_KV = 0.002
     const val FLYWHEEL_KA = 0.0
 
     const val FLYWHEEL_IDLE_SPEED = 0.0

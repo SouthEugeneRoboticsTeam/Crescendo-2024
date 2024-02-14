@@ -1,5 +1,6 @@
 package org.sert2521.crescendo2024.subsystems
 
+import com.revrobotics.CANSparkBase
 import com.revrobotics.CANSparkMax
 import com.revrobotics.CANSparkLowLevel
 import edu.wpi.first.wpilibj.DutyCycleEncoder
@@ -15,7 +16,7 @@ object Wrist : SubsystemBase() {
     val motorTwo = CANSparkMax(ElectronicIDs.WRIST_TWO_ID, CANSparkLowLevel.MotorType.kBrushless)
 
     val encoder = motorOne.encoder
-    val absEncoder = DutyCycleEncoder(-1)
+    val absEncoder = DutyCycleEncoder(1)
     val motorSpeed = 0.0
     var prevRot = 0.0
     var deltaTime = Timer.getFPGATimestamp()
@@ -28,12 +29,19 @@ object Wrist : SubsystemBase() {
 
         absEncoder.distancePerRotation = PhysicalConstants.WRIST_ENCODER_MULTIPLY
         prevRot = getRadians()
-        defaultCommand = SetWrist(getRadians(), false)
+        motorOne.idleMode = CANSparkBase.IdleMode.kBrake
+        motorTwo.idleMode = CANSparkBase.IdleMode.kBrake
+
+        motorTwo.inverted = true
+        motorOne.inverted = false
+
+        //defaultCommand = SetWrist(getRadians(), false)
     }
 
     override fun periodic(){
         //val time = Timer.getFPGATimestamp()
         //vel = time
+        //println(getRadians())
     }
     fun setSpeed(speed:Double){
         motorOne.set(speed)

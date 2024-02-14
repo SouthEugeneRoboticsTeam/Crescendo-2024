@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj2.command.Command
 import edu.wpi.first.wpilibj2.command.CommandScheduler
 import org.sert2521.crescendo2024.subsystems.Autos
 import org.sert2521.crescendo2024.subsystems.Drivetrain
+import org.sert2521.crescendo2024.subsystems.Wrist
 
 
 /**
@@ -36,6 +37,7 @@ object Robot : TimedRobot()
         Input
         Output
         Drivetrain
+        //Wrist
     }
 
     /**
