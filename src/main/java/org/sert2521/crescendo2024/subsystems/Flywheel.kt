@@ -15,12 +15,13 @@ object Flywheel : SubsystemBase(){
 
     init{
         flywheelMotorOne.encoder.positionConversionFactor = PhysicalConstants.FLYWHEEL_GEAR_RATIO
-        flywheelMotorOne.encoder.velocityConversionFactor = PhysicalConstants.FLYWHEEL_GEAR_RATIO / 60
+        flywheelMotorOne.encoder.velocityConversionFactor = PhysicalConstants.FLYWHEEL_GEAR_RATIO
         flywheelMotorOne.idleMode = CANSparkBase.IdleMode.kCoast
-        flywheelMotorOne.inverted = true
+        flywheelMotorOne.inverted = false
         flywheelMotorTwo.encoder.positionConversionFactor = PhysicalConstants.FLYWHEEL_GEAR_RATIO
-        flywheelMotorTwo.encoder.velocityConversionFactor = PhysicalConstants.FLYWHEEL_GEAR_RATIO / 60
+        flywheelMotorTwo.encoder.velocityConversionFactor = PhysicalConstants.FLYWHEEL_GEAR_RATIO
         flywheelMotorTwo.idleMode = CANSparkBase.IdleMode.kCoast
+        flywheelMotorTwo.inverted = false
         defaultCommand = SetFlywheel(TuningConstants.FLYWHEEL_IDLE_SPEED)
     }
     fun getSpeed():Double{

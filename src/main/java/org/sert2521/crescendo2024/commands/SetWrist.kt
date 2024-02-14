@@ -25,8 +25,14 @@ class SetWrist(private val goal:Double, private val ends:Boolean) : Command() {
     override fun initialize() {}
 
     override fun execute() {
+
         wristAngle = Wrist.getRadians()
-        Wrist.setVoltage(feedForward.calculate(wristAngle, 0.0) + pid.calculate(wristAngle+2*PI, RuntimeConstants.wristSetPoint+2*PI))
+
+        val pidResult =  pid.calculate(wristAngle+2*PI, goal+2*PI)
+        val feedforwardResult = feedForward.calculate(wristAngle, 0.0)
+        println(feedforwardResult)
+
+        Wrist.setVoltage(feedforwardResult - pidResult)
         if(ends){
             atSetpoint = abs(wristAngle - goal) <= TuningConstants.WRIST_ANGLE_TOLERANCE
         }

@@ -11,6 +11,7 @@ import org.sert2521.crescendo2024.commands.Outtake
 import org.sert2521.crescendo2024.commands.SetFlywheel
 import org.sert2521.crescendo2024.commands.SetWrist
 import org.sert2521.crescendo2024.subsystems.Drivetrain
+import org.sert2521.crescendo2024.subsystems.Wrist
 import java.io.ObjectInputFilter.Config
 
 
@@ -20,11 +21,11 @@ object Input {
 
     private val intake = JoystickButton(gunnerController, 1)
     private val rev = JoystickButton(gunnerController, 8)
-    private val outtake = JoystickButton(gunnerController, 5)
-    private val wristStow = JoystickButton(gunnerController, 9)
+    private val outtake = JoystickButton(gunnerController, 3)
+    private val wristStow = JoystickButton(gunnerController, 7)
     private val wristAmp = JoystickButton(gunnerController, 3)
     private val manualUp = JoystickButton(gunnerController, 6)
-    private val manualDown = JoystickButton(gunnerController, 7)
+    private val manualDown = JoystickButton(gunnerController, 10)
     private val visionAlign = JoystickButton(driverController, 1)
     private val resetAngle = JoystickButton(driverController, 4)
     private val secondarySpeedButton = JoystickButton(driverController, 2)
@@ -32,6 +33,7 @@ object Input {
         intake.whileTrue(IntakeCommand())
         rev.whileTrue(SetFlywheel(ConfigConstants.FLYWHEEL_SHOOT_SPEED))
         outtake.whileTrue(Outtake())
+        wristStow.whileTrue(SetWrist(0.2, false))
         //wristStow.whileTrue(SetWrist(PhysicalConstants.WRIST_SETPOINT_STOW, true))
         //wristAmp.whileTrue(SetWrist(PhysicalConstants.WRIST_SETPOINT_AMP, true))
         // Make these do stuff
