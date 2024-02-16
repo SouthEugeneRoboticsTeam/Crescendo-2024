@@ -34,8 +34,9 @@ object PhysicalConstants{
     //
 
     //ESTIMATES
-    const val WRIST_SETPOINT_STOW = -0.15
-    const val WRIST_SETPOINT_AMP = 1.35
+    const val WRIST_SETPOINT_STOW = -0.21
+    const val WRIST_SETPOINT_AMP = 1.53
+    const val WRIST_SETPOINT_PODIUM = 0.1
 
     val field: AprilTagFieldLayout = AprilTagFields.k2023ChargedUp.loadAprilTagLayoutField()
     const val FIELD_WIDTH = 8.21
@@ -141,7 +142,7 @@ object TuningConstants {
 
     const val VISION_TIMEOUT = 0.1
 
-    const val WRIST_P = 0.1
+    const val WRIST_P = 30.0
     const val WRIST_I = 0.0
     const val WRIST_D = 0.0
 
@@ -152,7 +153,7 @@ object TuningConstants {
     const val WRIST_A = 0.0
 
     const val WRIST_ANGLE_TOLERANCE = 0.1
-    val trapConstraints = TrapezoidProfile.Constraints(0.5, 0.25)
+    val trapConstraints = TrapezoidProfile.Constraints(5.0, 15.0)
 
     const val FLYWHEEL_P = 0.0
     const val FLYWHEEL_I = 0.0
