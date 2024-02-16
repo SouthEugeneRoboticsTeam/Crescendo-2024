@@ -22,9 +22,9 @@ class Outtake : Command() {
         if(RuntimeConstants.flywheelRevved != false||wasRevved == true){
             wasRevved = true
             println("set")
-            Indexer.setMotor(0.5)
+            Indexer.setMotor(1.0)
         }
-        Indexer.setMotor(0.5)
+        Indexer.setMotor(1.0)
     }
 
     override fun isFinished(): Boolean {
