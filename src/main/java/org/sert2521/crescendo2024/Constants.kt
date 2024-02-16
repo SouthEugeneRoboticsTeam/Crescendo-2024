@@ -13,6 +13,9 @@ import kotlin.math.PI
 class SwerveModuleData(val position: Translation2d, val powerMotorID: Int, val angleMotorID: Int, val angleEncoderID: Int, val angleOffset: Double, val inverted: Boolean)
 
 object PhysicalConstants{
+    const val CLIMBER_MAX = 10.0
+    const val CLIMBER_MIN = 0.0
+
     const val HALF_SIDE_LENGTH = 0.0
 
     const val WRIST_ENCODER_MULTIPLY = 0.0

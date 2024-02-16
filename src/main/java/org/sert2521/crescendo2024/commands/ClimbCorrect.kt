@@ -11,7 +11,7 @@ import kotlin.math.absoluteValue
 import kotlin.math.sin
 import kotlin.math.tan
 
-class ClimbCommand(val startEstimateOne:Double, val startEstimateTwo: Double) : Command() {
+class ClimbCorrect(val startEstimateOne:Double, val startEstimateTwo: Double) : Command() {
 
     //One is the a/x climber
     //Two is the b/y climber
