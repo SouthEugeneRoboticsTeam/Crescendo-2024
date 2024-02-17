@@ -1,4 +1,4 @@
-package org.sert2521.crescendo2024.commands
+package org.sert2521.crescendo2024.subsystems
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase
 import com.pathplanner.lib.auto.AutoBuilder
@@ -8,12 +8,13 @@ import com.pathplanner.lib.util.ReplanningConfig
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard
 import edu.wpi.first.wpilibj2.command.Command
+import edu.wpi.first.wpilibj2.command.Commands
 import org.sert2521.crescendo2024.SwerveConstants
 
 
 object Autos : SubsystemBase() {
     var autoChooser: SendableChooser<Command>? = null
-    val defaultAutoCommand = null
+    val defaultAutoCommand = Commands.none()
 
 
     init {
@@ -34,10 +35,15 @@ object Autos : SubsystemBase() {
 
 
         autoChooser = AutoBuilder.buildAutoChooser()
+
         SmartDashboard.putData("Auto Chooser", autoChooser)
     }
 
     fun getAuto(): Command?{
-        return autoChooser!!.selected
+        return if (autoChooser?.selected == null){
+            defaultAutoCommand
+        } else {
+            autoChooser!!.selected
+        }
     }
 }

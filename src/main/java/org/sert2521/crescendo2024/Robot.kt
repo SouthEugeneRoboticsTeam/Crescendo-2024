@@ -6,7 +6,6 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler
 import org.sert2521.crescendo2024.subsystems.Autos
 import org.sert2521.crescendo2024.subsystems.Climber
 import org.sert2521.crescendo2024.subsystems.Drivetrain
-import org.sert2521.crescendo2024.subsystems.Wrist
 
 
 /**
@@ -93,7 +92,7 @@ object Robot : TimedRobot()
     {
         // This makes sure that the autonomous stops running when teleop starts running. If you want the
         // autonomous to continue until interrupted by another command, remove this line or comment it out.
-        //autonomousCommand?.cancel()
+        autonomousCommand?.cancel()
     }
 
     override fun testInit()
