@@ -31,13 +31,14 @@ object PhysicalConstants{
 
     const val HALF_SIDE_LENGTH = 0.0
 
-    const val WRIST_ENCODER_MULTIPLY = 0.0
-    const val WRIST_ENCODER_OFFSET = 0.0
+    const val WRIST_ENCODER_MULTIPLY = -2*PI
+    const val WRIST_ENCODER_OFFSET = -1.789203
 
     //ESTIMATES
     const val WRIST_SETPOINT_STOW = -0.21
     const val WRIST_SETPOINT_AMP = 1.53
     const val WRIST_SETPOINT_PODIUM = 0.15
+    const val WRIST_SETPOINT_FAR = 0.375
 
     val field: AprilTagFieldLayout = AprilTagFields.k2023ChargedUp.loadAprilTagLayoutField()
     const val FIELD_WIDTH = 8.21
@@ -60,7 +61,7 @@ object ConfigConstants{
     const val ROT_DEADBAND = 0.075
 
     //Drive speed constants
-    const val DRIVE_SPEED = 12.0
+    const val DRIVE_SPEED = 2.0
     const val DRIVE_SECONDARY_SPEED = 2.75
     const val ROT_SPEED = 10.0
     const val ROT_SECONDARY_SPEED = 2.75
@@ -80,10 +81,10 @@ object SwerveConstants{
     const val DRIVE_BASE_RADIUS = 0.37268
 
     const val POWER_S = 0.0
-    const val POWER_V = 0.1
+    const val POWER_V = 0.3
     const val POWER_A = 0.0
 
-    const val POWER_P = 0.1
+    const val POWER_P = 0.2
     const val POWER_I = 0.0
     const val POWER_D = 0.0
 
@@ -128,7 +129,7 @@ object ElectronicIDs{
     const val WRIST_ONE_ID = 17
     const val WRIST_TWO_ID = 4
     const val INDEXER_MOTOR_ID = 9
-    const val BEAMBREAK_ID = 0
+    const val BEAMBREAK_ID = 3
     const val FLYWHEEL_MOTOR_ONE_ID = 8
     const val FLYWHEEL_MOTOR_TWO_ID = 11
     const val CLIMBER_MOTOR_ONE = 6

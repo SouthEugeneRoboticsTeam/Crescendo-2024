@@ -40,4 +40,6 @@ object Autos : SubsystemBase() {
     fun getAuto(): Command?{
         return autoChooser!!.selected
     }
+
+
 }
