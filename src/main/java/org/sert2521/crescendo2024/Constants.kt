@@ -179,9 +179,9 @@ object TuningConstants {
 
     const val CLIMBER_TOLERANCE_ENCODER = 0.0
 
-    const val CLIMBER_STALL_TOLERANCE = 0.0
-    const val CLIMBER_STALL_TRY_POWER = 0.0
-    const val CLIMBER_STALL_SPEED = 0.0
+    const val CLIMBER_STALL_TOLERANCE = 0.5
+    const val CLIMBER_STALL_TRY_POWER = 0.1
+    const val CLIMBER_STALL_SPEED = 0.1
 
     const val CLIMB_SPEED = 0.0
 }
