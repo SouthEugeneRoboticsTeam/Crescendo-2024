@@ -33,13 +33,13 @@ object Climber : SubsystemBase() {
         climberMotorOne.encoder.position = 0.0
         climberMotorTwo.encoder.position = 0.0
 
-        climberMotorOne.setSmartCurrentLimit(40)
-        climberMotorTwo.setSmartCurrentLimit(40)
+        climberMotorOne.setSmartCurrentLimit(20)
+        climberMotorTwo.setSmartCurrentLimit(20)
     }
 
     override fun periodic() {
-        println(Pair(climberMotorOne.encoder.position, climberMotorTwo.encoder.position))
-        /*
+        //println(Pair(climberMotorOne.encoder.position, climberMotorTwo.encoder.position))
+
         stallingOne = if (currentSpeedOne >= TuningConstants.CLIMBER_STALL_TRY_POWER) {
             filterOne.calculate(-climberMotorOne.encoder.velocity <= TuningConstants.CLIMBER_STALL_SPEED)
         } else if (-currentSpeedOne <= -TuningConstants.CLIMBER_STALL_SPEED) {
@@ -55,7 +55,7 @@ object Climber : SubsystemBase() {
             filterTwo.calculate(stallingTwo)
         }
 
-         */
+
     }
     fun setSpeed(speedOne:Double, speedTwo:Double){
         climberMotorOne.set(speedOne)
@@ -94,5 +94,10 @@ object Climber : SubsystemBase() {
         climberMotorTwo.stopMotor()
         currentSpeedOne = 0.0
         currentSpeedTwo = 0.0
+    }
+
+    fun setCurrentLimit(current:Int){
+        climberMotorOne.setSmartCurrentLimit(current)
+        climberMotorTwo.setSmartCurrentLimit(current)
     }
 }

@@ -26,6 +26,7 @@ object Input {
     private val wristPodium = JoystickButton(gunnerController, 6)
     private val manualUp = JoystickButton(gunnerController, 12)
     private val manualDown = JoystickButton(gunnerController, 11)
+    private val climb = JoystickButton(gunnerController, 14)
     private val visionAlign = JoystickButton(driverController, 1)
     private val resetAngle = JoystickButton(driverController, 4)
     private val secondarySpeedButton = JoystickButton(driverController, 2)
@@ -42,6 +43,7 @@ object Input {
         manualUp.onFalse(InstantCommand({Climber.setSpeed(0.0, 0.0)}))
         manualDown.onTrue(InstantCommand({Climber.setSpeed(-0.2, -0.2)}))
         manualDown.onFalse(InstantCommand({Climber.setSpeed(0.0, 0.0)}))
+        climb.whileTrue(ClimbInitiate())
         // Make these do stuff
         // manualUp.whileTrue()
         // manualDown.whileTrue()
