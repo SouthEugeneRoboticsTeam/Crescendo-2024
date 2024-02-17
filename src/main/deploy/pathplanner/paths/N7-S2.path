@@ -1,0 +1,67 @@
+{
+  "version": 1.0,
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 8.30158973295046,
+        "y": 2.412655817678048
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 9.30158973295046,
+        "y": 1.912655817678048
+      },
+      "isLocked": false,
+      "linkedName": "N7"
+    },
+    {
+      "anchor": {
+        "x": 1.3560654093318372,
+        "y": 5.514641868978395
+      },
+      "prevControl": {
+        "x": 1.1060654093318376,
+        "y": 7.014641868978395
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": "S2"
+    }
+  ],
+  "rotationTargets": [],
+  "constraintZones": [],
+  "eventMarkers": [
+    {
+      "name": "New Event Marker",
+      "waypointRelativePos": 1.0,
+      "command": {
+        "type": "parallel",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "OuttakeHigh"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "globalConstraints": {
+    "maxVelocity": 3.0,
+    "maxAcceleration": 3.0,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": 180.0,
+    "rotateFast": false
+  },
+  "reversed": false,
+  "folder": "NX-S2",
+  "previewStartingState": null,
+  "useDefaultConstraints": false
+}

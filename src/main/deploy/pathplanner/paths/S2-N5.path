@@ -1,0 +1,67 @@
+{
+  "version": 1.0,
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 1.3560654093318372,
+        "y": 5.514641868978395
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 3.3091677379283517,
+        "y": 6.600859206807472
+      },
+      "isLocked": false,
+      "linkedName": "S2"
+    },
+    {
+      "anchor": {
+        "x": 8.312034130429584,
+        "y": 5.744418613519161
+      },
+      "prevControl": {
+        "x": 7.2049279976422556,
+        "y": 6.820191553869114
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": "N5"
+    }
+  ],
+  "rotationTargets": [],
+  "constraintZones": [],
+  "eventMarkers": [
+    {
+      "name": "New Event Marker",
+      "waypointRelativePos": 0.75,
+      "command": {
+        "type": "parallel",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "Intake"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "globalConstraints": {
+    "maxVelocity": 3.0,
+    "maxAcceleration": 3.0,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": -47.489552921999234,
+    "rotateFast": false
+  },
+  "reversed": false,
+  "folder": "S2-NX",
+  "previewStartingState": null,
+  "useDefaultConstraints": false
+}

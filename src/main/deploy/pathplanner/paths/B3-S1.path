@@ -1,0 +1,73 @@
+{
+  "version": 1.0,
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 0.4787360210852742,
+        "y": 2.0471019059086473
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 1.7007305261429881,
+        "y": 2.6946545496144436
+      },
+      "isLocked": false,
+      "linkedName": "B3"
+    },
+    {
+      "anchor": {
+        "x": 0.698068368146915,
+        "y": 6.653081194203101
+      },
+      "prevControl": {
+        "x": 3.275902913637889,
+        "y": 6.428163233781938
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": "S1"
+    }
+  ],
+  "rotationTargets": [
+    {
+      "waypointRelativePos": 0,
+      "rotationDegrees": 0,
+      "rotateFast": false
+    }
+  ],
+  "constraintZones": [],
+  "eventMarkers": [
+    {
+      "name": "New Event Marker",
+      "waypointRelativePos": 1.0,
+      "command": {
+        "type": "parallel",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "OuttakeHigh"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "globalConstraints": {
+    "maxVelocity": 3.0,
+    "maxAcceleration": 3.0,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": 60.0,
+    "rotateFast": false
+  },
+  "reversed": false,
+  "folder": "B3-SX",
+  "previewStartingState": null,
+  "useDefaultConstraints": false
+}

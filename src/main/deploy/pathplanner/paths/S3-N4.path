@@ -1,0 +1,67 @@
+{
+  "version": 1.0,
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 0.6876239706677894,
+        "y": 4.386646941232814
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 2.6302819017784533,
+        "y": 4.282202966438131
+      },
+      "isLocked": false,
+      "linkedName": "S3"
+    },
+    {
+      "anchor": {
+        "x": 8.280700937992206,
+        "y": 7.446855402616658
+      },
+      "prevControl": {
+        "x": 6.578264148887985,
+        "y": 7.634854557237497
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": "N4"
+    }
+  ],
+  "rotationTargets": [],
+  "constraintZones": [],
+  "eventMarkers": [
+    {
+      "name": "New Event Marker",
+      "waypointRelativePos": 0.75,
+      "command": {
+        "type": "parallel",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "Intake"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "globalConstraints": {
+    "maxVelocity": 3.0,
+    "maxAcceleration": 3.0,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": 0,
+    "rotateFast": false
+  },
+  "reversed": false,
+  "folder": "S3-NX",
+  "previewStartingState": null,
+  "useDefaultConstraints": false
+}
