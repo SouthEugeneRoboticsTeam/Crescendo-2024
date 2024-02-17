@@ -6,10 +6,8 @@ import edu.wpi.first.wpilibj.Joystick
 import edu.wpi.first.wpilibj.XboxController
 import edu.wpi.first.wpilibj2.command.InstantCommand
 import edu.wpi.first.wpilibj2.command.button.JoystickButton
-import org.sert2521.crescendo2024.commands.IntakeCommand
-import org.sert2521.crescendo2024.commands.Outtake
-import org.sert2521.crescendo2024.commands.SetFlywheel
-import org.sert2521.crescendo2024.commands.SetWrist
+import org.sert2521.crescendo2024.commands.*
+import org.sert2521.crescendo2024.subsystems.Climber
 import org.sert2521.crescendo2024.subsystems.Drivetrain
 import org.sert2521.crescendo2024.subsystems.Wrist
 import java.io.ObjectInputFilter.Config
@@ -20,6 +18,7 @@ object Input {
     private val gunnerController = Joystick(1)
 
     private val intake = JoystickButton(gunnerController, 1)
+    private val intakeReverse = JoystickButton(gunnerController, 2)
     private val rev = JoystickButton(gunnerController, 8)
     private val outtake = JoystickButton(gunnerController, 10)
     private val wristStow = JoystickButton(gunnerController, 7)
@@ -32,12 +31,17 @@ object Input {
     private val secondarySpeedButton = JoystickButton(driverController, 2)
     init{
         intake.whileTrue(IntakeCommand())
+        intakeReverse.whileTrue(IntakeReverse())
         rev.whileTrue(SetFlywheel(ConfigConstants.FLYWHEEL_SHOOT_SPEED))
         outtake.whileTrue(Outtake())
         wristStow.onTrue(SetWrist(PhysicalConstants.WRIST_SETPOINT_STOW, false))
         //wristStow.whileTrue(SetWrist(PhysicalConstants.WRIST_SETPOINT_STOW, true))
         wristAmp.onTrue(SetWrist(PhysicalConstants.WRIST_SETPOINT_AMP, false))
         wristPodium.onTrue(SetWrist(PhysicalConstants.WRIST_SETPOINT_PODIUM, false))
+        manualUp.onTrue(InstantCommand({Climber.setSpeed(0.2, 0.2)}))
+        manualUp.onFalse(InstantCommand({Climber.setSpeed(0.0, 0.0)}))
+        manualDown.onTrue(InstantCommand({Climber.setSpeed(-0.2, -0.2)}))
+        manualDown.onFalse(InstantCommand({Climber.setSpeed(0.0, 0.0)}))
         // Make these do stuff
         // manualUp.whileTrue()
         // manualDown.whileTrue()

@@ -26,17 +26,18 @@ import kotlin.math.PI
 class SwerveModuleData(val position: Translation2d, val powerMotorID: Int, val angleMotorID: Int, val angleEncoderID: Int, val angleOffset: Double, val inverted: Boolean)
 
 object PhysicalConstants{
-    const val WRIST_ENCODER_MULTIPLY = -2*PI
-    const val WRIST_ENCODER_OFFSET = -1.789203
+    const val CLIMBER_MAX = 10.0
+    const val CLIMBER_MIN = 0.0
 
+    const val HALF_SIDE_LENGTH = 0.0
 
-    //3.36
-    //
+    const val WRIST_ENCODER_MULTIPLY = 0.0
+    const val WRIST_ENCODER_OFFSET = 0.0
 
     //ESTIMATES
     const val WRIST_SETPOINT_STOW = -0.21
     const val WRIST_SETPOINT_AMP = 1.53
-    const val WRIST_SETPOINT_PODIUM = 0.1
+    const val WRIST_SETPOINT_PODIUM = 0.15
 
     val field: AprilTagFieldLayout = AprilTagFields.k2023ChargedUp.loadAprilTagLayoutField()
     const val FIELD_WIDTH = 8.21
@@ -47,8 +48,11 @@ object PhysicalConstants{
     val frontPose = Transform3d(Translation3d(Units.inchesToMeters(18.375), Units.inchesToMeters(0.0),  Units.inchesToMeters(5.485)), Rotation3d(0.0, 0.0,  0.0))
     val centerPose = Transform3d(Translation3d(Units.inchesToMeters(-10.059), Units.inchesToMeters(6.081), Units.inchesToMeters(11.521)), Rotation3d(0.0, 0.349, PI))
 
-
     const val FLYWHEEL_GEAR_RATIO = 3.0/2.0
+
+    const val CLIMBER_ENCODER_TO_METERS = 1.0
+
+    const val CLIMBER_BETWEEN_DISTANCE = 1.0
 }
 
 object ConfigConstants{
@@ -115,6 +119,7 @@ object SwerveConstants{
 
     const val AUTO_REPLANNING_TOTAL_ERROR = 0.0
     const val AUTO_REPLANNING_SPIKE = 0.0
+
 }
 
 object ElectronicIDs{
@@ -126,6 +131,8 @@ object ElectronicIDs{
     const val BEAMBREAK_ID = 0
     const val FLYWHEEL_MOTOR_ONE_ID = 8
     const val FLYWHEEL_MOTOR_TWO_ID = 11
+    const val CLIMBER_MOTOR_ONE = 6
+    const val CLIMBER_MOTOR_TWO = 14
 
     //val camData:Pair<String, Translation3d> = listOf(/*Pair("Center", PhysicalConstants.centerPose), Pair("Right2", PhysicalConstants.rightPose), Pair("Left2", PhysicalConstants.frontPose)*/)
 }
@@ -164,4 +171,17 @@ object TuningConstants {
     const val FLYWHEEL_KA = 0.0
 
     const val FLYWHEEL_IDLE_SPEED = 0.0
+
+    const val CLIMBER_FILTER = 0.0
+
+    const val CLIMBER_TOLERANCE_ANGLE = 0.0
+    const val CLIMBER_RESTING_TOLERANCE = 0.0
+
+    const val CLIMBER_TOLERANCE_ENCODER = 0.0
+
+    const val CLIMBER_STALL_TOLERANCE = 0.0
+    const val CLIMBER_STALL_TRY_POWER = 0.0
+    const val CLIMBER_STALL_SPEED = 0.0
+
+    const val CLIMB_SPEED = 0.0
 }
