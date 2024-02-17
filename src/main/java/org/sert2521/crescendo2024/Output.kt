@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard
 import edu.wpi.first.wpilibj2.command.SubsystemBase
 import org.sert2521.crescendo2024.subsystems.Drivetrain
 import org.sert2521.crescendo2024.subsystems.Indexer
+import org.sert2521.crescendo2024.subsystems.Wrist
 import java.io.File
 
 object Output : SubsystemBase() {
@@ -39,7 +40,9 @@ object Output : SubsystemBase() {
         values.add(Pair("Drive 3 State Drive", { Drivetrain.getStates()[2].speedMetersPerSecond }))
         values.add(Pair("Drive 4 State Drive", { Drivetrain.getStates()[3].speedMetersPerSecond }))
 
-        bools.add(Pair("Beambreak", { Indexer.getBeamBreak()}))
+        values.add(Pair("Wrist Angle", { Wrist.getRadians() }))
+
+        bools.add(Pair("Beambreak", { Indexer.getBeamBreak() }))
     }
     fun update(){
         for (value in values) {

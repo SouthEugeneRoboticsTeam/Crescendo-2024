@@ -2,25 +2,16 @@ package org.sert2521.crescendo2024.subsystems
 
 import com.ctre.phoenix6.hardware.CANcoder
 import com.kauailabs.navx.frc.AHRS
-import com.revrobotics.AbsoluteEncoder
 import com.revrobotics.CANSparkBase
 import com.revrobotics.CANSparkMax
 import com.revrobotics.CANSparkLowLevel
-import com.revrobotics.MotorFeedbackSensor
-import com.revrobotics.SparkPIDController
-import edu.wpi.first.math.Vector
-import edu.wpi.first.math.controller.PIDController
-import edu.wpi.first.math.controller.SimpleMotorFeedforward
 import edu.wpi.first.math.estimator.SwerveDrivePoseEstimator
 import edu.wpi.first.math.geometry.*
 import edu.wpi.first.math.kinematics.*
 import edu.wpi.first.math.util.Units
-import edu.wpi.first.wpilibj.DriverStation
 import edu.wpi.first.wpilibj.MotorSafety
 import edu.wpi.first.wpilibj.Timer
 import edu.wpi.first.wpilibj2.command.SubsystemBase
-import org.photonvision.PhotonCamera
-import org.photonvision.PhotonPoseEstimator
 //import org.photonvision.PhotonCamera
 //import org.photonvision.PhotonPoseEstimator
 import org.sert2521.crescendo2024.*
@@ -38,7 +29,7 @@ class SwerveModule(private val powerMotor: CANSparkMax,
 
     var position: SwerveModulePosition
 
-    lateinit var goal: SwerveModuleState
+    private var goal: SwerveModuleState = state
 
     init {
         powerMotor.restoreFactoryDefaults()
@@ -123,7 +114,7 @@ class SwerveModule(private val powerMotor: CANSparkMax,
         angleMotor.pidController.setReference(optimized.angle.radians, CANSparkBase.ControlType.kPosition)
     }
 
-    fun getGoal():SwerveModuleState{
+    fun getModuleGoal():SwerveModuleState{
         return SwerveModuleState(goal.speedMetersPerSecond, Rotation2d(goal.angle.radians))
     }
 
@@ -377,7 +368,7 @@ object Drivetrain : SubsystemBase() {
     }
 
     fun getGoals():Array<SwerveModuleState>{
-        return arrayOf(modules[0].getGoal(), modules[1].getGoal(), modules[2].getGoal(), modules[3].getGoal())
+        return arrayOf(modules[0].getModuleGoal(), modules[1].getModuleGoal(), modules[2].getModuleGoal(), modules[3].getModuleGoal())
     }
 
     fun getStates():Array<SwerveModuleState>{
@@ -387,6 +378,12 @@ object Drivetrain : SubsystemBase() {
     fun setMode(coast: Boolean) {
         for (module in modules) {
             module.setMotorMode(coast)
+        }
+    }
+
+    fun enterClimbPos(){
+        for (module in modules){
+            module.set(SwerveModuleState(0.0, Rotation2d(0.0)))
         }
     }
 
