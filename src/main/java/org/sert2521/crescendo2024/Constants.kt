@@ -37,7 +37,7 @@ object PhysicalConstants{
     //ESTIMATES
     const val WRIST_SETPOINT_STOW = -0.21
     const val WRIST_SETPOINT_AMP = 1.53
-    const val WRIST_SETPOINT_PODIUM = 0.1
+    const val WRIST_SETPOINT_PODIUM = 0.15
 
     val field: AprilTagFieldLayout = AprilTagFields.k2023ChargedUp.loadAprilTagLayoutField()
     const val FIELD_WIDTH = 8.21
@@ -50,9 +50,9 @@ object PhysicalConstants{
 
     const val FLYWHEEL_GEAR_RATIO = 3.0/2.0
 
-    const val CLIMBER_ENCODER_TO_METERS = 0.0
+    const val CLIMBER_ENCODER_TO_METERS = 1.0
 
-    const val CLIMBER_BETWEEN_DISTANCE = 0.0
+    const val CLIMBER_BETWEEN_DISTANCE = 1.0
 }
 
 object ConfigConstants{
@@ -131,8 +131,8 @@ object ElectronicIDs{
     const val BEAMBREAK_ID = 0
     const val FLYWHEEL_MOTOR_ONE_ID = 8
     const val FLYWHEEL_MOTOR_TWO_ID = 11
-    const val CLIMBER_MOTOR_ONE = -1
-    const val CLIMBER_MOTOR_TWO = -1
+    const val CLIMBER_MOTOR_ONE = 6
+    const val CLIMBER_MOTOR_TWO = 14
 
     //val camData:Pair<String, Translation3d> = listOf(/*Pair("Center", PhysicalConstants.centerPose), Pair("Right2", PhysicalConstants.rightPose), Pair("Left2", PhysicalConstants.frontPose)*/)
 }
@@ -182,4 +182,6 @@ object TuningConstants {
     const val CLIMBER_STALL_TOLERANCE = 0.0
     const val CLIMBER_STALL_TRY_POWER = 0.0
     const val CLIMBER_STALL_SPEED = 0.0
+
+    const val CLIMB_SPEED = 0.0
 }

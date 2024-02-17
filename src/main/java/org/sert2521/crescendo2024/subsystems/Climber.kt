@@ -1,5 +1,6 @@
 package org.sert2521.crescendo2024.subsystems
 
+import com.revrobotics.CANSparkBase
 import com.revrobotics.CANSparkLowLevel
 import com.revrobotics.CANSparkMax
 import edu.wpi.first.math.filter.Debouncer
@@ -24,11 +25,21 @@ object Climber : SubsystemBase() {
         climberMotorOne.encoder.positionConversionFactor = PhysicalConstants.CLIMBER_ENCODER_TO_METERS
         climberMotorTwo.encoder.positionConversionFactor = PhysicalConstants.CLIMBER_ENCODER_TO_METERS
 
-        climberMotorOne.setSmartCurrentLimit(20)
-        climberMotorTwo.setSmartCurrentLimit(20)
+        climberMotorOne.inverted = true
+
+        climberMotorOne.idleMode = CANSparkBase.IdleMode.kBrake
+        climberMotorTwo.idleMode = CANSparkBase.IdleMode.kBrake
+
+        climberMotorOne.encoder.position = 0.0
+        climberMotorTwo.encoder.position = 0.0
+
+        climberMotorOne.setSmartCurrentLimit(40)
+        climberMotorTwo.setSmartCurrentLimit(40)
     }
 
     override fun periodic() {
+        println(Pair(climberMotorOne.encoder.position, climberMotorTwo.encoder.position))
+        /*
         stallingOne = if (currentSpeedOne >= TuningConstants.CLIMBER_STALL_TRY_POWER) {
             filterOne.calculate(-climberMotorOne.encoder.velocity <= TuningConstants.CLIMBER_STALL_SPEED)
         } else if (-currentSpeedOne <= -TuningConstants.CLIMBER_STALL_SPEED) {
@@ -43,6 +54,8 @@ object Climber : SubsystemBase() {
         } else {
             filterTwo.calculate(stallingTwo)
         }
+
+         */
     }
     fun setSpeed(speedOne:Double, speedTwo:Double){
         climberMotorOne.set(speedOne)
@@ -69,6 +82,11 @@ object Climber : SubsystemBase() {
         } else {
             stallingTwo
         }
+    }
+
+    fun reset(){
+        climberMotorOne.encoder.position = 0.0
+        climberMotorTwo.encoder.position = 0.0
     }
 
     fun stop(){

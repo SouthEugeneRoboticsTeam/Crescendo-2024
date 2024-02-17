@@ -369,13 +369,7 @@ object Drivetrain : SubsystemBase() {
         return Units.degreesToRadians(imu.roll.toDouble())
     }
 
-    fun enterBrakePos() {
-        for (module in modules) {
-            module.enterBrakePos()
-        }
 
-        feed()
-    }
 
     fun setMode(coast: Boolean) {
         for (module in modules) {
