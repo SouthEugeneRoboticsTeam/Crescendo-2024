@@ -1,0 +1,65 @@
+{
+  "version": 1.0,
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 8.312034130429584,
+        "y": 5.744418613519161
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 8.24936774555483,
+        "y": 3.853982669797401
+      },
+      "isLocked": false,
+      "linkedName": "N5"
+    },
+    {
+      "anchor": {
+        "x": 5.136937296775358,
+        "y": 4.365758146274563
+      },
+      "prevControl": {
+        "x": 6.0704671383498034,
+        "y": 3.454455205689985
+      },
+      "nextControl": {
+        "x": 3.3822785202822323,
+        "y": 6.078639332851185
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 0.6876239706677894,
+        "y": 4.386646941232814
+      },
+      "prevControl": {
+        "x": 1.5022869740395974,
+        "y": 4.156870196692047
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": "S3"
+    }
+  ],
+  "rotationTargets": [],
+  "constraintZones": [],
+  "eventMarkers": [],
+  "globalConstraints": {
+    "maxVelocity": 3.0,
+    "maxAcceleration": 3.0,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": 120.0,
+    "rotateFast": false
+  },
+  "reversed": false,
+  "folder": "NX-S3",
+  "previewStartingState": null,
+  "useDefaultConstraints": false
+}

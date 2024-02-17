@@ -1,0 +1,29 @@
+{
+  "robotWidth": 0.9,
+  "robotLength": 0.9,
+  "holonomicMode": true,
+  "pathFolders": [
+    "A-NX",
+    "B1-SX",
+    "B2-SX",
+    "B3-SX",
+    "BX-A",
+    "NX-S1",
+    "NX-S2",
+    "NX-S3",
+    "NX-A",
+    "S1-NX",
+    "S2-NX",
+    "S3-NX"
+  ],
+  "autoFolders": [
+    "B1",
+    "B2",
+    "B3"
+  ],
+  "defaultMaxVel": 3.0,
+  "defaultMaxAccel": 3.0,
+  "defaultMaxAngVel": 540.0,
+  "defaultMaxAngAccel": 720.0,
+  "maxModuleSpeed": 4.5
+}

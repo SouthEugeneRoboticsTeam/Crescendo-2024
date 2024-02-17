@@ -1,0 +1,83 @@
+{
+  "version": 1.0,
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 8.270256540513081,
+        "y": 0.7728854134553063
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 9.270256540513081,
+        "y": 0.27288541345530604
+      },
+      "isLocked": false,
+      "linkedName": "N8"
+    },
+    {
+      "anchor": {
+        "x": 5.711379158127274,
+        "y": 4.219536581566802
+      },
+      "prevControl": {
+        "x": 7.43949737135571,
+        "y": 3.478914490183186
+      },
+      "nextControl": {
+        "x": 4.029831163988028,
+        "y": 4.940200007626478
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 1.3560654093318372,
+        "y": 5.514641868978395
+      },
+      "prevControl": {
+        "x": 3.810498816926388,
+        "y": 5.243087534521127
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": "S2"
+    }
+  ],
+  "rotationTargets": [],
+  "constraintZones": [],
+  "eventMarkers": [
+    {
+      "name": "New Event Marker",
+      "waypointRelativePos": 2.0,
+      "command": {
+        "type": "parallel",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "OuttakeHigh"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "globalConstraints": {
+    "maxVelocity": 3.0,
+    "maxAcceleration": 3.0,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": 180.0,
+    "rotateFast": false
+  },
+  "reversed": false,
+  "folder": "NX-S2",
+  "previewStartingState": null,
+  "useDefaultConstraints": false
+}
