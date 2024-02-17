@@ -20,7 +20,7 @@ object Input {
     private val intake = JoystickButton(gunnerController, 1)
     private val intakeReverse = JoystickButton(gunnerController, 2)
     private val rev = JoystickButton(gunnerController, 8)
-    private val outtake = JoystickButton(gunnerController, 10)
+    private val outtake = JoystickButton(driverController, 6)
     private val wristStow = JoystickButton(gunnerController, 7)
     private val wristAmp = JoystickButton(gunnerController, 3)
     private val wristPodium = JoystickButton(gunnerController, 6)
