@@ -38,6 +38,8 @@ class SwerveModule(private val powerMotor: CANSparkMax,
 
     var position: SwerveModulePosition
 
+    lateinit var goal: SwerveModuleState
+
     init {
         powerMotor.restoreFactoryDefaults()
         angleMotor.restoreFactoryDefaults()
@@ -113,11 +115,16 @@ class SwerveModule(private val powerMotor: CANSparkMax,
         }
 
          */
+        goal= SwerveModuleState(optimized.speedMetersPerSecond, Rotation2d(optimized.angle.radians))
 
         powerMotor.pidController.setReference(optimized.speedMetersPerSecond, CANSparkBase.ControlType.kVelocity)
 
         //maybe -angleOffset
         angleMotor.pidController.setReference(optimized.angle.radians, CANSparkBase.ControlType.kPosition)
+    }
+
+    fun getGoal():SwerveModuleState{
+        return SwerveModuleState(goal.speedMetersPerSecond, Rotation2d(goal.angle.radians))
     }
 
     fun setMotorMode(coast: Boolean) {
@@ -369,7 +376,13 @@ object Drivetrain : SubsystemBase() {
         return Units.degreesToRadians(imu.roll.toDouble())
     }
 
+    fun getGoals():Array<SwerveModuleState>{
+        return arrayOf(modules[0].getGoal(), modules[1].getGoal(), modules[2].getGoal(), modules[3].getGoal())
+    }
 
+    fun getStates():Array<SwerveModuleState>{
+        return arrayOf(modules[0].state, modules[1].state, modules[2].state, modules[3].state)
+    }
 
     fun setMode(coast: Boolean) {
         for (module in modules) {
