@@ -81,10 +81,10 @@ object SwerveConstants{
     const val DRIVE_BASE_RADIUS = 0.37268
 
     const val POWER_S = 0.0
-    const val POWER_V = 0.3
+    const val POWER_V = 0.2
     const val POWER_A = 0.0
 
-    const val POWER_P = 0.2
+    const val POWER_P = 1.2
     const val POWER_I = 0.0
     const val POWER_D = 0.0
 
