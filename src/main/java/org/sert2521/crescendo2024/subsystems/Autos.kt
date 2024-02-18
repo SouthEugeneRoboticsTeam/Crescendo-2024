@@ -13,7 +13,7 @@ import org.sert2521.crescendo2024.SwerveConstants
 
 
 object Autos : SubsystemBase() {
-    var autoChooser: SendableChooser<Command>? = null
+    lateinit var autoChooser: SendableChooser<Command>
     val defaultAutoCommand = Commands.none()
 
 
@@ -35,7 +35,7 @@ object Autos : SubsystemBase() {
 
 
         autoChooser = AutoBuilder.buildAutoChooser()
-
+        autoChooser.setDefaultOption("Nothing", Commands.none())
         SmartDashboard.putData("Auto Chooser", autoChooser)
     }
 
@@ -46,4 +46,7 @@ object Autos : SubsystemBase() {
             autoChooser!!.selected
         }
     }
+
+
+
 }

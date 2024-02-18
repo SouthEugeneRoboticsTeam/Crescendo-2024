@@ -8,10 +8,12 @@
     "B2-SX",
     "B3-SX",
     "BX-A",
+    "N2-NX",
+    "NX-A",
     "NX-S1",
     "NX-S2",
     "NX-S3",
-    "NX-A",
+    "Working Ones",
     "S1-NX",
     "S2-NX",
     "S3-NX"
@@ -19,7 +21,8 @@
   "autoFolders": [
     "B1",
     "B2",
-    "B3"
+    "B3",
+    "S2"
   ],
   "defaultMaxVel": 3.0,
   "defaultMaxAccel": 3.0,
