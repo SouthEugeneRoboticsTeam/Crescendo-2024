@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.smartdashboard.Field2d
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard
 import edu.wpi.first.wpilibj2.command.SubsystemBase
+import org.sert2521.crescendo2024.subsystems.Autos
 import org.sert2521.crescendo2024.subsystems.Drivetrain
 import org.sert2521.crescendo2024.subsystems.Indexer
 import org.sert2521.crescendo2024.subsystems.Wrist

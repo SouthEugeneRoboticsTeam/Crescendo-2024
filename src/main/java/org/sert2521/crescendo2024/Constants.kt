@@ -13,6 +13,12 @@ import edu.wpi.first.math.numbers.N1
 import edu.wpi.first.math.numbers.N3
 import edu.wpi.first.math.trajectory.TrapezoidProfile
 import edu.wpi.first.math.util.Units
+import com.pathplanner.lib.auto.NamedCommands
+import edu.wpi.first.wpilibj2.command.Command
+import org.sert2521.crescendo2024.commands.IntakeCommand
+import org.sert2521.crescendo2024.commands.Outtake
+import org.sert2521.crescendo2024.commands.SetFlywheel
+import org.sert2521.crescendo2024.commands.SetWrist
 import kotlin.math.PI
 
 
@@ -61,9 +67,9 @@ object ConfigConstants{
     const val ROT_DEADBAND = 0.075
 
     //Drive speed constants
-    const val DRIVE_SPEED = 2.0
+    const val DRIVE_SPEED = 5.3
     const val DRIVE_SECONDARY_SPEED = 2.75
-    const val ROT_SPEED = 10.0
+    const val ROT_SPEED = 4.0
     const val ROT_SECONDARY_SPEED = 2.75
 
     //Acceleration of drivetrain
@@ -84,7 +90,7 @@ object SwerveConstants{
     const val POWER_V = 0.2
     const val POWER_A = 0.0
 
-    const val POWER_P = 1.2
+    const val POWER_P = 0.3
     const val POWER_I = 0.0
     const val POWER_D = 0.0
 
@@ -185,4 +191,17 @@ object TuningConstants {
     const val CLIMBER_STALL_SPEED = 0.1
 
     const val CLIMB_SPEED = 0.0
+}
+
+object AutoCommands{
+    var list = mapOf<String, Command>(
+            "Intake" to IntakeCommand(),
+            "Outtake" to Outtake().withTimeout(0.2),
+            "Wrist Stow" to SetWrist(PhysicalConstants.WRIST_SETPOINT_STOW),
+            "Wrist Podium" to SetWrist(PhysicalConstants.WRIST_SETPOINT_PODIUM),
+            "Wrist Far" to SetWrist(PhysicalConstants.WRIST_SETPOINT_FAR),
+            "Flywheel Rev" to SetFlywheel(ConfigConstants.FLYWHEEL_SHOOT_SPEED),
+            "Flywheel Stop" to SetFlywheel(ConfigConstants.FLYWHEEL_IDLE_SPEED)
+    )
+    val commands = NamedCommands.registerCommands(list)
 }

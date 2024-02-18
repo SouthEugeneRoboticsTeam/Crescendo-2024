@@ -12,16 +12,13 @@ import org.sert2521.crescendo2024.subsystems.Wrist
 import kotlin.math.PI
 import kotlin.math.abs
 
-class SetWrist(private val goal:Double, private val ends:Boolean) : Command() {
+class SetWrist(private val goal:Double) : Command() {
 
 
     private var wristAngle = Wrist.getRadians()
     private var feedForward = ArmFeedforward(TuningConstants.WRIST_S, TuningConstants.WRIST_G, TuningConstants.WRIST_V, TuningConstants.WRIST_A)
     //var pid = PIDController(TuningConstants.WRIST_P, TuningConstants.WRIST_I, TuningConstants.WRIST_D)
     private var pid = ProfiledPIDController(TuningConstants.WRIST_P, TuningConstants.WRIST_I, TuningConstants.WRIST_D, TuningConstants.trapConstraints)
-    private var atSetpoint = false
-    private var filter = Debouncer(0.2)
-    private var end = false
 
     init {
         // each subsystem used by the command must be passed into the addRequirements() method
@@ -42,15 +39,10 @@ class SetWrist(private val goal:Double, private val ends:Boolean) : Command() {
         //println(pid.setpoint.velocity)
 
         Wrist.setVoltage(feedforwardResult + pidResult)
-        if(ends){
-            atSetpoint = abs(wristAngle - goal) <= TuningConstants.WRIST_ANGLE_TOLERANCE
-            end = filter.calculate(atSetpoint)
-        }
-
     }
 
     override fun isFinished(): Boolean {
-        return end
+        return false
     }
 
     override fun end(interrupted: Boolean) {

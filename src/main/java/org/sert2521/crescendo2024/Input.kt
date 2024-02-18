@@ -37,10 +37,10 @@ object Input {
         rev.whileTrue(SetFlywheel(ConfigConstants.FLYWHEEL_SHOOT_SPEED))
         outtake.whileTrue(Outtake())
 
-        wristStow.onTrue(SetWrist(PhysicalConstants.WRIST_SETPOINT_STOW, false))
-        wristAmp.onTrue(SetWrist(PhysicalConstants.WRIST_SETPOINT_AMP, false))
-        wristPodium.onTrue(SetWrist(PhysicalConstants.WRIST_SETPOINT_PODIUM, false))
-        wristFar.onTrue(SetWrist(PhysicalConstants.WRIST_SETPOINT_FAR, false))
+        wristStow.onTrue(SetWrist(PhysicalConstants.WRIST_SETPOINT_STOW))
+        wristAmp.onTrue(SetWrist(PhysicalConstants.WRIST_SETPOINT_AMP))
+        wristPodium.onTrue(SetWrist(PhysicalConstants.WRIST_SETPOINT_PODIUM))
+        wristFar.onTrue(SetWrist(PhysicalConstants.WRIST_SETPOINT_FAR))
 
         manualUp.whileTrue(SetClimb(0.5))
         manualDown.whileTrue(SetClimb(-0.5))
