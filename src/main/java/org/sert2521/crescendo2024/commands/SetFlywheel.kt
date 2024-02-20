@@ -18,7 +18,9 @@ class SetFlywheel(private val rpm:Double) : Command() {
         addRequirements(Flywheel)
     }
 
-    override fun initialize() {}
+    override fun initialize() {
+        RuntimeConstants.flywheelGoal=rpm
+    }
 
     override fun execute() {
         Flywheel.setVoltage(-pid.calculate(rpm, Flywheel.getSpeed()) + feedForward.calculate(rpm))
@@ -31,6 +33,7 @@ class SetFlywheel(private val rpm:Double) : Command() {
     }
 //36:24
     override fun end(interrupted: Boolean) {
-        SetFlywheel(ConfigConstants.FLYWHEEL_IDLE_SPEED)
+        Flywheel.setVoltage(0.0)
+        RuntimeConstants.flywheelGoal=0.0
     }
 }

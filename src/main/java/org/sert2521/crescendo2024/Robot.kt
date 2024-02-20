@@ -38,7 +38,6 @@ object Robot : TimedRobot()
         Output
         Drivetrain
         Climber
-        AutoCommands
         //Wrist
     }
 
