@@ -22,6 +22,8 @@ object Flywheel : SubsystemBase(){
         flywheelMotorTwo.encoder.velocityConversionFactor = PhysicalConstants.FLYWHEEL_GEAR_RATIO
         flywheelMotorTwo.idleMode = CANSparkBase.IdleMode.kCoast
         flywheelMotorTwo.inverted = false
+        flywheelMotorOne.setSmartCurrentLimit(40)
+        flywheelMotorTwo.setSmartCurrentLimit(40)
         defaultCommand = SetFlywheel(TuningConstants.FLYWHEEL_IDLE_SPEED)
     }
     fun getSpeed():Double{
