@@ -1,0 +1,49 @@
+{
+  "version": 1.0,
+  "startingPose": {
+    "position": {
+      "x": 1.3560654093318372,
+      "y": 5.514641868978395
+    },
+    "rotation": 0
+  },
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "named",
+          "data": {
+            "name": "Flywheel Rev"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 1.0
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Outtake"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "S2-N2"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "N2-N1"
+          }
+        }
+      ]
+    }
+  },
+  "folder": "S2",
+  "choreoAuto": false
+}

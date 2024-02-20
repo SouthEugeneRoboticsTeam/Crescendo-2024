@@ -19,6 +19,7 @@ import org.sert2521.crescendo2024.commands.IntakeCommand
 import org.sert2521.crescendo2024.commands.Outtake
 import org.sert2521.crescendo2024.commands.SetFlywheel
 import org.sert2521.crescendo2024.commands.SetWrist
+import java.io.ObjectInputFilter.Config
 import kotlin.math.PI
 
 
@@ -114,13 +115,13 @@ object SwerveConstants{
 
     const val ANGLE_MOTOR_ENCODER_MULTIPLY = 1/21.4285714 * (2*PI)
 
-    const val MAX_AUTO_SPEED = 0.0
+    const val MAX_AUTO_SPEED = 2.0
 
-    const val AUTO_POWER_P = 0.0
+    const val AUTO_POWER_P = 0.2
     const val AUTO_POWER_I = 0.0
     const val AUTO_POWER_D = 0.0
 
-    const val AUTO_ANGLE_P = 0.0
+    const val AUTO_ANGLE_P = 1.4
     const val AUTO_ANGLE_I = 0.0
     const val AUTO_ANGLE_D = 0.0
 
@@ -203,5 +204,8 @@ object AutoCommands{
             "Flywheel Rev" to SetFlywheel(ConfigConstants.FLYWHEEL_SHOOT_SPEED),
             "Flywheel Stop" to SetFlywheel(ConfigConstants.FLYWHEEL_IDLE_SPEED)
     )
-    val commands = NamedCommands.registerCommands(list)
+    init {
+        NamedCommands.registerCommands(list)
+        NamedCommands.registerCommand("Flywheel Rev", SetFlywheel(ConfigConstants.FLYWHEEL_SHOOT_SPEED))
+    }
 }
