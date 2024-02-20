@@ -41,6 +41,7 @@ object Output : SubsystemBase() {
         values.add(Pair("Wrist Angle", { Wrist.getRadians() }))
 
         values.add(Pair("Flywheel Speed", { Flywheel.getSpeed() }))
+        values.add(Pair("Flywheel Goal", { RuntimeConstants.flywheelGoal }))
 
         bools.add(Pair("Beambreak", { Indexer.getBeamBreak() }))
 

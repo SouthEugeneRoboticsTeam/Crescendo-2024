@@ -74,8 +74,8 @@ object ConfigConstants{
     const val ROT_SECONDARY_SPEED = 2.75
 
     //Acceleration of drivetrain
-    const val DRIVE_ACCEL = 35.0
-    const val DRIVE_DECCEL = 40.0
+    const val DRIVE_ACCEL = 100.0
+    const val DRIVE_DECCEL = 100.0
 
     const val DRIVE_OPTIMIZED = true
 
@@ -149,6 +149,7 @@ object RuntimeConstants{
     var motorSpeed = 0.0
     var wristSetPoint = 0.0
     var flywheelRevved = false
+    var flywheelGoal = 0.0
 }
 
 object TuningConstants {
@@ -170,12 +171,12 @@ object TuningConstants {
     const val WRIST_ANGLE_TOLERANCE = 0.1
     val trapConstraints = TrapezoidProfile.Constraints(5.0, 15.0)
 
-    const val FLYWHEEL_P = 0.0
+    const val FLYWHEEL_P = 0.001
     const val FLYWHEEL_I = 0.0
     const val FLYWHEEL_D = 0.0
 
     const val FLYWHEEL_KS = 0.0
-    const val FLYWHEEL_KV = 0.002
+    const val FLYWHEEL_KV = 0.0015
     const val FLYWHEEL_KA = 0.0
 
     const val FLYWHEEL_IDLE_SPEED = 0.0
@@ -192,20 +193,4 @@ object TuningConstants {
     const val CLIMBER_STALL_SPEED = 0.1
 
     const val CLIMB_SPEED = 0.0
-}
-
-object AutoCommands{
-    var list = mapOf<String, Command>(
-            "Intake" to IntakeCommand(),
-            "Outtake" to Outtake().withTimeout(0.2),
-            "Wrist Stow" to SetWrist(PhysicalConstants.WRIST_SETPOINT_STOW),
-            "Wrist Podium" to SetWrist(PhysicalConstants.WRIST_SETPOINT_PODIUM),
-            "Wrist Far" to SetWrist(PhysicalConstants.WRIST_SETPOINT_FAR),
-            "Flywheel Rev" to SetFlywheel(ConfigConstants.FLYWHEEL_SHOOT_SPEED),
-            "Flywheel Stop" to SetFlywheel(ConfigConstants.FLYWHEEL_IDLE_SPEED)
-    )
-    init {
-        NamedCommands.registerCommands(list)
-        NamedCommands.registerCommand("Flywheel Rev", SetFlywheel(ConfigConstants.FLYWHEEL_SHOOT_SPEED))
-    }
 }

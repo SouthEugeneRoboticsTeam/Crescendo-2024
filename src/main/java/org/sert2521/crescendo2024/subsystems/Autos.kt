@@ -1,7 +1,9 @@
 package org.sert2521.crescendo2024.subsystems
 
+import com.fasterxml.jackson.databind.util.Named
 import edu.wpi.first.wpilibj2.command.SubsystemBase
 import com.pathplanner.lib.auto.AutoBuilder
+import com.pathplanner.lib.auto.NamedCommands
 import com.pathplanner.lib.util.HolonomicPathFollowerConfig
 import com.pathplanner.lib.util.PIDConstants
 import com.pathplanner.lib.util.ReplanningConfig
@@ -9,12 +11,29 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard
 import edu.wpi.first.wpilibj2.command.Command
 import edu.wpi.first.wpilibj2.command.Commands
+
+import org.sert2521.crescendo2024.ConfigConstants
+import org.sert2521.crescendo2024.PhysicalConstants
 import org.sert2521.crescendo2024.SwerveConstants
+import org.sert2521.crescendo2024.commands.IntakeCommand
+import org.sert2521.crescendo2024.commands.Outtake
+import org.sert2521.crescendo2024.commands.SetFlywheel
+import org.sert2521.crescendo2024.commands.SetWrist
 
 
 object Autos : SubsystemBase() {
-    lateinit var autoChooser: SendableChooser<Command>
+    private var autoChooser: SendableChooser<Command>
     val defaultAutoCommand = Commands.none()
+
+    var commandList = mapOf<String, Command>(
+            "Outtake" to Outtake().withTimeout(0.4),
+            "Intake Note" to IntakeCommand(),
+            "Wrist Stow" to SetWrist(PhysicalConstants.WRIST_SETPOINT_STOW),
+            "Wrist Podium" to SetWrist(PhysicalConstants.WRIST_SETPOINT_PODIUM),
+            "Wrist Far" to SetWrist(PhysicalConstants.WRIST_SETPOINT_FAR),
+            "Flywheel Rev" to SetFlywheel(ConfigConstants.FLYWHEEL_SHOOT_SPEED),
+            "Flywheel Stop" to SetFlywheel(ConfigConstants.FLYWHEEL_IDLE_SPEED)
+    )
 
 
     init {
@@ -33,20 +52,18 @@ object Autos : SubsystemBase() {
             Drivetrain
         )
 
+        NamedCommands.registerCommands(commandList)
 
         autoChooser = AutoBuilder.buildAutoChooser()
-        autoChooser.setDefaultOption("Nothing", Commands.none())
+
         SmartDashboard.putData("Auto Chooser", autoChooser)
     }
 
     fun getAuto(): Command?{
-        return if (autoChooser?.selected == null){
+        return if (autoChooser.selected == null){
             defaultAutoCommand
         } else {
-            autoChooser!!.selected
+            autoChooser.selected
         }
     }
-
-
-
 }

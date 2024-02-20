@@ -24,7 +24,7 @@ object Flywheel : SubsystemBase(){
         flywheelMotorTwo.inverted = false
         flywheelMotorOne.setSmartCurrentLimit(40)
         flywheelMotorTwo.setSmartCurrentLimit(40)
-        defaultCommand = SetFlywheel(TuningConstants.FLYWHEEL_IDLE_SPEED)
+        //defaultCommand = SetFlywheel(TuningConstants.FLYWHEEL_IDLE_SPEED)
     }
     fun getSpeed():Double{
         return (flywheelMotorOne.encoder.velocity+flywheelMotorTwo.encoder.velocity)/2.0

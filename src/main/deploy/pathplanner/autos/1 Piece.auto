@@ -12,13 +12,7 @@
     "data": {
       "commands": [
         {
-          "type": "named",
-          "data": {
-            "name": "Flywheel Rev"
-          }
-        },
-        {
-          "type": "parallel",
+          "type": "race",
           "data": {
             "commands": [
               {

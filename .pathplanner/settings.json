@@ -3,26 +3,9 @@
   "robotLength": 0.9,
   "holonomicMode": true,
   "pathFolders": [
-    "A-NX",
-    "B1-SX",
-    "B2-SX",
-    "B3-SX",
-    "BX-A",
-    "N2-NX",
-    "NX-A",
-    "NX-S1",
-    "NX-S2",
-    "NX-S3",
-    "Working Ones",
-    "S1-NX",
-    "S2-NX",
-    "S3-NX"
+    "S2-NX"
   ],
   "autoFolders": [
-    "B1",
-    "B2",
-    "B3",
-    "S3",
     "S2"
   ],
   "defaultMaxVel": 3.0,
