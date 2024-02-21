@@ -3,19 +3,21 @@ package org.sert2521.crescendo2024.commands
 import edu.wpi.first.wpilibj2.command.Command
 import org.sert2521.crescendo2024.subsystems.Indexer
 import org.sert2521.crescendo2024.subsystems.Intake
+import org.sert2521.crescendo2024.subsystems.Wrist
 
 class IntakeCommand : Command() {
-    private val intake = Intake
-
-
     init {
         // each subsystem used by the command must be passed into the addRequirements() method
         addRequirements(Indexer, Intake)
     }
 
     override fun initialize() {
-        Intake.setMotor(0.9)
-        Indexer.setMotor(0.6)
+        if (Wrist.getRadians()>-0.1){
+            this.end(true)
+        } else {
+            Intake.setMotor(0.9)
+            Indexer.setMotor(0.6)
+        }
     }
 
     override fun execute() {}

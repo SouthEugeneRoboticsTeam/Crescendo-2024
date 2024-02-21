@@ -29,7 +29,9 @@ class SwerveModule(private val powerMotor: CANSparkMax,
 
     var position: SwerveModulePosition
 
-    private var goal: SwerveModuleState = state
+    private var goal = state
+
+    private var reference = 0.0
 
     init {
         powerMotor.restoreFactoryDefaults()
@@ -55,13 +57,15 @@ class SwerveModule(private val powerMotor: CANSparkMax,
         angleMotor.pidController.positionPIDWrappingMinInput = -PI
         angleMotor.pidController.positionPIDWrappingMaxInput = PI
 
-        powerMotor.inverted = !inverted
+        powerMotor.inverted = inverted
         angleMotor.inverted = inverted
 
         powerMotor.encoder.positionConversionFactor = SwerveConstants.POWER_ENCODER_MULTIPLY_POSITION
         powerMotor.encoder.velocityConversionFactor = SwerveConstants.POWER_ENCODER_MULTIPLY_VELOCITY
 
-        powerMotor.setSmartCurrentLimit(20, 60)
+
+
+        powerMotor.setSmartCurrentLimit(20, 40, 60)
         angleMotor.setSmartCurrentLimit(30)
 
         position = SwerveModulePosition(powerMotor.encoder.position, getAngle())
@@ -89,6 +93,7 @@ class SwerveModule(private val powerMotor: CANSparkMax,
     fun set(wanted: SwerveModuleState) {
         // Using state because it should be updated and getVelocity and getAngle (probably) spend time over CAN
         val optimized = SwerveModuleState.optimize(wanted, state.angle)
+        val powerError = optimized.speedMetersPerSecond-powerMotor.encoder.velocity
         /*
         val feedforward = powerFeedforward.calculate(optimized.speedMetersPerSecond)
         val pid = if (inverted) {
@@ -108,6 +113,8 @@ class SwerveModule(private val powerMotor: CANSparkMax,
          */
         goal= SwerveModuleState(optimized.speedMetersPerSecond, Rotation2d(optimized.angle.radians))
 
+        reference=powerError.pow(2)*sign(powerError)+powerMotor.encoder.velocity
+
         powerMotor.pidController.setReference(optimized.speedMetersPerSecond, CANSparkBase.ControlType.kVelocity)
 
         //maybe -angleOffset
@@ -126,6 +133,14 @@ class SwerveModule(private val powerMotor: CANSparkMax,
             powerMotor.idleMode = CANSparkBase.IdleMode.kBrake
             angleMotor.idleMode = CANSparkBase.IdleMode.kBrake
         }
+    }
+
+    fun getModuleReference():Double{
+        return reference
+    }
+
+    fun getAmps():Double{
+        return powerMotor.outputCurrent
     }
 
     override fun stopMotor() {
@@ -164,6 +179,7 @@ object Drivetrain : SubsystemBase() {
         private set
 
     init {
+
         val modulePositions = mutableListOf<Translation2d>()
         val modulesList = mutableListOf<SwerveModule>()
 
@@ -369,6 +385,14 @@ object Drivetrain : SubsystemBase() {
 
     fun getGoals():Array<SwerveModuleState>{
         return arrayOf(modules[0].getModuleGoal(), modules[1].getModuleGoal(), modules[2].getModuleGoal(), modules[3].getModuleGoal())
+    }
+
+    fun getReferences():Array<Double>{
+        return arrayOf(modules[0].getModuleReference(), modules[1].getModuleReference(), modules[2].getModuleReference(), modules[3].getModuleReference())
+    }
+
+    fun getAmps():Array<Double>{
+        return arrayOf(modules[0].getAmps(), modules[1].getAmps(), modules[2].getAmps(), modules[3].getAmps())
     }
 
     fun getStates():Array<SwerveModuleState>{

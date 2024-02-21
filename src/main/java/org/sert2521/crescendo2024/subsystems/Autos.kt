@@ -7,6 +7,8 @@ import com.pathplanner.lib.auto.NamedCommands
 import com.pathplanner.lib.util.HolonomicPathFollowerConfig
 import com.pathplanner.lib.util.PIDConstants
 import com.pathplanner.lib.util.ReplanningConfig
+import edu.wpi.first.math.kinematics.ChassisSpeeds
+import edu.wpi.first.wpilibj.DriverStation
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard
 import edu.wpi.first.wpilibj2.command.Command
@@ -26,7 +28,7 @@ object Autos : SubsystemBase() {
     val defaultAutoCommand = Commands.none()
 
     var commandList = mapOf<String, Command>(
-            "Outtake" to Outtake().withTimeout(0.4),
+            "Outtake" to Outtake().withTimeout(0.2),
             "Intake Note" to IntakeCommand(),
             "Wrist Stow" to SetWrist(PhysicalConstants.WRIST_SETPOINT_STOW),
             "Wrist Podium" to SetWrist(PhysicalConstants.WRIST_SETPOINT_PODIUM),
@@ -41,14 +43,14 @@ object Autos : SubsystemBase() {
             Drivetrain::getPose,
             Drivetrain::setNewPose,
             Drivetrain::getReletiveSpeeds,
-            Drivetrain::drive,
+            {Drivetrain.drive(ChassisSpeeds(-it.vxMetersPerSecond, -it.vyMetersPerSecond, it.omegaRadiansPerSecond))},
             HolonomicPathFollowerConfig(PIDConstants(SwerveConstants.AUTO_POWER_P, SwerveConstants.AUTO_POWER_I, SwerveConstants.AUTO_POWER_D),
                 PIDConstants(SwerveConstants.AUTO_ANGLE_P, SwerveConstants.AUTO_ANGLE_I, SwerveConstants.AUTO_ANGLE_D),
                 SwerveConstants.MAX_AUTO_SPEED,
                 SwerveConstants.DRIVE_BASE_RADIUS,
                 ReplanningConfig(false, true, SwerveConstants.AUTO_REPLANNING_TOTAL_ERROR, SwerveConstants.AUTO_REPLANNING_SPIKE)
             ),
-            {false},
+            {DriverStation.getAlliance().get()==DriverStation.Alliance.Red},
             Drivetrain
         )
 
