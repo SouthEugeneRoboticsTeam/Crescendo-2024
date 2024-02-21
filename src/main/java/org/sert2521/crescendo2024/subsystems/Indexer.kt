@@ -12,7 +12,7 @@ object Indexer : Subsystem{
     private val beamBreakSensor = DigitalInput(ElectronicIDs.BEAMBREAK_ID)
     init{
         indexerMotor.idleMode = CANSparkBase.IdleMode.kBrake
-        indexerMotor.setSmartCurrentLimit(10, 45)
+        indexerMotor.setSmartCurrentLimit(45)
         indexerMotor.inverted = true
     }
     fun getBeamBreak():Boolean{

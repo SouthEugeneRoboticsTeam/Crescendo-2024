@@ -6,19 +6,23 @@ import edu.wpi.first.math.controller.PIDController
 import edu.wpi.first.math.controller.ProfiledPIDController
 import edu.wpi.first.math.filter.Debouncer
 import edu.wpi.first.wpilibj2.command.Command
+import org.sert2521.crescendo2024.ConfigConstants
+import org.sert2521.crescendo2024.PhysicalConstants
 import org.sert2521.crescendo2024.RuntimeConstants
 import org.sert2521.crescendo2024.TuningConstants
 import org.sert2521.crescendo2024.subsystems.Wrist
 import kotlin.math.PI
 import kotlin.math.abs
 
-class SetWrist(private val goal:Double) : Command() {
+class SetWrist(private val goal:Double, private val ends:Boolean = true) : Command() {
 
 
     private var wristAngle = Wrist.getRadians()
     private var feedForward = ArmFeedforward(TuningConstants.WRIST_S, TuningConstants.WRIST_G, TuningConstants.WRIST_V, TuningConstants.WRIST_A)
     //var pid = PIDController(TuningConstants.WRIST_P, TuningConstants.WRIST_I, TuningConstants.WRIST_D)
     private var pid = ProfiledPIDController(TuningConstants.WRIST_P, TuningConstants.WRIST_I, TuningConstants.WRIST_D, TuningConstants.trapConstraints)
+
+    private var done = false
 
     init {
         // each subsystem used by the command must be passed into the addRequirements() method
@@ -39,13 +43,20 @@ class SetWrist(private val goal:Double) : Command() {
         //println(pid.setpoint.velocity)
 
         Wrist.setVoltage(feedforwardResult + pidResult)
+
+        if (ends && Wrist.getRadians()>goal-TuningConstants.WRIST_ANGLE_TOLERANCE && Wrist.getRadians()<goal+TuningConstants.WRIST_ANGLE_TOLERANCE){
+            done=true
+        }
     }
 
     override fun isFinished(): Boolean {
-        return false
+        return done
     }
 
     override fun end(interrupted: Boolean) {
         Wrist.stop()
+        if (goal!=PhysicalConstants.WRIST_SETPOINT_STOW){
+            SetWrist(goal, false).schedule()
+        }
     }
 }

@@ -38,6 +38,16 @@ object Output : SubsystemBase() {
         values.add(Pair("Drive 3 State Drive", { Drivetrain.getStates()[2].speedMetersPerSecond }))
         values.add(Pair("Drive 4 State Drive", { Drivetrain.getStates()[3].speedMetersPerSecond }))
 
+        values.add(Pair("Drive 1 Reference Drive", { Drivetrain.getReferences()[0] }))
+        values.add(Pair("Drive 2 Reference Drive", { Drivetrain.getReferences()[1] }))
+        values.add(Pair("Drive 3 Reference Drive", { Drivetrain.getReferences()[2] }))
+        values.add(Pair("Drive 4 Reference Drive", { Drivetrain.getReferences()[3] }))
+
+        values.add(Pair("Drive 1 Amps Drive", { Drivetrain.getAmps()[0] }))
+        values.add(Pair("Drive 2 Amps Drive", { Drivetrain.getAmps()[1] }))
+        values.add(Pair("Drive 3 Amps Drive", { Drivetrain.getAmps()[2] }))
+        values.add(Pair("Drive 4 Amps Drive", { Drivetrain.getAmps()[3] }))
+
         values.add(Pair("Wrist Angle", { Wrist.getRadians() }))
 
         values.add(Pair("Flywheel Speed", { Flywheel.getSpeed() }))

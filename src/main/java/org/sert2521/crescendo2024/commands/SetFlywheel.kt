@@ -9,9 +9,9 @@ import org.sert2521.crescendo2024.TuningConstants
 import org.sert2521.crescendo2024.subsystems.Flywheel
 import java.io.ObjectInputFilter.Config
 
-class SetFlywheel(private val rpm:Double) : Command() {
-    val pid = PIDController(TuningConstants.FLYWHEEL_P, TuningConstants.FLYWHEEL_I, TuningConstants.FLYWHEEL_D)
-    val feedForward = SimpleMotorFeedforward(TuningConstants.FLYWHEEL_KS, TuningConstants.FLYWHEEL_KV, TuningConstants.FLYWHEEL_KA)
+class SetFlywheel(private val rpm:Double, private val ends: Boolean = true) : Command() {
+    private val pid = PIDController(TuningConstants.FLYWHEEL_P, TuningConstants.FLYWHEEL_I, TuningConstants.FLYWHEEL_D)
+    private val feedForward = SimpleMotorFeedforward(TuningConstants.FLYWHEEL_KS, TuningConstants.FLYWHEEL_KV, TuningConstants.FLYWHEEL_KA)
 
     init {
         // each subsystem used by the command must be passed into the addRequirements() method
@@ -23,7 +23,7 @@ class SetFlywheel(private val rpm:Double) : Command() {
     }
 
     override fun execute() {
-        Flywheel.setVoltage(-pid.calculate(rpm, Flywheel.getSpeed()) + feedForward.calculate(rpm))
+        Flywheel.setVoltage(pid.calculate(Flywheel.getSpeed(), rpm) + feedForward.calculate(rpm))
         RuntimeConstants.flywheelRevved =  Flywheel.getSpeed() > ConfigConstants.FLYWHEEL_SHOOT_SPEED-10.0
     }
 

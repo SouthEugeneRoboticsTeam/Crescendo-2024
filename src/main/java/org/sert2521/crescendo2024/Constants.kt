@@ -42,7 +42,7 @@ object PhysicalConstants{
     const val WRIST_ENCODER_OFFSET = -1.789203
 
     //ESTIMATES
-    const val WRIST_SETPOINT_STOW = -0.21
+    const val WRIST_SETPOINT_STOW = -0.2
     const val WRIST_SETPOINT_AMP = 1.53
     const val WRIST_SETPOINT_PODIUM = 0.15
     const val WRIST_SETPOINT_FAR = 0.375
@@ -70,7 +70,7 @@ object ConfigConstants{
     //Drive speed constants
     const val DRIVE_SPEED = 5.3
     const val DRIVE_SECONDARY_SPEED = 2.75
-    const val ROT_SPEED = 4.0
+    const val ROT_SPEED = 6.0
     const val ROT_SECONDARY_SPEED = 2.75
 
     //Acceleration of drivetrain
@@ -80,7 +80,7 @@ object ConfigConstants{
     const val DRIVE_OPTIMIZED = true
 
     const val FLYWHEEL_IDLE_SPEED = 0.0
-    const val FLYWHEEL_SHOOT_SPEED = 4000.0
+    const val FLYWHEEL_SHOOT_SPEED = 6000.0
 }
 
 object SwerveConstants{
@@ -115,9 +115,9 @@ object SwerveConstants{
 
     const val ANGLE_MOTOR_ENCODER_MULTIPLY = 1/21.4285714 * (2*PI)
 
-    const val MAX_AUTO_SPEED = 2.0
+    const val MAX_AUTO_SPEED = 4.0
 
-    const val AUTO_POWER_P = 0.2
+    const val AUTO_POWER_P = 0.8
     const val AUTO_POWER_I = 0.0
     const val AUTO_POWER_D = 0.0
 
@@ -125,8 +125,8 @@ object SwerveConstants{
     const val AUTO_ANGLE_I = 0.0
     const val AUTO_ANGLE_D = 0.0
 
-    const val AUTO_REPLANNING_TOTAL_ERROR = 0.0
-    const val AUTO_REPLANNING_SPIKE = 0.0
+    const val AUTO_REPLANNING_TOTAL_ERROR = 100.0
+    const val AUTO_REPLANNING_SPIKE = 100.0
 
 }
 
