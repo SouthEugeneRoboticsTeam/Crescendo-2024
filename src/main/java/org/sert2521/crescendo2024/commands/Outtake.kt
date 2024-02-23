@@ -28,7 +28,7 @@ class Outtake : Command() {
             flywheelCommand.schedule()
             Indexer.setMotor(1.0)
         } else {
-            if (Flywheel.getSpeed()>2000){
+            if (RuntimeConstants.flywheelRevved){
                 Indexer.setMotor(1.0)
             }
         }

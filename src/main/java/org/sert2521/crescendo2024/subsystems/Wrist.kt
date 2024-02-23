@@ -5,9 +5,11 @@ import com.revrobotics.CANSparkMax
 import com.revrobotics.CANSparkLowLevel
 import edu.wpi.first.wpilibj.DutyCycleEncoder
 import edu.wpi.first.wpilibj.Timer
+import edu.wpi.first.wpilibj2.command.InstantCommand
 import edu.wpi.first.wpilibj2.command.SubsystemBase
 import org.sert2521.crescendo2024.ElectronicIDs
 import org.sert2521.crescendo2024.PhysicalConstants
+import org.sert2521.crescendo2024.RuntimeConstants
 import org.sert2521.crescendo2024.commands.SetWrist
 import kotlin.math.PI
 
@@ -34,8 +36,9 @@ object Wrist : SubsystemBase() {
 
         motorTwo.inverted = true
         motorOne.inverted = false
-
-        //defaultCommand = SetWrist(getRadians(), false)
+        val holdCommand = InstantCommand({ SetWrist(RuntimeConstants.wristSetPoint, false).schedule() })
+        holdCommand.addRequirements(this)
+        defaultCommand = holdCommand
     }
 
     override fun periodic(){
