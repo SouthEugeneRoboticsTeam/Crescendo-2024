@@ -21,6 +21,7 @@ class SetWrist(private val goal:Double, private val ends:Boolean = true) : Comma
     private var feedForward = ArmFeedforward(TuningConstants.WRIST_S, TuningConstants.WRIST_G, TuningConstants.WRIST_V, TuningConstants.WRIST_A)
     //var pid = PIDController(TuningConstants.WRIST_P, TuningConstants.WRIST_I, TuningConstants.WRIST_D)
     private var pid = ProfiledPIDController(TuningConstants.WRIST_P, TuningConstants.WRIST_I, TuningConstants.WRIST_D, TuningConstants.trapConstraints)
+    private var notProfiled = PIDController(TuningConstants.WRIST_P, TuningConstants.WRIST_I, TuningConstants.WRIST_D)
 
     private var done = false
 
@@ -30,15 +31,21 @@ class SetWrist(private val goal:Double, private val ends:Boolean = true) : Comma
     }
 
     override fun initialize() {
+
         wristAngle = Wrist.getRadians()
         pid.reset(wristAngle+2*PI)
+        RuntimeConstants.wristSetPoint=goal
     }
 
     override fun execute() {
-
+        done = false
+        val pidResult:Double
         wristAngle = Wrist.getRadians()
-
-        val pidResult =  pid.calculate(wristAngle+2*PI, goal+2*PI)
+        if (ends){
+            pidResult =  pid.calculate(wristAngle+2*PI, goal+2*PI)
+        } else {
+            pidResult = notProfiled.calculate(wristAngle + 2 * PI, goal + 2 * PI)
+        }
         val feedforwardResult = feedForward.calculate(wristAngle, 0.0)
         //println(pid.setpoint.velocity)
 
@@ -54,9 +61,8 @@ class SetWrist(private val goal:Double, private val ends:Boolean = true) : Comma
     }
 
     override fun end(interrupted: Boolean) {
-        Wrist.stop()
-        if (goal!=PhysicalConstants.WRIST_SETPOINT_STOW){
-            SetWrist(goal, false).schedule()
+        if (interrupted){
+            RuntimeConstants.flywheelGoal = 0.0
         }
     }
 }

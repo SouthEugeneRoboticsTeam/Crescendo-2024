@@ -3,11 +3,14 @@ package org.sert2521.crescendo2024.subsystems
 import com.revrobotics.CANSparkBase
 import com.revrobotics.CANSparkLowLevel
 import com.revrobotics.CANSparkMax
+import edu.wpi.first.wpilibj2.command.InstantCommand
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import org.sert2521.crescendo2024.ElectronicIDs
 import org.sert2521.crescendo2024.PhysicalConstants
+import org.sert2521.crescendo2024.RuntimeConstants
 import org.sert2521.crescendo2024.TuningConstants
 import org.sert2521.crescendo2024.commands.SetFlywheel
+import org.sert2521.crescendo2024.commands.SetWrist
 
 object Flywheel : SubsystemBase(){
     private val flywheelMotorOne = CANSparkMax(ElectronicIDs.FLYWHEEL_MOTOR_ONE_ID, CANSparkLowLevel.MotorType.kBrushless) //Top
@@ -25,6 +28,10 @@ object Flywheel : SubsystemBase(){
         flywheelMotorOne.setSmartCurrentLimit(40)
         flywheelMotorTwo.setSmartCurrentLimit(40)
         //defaultCommand = SetFlywheel(TuningConstants.FLYWHEEL_IDLE_SPEED)
+        val holdCommand = InstantCommand({ if (RuntimeConstants.flywheelGoal != 0.0){
+            SetFlywheel(RuntimeConstants.flywheelGoal, false).schedule() }})
+        holdCommand.addRequirements(this)
+        defaultCommand = holdCommand
     }
     fun getSpeed():Double{
         return (flywheelMotorOne.encoder.velocity+flywheelMotorTwo.encoder.velocity)/2.0

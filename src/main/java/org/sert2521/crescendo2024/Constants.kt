@@ -80,7 +80,7 @@ object ConfigConstants{
     const val DRIVE_OPTIMIZED = true
 
     const val FLYWHEEL_IDLE_SPEED = 0.0
-    const val FLYWHEEL_SHOOT_SPEED = 6000.0
+    const val FLYWHEEL_SHOOT_SPEED = 5000.0
 }
 
 object SwerveConstants{
@@ -147,7 +147,7 @@ object ElectronicIDs{
 
 object RuntimeConstants{
     var motorSpeed = 0.0
-    var wristSetPoint = 0.0
+    var wristSetPoint = PhysicalConstants.WRIST_SETPOINT_STOW
     var flywheelRevved = false
     var flywheelGoal = 0.0
 }
