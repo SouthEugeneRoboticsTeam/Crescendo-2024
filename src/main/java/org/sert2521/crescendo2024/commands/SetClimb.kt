@@ -6,6 +6,7 @@ import org.sert2521.crescendo2024.PhysicalConstants.CLIMBER_MAX
 import org.sert2521.crescendo2024.PhysicalConstants.CLIMBER_MIN
 import org.sert2521.crescendo2024.TuningConstants.CLIMB_SPEED
 import org.sert2521.crescendo2024.subsystems.Climber
+import org.sert2521.crescendo2024.subsystems.Drivetrain
 
 class SetClimb(private val climbSpeed:Double) : Command() {
 
@@ -14,10 +15,13 @@ class SetClimb(private val climbSpeed:Double) : Command() {
         addRequirements(Climber)
     }
 
-    override fun initialize() {}
+    override fun initialize() {
+        Drivetrain.enterClimbPos()
+    }
 
     override fun execute() {
         Climber.setSpeed(climbSpeed, climbSpeed)
+
     }
 
     override fun isFinished(): Boolean {
