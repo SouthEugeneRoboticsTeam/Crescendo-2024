@@ -26,7 +26,45 @@
         {
           "type": "parallel",
           "data": {
-            "commands": []
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "4 Piece Near"
+                }
+              },
+              {
+                "type": "sequential",
+                "data": {
+                  "commands": [
+                    {
+                      "type": "wait",
+                      "data": {
+                        "waitTime": 0.2
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "Podium Shot"
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "Podium Shot"
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "Podium Shot"
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
           }
         }
       ]
