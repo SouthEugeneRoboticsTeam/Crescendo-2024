@@ -28,13 +28,14 @@ object Autos : SubsystemBase() {
     val defaultAutoCommand = Commands.none()
 
     var commandList = mapOf<String, Command>(
-            "Outtake" to Outtake().withTimeout(0.4),
+            "Outtake" to Outtake().withTimeout(0.1),
             "Intake Note" to IntakeCommand(),
             "Wrist Stow" to SetWrist(PhysicalConstants.WRIST_SETPOINT_STOW).asProxy(),
             "Wrist Podium" to SetWrist(PhysicalConstants.WRIST_SETPOINT_PODIUM).asProxy(),
             "Wrist Far" to SetWrist(PhysicalConstants.WRIST_SETPOINT_FAR).asProxy(),
             "Flywheel Rev" to SetFlywheel(ConfigConstants.FLYWHEEL_SHOOT_SPEED, true).asProxy(),
-            "Flywheel Stop" to SetFlywheel(ConfigConstants.FLYWHEEL_IDLE_SPEED, true).asProxy()
+            "Flywheel Stop" to SetFlywheel(ConfigConstants.FLYWHEEL_IDLE_SPEED, true).asProxy(),
+            "Podium Shot" to IntakeCommand().andThen(SetWrist(PhysicalConstants.WRIST_SETPOINT_PODIUM).asProxy()).andThen(Outtake().withTimeout(0.4)).andThen(SetWrist(PhysicalConstants.WRIST_SETPOINT_STOW).asProxy())
     )
 
 
@@ -43,7 +44,7 @@ object Autos : SubsystemBase() {
             Drivetrain::getPose,
             Drivetrain::setNewPose,
             Drivetrain::getReletiveSpeeds,
-            {Drivetrain.drive(ChassisSpeeds(-it.vxMetersPerSecond, -it.vyMetersPerSecond, it.omegaRadiansPerSecond))},
+            {Drivetrain.drive(ChassisSpeeds(-it.vxMetersPerSecond, -it.vyMetersPerSecond, -it.omegaRadiansPerSecond))},
             HolonomicPathFollowerConfig(PIDConstants(SwerveConstants.AUTO_POWER_P, SwerveConstants.AUTO_POWER_I, SwerveConstants.AUTO_POWER_D),
                 PIDConstants(SwerveConstants.AUTO_ANGLE_P, SwerveConstants.AUTO_ANGLE_I, SwerveConstants.AUTO_ANGLE_D),
                 SwerveConstants.MAX_AUTO_SPEED,
