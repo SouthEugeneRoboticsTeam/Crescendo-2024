@@ -48,8 +48,8 @@ object Input {
         wristPodium.onTrue(SetWrist(PhysicalConstants.WRIST_SETPOINT_PODIUM))
         wristFar.onTrue(SetWrist(PhysicalConstants.WRIST_SETPOINT_FAR))
 
-        manualUp.whileTrue(SetClimb(0.5))
-        manualDown.whileTrue(SetClimb(-0.5))
+        manualUp.whileTrue(SetClimb(1.0))
+        manualDown.whileTrue(SetClimb(-1.0))
 
         climb.onTrue(InstantCommand({ Drivetrain.enterClimbPos() }))
         climb.whileTrue(ClimbInitiate())

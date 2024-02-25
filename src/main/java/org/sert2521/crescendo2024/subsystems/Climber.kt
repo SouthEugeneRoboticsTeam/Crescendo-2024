@@ -33,8 +33,8 @@ object Climber : SubsystemBase() {
         climberMotorOne.encoder.position = 0.0
         climberMotorTwo.encoder.position = 0.0
 
-        climberMotorOne.setSmartCurrentLimit(20)
-        climberMotorTwo.setSmartCurrentLimit(20)
+        climberMotorOne.setSmartCurrentLimit(15)
+        climberMotorTwo.setSmartCurrentLimit(15)
     }
 
     override fun periodic() {
@@ -99,5 +99,9 @@ object Climber : SubsystemBase() {
     fun setCurrentLimit(current:Int){
         climberMotorOne.setSmartCurrentLimit(current)
         climberMotorTwo.setSmartCurrentLimit(current)
+    }
+
+    fun getCurrents():Pair<Double, Double>{
+        return Pair(climberMotorOne.outputCurrent, climberMotorTwo.outputCurrent)
     }
 }

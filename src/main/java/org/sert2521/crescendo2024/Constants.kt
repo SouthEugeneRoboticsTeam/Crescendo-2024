@@ -45,7 +45,7 @@ object PhysicalConstants{
     const val WRIST_SETPOINT_STOW = -0.2
     const val WRIST_SETPOINT_AMP = 1.53
     const val WRIST_SETPOINT_PODIUM = 0.15
-    const val WRIST_SETPOINT_FAR = 0.375
+    const val WRIST_SETPOINT_FAR = 0.295
 
     val field: AprilTagFieldLayout = AprilTagFields.k2023ChargedUp.loadAprilTagLayoutField()
     const val FIELD_WIDTH = 8.21
@@ -80,7 +80,7 @@ object ConfigConstants{
     const val DRIVE_OPTIMIZED = true
 
     const val FLYWHEEL_IDLE_SPEED = 0.0
-    const val FLYWHEEL_SHOOT_SPEED = 5000.0
+    const val FLYWHEEL_SHOOT_SPEED = 4000.0
 }
 
 object SwerveConstants{
@@ -117,11 +117,11 @@ object SwerveConstants{
 
     const val MAX_AUTO_SPEED = 4.0
 
-    const val AUTO_POWER_P = 14.0
+    const val AUTO_POWER_P = 16.0
     const val AUTO_POWER_I = 0.0
     const val AUTO_POWER_D = 0.0
 
-    const val AUTO_ANGLE_P = 2.8
+    const val AUTO_ANGLE_P = 6.0
     const val AUTO_ANGLE_I = 0.0
     const val AUTO_ANGLE_D = 0.0
 
@@ -171,7 +171,7 @@ object TuningConstants {
     const val WRIST_ANGLE_TOLERANCE = 0.1
     val trapConstraints = TrapezoidProfile.Constraints(5.0, 15.0)
 
-    const val FLYWHEEL_P = 0.001
+    const val FLYWHEEL_P = 0.00
     const val FLYWHEEL_I = 0.0
     const val FLYWHEEL_D = 0.0
 

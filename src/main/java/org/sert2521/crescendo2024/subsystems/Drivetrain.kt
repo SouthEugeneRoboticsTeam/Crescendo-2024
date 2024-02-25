@@ -139,8 +139,8 @@ class SwerveModule(private val powerMotor: CANSparkMax,
         return reference
     }
 
-    fun getAmps():Double{
-        return powerMotor.outputCurrent
+    fun getAmps():Pair<Double, Double>{
+        return Pair(powerMotor.outputCurrent, angleMotor.outputCurrent)
     }
 
     override fun stopMotor() {
@@ -391,7 +391,7 @@ object Drivetrain : SubsystemBase() {
         return arrayOf(modules[0].getModuleReference(), modules[1].getModuleReference(), modules[2].getModuleReference(), modules[3].getModuleReference())
     }
 
-    fun getAmps():Array<Double>{
+    fun getAmps():Array<Pair<Double, Double>>{
         return arrayOf(modules[0].getAmps(), modules[1].getAmps(), modules[2].getAmps(), modules[3].getAmps())
     }
 
