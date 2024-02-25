@@ -100,4 +100,8 @@ object Climber : SubsystemBase() {
         climberMotorOne.setSmartCurrentLimit(current)
         climberMotorTwo.setSmartCurrentLimit(current)
     }
+
+    fun getCurrents():Pair<Double, Double>{
+        return Pair(climberMotorOne.outputCurrent, climberMotorTwo.outputCurrent)
+    }
 }

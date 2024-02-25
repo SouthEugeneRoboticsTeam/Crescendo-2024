@@ -25,7 +25,7 @@ class SetFlywheel(private val rpm:Double, private val ends: Boolean = false) : C
 
     override fun execute() {
         Flywheel.setVoltage(pid.calculate(Flywheel.getSpeed(), rpm) + feedForward.calculate(rpm))
-        RuntimeConstants.flywheelRevved =  Flywheel.getSpeed() > ConfigConstants.FLYWHEEL_SHOOT_SPEED
+        RuntimeConstants.flywheelRevved =  Flywheel.getSpeed() > ConfigConstants.FLYWHEEL_SHOOT_SPEED-1000
     }
 
     override fun isFinished(): Boolean {

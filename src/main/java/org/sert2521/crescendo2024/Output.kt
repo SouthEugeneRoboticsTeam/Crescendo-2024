@@ -14,6 +14,7 @@ object Output : SubsystemBase() {
     private val values = mutableListOf<Pair<String, () -> Double>>()
     private val bools = mutableListOf<Pair<String, () -> Boolean>>()
     private val field = Field2d()
+    private var ampArray: Array<Pair<Double, Double>> = arrayOf()
 
     init {
 
@@ -43,21 +44,31 @@ object Output : SubsystemBase() {
         values.add(Pair("Drive 3 Reference Drive", { Drivetrain.getReferences()[2] }))
         values.add(Pair("Drive 4 Reference Drive", { Drivetrain.getReferences()[3] }))
 
-        values.add(Pair("Drive 1 Amps Drive", { Drivetrain.getAmps()[0] }))
-        values.add(Pair("Drive 2 Amps Drive", { Drivetrain.getAmps()[1] }))
-        values.add(Pair("Drive 3 Amps Drive", { Drivetrain.getAmps()[2] }))
-        values.add(Pair("Drive 4 Amps Drive", { Drivetrain.getAmps()[3] }))
+        values.add(Pair("Drive 1 Amps Drive", { ampArray[0].first }))
+        values.add(Pair("Drive 2 Amps Drive", { ampArray[1].first }))
+        values.add(Pair("Drive 3 Amps Drive", { ampArray[2].first }))
+        values.add(Pair("Drive 4 Amps Drive", { ampArray[3].first }))
+
+        values.add(Pair("Drive 1 Amps Angle", { ampArray[0].second }))
+        values.add(Pair("Drive 2 Amps Angle", { ampArray[1].second }))
+        values.add(Pair("Drive 3 Amps Angle", { ampArray[2].second }))
+        values.add(Pair("Drive 4 Amps Angle", { ampArray[3].second }))
 
         values.add(Pair("Wrist Angle", { Wrist.getRadians() }))
 
         values.add(Pair("Flywheel Speed", { Flywheel.getSpeed() }))
         values.add(Pair("Flywheel Goal", { RuntimeConstants.flywheelGoal }))
 
+        values.add(Pair("Climber 1 Amps", { Climber.getCurrents().first }))
+        values.add(Pair("Climber 2 Amps", { Climber.getCurrents().second }))
+
         bools.add(Pair("Beambreak", { Indexer.getBeamBreak() }))
 
         SmartDashboard.putData("Field", field)
     }
     fun update(){
+        ampArray = Drivetrain.getAmps()
+
         for (value in values) {
             SmartDashboard.putNumber("Output/${value.first}", value.second())
         }
