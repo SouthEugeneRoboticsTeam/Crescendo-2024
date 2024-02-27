@@ -44,8 +44,9 @@ object PhysicalConstants{
     //ESTIMATES
     const val WRIST_SETPOINT_STOW = -0.2
     const val WRIST_SETPOINT_AMP = 1.53
-    const val WRIST_SETPOINT_PODIUM = 0.15
+    const val WRIST_SETPOINT_PODIUM = 0.16
     const val WRIST_SETPOINT_FAR = 0.295
+    const val WRIST_SETPOINT_PODIUM_MINUS = 0.07
 
     val field: AprilTagFieldLayout = AprilTagFields.k2023ChargedUp.loadAprilTagLayoutField()
     const val FIELD_WIDTH = 8.21
@@ -117,7 +118,7 @@ object SwerveConstants{
 
     const val MAX_AUTO_SPEED = 4.0
 
-    const val AUTO_POWER_P = 16.0
+    const val AUTO_POWER_P = 1.0
     const val AUTO_POWER_I = 0.0
     const val AUTO_POWER_D = 0.0
 

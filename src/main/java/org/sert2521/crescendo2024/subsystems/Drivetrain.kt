@@ -65,7 +65,7 @@ class SwerveModule(private val powerMotor: CANSparkMax,
 
 
 
-        powerMotor.setSmartCurrentLimit(20, 40, 60)
+        powerMotor.setSmartCurrentLimit(40)
         angleMotor.setSmartCurrentLimit(30)
 
         position = SwerveModulePosition(powerMotor.encoder.position, getAngle())

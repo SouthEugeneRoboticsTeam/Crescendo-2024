@@ -2,10 +2,10 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 1.398271560668945,
-      "y": 5.57265567779541
+      "x": 1.3672044277191162,
+      "y": 5.544422626495361
     },
-    "rotation": 0.0
+    "rotation": -6.420034874035952e-30
   },
   "command": {
     "type": "sequential",
@@ -66,13 +66,13 @@
                     {
                       "type": "named",
                       "data": {
-                        "name": "Podium Shot"
+                        "name": "Podium Minus Shot"
                       }
                     },
                     {
                       "type": "named",
                       "data": {
-                        "name": "Podium Shot"
+                        "name": "Podium Minus Shot"
                       }
                     },
                     {
