@@ -1,0 +1,25 @@
+{
+  "version": 1.0,
+  "startingPose": {
+    "position": {
+      "x": 1.398271560668945,
+      "y": 5.57265567779541
+    },
+    "rotation": 0.0
+  },
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "path",
+          "data": {
+            "pathName": "mirrored 4 piece near"
+          }
+        }
+      ]
+    }
+  },
+  "folder": "Choreo Autos",
+  "choreoAuto": true
+}
