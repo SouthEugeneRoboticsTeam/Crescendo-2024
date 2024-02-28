@@ -34,7 +34,7 @@ object Autos : SubsystemBase() {
             "Intake Note" to IntakeCommand(),
             "Wrist Stow" to SetWrist(PhysicalConstants.WRIST_SETPOINT_STOW).asProxy(),
             "Wrist Podium" to SetWrist(PhysicalConstants.WRIST_SETPOINT_PODIUM).asProxy(),
-            "Wrist Podium Minus" to SetWrist(PhysicalConstants.WRIST_SETPOINT_PODIUM_MINUS),
+            "Wrist Podium Minus" to SetWrist(PhysicalConstants.WRIST_SETPOINT_PODIUM_MINUS).asProxy(),
             "Wrist Far" to SetWrist(PhysicalConstants.WRIST_SETPOINT_FAR).asProxy(),
             "Flywheel Rev" to SetFlywheel(ConfigConstants.FLYWHEEL_SHOOT_SPEED, true).asProxy(),
             "Flywheel Stop" to SetFlywheel(ConfigConstants.FLYWHEEL_IDLE_SPEED, true).asProxy(),
