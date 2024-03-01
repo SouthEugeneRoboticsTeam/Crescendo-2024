@@ -44,6 +44,10 @@ object Flywheel : SubsystemBase(){
         flywheelMotorOne.set(speed)
         flywheelMotorTwo.set(speed)
     }
+
+    fun getAmps():Pair<Double, Double>{
+        return Pair(flywheelMotorOne.outputCurrent, flywheelMotorTwo.outputCurrent)
+    }
     fun stop(){
         flywheelMotorOne.stopMotor()
         flywheelMotorTwo.stopMotor()
