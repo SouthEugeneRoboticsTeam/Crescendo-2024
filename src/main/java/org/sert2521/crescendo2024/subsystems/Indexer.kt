@@ -21,6 +21,10 @@ object Indexer : Subsystem{
     fun setMotor(speed:Double){
         indexerMotor.set(speed)
     }
+
+    fun getAmps():Double{
+        return indexerMotor.outputCurrent
+    }
     fun stop(){
         indexerMotor.stopMotor()
     }

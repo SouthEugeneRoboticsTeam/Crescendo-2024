@@ -77,6 +77,10 @@ object Wrist : SubsystemBase() {
         absEncoder.reset()
     }
 
+    fun getAmps():Pair<Double, Double>{
+        return Pair(motorOne.outputCurrent, motorTwo.outputCurrent)
+    }
+
     fun stop(){
         motorOne.stopMotor()
         motorTwo.stopMotor()

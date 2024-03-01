@@ -15,7 +15,11 @@ object Output : SubsystemBase() {
     private val bools = mutableListOf<Pair<String, () -> Boolean>>()
     private val field = Field2d()
     private var ampArray: Array<Pair<Double, Double>> = arrayOf()
-
+    private var flywheelAmps = Flywheel.getAmps()
+    private var wristAmps = Wrist.getAmps()
+    private var climberAmps = Climber.getCurrents()
+    private var indexerAmps = Indexer.getAmps()
+    private var totalAmps = 0.0
     init {
 
         val storageDevices = File("/media").listFiles()
@@ -56,11 +60,21 @@ object Output : SubsystemBase() {
 
         values.add(Pair("Wrist Angle", { Wrist.getRadians() }))
 
+        values.add(Pair("Wrist 1 Amps", { wristAmps.first }))
+        values.add(Pair("Wrist 2 Amps", { wristAmps.second }))
+
         values.add(Pair("Flywheel Speed", { Flywheel.getSpeed() }))
         values.add(Pair("Flywheel Goal", { RuntimeConstants.flywheelGoal }))
 
-        values.add(Pair("Climber 1 Amps", { Climber.getCurrents().first }))
-        values.add(Pair("Climber 2 Amps", { Climber.getCurrents().second }))
+        values.add(Pair("Flywheel 1 Amps", { flywheelAmps.first }))
+        values.add(Pair("Flywheel 2 Amps", { flywheelAmps.second }))
+
+        values.add(Pair("Climber 1 Amps", { climberAmps.first }))
+        values.add(Pair("Climber 2 Amps", { climberAmps.second }))
+
+        values.add(Pair("Indexer Amps", { indexerAmps }))
+
+        values.add(Pair("Total Amps", { totalAmps }))
 
         bools.add(Pair("Beambreak", { Indexer.getBeamBreak() }))
 
@@ -68,6 +82,12 @@ object Output : SubsystemBase() {
     }
     fun update(){
         ampArray = Drivetrain.getAmps()
+        flywheelAmps = Flywheel.getAmps()
+        wristAmps = Wrist.getAmps()
+        climberAmps = Climber.getCurrents()
+        indexerAmps = Indexer.getAmps()
+        totalAmps = ampArray[0].first+ampArray[1].first+ampArray[2].first+ampArray[3].first+ampArray[0].second+ampArray[1].second+ampArray[2].second+ampArray[3].second+flywheelAmps.first+flywheelAmps.second+wristAmps.first+wristAmps.second+climberAmps.first+climberAmps.second+indexerAmps
+
 
         for (value in values) {
             SmartDashboard.putNumber("Output/${value.first}", value.second())
