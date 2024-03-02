@@ -14,21 +14,21 @@ class ClimbInitiate : Command() {
     }
 
     override fun initialize() {
-        Climber.setCurrentLimit(5)
+        Climber.setCurrentLimit(4)
     }
 
     override fun execute() {
-        Climber.setSpeed(-0.5, -0.5)
+        Climber.setSpeed(-0.7, -0.7)
     }
 
     override fun isFinished(): Boolean {
         // TODO: Make this return true when this Command no longer needs to run execute()
         //println(Pair(Climber.getStall(1), Climber.getStall(2)))
-        return min(Climber.getEncoder(1), Climber.getEncoder(2)) < CLIMBER_MIN //|| (Climber.getStall(1) && Climber.getStall(2))
+        return min(Climber.getEncoder(1), Climber.getEncoder(2)) <= CLIMBER_MIN //|| (Climber.getStall(1) && Climber.getStall(2))
     }
 
     override fun end(interrupted: Boolean) {
         Climber.setSpeed(0.0, 0.0)
-        Climber.setCurrentLimit(30)
+        Climber.setCurrentLimit(26)
     }
 }

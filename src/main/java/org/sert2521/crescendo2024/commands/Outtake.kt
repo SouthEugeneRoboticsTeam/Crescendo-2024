@@ -14,7 +14,6 @@ class Outtake : Command() {
     private val flywheelCommand = SetFlywheel(1000.0)
 
     init {
-        println("ran")
         // each subsystem used by the command must be passed into the addRequirements() method
         addRequirements(Indexer, Intake)
     }
