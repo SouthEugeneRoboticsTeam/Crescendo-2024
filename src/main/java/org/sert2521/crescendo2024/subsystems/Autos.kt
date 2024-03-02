@@ -35,13 +35,15 @@ object Autos : SubsystemBase() {
             "Wrist Stow" to SetWrist(PhysicalConstants.WRIST_SETPOINT_STOW).asProxy(),
             "Wrist Podium" to SetWrist(PhysicalConstants.WRIST_SETPOINT_PODIUM).asProxy(),
             "Wrist Podium Minus" to SetWrist(PhysicalConstants.WRIST_SETPOINT_PODIUM_MINUS).asProxy(),
-            "Wrist Podium Plus" to SetWrist(PhysicalConstants.WRIST_SETPOINT_PODIUM_PLUS),
+            "Wrist Podium Plus" to SetWrist(PhysicalConstants.WRIST_SETPOINT_PODIUM_PLUS).asProxy(),
+            "Wrist Podium Double Plus" to SetWrist(PhysicalConstants.WRIST_SETPOINT_PODIUM_DOUBLE_PLUS).asProxy(),
             "Wrist Far" to SetWrist(PhysicalConstants.WRIST_SETPOINT_FAR).asProxy(),
             "Flywheel Rev" to SetFlywheel(ConfigConstants.FLYWHEEL_SHOOT_SPEED, true).asProxy(),
             "Flywheel Stop" to SetFlywheel(ConfigConstants.FLYWHEEL_IDLE_SPEED, true).asProxy(),
             "Podium Shot" to IntakeCommand().andThen(SetWrist(PhysicalConstants.WRIST_SETPOINT_PODIUM).asProxy()).andThen(Outtake().withTimeout(0.2)).andThen(SetWrist(PhysicalConstants.WRIST_SETPOINT_STOW).asProxy()),
             "Podium Minus Shot" to IntakeCommand().andThen(SetWrist(PhysicalConstants.WRIST_SETPOINT_PODIUM_MINUS).asProxy()).andThen(Outtake().withTimeout(0.2)).andThen(SetWrist(PhysicalConstants.WRIST_SETPOINT_STOW).asProxy()),
-            "Podium Plus Shot" to IntakeCommand().andThen(SetWrist(PhysicalConstants.WRIST_SETPOINT_PODIUM_PLUS).asProxy()).andThen(Outtake().withTimeout(0.2)).andThen(SetWrist(PhysicalConstants.WRIST_SETPOINT_STOW).asProxy())
+            "Podium Plus Shot" to IntakeCommand().andThen(SetWrist(PhysicalConstants.WRIST_SETPOINT_PODIUM_PLUS).asProxy()).andThen(Outtake().withTimeout(0.2)).andThen(SetWrist(PhysicalConstants.WRIST_SETPOINT_STOW).asProxy()),
+            "Podium Double Plus Shot" to IntakeCommand().andThen(SetWrist(PhysicalConstants.WRIST_SETPOINT_PODIUM_DOUBLE_PLUS).asProxy()).andThen(Outtake().withTimeout(0.2)).andThen(SetWrist(PhysicalConstants.WRIST_SETPOINT_STOW).asProxy())
     )
 
 

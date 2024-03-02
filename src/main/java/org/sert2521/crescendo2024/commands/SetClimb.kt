@@ -20,7 +20,16 @@ class SetClimb(private val climbSpeed:Double) : Command() {
     }
 
     override fun execute() {
-        Climber.setSpeed(climbSpeed, climbSpeed)
+        if (Climber.getEncoder(1)<=0.2 || Climber.getEncoder(2)<=0.2){
+            if(climbSpeed<=-2.0){
+                this.end(true)
+                this.cancel()
+            } else {
+                Climber.setSpeed(climbSpeed, climbSpeed)
+            }
+        } else {
+            Climber.setSpeed(climbSpeed, climbSpeed)
+        }
 
     }
 
