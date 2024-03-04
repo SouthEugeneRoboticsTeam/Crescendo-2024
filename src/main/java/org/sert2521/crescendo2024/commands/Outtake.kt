@@ -11,7 +11,7 @@ import kotlin.math.PI
 
 class Outtake : Command() {
     private var wasRevved = false
-    private val flywheelCommand = SetFlywheel(1000.0)
+    private val flywheelCommand = SetFlywheel(2000.0)
 
     init {
         // each subsystem used by the command must be passed into the addRequirements() method
@@ -23,7 +23,7 @@ class Outtake : Command() {
     }
 
     override fun execute() {
-        if (Wrist.getRadians() >= 1.37){ //Just to check if its in amp range
+        if (Wrist.getRadians() >= 1.3){ //Just to check if its in amp range
             flywheelCommand.schedule()
             Indexer.setMotor(1.0)
         } else {
