@@ -77,8 +77,8 @@ object ConfigConstants{
     const val ROT_SECONDARY_SPEED = 2.75
 
     //Acceleration of drivetrain
-    const val DRIVE_ACCEL = 100.0
-    const val DRIVE_DECCEL = 100.0
+    const val DRIVE_ACCEL = 35.0
+    const val DRIVE_DECCEL = 40.0
 
     const val DRIVE_OPTIMIZED = true
 
@@ -103,10 +103,10 @@ object SwerveConstants{
     const val ANGLE_D = 0.0
 
     val swerveModuleData = listOf(
-            SwerveModuleData(Translation2d(HALF_SIDE_LENGTH, -HALF_SIDE_LENGTH), 5, 7, 16, -0.355-PI/2, false), //Back Left
-            SwerveModuleData(Translation2d(-HALF_SIDE_LENGTH, -HALF_SIDE_LENGTH), 1, 2, 15, -0.138-PI/2, false), //Back Right
-            SwerveModuleData(Translation2d(HALF_SIDE_LENGTH, HALF_SIDE_LENGTH), 16, 15, 14, 2.41-PI/2, false), //Front Left
-            SwerveModuleData(Translation2d(-HALF_SIDE_LENGTH, HALF_SIDE_LENGTH), 3, 12, 13, 0.059-PI/2, false)) //Front Right
+            SwerveModuleData(Translation2d(HALF_SIDE_LENGTH, -HALF_SIDE_LENGTH), 5, 7, 16, -0.355-1.61, false), //Back Left
+            SwerveModuleData(Translation2d(-HALF_SIDE_LENGTH, -HALF_SIDE_LENGTH), 1, 2, 15, -0.138-1.57, false), //Back Right
+            SwerveModuleData(Translation2d(HALF_SIDE_LENGTH, HALF_SIDE_LENGTH), 16, 15, 14, 2.41-1.612, false), //Front Left
+            SwerveModuleData(Translation2d(-HALF_SIDE_LENGTH, HALF_SIDE_LENGTH), 3, 12, 13, 0.059-1.568, false)) //Front Right
 
     // Pi * diameter / gear ratio
     const val POWER_ENCODER_MULTIPLY_POSITION = PI * 0.1016 / 5.903

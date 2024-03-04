@@ -5,24 +5,12 @@
       "x": 1.3672044277191162,
       "y": 5.544422626495361
     },
-    "rotation": 3.2145367194256906e-29
+    "rotation": 8.420509788599502e-27
   },
   "command": {
     "type": "sequential",
     "data": {
       "commands": [
-        {
-          "type": "named",
-          "data": {
-            "name": "Flywheel Rev"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "Outtake"
-          }
-        },
         {
           "type": "parallel",
           "data": {
