@@ -3,9 +3,6 @@ package org.sert2521.crescendo2024
 import edu.wpi.first.wpilibj.TimedRobot
 import edu.wpi.first.wpilibj2.command.Command
 import edu.wpi.first.wpilibj2.command.CommandScheduler
-import org.sert2521.crescendo2024.subsystems.Autos
-import org.sert2521.crescendo2024.subsystems.Climber
-import org.sert2521.crescendo2024.subsystems.Drivetrain
 
 
 /**
@@ -25,7 +22,6 @@ object Robot : TimedRobot()
      * the [autonomousInit] method will set it to the value selected in
      *the  AutoChooser on the dashboard.
      */
-    private var autonomousCommand: Command? = Autos.defaultAutoCommand
 
 
     /**
@@ -34,11 +30,7 @@ object Robot : TimedRobot()
      */
     override fun robotInit()
     {
-        Input
-        Output
-        Drivetrain
-        Climber
-        //Wrist
+
     }
 
     /**
@@ -55,12 +47,10 @@ object Robot : TimedRobot()
         // and running subsystem periodic() methods.  This must be called from the robot's periodic
         // block in order for anything in the Command-based framework to work.
         CommandScheduler.getInstance().run()
-        Output.update()
 
     }
 
     override fun disabledExit() {
-        Climber.reset()
     }
 
     /** This method is called once each time the robot enters Disabled mode.  */
@@ -79,8 +69,6 @@ object Robot : TimedRobot()
     {
         // We store the command as a Robot property in the rare event that the selector on the dashboard
         // is modified while the command is running since we need to access it again in teleopInit()
-        autonomousCommand = Autos.getAuto()
-        autonomousCommand?.schedule()
     }
 
     /** This method is called periodically during autonomous.  */
@@ -92,8 +80,6 @@ object Robot : TimedRobot()
     {
         // This makes sure that the autonomous stops running when teleop starts running. If you want the
         // autonomous to continue until interrupted by another command, remove this line or comment it out.
-        autonomousCommand?.cancel()
-        RuntimeConstants.wristSetPoint = PhysicalConstants.WRIST_SETPOINT_STOW
     }
 
     override fun testInit()
