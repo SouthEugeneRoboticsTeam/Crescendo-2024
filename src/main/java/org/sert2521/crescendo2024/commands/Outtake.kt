@@ -9,7 +9,7 @@ import org.sert2521.crescendo2024.subsystems.Intake
 import org.sert2521.crescendo2024.subsystems.Wrist
 import kotlin.math.PI
 
-class Outtake : Command() {
+class Outtake(val withoutRev:Boolean = false) : Command() {
     private var wasRevved = false
     private val flywheelCommand = SetFlywheel(2000.0)
 
@@ -27,7 +27,7 @@ class Outtake : Command() {
             flywheelCommand.schedule()
             Indexer.setMotor(1.0)
         } else {
-            if (RuntimeConstants.flywheelRevved){
+            if (RuntimeConstants.flywheelRevved || withoutRev){
                 Indexer.setMotor(1.0)
             }
         }

@@ -5,7 +5,7 @@
       "x": 1.3672044277191162,
       "y": 5.544422626495361
     },
-    "rotation": 8.420509788599502e-27
+    "rotation": -2.2925827569258834e-26
   },
   "command": {
     "type": "sequential",
@@ -28,7 +28,7 @@
                     {
                       "type": "wait",
                       "data": {
-                        "waitTime": 0.3
+                        "waitTime": 0.6
                       }
                     },
                     {
@@ -59,7 +59,7 @@
                     {
                       "type": "wait",
                       "data": {
-                        "waitTime": 0.2
+                        "waitTime": 0.4
                       }
                     },
                     {
@@ -89,7 +89,7 @@
                     {
                       "type": "named",
                       "data": {
-                        "name": "Wrist Podium"
+                        "name": "Wrist Podium Plus"
                       }
                     },
                     {

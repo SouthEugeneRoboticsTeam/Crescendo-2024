@@ -30,7 +30,7 @@ object Autos : SubsystemBase() {
 
 
     var commandList = mapOf<String, Command>(
-            "Outtake" to Outtake().withTimeout(0.4),
+            "Outtake" to Outtake(true).withTimeout(0.4),
             "Intake Note" to IntakeCommand(),
             "Wrist Stow" to SetWrist(PhysicalConstants.WRIST_SETPOINT_STOW).asProxy(),
             "Wrist Podium" to SetWrist(PhysicalConstants.WRIST_SETPOINT_PODIUM).asProxy(),
