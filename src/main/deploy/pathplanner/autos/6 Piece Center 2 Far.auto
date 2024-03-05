@@ -5,7 +5,7 @@
       "x": 1.3672044277191162,
       "y": 5.544422626495361
     },
-    "rotation": -2.2925827569258834e-26
+    "rotation": -8.279280094003644e-29
   },
   "command": {
     "type": "sequential",
@@ -28,7 +28,7 @@
                     {
                       "type": "wait",
                       "data": {
-                        "waitTime": 0.6
+                        "waitTime": 0.4
                       }
                     },
                     {
@@ -91,12 +91,6 @@
                       "data": {
                         "name": "Wrist Podium Plus"
                       }
-                    },
-                    {
-                      "type": "named",
-                      "data": {
-                        "name": "Outtake"
-                      }
                     }
                   ]
                 }
@@ -134,6 +128,12 @@
                     {
                       "type": "named",
                       "data": {
+                        "name": "Outtake"
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
                         "name": "Wrist Stow"
                       }
                     },
@@ -159,12 +159,6 @@
                 }
               }
             ]
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "Outtake"
           }
         },
         {
@@ -194,6 +188,12 @@
                 "type": "sequential",
                 "data": {
                   "commands": [
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "Outtake"
+                      }
+                    },
                     {
                       "type": "named",
                       "data": {
