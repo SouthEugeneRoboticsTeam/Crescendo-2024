@@ -5,7 +5,7 @@
       "x": 1.3672044277191162,
       "y": 5.544422626495361
     },
-    "rotation": -8.279280094003644e-29
+    "rotation": 1.727881577113406e-28
   },
   "command": {
     "type": "sequential",
@@ -77,7 +77,7 @@
                     {
                       "type": "named",
                       "data": {
-                        "name": "Podium Minus Shot"
+                        "name": "Podium Shot"
                       }
                     },
                     {
