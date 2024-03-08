@@ -11,7 +11,7 @@ import kotlin.math.PI
 
 class Outtake(val withoutRev:Boolean = false) : Command() {
     private var wasRevved = false
-    private val flywheelCommand = SetFlywheel(2000.0)
+    private val flywheelCommand = SetFlywheel(3000.0)
 
     init {
         // each subsystem used by the command must be passed into the addRequirements() method

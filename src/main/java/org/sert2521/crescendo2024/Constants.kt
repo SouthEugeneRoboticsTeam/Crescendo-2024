@@ -43,12 +43,12 @@ object PhysicalConstants{
 
     //ESTIMATES
     const val WRIST_SETPOINT_STOW = -0.2
-    const val WRIST_SETPOINT_AMP = 1.4
+    const val WRIST_SETPOINT_AMP = 1.53
     const val WRIST_SETPOINT_PODIUM = 0.16
     const val WRIST_SETPOINT_FAR = 0.295
     const val WRIST_SETPOINT_PODIUM_MINUS = 0.07
-    const val WRIST_SETPOINT_PODIUM_PLUS = 0.2
-    const val WRIST_SETPOINT_PODIUM_DOUBLE_PLUS = 0.28
+    const val WRIST_SETPOINT_PODIUM_PLUS = 0.215
+    const val WRIST_SETPOINT_PODIUM_DOUBLE_PLUS = 0.295
 
     val field: AprilTagFieldLayout = AprilTagFields.k2023ChargedUp.loadAprilTagLayoutField()
     const val FIELD_WIDTH = 8.21
