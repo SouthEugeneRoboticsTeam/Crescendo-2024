@@ -80,12 +80,14 @@ object Robot : TimedRobot()
     {
         // We store the command as a Robot property in the rare event that the selector on the dashboard
         // is modified while the command is running since we need to access it again in teleopInit()
-
+        /*
         if (Input.getColor() == DriverStation.Alliance.Blue){
-            PhysicalConstants.WRIST_SETPOINT_PODIUM_DOUBLE_PLUS = 0.28
+            PhysicalConstants.WRIST_SETPOINT_PODIUM_DOUBLE_PLUS = 0.29
         } else {
-            PhysicalConstants.WRIST_SETPOINT_PODIUM_DOUBLE_PLUS = 0.295
+            PhysicalConstants.WRIST_SETPOINT_PODIUM_DOUBLE_PLUS = 0.29
         }
+
+         */
         autonomousCommand = Autos.getAuto()
         autonomousCommand?.schedule()
     }

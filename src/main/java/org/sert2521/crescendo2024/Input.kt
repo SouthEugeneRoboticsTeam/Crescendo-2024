@@ -58,7 +58,7 @@ object Input {
         // manualDown.whileTrue()
         // visionAlign.whileTrue()
         resetAngle.onTrue(InstantCommand({ Drivetrain.setNewPose(Pose2d())}))
-        rumble.onTrue(InstantCommand({setRumble(0.5)}).andThen(WaitCommand(0.2).andThen(InstantCommand({ setRumble(0.0) }))))
+        rumble.onTrue(InstantCommand({setRumble(0.8)}).andThen(WaitCommand(0.2).andThen(InstantCommand({ setRumble(0.0) }))))
 
         //secondarySpeedButton.onTrue(InstantCommand({ secondarySpeedMode = !secondarySpeedMode }))
         //secondarySpeedButton.onFalse(InstantCommand({ secondarySpeedMode = !secondarySpeedMode }))
