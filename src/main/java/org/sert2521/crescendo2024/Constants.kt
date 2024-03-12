@@ -161,7 +161,7 @@ object TuningConstants {
 
     const val VISION_TIMEOUT = 0.1
 
-    const val WRIST_P = 30.0
+    const val WRIST_P = 3.0
     const val WRIST_I = 0.0
     const val WRIST_D = 0.0
 

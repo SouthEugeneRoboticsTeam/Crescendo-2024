@@ -33,12 +33,12 @@ object Flywheel : SubsystemBase(){
         holdCommand.addRequirements(this)
         defaultCommand = holdCommand
     }
-    fun getSpeed():Double{
-        return (flywheelMotorOne.encoder.velocity+flywheelMotorTwo.encoder.velocity)/2.0
+    fun getSpeeds():Pair<Double, Double>{
+        return Pair(flywheelMotorOne.encoder.velocity,flywheelMotorTwo.encoder.velocity)
     }
-    fun setVoltage(voltage:Double){
-        flywheelMotorOne.setVoltage(voltage)
-        flywheelMotorTwo.setVoltage(voltage)
+    fun setVoltages(voltages:Pair<Double, Double>){
+        flywheelMotorOne.setVoltage(voltages.first)
+        flywheelMotorTwo.setVoltage(voltages.second)
     }
     fun setSpeed(speed:Double){
         flywheelMotorOne.set(speed)
