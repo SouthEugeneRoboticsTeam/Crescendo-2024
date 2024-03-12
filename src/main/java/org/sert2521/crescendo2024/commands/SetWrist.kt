@@ -44,9 +44,9 @@ class SetWrist(private val goal:Double, private val ends:Boolean = true) : Comma
         if (ends){
             pidResult =  pid.calculate(wristAngle+2*PI, goal+2*PI)
         } else {
-            pidResult = notProfiled.calculate(wristAngle + 2 * PI, goal + 2 * PI)
+            pidResult = notProfiled.calculate(goal-wristAngle)
         }
-        val feedforwardResult = feedForward.calculate(wristAngle, 0.0)
+        val feedforwardResult = feedForward.calculate(wristAngle, pid.setpoint.velocity)
         //println(pid.setpoint.velocity)
 
         Wrist.setVoltage(feedforwardResult + pidResult)

@@ -75,12 +75,12 @@ class SwerveModule(private val powerMotor: CANSparkMax,
 
     fun getAngle(): Rotation2d {
         if (inverted){
-            angleMotor.encoder.setPosition(angleEncoder.absolutePosition.valueAsDouble* SwerveConstants.ANGLE_ENCODER_MULTIPLY - angleOffset)
+            angleMotor.encoder.setPosition(angleEncoder.absolutePosition.valueAsDouble * SwerveConstants.ANGLE_ENCODER_MULTIPLY - angleOffset)
         } else {
-            angleMotor.encoder.setPosition(-(angleEncoder.absolutePosition.valueAsDouble* SwerveConstants.ANGLE_ENCODER_MULTIPLY - angleOffset))
+            angleMotor.encoder.setPosition(-(angleEncoder.absolutePosition.valueAsDouble * SwerveConstants.ANGLE_ENCODER_MULTIPLY - angleOffset))
         }
 
-        return Rotation2d(((angleMotor.encoder.position+ PI).mod(2*PI)- 2*PI)+PI)
+        return Rotation2d((angleMotor.encoder.position+PI).mod(2*PI)-PI)
     }
 
     // Should be called in periodic

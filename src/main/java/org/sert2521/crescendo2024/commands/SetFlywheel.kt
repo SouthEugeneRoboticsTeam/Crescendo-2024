@@ -9,9 +9,12 @@ import org.sert2521.crescendo2024.RuntimeConstants
 import org.sert2521.crescendo2024.TuningConstants
 import org.sert2521.crescendo2024.subsystems.Flywheel
 import java.io.ObjectInputFilter.Config
+import kotlin.math.min
 
 class SetFlywheel(private val rpm:Double, private val ends: Boolean = false) : Command() {
-    private val pid = PIDController(TuningConstants.FLYWHEEL_P, TuningConstants.FLYWHEEL_I, TuningConstants.FLYWHEEL_D)
+    private val pidOne = PIDController(TuningConstants.FLYWHEEL_P, TuningConstants.FLYWHEEL_I, TuningConstants.FLYWHEEL_D)
+    private val pidTwo = PIDController(TuningConstants.FLYWHEEL_P, TuningConstants.FLYWHEEL_I, TuningConstants.FLYWHEEL_D)
+
     private val feedForward = SimpleMotorFeedforward(TuningConstants.FLYWHEEL_KS, TuningConstants.FLYWHEEL_KV, TuningConstants.FLYWHEEL_KA)
 
     init {
@@ -24,8 +27,8 @@ class SetFlywheel(private val rpm:Double, private val ends: Boolean = false) : C
     }
 
     override fun execute() {
-        Flywheel.setVoltage(pid.calculate(Flywheel.getSpeed(), rpm) + feedForward.calculate(rpm))
-        RuntimeConstants.flywheelRevved =  Flywheel.getSpeed() > ConfigConstants.FLYWHEEL_SHOOT_SPEED-1000
+        Flywheel.setVoltages(Pair(pidOne.calculate(Flywheel.getSpeeds().first, rpm) + feedForward.calculate(rpm), pidTwo.calculate(Flywheel.getSpeeds().second, rpm) + feedForward.calculate(rpm)))
+        RuntimeConstants.flywheelRevved = min(Flywheel.getSpeeds().first, Flywheel.getSpeeds().second) > ConfigConstants.FLYWHEEL_SHOOT_SPEED-100
     }
 
     override fun isFinished(): Boolean {
@@ -37,7 +40,7 @@ class SetFlywheel(private val rpm:Double, private val ends: Boolean = false) : C
         if (interrupted){
             RuntimeConstants.flywheelGoal = 0.0
         }
-        Flywheel.setVoltage(0.0)
+        Flywheel.setVoltages(Pair(0.0, 0.0))
         RuntimeConstants.flywheelRevved = false
     }
 }
