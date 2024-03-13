@@ -1,0 +1,57 @@
+package org.sert2521.crescendo2024.subsystems
+
+import edu.wpi.first.math.geometry.Pose2d
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import org.photonvision.EstimatedRobotPose
+import org.photonvision.PhotonCamera
+import org.photonvision.PhotonPoseEstimator
+import org.photonvision.targeting.PhotonPipelineResult
+import org.photonvision.targeting.PhotonTrackedTarget
+import org.sert2521.crescendo2024.PhysicalConstants
+import org.sert2521.crescendo2024.TuningConstants
+import java.util.*
+
+object Vision : SubsystemBase() {
+    private val cam = PhotonCamera("thecamera")
+    private var result: PhotonPipelineResult = cam.latestResult
+
+    private var targets:List<PhotonTrackedTarget> = result.targets
+
+    private var bestTarget:PhotonTrackedTarget? = null
+
+    private val visionPoseEstimator = PhotonPoseEstimator(PhysicalConstants.usedField, PhotonPoseEstimator.PoseStrategy.MULTI_TAG_PNP_ON_COPROCESSOR, cam, PhysicalConstants.centerPose)
+    private var estimation:Optional<EstimatedRobotPose>
+
+    init{
+        estimation = visionPoseEstimator.update()
+    }
+
+    override fun periodic() {
+        estimation = visionPoseEstimator.update()
+    }
+
+    fun getEstimation():Optional<EstimatedRobotPose>{
+        return estimation
+    }
+
+    fun getDistanceSpeaker():Double?{
+        var distance:Double
+        var estimationPose:Pose2d
+
+        if (estimation.isEmpty){
+            return null
+        } else {
+            estimationPose = estimation.get().estimatedPose.toPose2d()
+        }
+        return estimationPose.translation.getDistance(PhysicalConstants.speakerPose)
+    }
+
+    fun getVisionWristAngle():Double{
+        val distance = getDistanceSpeaker()
+        return if (distance == null){
+            PhysicalConstants.WRIST_SETPOINT_STOW
+        } else {
+            TuningConstants.wristAngLookup.get(distance!!)
+        }
+    }
+}
