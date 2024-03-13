@@ -5,20 +5,20 @@ import edu.wpi.first.apriltag.AprilTagFields
 import edu.wpi.first.math.MatBuilder.fill
 import edu.wpi.first.math.Matrix
 import edu.wpi.first.math.Nat
-import edu.wpi.first.math.geometry.Rotation3d
-import edu.wpi.first.math.geometry.Transform3d
-import edu.wpi.first.math.geometry.Translation2d
-import edu.wpi.first.math.geometry.Translation3d
 import edu.wpi.first.math.numbers.N1
 import edu.wpi.first.math.numbers.N3
 import edu.wpi.first.math.trajectory.TrapezoidProfile
 import edu.wpi.first.math.util.Units
 import com.pathplanner.lib.auto.NamedCommands
+import edu.wpi.first.apriltag.AprilTag
+import edu.wpi.first.math.geometry.*
+import edu.wpi.first.math.interpolation.InterpolatingDoubleTreeMap
 import edu.wpi.first.wpilibj2.command.Command
 import org.sert2521.crescendo2024.commands.IntakeCommand
 import org.sert2521.crescendo2024.commands.Outtake
 import org.sert2521.crescendo2024.commands.SetFlywheel
 import org.sert2521.crescendo2024.commands.SetWrist
+import java.awt.image.LookupTable
 import java.io.ObjectInputFilter.Config
 import kotlin.math.PI
 
@@ -50,14 +50,24 @@ object PhysicalConstants{
     const val WRIST_SETPOINT_PODIUM_PLUS = 0.215
     var WRIST_SETPOINT_PODIUM_DOUBLE_PLUS = 0.2927
 
-    val field: AprilTagFieldLayout = AprilTagFields.k2023ChargedUp.loadAprilTagLayoutField()
-    const val FIELD_WIDTH = 8.21
-    const val FIELD_LENGTH = 16.54
+    val aprilTagField: AprilTagFieldLayout = AprilTagFields.k2024Crescendo.loadAprilTagLayoutField()
+    val usedTags = listOf(0, 1, 2)
+    val usedFieldTags = mutableListOf<AprilTag>()
+    var usedField: AprilTagFieldLayout
+
+    init {
+        for (tag in usedTags){
+            usedFieldTags.add(aprilTagField.tags[tag])
+        }
+        usedField = AprilTagFieldLayout(usedFieldTags, aprilTagField.fieldLength, aprilTagField.fieldWidth)
+    }
 
 
     val rightPose = Transform3d(Translation3d(Units.inchesToMeters(-11.26), Units.inchesToMeters(-6.04), Units.inchesToMeters(9.25)), Rotation3d(0.0, 0.0, Units.degreesToRadians(-105.0)))
     val frontPose = Transform3d(Translation3d(Units.inchesToMeters(18.375), Units.inchesToMeters(0.0),  Units.inchesToMeters(5.485)), Rotation3d(0.0, 0.0,  0.0))
     val centerPose = Transform3d(Translation3d(Units.inchesToMeters(-10.059), Units.inchesToMeters(6.081), Units.inchesToMeters(11.521)), Rotation3d(0.0, 0.349, PI))
+
+    val speakerPose = Translation2d()
 
     const val FLYWHEEL_GEAR_RATIO = 3.0/2.0
 
@@ -156,6 +166,13 @@ object RuntimeConstants{
 }
 
 object TuningConstants {
+    //Key = Meters from target, value = arm angle
+    val wristAngLookup = InterpolatingDoubleTreeMap()
+
+    init{
+        wristAngLookup.put(0.8, PhysicalConstants.WRIST_SETPOINT_STOW)
+    }
+
     val defaultVisionDeviations: Matrix<N3, N1> = fill(Nat.N3(), Nat.N1(), 1.0, 1.0, 1000.0)
     val alignVisionDeviations: Matrix<N3, N1> = fill(Nat.N3(), Nat.N1(),3.0, 3.0, 1000.0)
 
