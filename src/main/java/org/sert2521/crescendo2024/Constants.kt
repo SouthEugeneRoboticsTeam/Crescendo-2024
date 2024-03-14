@@ -18,6 +18,7 @@ import org.sert2521.crescendo2024.commands.IntakeCommand
 import org.sert2521.crescendo2024.commands.Outtake
 import org.sert2521.crescendo2024.commands.SetFlywheel
 import org.sert2521.crescendo2024.commands.SetWrist
+import org.sert2521.crescendo2024.subsystems.Vision
 import java.awt.image.LookupTable
 import java.io.ObjectInputFilter.Config
 import kotlin.math.PI
@@ -77,8 +78,8 @@ object PhysicalConstants{
 }
 
 object ConfigConstants{
-    const val POWER_DEADBAND = 0.075
-    const val ROT_DEADBAND = 0.075
+    const val POWER_DEADBAND = 0.05
+    const val ROT_DEADBAND = 0.05
 
     //Drive speed constants
     const val DRIVE_SPEED = 5.3
@@ -163,6 +164,9 @@ object RuntimeConstants{
     var wristSetPoint = PhysicalConstants.WRIST_SETPOINT_STOW
     var flywheelRevved = false
     var flywheelGoal = 0.0
+    var disableDriverRotation = false
+    var visionRightStick = 0.0
+    var wristVision = PhysicalConstants.WRIST_SETPOINT_STOW
 }
 
 object TuningConstants {
@@ -187,6 +191,12 @@ object TuningConstants {
     const val WRIST_G = 0.365
     const val WRIST_V = 0.0
     const val WRIST_A = 0.0
+
+    const val VISION_ALIGN_P = 0.0
+    const val VISION_ALIGN_I = 0.0
+    const val VISION_ALIGN_D = 0.0
+
+    const val VISION_TRAP_TOL = 1.0
 
     const val WRIST_ANGLE_TOLERANCE = 0.1
     val trapConstraints = TrapezoidProfile.Constraints(5.0, 15.0)

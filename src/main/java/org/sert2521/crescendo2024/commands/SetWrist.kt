@@ -14,7 +14,7 @@ import org.sert2521.crescendo2024.subsystems.Wrist
 import kotlin.math.PI
 import kotlin.math.abs
 
-class SetWrist(private val goal:Double, private val ends:Boolean = true) : Command() {
+class SetWrist(private val goal:Double, private val ends:Boolean = true, private val useVision:Boolean = false) : Command() {
 
 
     private var wristAngle = Wrist.getRadians()
@@ -22,6 +22,7 @@ class SetWrist(private val goal:Double, private val ends:Boolean = true) : Comma
     //var pid = PIDController(TuningConstants.WRIST_P, TuningConstants.WRIST_I, TuningConstants.WRIST_D)
     private var pid = ProfiledPIDController(TuningConstants.WRIST_P, TuningConstants.WRIST_I, TuningConstants.WRIST_D, TuningConstants.trapConstraints)
     private var notProfiled = PIDController(TuningConstants.WRIST_P, TuningConstants.WRIST_I, TuningConstants.WRIST_D)
+
 
     private var done = false
 
@@ -31,7 +32,6 @@ class SetWrist(private val goal:Double, private val ends:Boolean = true) : Comma
     }
 
     override fun initialize() {
-
         wristAngle = Wrist.getRadians()
         pid.reset(wristAngle+2*PI)
         RuntimeConstants.wristSetPoint=goal
@@ -44,7 +44,11 @@ class SetWrist(private val goal:Double, private val ends:Boolean = true) : Comma
         if (ends){
             pidResult =  pid.calculate(wristAngle+2*PI, goal+2*PI)
         } else {
-            pidResult = notProfiled.calculate(goal-wristAngle)
+            if (useVision){
+                pidResult = notProfiled.calculate(RuntimeConstants.wristVision-wristAngle)
+            } else {
+                pidResult = notProfiled.calculate(goal-wristAngle)
+            }
         }
         val feedforwardResult = feedForward.calculate(wristAngle, pid.setpoint.velocity)
         //println(pid.setpoint.velocity)
@@ -62,7 +66,7 @@ class SetWrist(private val goal:Double, private val ends:Boolean = true) : Comma
 
     override fun end(interrupted: Boolean) {
         if (interrupted){
-            RuntimeConstants.flywheelGoal = 0.0
+            RuntimeConstants.wristSetPoint
         }
     }
 }
