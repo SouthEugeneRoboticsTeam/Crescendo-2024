@@ -52,7 +52,7 @@ object Autos : SubsystemBase() {
             Drivetrain::getPose,
             Drivetrain::setNewPose,
             Drivetrain::getReletiveSpeeds,
-            {Drivetrain.drive(ChassisSpeeds(-it.vxMetersPerSecond, -it.vyMetersPerSecond, -it.omegaRadiansPerSecond))},
+            {Drivetrain.drive(ChassisSpeeds(it.vxMetersPerSecond, it.vyMetersPerSecond, it.omegaRadiansPerSecond))},
             HolonomicPathFollowerConfig(PIDConstants(SwerveConstants.AUTO_POWER_P, SwerveConstants.AUTO_POWER_I, SwerveConstants.AUTO_POWER_D),
                 PIDConstants(SwerveConstants.AUTO_ANGLE_P, SwerveConstants.AUTO_ANGLE_I, SwerveConstants.AUTO_ANGLE_D),
                 SwerveConstants.MAX_AUTO_SPEED,

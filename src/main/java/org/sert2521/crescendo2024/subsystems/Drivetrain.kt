@@ -355,7 +355,7 @@ object Drivetrain : SubsystemBase() {
     fun drive(chassisSpeeds: ChassisSpeeds) {
         // Maybe desaturate wheel speeds
         // Fix this ChassisSpeeds nonsense
-        val wantedStates = kinematics.toSwerveModuleStates(ChassisSpeeds(-chassisSpeeds.vyMetersPerSecond, -chassisSpeeds.vxMetersPerSecond, chassisSpeeds.omegaRadiansPerSecond))
+        val wantedStates = kinematics.toSwerveModuleStates(ChassisSpeeds(chassisSpeeds.vyMetersPerSecond, chassisSpeeds.vxMetersPerSecond, -chassisSpeeds.omegaRadiansPerSecond))
 
         for (i in wantedStates.indices) {
             modules[i].set(wantedStates[i])
