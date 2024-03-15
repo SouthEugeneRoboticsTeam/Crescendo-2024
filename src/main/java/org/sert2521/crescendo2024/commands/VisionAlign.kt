@@ -59,6 +59,14 @@ class VisionAlign() : Command() {
                     wristCommand.schedule()
                     wristIsTrap = true
                 }
+            } else {
+                if (abs(Wrist.getRadians()-currWristTarget)>TuningConstants.VISION_TRAP_TOL){
+                    wristCommand = SetWrist(currWristTarget)
+                    wristCommand.schedule()
+                    wristIsTrap = true
+                } else {
+                    wristCommand = SetWrist(currWristTarget, false, true)
+                }
             }
         }
     }
