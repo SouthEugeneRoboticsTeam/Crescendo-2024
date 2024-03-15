@@ -1,5 +1,7 @@
 package org.sert2521.crescendo2024
 
+import edu.wpi.first.math.geometry.Pose2d
+import edu.wpi.first.math.geometry.Rotation2d
 import edu.wpi.first.wpilibj.DriverStation
 import edu.wpi.first.wpilibj.TimedRobot
 import edu.wpi.first.wpilibj2.command.Command
@@ -7,6 +9,7 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler
 import org.sert2521.crescendo2024.subsystems.Autos
 import org.sert2521.crescendo2024.subsystems.Climber
 import org.sert2521.crescendo2024.subsystems.Drivetrain
+import kotlin.math.PI
 
 
 /**
@@ -53,7 +56,6 @@ object Robot : TimedRobot()
     {
         CommandScheduler.getInstance().run()
         Output.update()
-        PhysicalConstants.periodic()
     }
 
     override fun disabledExit() {
@@ -91,6 +93,10 @@ object Robot : TimedRobot()
     /** This method is called periodically during autonomous.  */
     override fun autonomousPeriodic()
     {
+    }
+
+    override fun autonomousExit() {
+        //Drivetrain.setNewPose(Pose2d(Drivetrain.getPose().translation, Rotation2d(Drivetrain.getPose().rotation.radians+PI)))
     }
 
     override fun teleopInit()
