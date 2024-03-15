@@ -45,9 +45,9 @@ class SetWrist(private val goal:Double, private val ends:Boolean = true, private
             pidResult =  pid.calculate(wristAngle+2*PI, goal+2*PI)
         } else {
             if (useVision){
-                pidResult = notProfiled.calculate(RuntimeConstants.wristVision-wristAngle)
+                pidResult = notProfiled.calculate(wristAngle+2*PI, RuntimeConstants.wristVision+2*PI)
             } else {
-                pidResult = notProfiled.calculate(goal-wristAngle)
+                pidResult = notProfiled.calculate(wristAngle + 2 * PI, goal + 2 * PI)
             }
         }
         val feedforwardResult = feedForward.calculate(wristAngle, pid.setpoint.velocity)
