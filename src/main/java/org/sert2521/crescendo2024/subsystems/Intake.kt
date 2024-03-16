@@ -21,6 +21,10 @@ object Intake : SubsystemBase() {
         intakeMotor.set(speed)
         alignmentMotor.set(speed)
     }
+
+    fun getAmps():Pair<Double, Double>{
+        return Pair(intakeMotor.outputCurrent, alignmentMotor.outputCurrent)
+    }
     fun stop(){
         intakeMotor.stopMotor()
         alignmentMotor.stopMotor()
