@@ -14,7 +14,7 @@ class ClimbInitiate : Command() {
     }
 
     override fun initialize() {
-        Climber.setCurrentLimit(4)
+        Climber.setCurrentLimit(8)
     }
 
     override fun execute() {
