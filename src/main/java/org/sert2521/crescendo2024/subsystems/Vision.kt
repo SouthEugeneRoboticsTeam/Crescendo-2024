@@ -14,7 +14,7 @@ import java.util.*
 import kotlin.math.tan
 
 object Vision : SubsystemBase() {
-    private val cam = PhotonCamera("thecamera")
+    private val cam = PhotonCamera("Left2")
     private var result: PhotonPipelineResult = cam.latestResult
 
     private var targets:List<PhotonTrackedTarget> = result.targets
