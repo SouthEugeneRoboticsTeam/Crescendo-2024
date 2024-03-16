@@ -23,7 +23,6 @@ class SetWrist(private val goal:Double, private val ends:Boolean = true, private
     private var pid = ProfiledPIDController(TuningConstants.WRIST_P, TuningConstants.WRIST_I, TuningConstants.WRIST_D, TuningConstants.trapConstraints)
     private var notProfiled = PIDController(TuningConstants.WRIST_P, TuningConstants.WRIST_I, TuningConstants.WRIST_D)
 
-
     private var done = false
 
     init {
