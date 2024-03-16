@@ -63,10 +63,7 @@ object PhysicalConstants{
         usedField = AprilTagFieldLayout(usedFieldTags, aprilTagField.fieldLength, aprilTagField.fieldWidth)
     }
 
-
-    val rightPose = Transform3d(Translation3d(Units.inchesToMeters(-11.26), Units.inchesToMeters(-6.04), Units.inchesToMeters(9.25)), Rotation3d(0.0, 0.0, Units.degreesToRadians(-105.0)))
-    val frontPose = Transform3d(Translation3d(Units.inchesToMeters(18.375), Units.inchesToMeters(0.0),  Units.inchesToMeters(5.485)), Rotation3d(0.0, 0.0,  0.0))
-    val centerPose = Transform3d(Translation3d(Units.inchesToMeters(-10.059), Units.inchesToMeters(6.081), Units.inchesToMeters(11.521)), Rotation3d(0.0, 0.349, PI))
+    val centerPose = Transform3d(Translation3d(Units.inchesToMeters(-10.029), Units.inchesToMeters(6.081), Units.inchesToMeters(15.26)), Rotation3d(0.0, 0.349, PI))
 
     val speakerPose = Translation2d()
 
