@@ -2,9 +2,7 @@ package org.sert2521.crescendo2024
 
 import edu.wpi.first.wpilibj.DataLogManager
 import edu.wpi.first.wpilibj.DriverStation
-import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard
 import edu.wpi.first.wpilibj.smartdashboard.Field2d
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard
 import edu.wpi.first.wpilibj2.command.SubsystemBase
 import org.sert2521.crescendo2024.subsystems.*
@@ -14,11 +12,12 @@ object Output : SubsystemBase() {
     private val values = mutableListOf<Pair<String, () -> Double>>()
     private val bools = mutableListOf<Pair<String, () -> Boolean>>()
     private val field = Field2d()
-    private var ampArray: Array<Pair<Double, Double>> = arrayOf()
+    private var drivetrainAmps: Array<Pair<Double, Double>> = arrayOf()
     private var flywheelAmps = Flywheel.getAmps()
     private var wristAmps = Wrist.getAmps()
     private var climberAmps = Climber.getCurrents()
     private var indexerAmps = Indexer.getAmps()
+    private var intakeAmps = Intake.getAmps()
     private var totalAmps = 0.0
     init {
 
@@ -48,15 +47,15 @@ object Output : SubsystemBase() {
         values.add(Pair("Drive 3 Reference Drive", { Drivetrain.getReferences()[2] }))
         values.add(Pair("Drive 4 Reference Drive", { Drivetrain.getReferences()[3] }))
 
-        values.add(Pair("Drive 1 Amps Drive", { ampArray[0].first }))
-        values.add(Pair("Drive 2 Amps Drive", { ampArray[1].first }))
-        values.add(Pair("Drive 3 Amps Drive", { ampArray[2].first }))
-        values.add(Pair("Drive 4 Amps Drive", { ampArray[3].first }))
+        values.add(Pair("Drive 1 Amps Drive", { drivetrainAmps[0].first }))
+        values.add(Pair("Drive 2 Amps Drive", { drivetrainAmps[1].first }))
+        values.add(Pair("Drive 3 Amps Drive", { drivetrainAmps[2].first }))
+        values.add(Pair("Drive 4 Amps Drive", { drivetrainAmps[3].first }))
 
-        values.add(Pair("Drive 1 Amps Angle", { ampArray[0].second }))
-        values.add(Pair("Drive 2 Amps Angle", { ampArray[1].second }))
-        values.add(Pair("Drive 3 Amps Angle", { ampArray[2].second }))
-        values.add(Pair("Drive 4 Amps Angle", { ampArray[3].second }))
+        values.add(Pair("Drive 1 Amps Angle", { drivetrainAmps[0].second }))
+        values.add(Pair("Drive 2 Amps Angle", { drivetrainAmps[1].second }))
+        values.add(Pair("Drive 3 Amps Angle", { drivetrainAmps[2].second }))
+        values.add(Pair("Drive 4 Amps Angle", { drivetrainAmps[3].second }))
 
         values.add(Pair("Wrist Angle", { Wrist.getRadians() }))
 
@@ -74,6 +73,9 @@ object Output : SubsystemBase() {
 
         values.add(Pair("Indexer Amps", { indexerAmps }))
 
+        values.add(Pair("Intake intake Amps", { intakeAmps.first }))
+        values.add(Pair("Intake alignment", { intakeAmps.second }))
+
         values.add(Pair("Total Amps", { totalAmps }))
 
         bools.add(Pair("Beambreak", { Indexer.getBeamBreak() }))
@@ -81,12 +83,13 @@ object Output : SubsystemBase() {
         SmartDashboard.putData("Field", field)
     }
     fun update(){
-        ampArray = Drivetrain.getAmps()
+        drivetrainAmps = Drivetrain.getAmps()
         flywheelAmps = Flywheel.getAmps()
         wristAmps = Wrist.getAmps()
         climberAmps = Climber.getCurrents()
         indexerAmps = Indexer.getAmps()
-        totalAmps = ampArray[0].first+ampArray[1].first+ampArray[2].first+ampArray[3].first+ampArray[0].second+ampArray[1].second+ampArray[2].second+ampArray[3].second+flywheelAmps.first+flywheelAmps.second+wristAmps.first+wristAmps.second+climberAmps.first+climberAmps.second+indexerAmps
+        intakeAmps = Intake.getAmps()
+        totalAmps = drivetrainAmps[0].first+drivetrainAmps[1].first+drivetrainAmps[2].first+drivetrainAmps[3].first+drivetrainAmps[0].second+drivetrainAmps[1].second+drivetrainAmps[2].second+drivetrainAmps[3].second+flywheelAmps.first+flywheelAmps.second+wristAmps.first+wristAmps.second+climberAmps.first+climberAmps.second+indexerAmps+intakeAmps.first+intakeAmps.second
 
 
         for (value in values) {
