@@ -52,7 +52,7 @@ object PhysicalConstants{
     var WRIST_SETPOINT_PODIUM_DOUBLE_PLUS = 0.2927
 
     val aprilTagField: AprilTagFieldLayout = AprilTagFields.k2024Crescendo.loadAprilTagLayoutField()
-    val usedTags = listOf(0, 1, 2)
+    val usedTags = listOf(2, 3, 6, 7) // -1 because indexes and shit
     val usedFieldTags = mutableListOf<AprilTag>()
     var usedField: AprilTagFieldLayout
 
@@ -65,7 +65,8 @@ object PhysicalConstants{
 
     val centerPose = Transform3d(Translation3d(Units.inchesToMeters(-10.029), Units.inchesToMeters(6.081), Units.inchesToMeters(15.26)), Rotation3d(0.0, 0.349, PI))
 
-    val speakerPose = Translation2d()
+    val speakerTransRed = aprilTagField.tags[3].pose.translation.toTranslation2d()
+    val speakerTransBlue = aprilTagField.tags[8].pose.translation.toTranslation2d()
 
     const val FLYWHEEL_GEAR_RATIO = 3.0/2.0
 
