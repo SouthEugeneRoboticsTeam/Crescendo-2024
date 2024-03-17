@@ -56,6 +56,7 @@ object Robot : TimedRobot()
     {
         CommandScheduler.getInstance().run()
         Output.update()
+        println(PhysicalConstants.usedField.tags)
     }
 
     override fun disabledExit() {

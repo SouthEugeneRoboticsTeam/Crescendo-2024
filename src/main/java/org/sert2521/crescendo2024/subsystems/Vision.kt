@@ -2,12 +2,14 @@ package org.sert2521.crescendo2024.subsystems
 
 import edu.wpi.first.math.geometry.Pose2d
 import edu.wpi.first.math.geometry.Rotation2d
+import edu.wpi.first.wpilibj.DriverStation
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import org.photonvision.EstimatedRobotPose
 import org.photonvision.PhotonCamera
 import org.photonvision.PhotonPoseEstimator
 import org.photonvision.targeting.PhotonPipelineResult
 import org.photonvision.targeting.PhotonTrackedTarget
+import org.sert2521.crescendo2024.Input
 import org.sert2521.crescendo2024.PhysicalConstants
 import org.sert2521.crescendo2024.TuningConstants
 import java.util.*
@@ -39,13 +41,17 @@ object Vision : SubsystemBase() {
     fun getDistanceSpeaker():Double?{
         var distance:Double
         var estimationPose:Pose2d
-
+        var speakerTrans = if (Input.getColor()==DriverStation.Alliance.Blue){
+            PhysicalConstants.speakerTransBlue
+        } else {
+            PhysicalConstants.speakerTransRed
+        }
         if (estimation.isEmpty){
             return null
         } else {
             estimationPose = estimation.get().estimatedPose.toPose2d()
         }
-        return estimationPose.translation.getDistance(PhysicalConstants.speakerPose)
+        return estimationPose.translation.getDistance(speakerTrans)
     }
 
     fun getVisionWristAngle():Double{
@@ -59,12 +65,16 @@ object Vision : SubsystemBase() {
 
     fun getDriveAngleTarget():Rotation2d?{
         val estimationPose:Pose2d
-
+        val speakerTrans = if (Input.getColor()==DriverStation.Alliance.Red){
+            PhysicalConstants.speakerTransRed
+        } else {
+            PhysicalConstants.speakerTransBlue
+        }
         if (estimation.isEmpty){
             return null
         } else {
             estimationPose = estimation.get().estimatedPose.toPose2d()
         }
-        return Rotation2d(tan((estimationPose.x-PhysicalConstants.speakerPose.x)/(estimationPose.y-PhysicalConstants.speakerPose.y)))
+        return Rotation2d(tan((estimationPose.x-speakerTrans.x)/(estimationPose.y-speakerTrans.y)))
     }
 }
