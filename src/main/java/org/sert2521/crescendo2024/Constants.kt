@@ -132,7 +132,7 @@ object SwerveConstants{
     const val AUTO_POWER_I = 0.0
     const val AUTO_POWER_D = 0.0
 
-    const val AUTO_ANGLE_P = 6.0
+    const val AUTO_ANGLE_P = 2.0
     const val AUTO_ANGLE_I = 0.0
     const val AUTO_ANGLE_D = 0.0
 
