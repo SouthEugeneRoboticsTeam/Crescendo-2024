@@ -85,7 +85,7 @@ object Autos : SubsystemBase() {
         )
          */
 
-
+        /*
         autoChooser.addOption("6 Piece w Logic",
                 (PathPlannerAuto("6 Piece First 4.5"))
                 .andThen(
@@ -124,6 +124,7 @@ object Autos : SubsystemBase() {
                         .alongWith(PathPlannerAuto("4 Source 4th Failed").onlyIf{ !Indexer.getBeamBreak() })
                 )
           )
+         */
 
 
         SmartDashboard.putData("Auto Chooser", autoChooser)
