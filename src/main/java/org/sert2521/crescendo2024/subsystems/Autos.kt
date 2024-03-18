@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.util.Named
 import edu.wpi.first.wpilibj2.command.SubsystemBase
 import com.pathplanner.lib.auto.AutoBuilder
 import com.pathplanner.lib.auto.NamedCommands
+import com.pathplanner.lib.path.PathPlannerPath
 import com.pathplanner.lib.util.HolonomicPathFollowerConfig
 import com.pathplanner.lib.util.PIDConstants
 import com.pathplanner.lib.util.ReplanningConfig
@@ -13,10 +14,12 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard
 import edu.wpi.first.wpilibj2.command.Command
 import edu.wpi.first.wpilibj2.command.Commands
+import edu.wpi.first.wpilibj2.command.WaitCommand
 
 import org.sert2521.crescendo2024.ConfigConstants
 import org.sert2521.crescendo2024.PhysicalConstants
 import org.sert2521.crescendo2024.SwerveConstants
+import org.sert2521.crescendo2024.TuningConstants
 import org.sert2521.crescendo2024.commands.IntakeCommand
 import org.sert2521.crescendo2024.commands.Outtake
 import org.sert2521.crescendo2024.commands.SetFlywheel
@@ -65,9 +68,15 @@ object Autos : SubsystemBase() {
         )
 
 
+
         NamedCommands.registerCommands(commandList)
 
         autoChooser = AutoBuilder.buildAutoChooser()
+        autoChooser.addOption("4 Piece Source No Stop",
+                (WaitCommand(0.5).andThen(AutoBuilder.followPath(PathPlannerPath.fromChoreoTrajectory("4 Source.1.traj"))))
+                        .alongWith(SetFlywheel(ConfigConstants.FLYWHEEL_SHOOT_SPEED))
+                        .alongWith(WaitCommand(0.5).andThen(Outtake().withTimeout(0.4)).andThen(WaitCommand(0.5)))
+        )
 
         SmartDashboard.putData("Auto Chooser", autoChooser)
     }
