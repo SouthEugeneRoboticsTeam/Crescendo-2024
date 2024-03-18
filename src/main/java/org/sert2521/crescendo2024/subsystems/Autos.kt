@@ -111,6 +111,20 @@ object Autos : SubsystemBase() {
                 )
         )
 
+        autoChooser.addOption("4 Source 3 Mid w Logic",
+                (PathPlannerAuto("4 Source First 1.5"))
+                .andThen(
+                        (PathPlannerAuto("4 Source 2nd Normal").onlyIf{ Indexer.getBeamBreak() })
+                        .alongWith(PathPlannerAuto("4 Source 2nd Failed").onlyIf{ !Indexer.getBeamBreak() })
+                ).andThen(
+                        (PathPlannerAuto("4 Source 3rd Normal").onlyIf{ Indexer.getBeamBreak() })
+                        .alongWith(PathPlannerAuto("4 Source 3rd Failed").onlyIf{ !Indexer.getBeamBreak() })
+                ).andThen(
+                        (PathPlannerAuto("4 Source 4th Normal").onlyIf{ Indexer.getBeamBreak() })
+                        .alongWith(PathPlannerAuto("4 Source 4th Failed").onlyIf{ !Indexer.getBeamBreak() })
+                )
+          )
+
 
         SmartDashboard.putData("Auto Chooser", autoChooser)
     }
