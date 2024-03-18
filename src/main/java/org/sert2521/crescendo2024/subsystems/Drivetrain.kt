@@ -143,6 +143,10 @@ class SwerveModule(private val powerMotor: CANSparkMax,
         return Pair(powerMotor.outputCurrent, angleMotor.outputCurrent)
     }
 
+    fun setCurrentLimit(amps:Int){
+        powerMotor.setSmartCurrentLimit(amps)
+    }
+
     override fun stopMotor() {
         powerMotor.stopMotor()
         angleMotor.stopMotor()
@@ -408,6 +412,12 @@ object Drivetrain : SubsystemBase() {
     fun enterClimbPos(){
         for (module in modules){
             module.set(SwerveModuleState(0.0, Rotation2d(0.0)))
+        }
+    }
+
+    fun setCurrentLimit(amps:Int){
+        for (module in modules){
+            module.setCurrentLimit(amps)
         }
     }
 

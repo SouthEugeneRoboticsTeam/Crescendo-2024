@@ -50,6 +50,7 @@ object PhysicalConstants{
     const val WRIST_SETPOINT_PODIUM_MINUS = 0.07
     const val WRIST_SETPOINT_PODIUM_PLUS = 0.215
     var WRIST_SETPOINT_PODIUM_DOUBLE_PLUS = 0.2927
+    const val WRIST_SETPOINT_PODIUM_TRIPLE_PLUS = 0.33
 
     val aprilTagField: AprilTagFieldLayout = AprilTagFields.k2024Crescendo.loadAprilTagLayoutField()
     val usedTags = listOf(2, 3, 6, 7) // -1 because indexes and shit
@@ -199,9 +200,13 @@ object TuningConstants {
     const val WRIST_ANGLE_TOLERANCE = 0.1
     val trapConstraints = TrapezoidProfile.Constraints(5.0, 15.0)
 
-    const val FLYWHEEL_P = 0.00
+    const val FLYWHEEL_P = 0.001
     const val FLYWHEEL_I = 0.0
     const val FLYWHEEL_D = 0.0
+
+    const val FLYWHEEL_P_COR = 0.001
+    const val FLYWHEEL_I_COR = 0.0
+    const val FLYWHEEL_D_COR = 0.0
 
     const val FLYWHEEL_KS = 0.0
     const val FLYWHEEL_KV = 0.0015

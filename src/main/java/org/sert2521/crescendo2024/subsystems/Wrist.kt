@@ -25,7 +25,8 @@ object Wrist : SubsystemBase() {
     var vel = 0.0
 
     init{
-        //motorOne.setSmartCurrentLimit(40)
+        motorOne.setSmartCurrentLimit(40)
+        motorTwo.setSmartCurrentLimit(40)
         //defaultCommand= RunWrist()
         //motor.inverted = true
 

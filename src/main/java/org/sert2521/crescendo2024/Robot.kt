@@ -56,7 +56,6 @@ object Robot : TimedRobot()
     {
         CommandScheduler.getInstance().run()
         Output.update()
-        println(PhysicalConstants.usedField.tags)
     }
 
     override fun disabledExit() {
@@ -87,6 +86,7 @@ object Robot : TimedRobot()
         }
 
          */
+        Drivetrain.setCurrentLimit(60)
         autonomousCommand = Autos.getAuto()
         autonomousCommand?.schedule()
     }
@@ -97,6 +97,7 @@ object Robot : TimedRobot()
     }
 
     override fun autonomousExit() {
+        Drivetrain.setCurrentLimit(60)
         //Drivetrain.setNewPose(Pose2d(Drivetrain.getPose().translation, Rotation2d(Drivetrain.getPose().rotation.radians+PI)))
     }
 
@@ -104,6 +105,7 @@ object Robot : TimedRobot()
     {
         // This makes sure that the autonomous stops running when teleop starts running. If you want the
         // autonomous to continue until interrupted by another command, remove this line or comment it out.
+        Drivetrain.setCurrentLimit(60)
         autonomousCommand?.cancel()
         RuntimeConstants.wristSetPoint = PhysicalConstants.WRIST_SETPOINT_STOW
     }
