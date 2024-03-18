@@ -13,7 +13,7 @@ import kotlin.math.min
 
 class SetFlywheel(private val rpm:Double, private val ends: Boolean = false) : Command() {
     private val pidOne = PIDController(TuningConstants.FLYWHEEL_P, TuningConstants.FLYWHEEL_I, TuningConstants.FLYWHEEL_D)
-    private val pidTwo = PIDController(TuningConstants.FLYWHEEL_P, TuningConstants.FLYWHEEL_I, TuningConstants.FLYWHEEL_D)
+    private val pidTwo = PIDController(TuningConstants.FLYWHEEL_P_COR, TuningConstants.FLYWHEEL_I_COR, TuningConstants.FLYWHEEL_D_COR)
 
     private val feedForward = SimpleMotorFeedforward(TuningConstants.FLYWHEEL_KS, TuningConstants.FLYWHEEL_KV, TuningConstants.FLYWHEEL_KA)
 
@@ -27,7 +27,7 @@ class SetFlywheel(private val rpm:Double, private val ends: Boolean = false) : C
     }
 
     override fun execute() {
-        Flywheel.setVoltages(Pair(pidOne.calculate(Flywheel.getSpeeds().first, rpm) + feedForward.calculate(rpm), pidTwo.calculate(Flywheel.getSpeeds().second, rpm) + feedForward.calculate(rpm)))
+        Flywheel.setVoltages(Pair(pidOne.calculate(Flywheel.getSpeeds().first, rpm) + feedForward.calculate(rpm), pidTwo.calculate(Flywheel.getSpeeds().second, Flywheel.getSpeeds().first) + feedForward.calculate(rpm)))
         RuntimeConstants.flywheelRevved = min(Flywheel.getSpeeds().first, Flywheel.getSpeeds().second) > ConfigConstants.FLYWHEEL_SHOOT_SPEED-100
     }
 

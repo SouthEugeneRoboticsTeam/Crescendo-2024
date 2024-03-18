@@ -62,7 +62,9 @@ object Output : SubsystemBase() {
         values.add(Pair("Wrist 1 Amps", { wristAmps.first }))
         values.add(Pair("Wrist 2 Amps", { wristAmps.second }))
 
-        values.add(Pair("Flywheel Speed", { Flywheel.getSpeeds().first }))
+        values.add(Pair("Flywheel Speed 1", { Flywheel.getSpeeds().first }))
+        values.add(Pair("Flywheel Speed 2", { Flywheel.getSpeeds().second }))
+
         values.add(Pair("Flywheel Goal", { RuntimeConstants.flywheelGoal }))
 
         values.add(Pair("Flywheel 1 Amps", { flywheelAmps.first }))
