@@ -38,6 +38,14 @@ object Vision : SubsystemBase() {
         return estimation
     }
 
+    fun getPose():Pose2d{
+        if (getEstimation().isEmpty){
+            return Pose2d(0.0, 0.0, Rotation2d(0.0))
+        } else {
+            return getEstimation().get().estimatedPose.toPose2d()
+        }
+    }
+
     fun getDistanceSpeaker():Double?{
         var distance:Double
         var estimationPose:Pose2d
@@ -59,7 +67,7 @@ object Vision : SubsystemBase() {
         return if (distance == null){
             PhysicalConstants.WRIST_SETPOINT_STOW
         } else {
-            TuningConstants.wristAngLookup.get(distance!!)
+            TuningConstants.wristAngLookup.get(distance)
         }
     }
 
