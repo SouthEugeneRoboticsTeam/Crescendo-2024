@@ -30,7 +30,8 @@ import kotlin.io.path.Path
 
 
 object Autos : SubsystemBase() {
-    private var autoChooser: SendableChooser<Command>
+    private var autoChooser = SendableChooser<Command>()
+    private var extendedChooser = SendableChooser<Command>()
     val defaultAutoCommand = Commands.none()
 
 
@@ -74,7 +75,10 @@ object Autos : SubsystemBase() {
 
         NamedCommands.registerCommands(commandList)
 
-        autoChooser = AutoBuilder.buildAutoChooser()
+        autoChooser.addOption("5 Piece Amp Race", PathPlannerAuto("4 Piece Amp 2 Far"))
+        autoChooser.addOption("6 Piece Original", PathPlannerAuto("6 Piece Center 2 Far"))
+        autoChooser.addOption("6 Piece New Order", PathPlannerAuto("6 Piece New Order"))
+        autoChooser.addOption("4 Piece Source", PathPlannerAuto("4 Piece Source 3 Far"))
 
         //NOT FINISHED
         /*
@@ -126,15 +130,20 @@ object Autos : SubsystemBase() {
           )
          */
 
+        extendedChooser = AutoBuilder.buildAutoChooser()
 
+        SmartDashboard.putData("Extended Auto Chooser", extendedChooser)
         SmartDashboard.putData("Auto Chooser", autoChooser)
+        Commands.none()
     }
 
     fun getAuto(): Command?{
-        return if (autoChooser.selected == null){
+        return if (autoChooser.selected == null && extendedChooser.selected == null){
             defaultAutoCommand
-        } else {
+        } else if (extendedChooser.selected==Commands.none()){
             autoChooser.selected
+        } else {
+            extendedChooser.selected
         }
     }
 }
