@@ -169,6 +169,8 @@ object RuntimeConstants{
 }
 
 object TuningConstants {
+    const val VIS_DRIVE_OFFSET_MULT = 0.0
+    const val VIS_WRIST_OFFSET_MULT = 0.0
     //Key = Meters from target, value = arm angle
     val wristAngLookup = InterpolatingDoubleTreeMap()
 
