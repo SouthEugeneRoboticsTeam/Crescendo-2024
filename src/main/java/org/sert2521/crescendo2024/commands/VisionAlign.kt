@@ -66,6 +66,8 @@ class VisionAlign() : Command() {
                     wristIsTrap = true
                 } else {
                     wristCommand = SetWrist(currWristTarget, false, true)
+                    wristCommand.schedule()
+                    wristIsTrap = false
                 }
             }
         }

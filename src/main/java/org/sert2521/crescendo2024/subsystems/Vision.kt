@@ -2,6 +2,7 @@ package org.sert2521.crescendo2024.subsystems
 
 import edu.wpi.first.math.geometry.Pose2d
 import edu.wpi.first.math.geometry.Rotation2d
+import edu.wpi.first.math.kinematics.ChassisSpeeds
 import edu.wpi.first.wpilibj.DriverStation
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import org.photonvision.EstimatedRobotPose
@@ -64,15 +65,17 @@ object Vision : SubsystemBase() {
 
     fun getVisionWristAngle():Double{
         val distance = getDistanceSpeaker()
+        val speedX = Drivetrain.getAbsoluteSpeeds().vxMetersPerSecond
         return if (distance == null){
             PhysicalConstants.WRIST_SETPOINT_STOW
         } else {
-            TuningConstants.wristAngLookup.get(distance)
+            TuningConstants.wristAngLookup.get(distance-speedX*TuningConstants.VIS_WRIST_OFFSET_MULT)
         }
     }
 
     fun getDriveAngleTarget():Rotation2d?{
         val estimationPose:Pose2d
+        val speedY = Drivetrain.getAbsoluteSpeeds().vyMetersPerSecond
         val speakerTrans = if (Input.getColor()==DriverStation.Alliance.Red){
             PhysicalConstants.speakerTransRed
         } else {
@@ -83,6 +86,6 @@ object Vision : SubsystemBase() {
         } else {
             estimationPose = estimation.get().estimatedPose.toPose2d()
         }
-        return Rotation2d(tan((estimationPose.x-speakerTrans.x)/(estimationPose.y-speakerTrans.y)))
+        return Rotation2d(tan((estimationPose.x-speakerTrans.x)/(estimationPose.y-(speakerTrans.y-speedY*TuningConstants.VIS_DRIVE_OFFSET_MULT))))
     }
 }
