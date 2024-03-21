@@ -1,9 +1,7 @@
 package org.sert2521.crescendo2024.subsystems
 
-import edu.wpi.first.math.estimator.SwerveDrivePoseEstimator
 import edu.wpi.first.math.geometry.Pose2d
 import edu.wpi.first.math.geometry.Rotation2d
-import edu.wpi.first.math.kinematics.ChassisSpeeds
 import edu.wpi.first.wpilibj.DriverStation
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import org.photonvision.EstimatedRobotPose
@@ -29,7 +27,6 @@ object Vision : SubsystemBase() {
     private var estimation:Optional<EstimatedRobotPose>
 
     init{
-
         estimation = visionPoseEstimator.update()
     }
 
@@ -46,9 +43,9 @@ object Vision : SubsystemBase() {
     }
 
     fun getDistanceSpeaker():Double?{
-        var distance:Double
-        var estimationPose:Pose2d
-        var speakerTrans = if (Input.getColor()==DriverStation.Alliance.Blue){
+        //var distance:Double
+        val estimationPose:Pose2d
+        val speakerTrans = if (Input.getColor()==DriverStation.Alliance.Blue){
             PhysicalConstants.speakerTransBlue
         } else {
             PhysicalConstants.speakerTransRed
@@ -56,18 +53,17 @@ object Vision : SubsystemBase() {
         if (estimation.isEmpty){
             return null
         } else {
-            estimationPose = getPose()
+            estimationPose = estimation.get().estimatedPose.toPose2d()
         }
         return estimationPose.translation.getDistance(speakerTrans)
     }
 
     fun getVisionWristAngle():Double{
         val distance = getDistanceSpeaker()
-        val speedX = Drivetrain.getAbsoluteSpeeds().vxMetersPerSecond
         return if (distance == null){
             PhysicalConstants.WRIST_SETPOINT_STOW
         } else {
-            TuningConstants.wristAngLookup.get(distance-speedX*TuningConstants.VIS_WRIST_OFFSET_MULT)
+            TuningConstants.wristAngLookup.get(distance)
         }
     }
 
