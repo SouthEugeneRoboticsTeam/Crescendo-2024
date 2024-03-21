@@ -9,18 +9,9 @@ import edu.wpi.first.math.numbers.N1
 import edu.wpi.first.math.numbers.N3
 import edu.wpi.first.math.trajectory.TrapezoidProfile
 import edu.wpi.first.math.util.Units
-import com.pathplanner.lib.auto.NamedCommands
 import edu.wpi.first.apriltag.AprilTag
 import edu.wpi.first.math.geometry.*
 import edu.wpi.first.math.interpolation.InterpolatingDoubleTreeMap
-import edu.wpi.first.wpilibj2.command.Command
-import org.sert2521.crescendo2024.commands.IntakeCommand
-import org.sert2521.crescendo2024.commands.Outtake
-import org.sert2521.crescendo2024.commands.SetFlywheel
-import org.sert2521.crescendo2024.commands.SetWrist
-import org.sert2521.crescendo2024.subsystems.Vision
-import java.awt.image.LookupTable
-import java.io.ObjectInputFilter.Config
 import kotlin.math.PI
 
 
@@ -70,7 +61,7 @@ object PhysicalConstants{
     val centerPose = Transform3d(Translation3d(Units.inchesToMeters(-10.029), Units.inchesToMeters(6.081), Units.inchesToMeters(15.26)), Rotation3d(0.0, 0.349, PI))
 
     val speakerTransRed = Translation2d(aprilTagField.tags[3].pose.translation.toTranslation2d().x, aprilTagField.tags[3].pose.translation.toTranslation2d().y+0.2)
-    val speakerTransBlue = aprilTagField.tags[7].pose.translation.toTranslation2d()
+    val speakerTransBlue = Translation2d(aprilTagField.tags[7].pose.translation.toTranslation2d().x, aprilTagField.tags[7].pose.translation.toTranslation2d().y)
 
     const val FLYWHEEL_GEAR_RATIO = 3.0/2.0
 
@@ -166,7 +157,7 @@ object RuntimeConstants{
     var wristSetPoint = PhysicalConstants.WRIST_SETPOINT_STOW
     var flywheelRevved = false
     var flywheelGoal = 0.0
-    var disableDriverRotation = false
+    var visionAligning = false
     var visionRightStick = 0.0
     var wristVision = PhysicalConstants.WRIST_SETPOINT_STOW
 }
@@ -181,8 +172,8 @@ object TuningConstants {
         wristAngLookup.put(0.8, PhysicalConstants.WRIST_SETPOINT_STOW)
     }
 
-    val defaultVisionDeviations: Matrix<N3, N1> = fill(Nat.N3(), Nat.N1(), 1.0, 1.0, 1000.0)
-    val alignVisionDeviations: Matrix<N3, N1> = fill(Nat.N3(), Nat.N1(),3.0, 3.0, 1000.0)
+    val defaultVisionDeviations: Matrix<N3, N1> = fill(Nat.N3(), Nat.N1(), 0.1, 0.1, 0.1)
+    val alignVisionDeviations: Matrix<N3, N1> = fill(Nat.N3(), Nat.N1(),3.0, 3.0, 2.0)
 
     const val VISION_TIMEOUT = 0.1
 
@@ -200,7 +191,7 @@ object TuningConstants {
     const val VISION_ALIGN_I = 0.0
     const val VISION_ALIGN_D = 0.0
 
-    const val VISION_TRAP_TOL = 1.0
+    const val VISION_TOLERANCE = 0.1
 
     const val WRIST_ANGLE_TOLERANCE = 0.1
     val trapConstraints = TrapezoidProfile.Constraints(5.0, 15.0)

@@ -9,7 +9,6 @@ import edu.wpi.first.math.estimator.SwerveDrivePoseEstimator
 import edu.wpi.first.math.geometry.*
 import edu.wpi.first.math.kinematics.*
 import edu.wpi.first.math.util.Units
-import edu.wpi.first.wpilibj.DriverStation
 import edu.wpi.first.wpilibj.MotorSafety
 import edu.wpi.first.wpilibj.Timer
 import edu.wpi.first.wpilibj2.command.SubsystemBase
@@ -268,6 +267,11 @@ object Drivetrain : SubsystemBase() {
         val poseEstimation = Vision.getEstimation()
         visionPose = poseEstimator.update(-imu.rotation2d, positionsArray)
         if (!poseEstimation.isEmpty){
+            if (RuntimeConstants.visionAligning){
+                poseEstimator.addVisionMeasurement(Pose2d(poseEstimation.get().estimatedPose.toPose2d().y,poseEstimation.get().estimatedPose.toPose2d().x,Rotation2d(-poseEstimation.get().estimatedPose.toPose2d().rotation.radians)), poseEstimation.get().timestampSeconds, TuningConstants.alignVisionDeviations)
+            } else {
+                poseEstimator.addVisionMeasurement(Pose2d(poseEstimation.get().estimatedPose.toPose2d().y,poseEstimation.get().estimatedPose.toPose2d().x,Rotation2d(-poseEstimation.get().estimatedPose.toPose2d().rotation.radians)), poseEstimation.get().timestampSeconds, TuningConstants.defaultVisionDeviations)
+            }
             poseEstimator.addVisionMeasurement(Pose2d(poseEstimation.get().estimatedPose.toPose2d().y,poseEstimation.get().estimatedPose.toPose2d().x,Rotation2d(-poseEstimation.get().estimatedPose.toPose2d().rotation.radians)), poseEstimation.get().timestampSeconds)
         }
 
