@@ -82,7 +82,7 @@ abstract class JoystickCommand : Command() {
         }
 
         var rot = Input.getRot()
-        if (RuntimeConstants.disableDriverRotation){
+        if (RuntimeConstants.visionAligning){
             rot=RuntimeConstants.visionRightStick
         }else if (abs(rot) <= ConfigConstants.ROT_DEADBAND) {
             rot = 0.0
