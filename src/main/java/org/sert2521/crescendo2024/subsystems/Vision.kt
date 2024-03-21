@@ -39,9 +39,9 @@ object Vision : SubsystemBase() {
     }
 
     fun getDistanceSpeaker():Double?{
-        var distance:Double
-        var estimationPose:Pose2d
-        var speakerTrans = if (Input.getColor()==DriverStation.Alliance.Blue){
+        //var distance:Double
+        val estimationPose:Pose2d
+        val speakerTrans = if (Input.getColor()==DriverStation.Alliance.Blue){
             PhysicalConstants.speakerTransBlue
         } else {
             PhysicalConstants.speakerTransRed
@@ -59,7 +59,7 @@ object Vision : SubsystemBase() {
         return if (distance == null){
             PhysicalConstants.WRIST_SETPOINT_STOW
         } else {
-            TuningConstants.wristAngLookup.get(distance!!)
+            TuningConstants.wristAngLookup.get(distance)
         }
     }
 
