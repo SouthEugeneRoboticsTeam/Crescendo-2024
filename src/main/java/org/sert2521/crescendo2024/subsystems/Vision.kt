@@ -1,5 +1,6 @@
 package org.sert2521.crescendo2024.subsystems
 
+import edu.wpi.first.math.estimator.SwerveDrivePoseEstimator
 import edu.wpi.first.math.geometry.Pose2d
 import edu.wpi.first.math.geometry.Rotation2d
 import edu.wpi.first.math.kinematics.ChassisSpeeds
@@ -14,7 +15,7 @@ import org.sert2521.crescendo2024.Input
 import org.sert2521.crescendo2024.PhysicalConstants
 import org.sert2521.crescendo2024.TuningConstants
 import java.util.*
-import kotlin.math.tan
+import kotlin.math.*
 
 object Vision : SubsystemBase() {
     private val cam = PhotonCamera("Left2")
@@ -28,6 +29,7 @@ object Vision : SubsystemBase() {
     private var estimation:Optional<EstimatedRobotPose>
 
     init{
+
         estimation = visionPoseEstimator.update()
     }
 
@@ -40,11 +42,7 @@ object Vision : SubsystemBase() {
     }
 
     fun getPose():Pose2d{
-        if (getEstimation().isEmpty){
-            return Pose2d(0.0, 0.0, Rotation2d(0.0))
-        } else {
-            return getEstimation().get().estimatedPose.toPose2d()
-        }
+        return Drivetrain.getVisionPose()
     }
 
     fun getDistanceSpeaker():Double?{
@@ -58,7 +56,7 @@ object Vision : SubsystemBase() {
         if (estimation.isEmpty){
             return null
         } else {
-            estimationPose = estimation.get().estimatedPose.toPose2d()
+            estimationPose = getPose()
         }
         return estimationPose.translation.getDistance(speakerTrans)
     }
@@ -73,19 +71,14 @@ object Vision : SubsystemBase() {
         }
     }
 
-    fun getDriveAngleTarget():Rotation2d?{
-        val estimationPose:Pose2d
+    fun getDriveAngleTarget():Rotation2d{
+        val estimationPose = Vision.getPose()
         val speedY = Drivetrain.getAbsoluteSpeeds().vyMetersPerSecond
         val speakerTrans = if (Input.getColor()==DriverStation.Alliance.Red){
             PhysicalConstants.speakerTransRed
         } else {
             PhysicalConstants.speakerTransBlue
         }
-        if (estimation.isEmpty){
-            return null
-        } else {
-            estimationPose = estimation.get().estimatedPose.toPose2d()
-        }
-        return Rotation2d(tan((estimationPose.x-speakerTrans.x)/(estimationPose.y-(speakerTrans.y-speedY*TuningConstants.VIS_DRIVE_OFFSET_MULT))))
+        return Rotation2d(PI/2- atan2((estimationPose.x-speakerTrans.x), (estimationPose.y-(speakerTrans.y/*-speedY*TuningConstants.VIS_DRIVE_OFFSET_MULT*/))))
     }
 }

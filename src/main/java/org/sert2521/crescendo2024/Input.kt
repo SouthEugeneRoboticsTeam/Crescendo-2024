@@ -60,6 +60,8 @@ object Input {
         resetAngle.onTrue(InstantCommand({ Drivetrain.setNewPose(Pose2d())}))
         rumble.onTrue(InstantCommand({setRumble(0.8)}).andThen(WaitCommand(0.2).andThen(InstantCommand({ setRumble(0.0) }))))
 
+        visionAlign.whileTrue(VisionAlign())
+
         //secondarySpeedButton.onTrue(InstantCommand({ secondarySpeedMode = !secondarySpeedMode }))
         //secondarySpeedButton.onFalse(InstantCommand({ secondarySpeedMode = !secondarySpeedMode }))
     }

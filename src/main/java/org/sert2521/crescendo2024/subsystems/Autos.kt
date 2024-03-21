@@ -79,7 +79,7 @@ object Autos : SubsystemBase() {
         autoChooser.addOption("6 Piece Original", PathPlannerAuto("6 Piece Center 2 Far"))
         autoChooser.addOption("6 Piece New Order", PathPlannerAuto("6 Piece New Order"))
         autoChooser.addOption("4 Piece Source", PathPlannerAuto("4 Piece Source 3 Far"))
-
+        autoChooser.setDefaultOption("None", Commands.none())
         //NOT FINISHED
         /*
         autoChooser.addOption("4 Piece Source No Stop",
