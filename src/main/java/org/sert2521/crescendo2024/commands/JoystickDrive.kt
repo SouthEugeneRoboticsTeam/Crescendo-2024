@@ -12,13 +12,7 @@ class JoystickDrive(private val fieldOrientated: Boolean) : JoystickCommand() {
 
     override fun execute() {
         val joystickData = readJoystick()
-        if (RuntimeConstants.disableDriverRotation){
-            if (fieldOrientated){
-                Drivetrain.drive(ChassisSpeeds.fromFieldRelativeSpeeds(joystickData.x, joystickData.y, RuntimeConstants.visionRightStick, Drivetrain.getPose().rotation))
-            } else {
-                Drivetrain.drive(ChassisSpeeds(joystickData.x, joystickData.y, RuntimeConstants.visionRightStick))
-            }
-        }
+
         if (joystickData.x == 0.0 && joystickData.y == 0.0 && joystickData.z == 0.0) {
             Drivetrain.stop()
             /*

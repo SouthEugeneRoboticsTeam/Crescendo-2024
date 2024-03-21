@@ -13,7 +13,7 @@ import org.sert2521.crescendo2024.Input
 import org.sert2521.crescendo2024.PhysicalConstants
 import org.sert2521.crescendo2024.TuningConstants
 import java.util.*
-import kotlin.math.tan
+import kotlin.math.*
 
 object Vision : SubsystemBase() {
     private val cam = PhotonCamera("Left2")
@@ -36,6 +36,10 @@ object Vision : SubsystemBase() {
 
     fun getEstimation():Optional<EstimatedRobotPose>{
         return estimation
+    }
+
+    fun getPose():Pose2d{
+        return Drivetrain.getVisionPose()
     }
 
     fun getDistanceSpeaker():Double?{
@@ -63,18 +67,14 @@ object Vision : SubsystemBase() {
         }
     }
 
-    fun getDriveAngleTarget():Rotation2d?{
-        val estimationPose:Pose2d
+    fun getDriveAngleTarget():Rotation2d{
+        val estimationPose = Vision.getPose()
+        val speedY = Drivetrain.getAbsoluteSpeeds().vyMetersPerSecond
         val speakerTrans = if (Input.getColor()==DriverStation.Alliance.Red){
             PhysicalConstants.speakerTransRed
         } else {
             PhysicalConstants.speakerTransBlue
         }
-        if (estimation.isEmpty){
-            return null
-        } else {
-            estimationPose = estimation.get().estimatedPose.toPose2d()
-        }
-        return Rotation2d(tan((estimationPose.x-speakerTrans.x)/(estimationPose.y-speakerTrans.y)))
+        return Rotation2d(PI/2- atan2((estimationPose.x-speakerTrans.x), (estimationPose.y-(speakerTrans.y/*-speedY*TuningConstants.VIS_DRIVE_OFFSET_MULT*/))))
     }
 }

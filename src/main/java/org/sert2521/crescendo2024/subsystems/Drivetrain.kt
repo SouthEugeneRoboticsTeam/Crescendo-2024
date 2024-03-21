@@ -212,6 +212,8 @@ object Drivetrain : SubsystemBase() {
         kinematics = SwerveDriveKinematics(*modulePositions.toTypedArray())
         odometry = SwerveDriveOdometry(kinematics, -imu.rotation2d, positionsArray, Pose2d())
         poseEstimator = SwerveDrivePoseEstimator(kinematics, -imu.rotation2d, positionsArray, Pose2d())
+
+
         /*
         val camsList = mutableListOf<PhotonCamera>()
         val photonPoseEstimatorsList = mutableListOf<PhotonPoseEstimator>()
@@ -262,7 +264,19 @@ object Drivetrain : SubsystemBase() {
         val positionsArray = positions.toTypedArray()
 
         pose = odometry.update(-imu.rotation2d, positionsArray)
+        val poseEstimation = Vision.getEstimation()
         visionPose = poseEstimator.update(-imu.rotation2d, positionsArray)
+        if (!poseEstimation.isEmpty){
+            if (RuntimeConstants.visionAligning){
+                poseEstimator.addVisionMeasurement(Pose2d(poseEstimation.get().estimatedPose.toPose2d().y,poseEstimation.get().estimatedPose.toPose2d().x,Rotation2d(-poseEstimation.get().estimatedPose.toPose2d().rotation.radians)), poseEstimation.get().timestampSeconds, TuningConstants.alignVisionDeviations)
+            } else {
+                poseEstimator.addVisionMeasurement(Pose2d(poseEstimation.get().estimatedPose.toPose2d().y,poseEstimation.get().estimatedPose.toPose2d().x,Rotation2d(-poseEstimation.get().estimatedPose.toPose2d().rotation.radians)), poseEstimation.get().timestampSeconds, TuningConstants.defaultVisionDeviations)
+            }
+            poseEstimator.addVisionMeasurement(Pose2d(poseEstimation.get().estimatedPose.toPose2d().y,poseEstimation.get().estimatedPose.toPose2d().x,Rotation2d(-poseEstimation.get().estimatedPose.toPose2d().rotation.radians)), poseEstimation.get().timestampSeconds)
+        }
+
+
+
         /*
         for (photonPoseEstimator in photonPoseEstimators) {
             val poseOutput = photonPoseEstimator.update()
@@ -344,6 +358,10 @@ object Drivetrain : SubsystemBase() {
 
     fun getReletiveSpeeds():ChassisSpeeds{
         return kinematics.toChassisSpeeds(modules[0].state, modules[1].state, modules[2].state, modules[3].state)
+    }
+
+    fun getAbsoluteSpeeds():ChassisSpeeds{
+        return ChassisSpeeds.fromRobotRelativeSpeeds(getReletiveSpeeds(), getPose().rotation)
     }
 
     fun getAccelSqr(): Double {

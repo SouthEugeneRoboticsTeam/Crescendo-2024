@@ -2,13 +2,14 @@ package org.sert2521.crescendo2024.commands
 
 import edu.wpi.first.math.controller.PIDController
 import edu.wpi.first.math.geometry.Rotation2d
+import edu.wpi.first.wpilibj.DriverStation
 import edu.wpi.first.wpilibj2.command.Command
+import org.sert2521.crescendo2024.Input
 import org.sert2521.crescendo2024.PhysicalConstants
 import org.sert2521.crescendo2024.RuntimeConstants
 import org.sert2521.crescendo2024.TuningConstants
 import org.sert2521.crescendo2024.subsystems.*
 import kotlin.math.PI
-import kotlin.math.abs
 
 class VisionAlign() : Command() {
     var prevWristTarget = PhysicalConstants.WRIST_SETPOINT_STOW
@@ -26,20 +27,25 @@ class VisionAlign() : Command() {
     }
 
     override fun initialize() {
+        driveAlignPID.enableContinuousInput(-PI, PI)
+        driveAlignPID.setTolerance(TuningConstants.VISION_TOLERANCE)
         currWristTarget = Vision.getVisionWristAngle()
         drivetrainTarget = Vision.getDriveAngleTarget()
     }
 
     override fun execute() {
-        drivetrainTarget = Vision.getDriveAngleTarget()
         if (drivetrainTarget == null){
-            RuntimeConstants.disableDriverRotation = false
+            RuntimeConstants.visionAligning = false
         } else {
-            RuntimeConstants.disableDriverRotation = true
-            //Maybe square it or smth
-            RuntimeConstants.visionRightStick = driveAlignPID.calculate(drivetrainTarget!!.radians-Drivetrain.getPose().rotation.radians)
-        }
 
+            RuntimeConstants.visionAligning = true
+            //Maybe square it or smth
+            RuntimeConstants.visionRightStick = driveAlignPID.calculate(Vision.getPose().rotation.radians-drivetrainTarget!!.radians)
+        }
+        if (driveAlignPID.atSetpoint()){
+            drivetrainTarget = Vision.getDriveAngleTarget()
+        }
+        /*
         currWristTarget=Vision.getVisionWristAngle()
         RuntimeConstants.wristVision = currWristTarget
 
@@ -66,9 +72,12 @@ class VisionAlign() : Command() {
                     wristIsTrap = true
                 } else {
                     wristCommand = SetWrist(currWristTarget, false, true)
+                    wristCommand.schedule()
+                    wristIsTrap = false
                 }
             }
         }
+         */
     }
 
     override fun isFinished(): Boolean {
@@ -76,6 +85,7 @@ class VisionAlign() : Command() {
     }
 
     override fun end(interrupted: Boolean) {
-
+        RuntimeConstants.visionRightStick = 0.0
+        RuntimeConstants.visionAligning = false
     }
 }
