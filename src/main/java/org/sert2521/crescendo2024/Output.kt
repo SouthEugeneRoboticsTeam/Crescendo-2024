@@ -1,6 +1,7 @@
 package org.sert2521.crescendo2024
 
 import edu.wpi.first.math.geometry.Pose2d
+import edu.wpi.first.math.geometry.Rotation2d
 import edu.wpi.first.wpilibj.DataLogManager
 import edu.wpi.first.wpilibj.DriverStation
 import edu.wpi.first.wpilibj.smartdashboard.Field2d
@@ -16,6 +17,7 @@ object Output : SubsystemBase() {
     private val field = Field2d()
     private val visionField = Field2d()
     private val visionTargetPose = Field2d()
+    private val visionEstimation = Field2d()
     private var drivetrainAmps: Array<Pair<Double, Double>> = arrayOf()
     private var flywheelAmps = Flywheel.getAmps()
     private var wristAmps = Wrist.getAmps()
@@ -78,6 +80,7 @@ object Output : SubsystemBase() {
         SmartDashboard.putData("Vision Field", visionField)
         SmartDashboard.putData("Vision Pose Target", visionTargetPose)
         SmartDashboard.putData("Field", field)
+        SmartDashboard.putData("Vision Estimation", visionEstimation)
 
         update()
     }
@@ -98,8 +101,18 @@ object Output : SubsystemBase() {
         for (bool in bools) {
             SmartDashboard.putBoolean("Output/${bool.first}", bool.second())
         }
-        visionField.robotPose = Vision.getPose()
+        if (Vision.getPose() == null){
+            visionField.robotPose = Pose2d(0.0, 0.0, Rotation2d(0.0))
+        } else {
+            visionField.robotPose = Vision.getPose()
+        }
         field.robotPose = Drivetrain.getPose()
-        visionTargetPose.robotPose = Pose2d(Vision.getPose().translation, Vision.getDriveAngleTarget())
+
+        if (Vision.getDriveAngleTarget()!=null){
+            visionTargetPose.robotPose = Pose2d(Vision.getPose().translation, Vision.getDriveAngleTarget())
+        }
+        if (!Vision.getEstimation().isEmpty){
+            visionEstimation.robotPose = Vision.getEstimation().get().estimatedPose.toPose2d()
+        }
     }
 }
