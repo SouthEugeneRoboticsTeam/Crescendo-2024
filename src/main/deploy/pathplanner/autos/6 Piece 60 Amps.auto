@@ -5,7 +5,7 @@
       "x": 1.3672044277191162,
       "y": 5.544422626495361
     },
-    "rotation": 9.812565027454758e-29
+    "rotation": 1.7602482741628556e-29
   },
   "command": {
     "type": "sequential",
@@ -71,7 +71,7 @@
                     {
                       "type": "named",
                       "data": {
-                        "name": "Podium Shot"
+                        "name": "Podium Minus Shot"
                       }
                     },
                     {
@@ -152,7 +152,7 @@
                     {
                       "type": "named",
                       "data": {
-                        "name": "Wrist Podium"
+                        "name": "Wrist Podium Double Plus"
                       }
                     }
                   ]
@@ -215,7 +215,7 @@
                     {
                       "type": "named",
                       "data": {
-                        "name": "Wrist Podium"
+                        "name": "Wrist Podium Double Plus"
                       }
                     }
                   ]
