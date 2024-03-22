@@ -10,6 +10,7 @@ import org.sert2521.crescendo2024.RuntimeConstants
 import org.sert2521.crescendo2024.TuningConstants
 import org.sert2521.crescendo2024.subsystems.*
 import kotlin.math.PI
+import kotlin.math.abs
 
 class VisionAlign() : Command() {
     var prevWristTarget = PhysicalConstants.WRIST_SETPOINT_STOW
@@ -31,6 +32,8 @@ class VisionAlign() : Command() {
         driveAlignPID.setTolerance(TuningConstants.VISION_TOLERANCE)
         currWristTarget = Vision.getVisionWristAngle()
         drivetrainTarget = Vision.getDriveAngleTarget()
+        currWristTarget=Vision.getVisionWristAngle()
+        RuntimeConstants.wristVision = currWristTarget
     }
 
     override fun execute() {
@@ -44,18 +47,26 @@ class VisionAlign() : Command() {
         }
         if (driveAlignPID.atSetpoint()){
             drivetrainTarget = Vision.getDriveAngleTarget()
+            currWristTarget=Vision.getVisionWristAngle()
+            RuntimeConstants.wristVision = currWristTarget
         }
-        /*
-        currWristTarget=Vision.getVisionWristAngle()
-        RuntimeConstants.wristVision = currWristTarget
+
+
+
 
         if (wristIsTrap){
             if (wristCommand.isScheduled){
                 wristIsTrap = true
             } else {
+                wristCommand = SetWrist(currWristTarget, false, true)
+                wristCommand.schedule()
                 wristIsTrap = false
             }
         } else {
+            wristCommand = SetWrist(currWristTarget, false, true)
+            wristCommand.schedule()
+            wristIsTrap = false
+            /*
             if (wristCommand.isScheduled){
                 //if gap is too big between target and actual wrist
                 if (abs(Wrist.getRadians()-currWristTarget)>TuningConstants.VISION_TRAP_TOL){
@@ -76,8 +87,9 @@ class VisionAlign() : Command() {
                     wristIsTrap = false
                 }
             }
+             */
         }
-         */
+
     }
 
     override fun isFinished(): Boolean {
