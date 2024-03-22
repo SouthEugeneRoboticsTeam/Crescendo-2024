@@ -131,20 +131,14 @@ object Autos : SubsystemBase() {
           )
          */
 
-        extendedChooser = AutoBuilder.buildAutoChooser()
+        //extendedChooser = AutoBuilder.buildAutoChooser()
 
-        SmartDashboard.putData("Extended Auto Chooser", extendedChooser)
+
+        //SmartDashboard.putData("Extended Auto Chooser", extendedChooser)
         SmartDashboard.putData("Auto Chooser", autoChooser)
-        Commands.none()
     }
 
-    fun getAuto(): Command?{
-        return if (autoChooser.selected == null && extendedChooser.selected == null){
-            defaultAutoCommand
-        } else if (extendedChooser.selected==Commands.none()){
-            autoChooser.selected
-        } else {
-            extendedChooser.selected
-        }
+    fun getAuto(): Command{
+        return autoChooser.selected
     }
 }

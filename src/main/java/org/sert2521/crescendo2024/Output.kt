@@ -75,7 +75,7 @@ object Output : SubsystemBase() {
 
         bools.add(Pair("Beambreak") { Indexer.getBeamBreak() })
 
-        values.add(Pair("Vision Wrist Angle") { Vision.getVisionWristAngle() })
+        //values.add(Pair("Vision Wrist Angle") { Vision.getVisionWristAngle() })
 
         //SmartDashboard.putData("Vision Field", visionField)
         //SmartDashboard.putData("Vision Pose Target", visionTargetPose)

@@ -264,6 +264,7 @@ object Drivetrain : SubsystemBase() {
         val positionsArray = positions.toTypedArray()
 
         pose = odometry.update(-imu.rotation2d, positionsArray)
+        /*
         val poseEstimation = Vision.getEstimation()
         visionPose = poseEstimator.update(-imu.rotation2d, positionsArray)
         if (!poseEstimation.isEmpty){
@@ -274,6 +275,8 @@ object Drivetrain : SubsystemBase() {
             }
             poseEstimator.addVisionMeasurement(Pose2d(poseEstimation.get().estimatedPose.toPose2d().y,poseEstimation.get().estimatedPose.toPose2d().x,Rotation2d(-poseEstimation.get().estimatedPose.toPose2d().rotation.radians)), poseEstimation.get().timestampSeconds)
         }
+
+         */
 
 
 
