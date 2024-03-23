@@ -13,6 +13,7 @@ import kotlin.math.PI
 import kotlin.math.abs
 
 class VisionAlign() : Command() {
+    /*
     var prevWristTarget = PhysicalConstants.WRIST_SETPOINT_STOW
     var currWristTarget = PhysicalConstants.WRIST_SETPOINT_STOW
     var drivetrainTarget:Rotation2d? = Rotation2d(0.0)
@@ -100,4 +101,6 @@ class VisionAlign() : Command() {
         RuntimeConstants.visionRightStick = 0.0
         RuntimeConstants.visionAligning = false
     }
+
+     */
 }

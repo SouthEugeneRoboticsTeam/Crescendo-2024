@@ -45,6 +45,7 @@ object Autos : SubsystemBase() {
             "Wrist Podium Plus" to SetWrist(PhysicalConstants.WRIST_SETPOINT_PODIUM_PLUS).asProxy(),
             "Wrist Podium Double Plus" to SetWrist(PhysicalConstants.WRIST_SETPOINT_PODIUM_DOUBLE_PLUS).asProxy(),
             "Wrist Podium Triple Plus" to SetWrist(PhysicalConstants.WRIST_SETPOINT_PODIUM_TRIPLE_PLUS).asProxy(),
+            "Wrist Podium Plus Half" to SetWrist(PhysicalConstants.WRIST_SETPOINT_PODIUM_PLUS_HALF).asProxy(),
             "Wrist Far" to SetWrist(PhysicalConstants.WRIST_SETPOINT_FAR).asProxy(),
             "Flywheel Rev" to SetFlywheel(ConfigConstants.FLYWHEEL_SHOOT_SPEED, true).asProxy(),
             "Flywheel Stop" to SetFlywheel(ConfigConstants.FLYWHEEL_IDLE_SPEED, true).asProxy(),
@@ -79,6 +80,7 @@ object Autos : SubsystemBase() {
         autoChooser.addOption("6 Piece Original", PathPlannerAuto("6 Piece Center 2 Far"))
         autoChooser.addOption("6 Piece New Order", PathPlannerAuto("6 Piece New Order"))
         autoChooser.addOption("4 Piece Source", PathPlannerAuto("4 Piece Source 3 Far"))
+        autoChooser.addOption("6 Piece 60 Amps", PathPlannerAuto("6 Piece 60 Amps"))
         autoChooser.setDefaultOption("None", Commands.none())
         //NOT FINISHED
         /*
@@ -130,20 +132,14 @@ object Autos : SubsystemBase() {
           )
          */
 
-        extendedChooser = AutoBuilder.buildAutoChooser()
+        //extendedChooser = AutoBuilder.buildAutoChooser()
 
-        SmartDashboard.putData("Extended Auto Chooser", extendedChooser)
+
+        //SmartDashboard.putData("Extended Auto Chooser", extendedChooser)
         SmartDashboard.putData("Auto Chooser", autoChooser)
-        Commands.none()
     }
 
-    fun getAuto(): Command?{
-        return if (autoChooser.selected == null && extendedChooser.selected == null){
-            defaultAutoCommand
-        } else if (extendedChooser.selected==Commands.none()){
-            autoChooser.selected
-        } else {
-            extendedChooser.selected
-        }
+    fun getAuto(): Command{
+        return autoChooser.selected
     }
 }

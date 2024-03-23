@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler
 import org.sert2521.crescendo2024.subsystems.Autos
 import org.sert2521.crescendo2024.subsystems.Climber
 import org.sert2521.crescendo2024.subsystems.Drivetrain
+import org.sert2521.crescendo2024.subsystems.Wrist
 import kotlin.math.PI
 
 
@@ -86,6 +87,7 @@ object Robot : TimedRobot()
         }
 
          */
+        Wrist.rezeroEncoder()
         Drivetrain.setCurrentLimit(60)
         autonomousCommand = Autos.getAuto()
         autonomousCommand?.schedule()

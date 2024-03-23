@@ -15,9 +15,9 @@ object Output : SubsystemBase() {
     private val values = mutableListOf<Pair<String, () -> Double>>()
     private val bools = mutableListOf<Pair<String, () -> Boolean>>()
     private val field = Field2d()
-    private val visionField = Field2d()
-    private val visionTargetPose = Field2d()
-    private val visionEstimation = Field2d()
+    //private val visionField = Field2d()
+    //private val visionTargetPose = Field2d()
+    //private val visionEstimation = Field2d()
     private var drivetrainAmps: Array<Pair<Double, Double>> = arrayOf()
     private var flywheelAmps = Flywheel.getAmps()
     private var wristAmps = Wrist.getAmps()
@@ -75,12 +75,12 @@ object Output : SubsystemBase() {
 
         bools.add(Pair("Beambreak") { Indexer.getBeamBreak() })
 
-        values.add(Pair("Vision Wrist Angle") { Vision.getVisionWristAngle() })
+        //values.add(Pair("Vision Wrist Angle") { Vision.getVisionWristAngle() })
 
-        SmartDashboard.putData("Vision Field", visionField)
-        SmartDashboard.putData("Vision Pose Target", visionTargetPose)
+        //SmartDashboard.putData("Vision Field", visionField)
+        //SmartDashboard.putData("Vision Pose Target", visionTargetPose)
         SmartDashboard.putData("Field", field)
-        SmartDashboard.putData("Vision Estimation", visionEstimation)
+        //SmartDashboard.putData("Vision Estimation", visionEstimation)
 
         update()
     }
@@ -101,6 +101,7 @@ object Output : SubsystemBase() {
         for (bool in bools) {
             SmartDashboard.putBoolean("Output/${bool.first}", bool.second())
         }
+        /*
         if (Vision.getPose() == null){
             visionField.robotPose = Pose2d(0.0, 0.0, Rotation2d(0.0))
         } else {
@@ -114,5 +115,7 @@ object Output : SubsystemBase() {
         if (!Vision.getEstimation().isEmpty){
             visionEstimation.robotPose = Vision.getEstimation().get().estimatedPose.toPose2d()
         }
+
+         */
     }
 }
