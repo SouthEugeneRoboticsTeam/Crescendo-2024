@@ -5,7 +5,7 @@
       "x": 1.3672044277191162,
       "y": 5.544422626495361
     },
-    "rotation": 1.7602482741628556e-29
+    "rotation": 1.9370516466229318e-27
   },
   "command": {
     "type": "sequential",
@@ -152,7 +152,7 @@
                     {
                       "type": "named",
                       "data": {
-                        "name": "Wrist Podium Double Plus"
+                        "name": "Wrist Podium Plus Half"
                       }
                     }
                   ]
@@ -215,7 +215,7 @@
                     {
                       "type": "named",
                       "data": {
-                        "name": "Wrist Podium Double Plus"
+                        "name": "Wrist Podium Plus Half"
                       }
                     }
                   ]
