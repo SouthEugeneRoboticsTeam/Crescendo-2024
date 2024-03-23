@@ -47,6 +47,11 @@ object Wrist : SubsystemBase() {
         //vel = time
         //println(getRadians())
     }
+
+    fun rezeroEncoder(){
+        absEncoder.reset()
+        absEncoder.positionOffset = -0.2/(2*PI)
+    }
     fun setSpeed(speed:Double){
         motorOne.set(speed)
         motorTwo.set(speed)
@@ -72,10 +77,6 @@ object Wrist : SubsystemBase() {
 
     fun getVelocity():Double{
         return getRadians()- prevRot
-    }
-
-    fun resetEncoder(){
-        absEncoder.reset()
     }
 
     fun getAmps():Pair<Double, Double>{

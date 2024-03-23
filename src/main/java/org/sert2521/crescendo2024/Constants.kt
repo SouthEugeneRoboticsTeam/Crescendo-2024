@@ -31,7 +31,7 @@ object PhysicalConstants{
     const val HALF_SIDE_LENGTH = 0.0
 
     const val WRIST_ENCODER_MULTIPLY = -2*PI
-    const val WRIST_ENCODER_OFFSET = -1.789203
+    const val WRIST_ENCODER_OFFSET = -1.789203-0.17
 
     //ESTIMATES
     const val WRIST_SETPOINT_STOW = -0.2
