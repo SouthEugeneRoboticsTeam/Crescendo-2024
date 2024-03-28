@@ -38,7 +38,7 @@ object Autos : SubsystemBase() {
 
     var commandList = mapOf<String, Command>(
             "Outtake" to Outtake(true).withTimeout(0.4),
-            "Intake Note" to IntakeCommand(),
+            "Intake Note" to IntakeCommand().withTimeout(3.0),
             "Wrist Stow" to SetWrist(PhysicalConstants.WRIST_SETPOINT_STOW).asProxy(),
             "Wrist Podium" to SetWrist(PhysicalConstants.WRIST_SETPOINT_PODIUM).asProxy(),
             "Wrist Podium Minus" to SetWrist(PhysicalConstants.WRIST_SETPOINT_PODIUM_MINUS).asProxy(),
@@ -81,6 +81,7 @@ object Autos : SubsystemBase() {
         autoChooser.addOption("6 Piece New Order", PathPlannerAuto("6 Piece New Order"))
         autoChooser.addOption("4 Piece Source", PathPlannerAuto("4 Piece Source 3 Far"))
         autoChooser.addOption("6 Piece 60 Amps", PathPlannerAuto("6 Piece 60 Amps"))
+        autoChooser.addOption("Amp Race 3rd Mid First", PathPlannerAuto("5 Amp Race 3rd First"))
         autoChooser.setDefaultOption("None", Commands.none())
         //NOT FINISHED
         /*

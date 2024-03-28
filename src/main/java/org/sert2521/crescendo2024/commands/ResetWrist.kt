@@ -33,7 +33,7 @@ class ResetWrist() : Command() {
         val feedforwardResult = feedForward.calculate(wristAngle, 0.0)
         //println(pid.setpoint.velocity)
 
-        Wrist.setVoltage(feedforwardResult-0.2)
+        Wrist.setVoltage(feedforwardResult-0.8)
     }
 
     override fun isFinished(): Boolean {
@@ -43,5 +43,6 @@ class ResetWrist() : Command() {
     override fun end(interrupted: Boolean) {
         Wrist.rezeroEncoder()
         PhysicalConstants.WRIST_ENCODER_OFFSET = -0.197
+        RuntimeConstants.wristSetPoint = PhysicalConstants.WRIST_SETPOINT_STOW
     }
 }

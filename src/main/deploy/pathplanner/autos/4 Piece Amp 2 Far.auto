@@ -114,6 +114,12 @@
                       }
                     },
                     {
+                      "type": "wait",
+                      "data": {
+                        "waitTime": 0.75
+                      }
+                    },
+                    {
                       "type": "named",
                       "data": {
                         "name": "Intake Note"
@@ -168,6 +174,12 @@
                       "type": "named",
                       "data": {
                         "name": "Wrist Stow"
+                      }
+                    },
+                    {
+                      "type": "wait",
+                      "data": {
+                        "waitTime": 1.0
                       }
                     },
                     {
@@ -230,7 +242,7 @@
                     {
                       "type": "wait",
                       "data": {
-                        "waitTime": 0.5
+                        "waitTime": 1.5
                       }
                     },
                     {
