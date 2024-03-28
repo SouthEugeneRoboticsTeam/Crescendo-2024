@@ -28,13 +28,14 @@ object Input {
     private val wristStow = JoystickButton(gunnerController, 7)
     private val wristAmp = JoystickButton(gunnerController, 5)
     private val wristPodium = JoystickButton(gunnerController, 6)
-    private val wristFar = JoystickButton(gunnerController, 4)
+    private val wristAmpRev = JoystickButton(gunnerController, 4)
     private val manualUp = JoystickButton(gunnerController, 10)
     private val manualDown = JoystickButton(gunnerController, 8)
     private val climb = JoystickButton(gunnerController, 9)
     private val visionAlign = JoystickButton(driverController, 1)
     private val resetAngle = JoystickButton(driverController, 4)
     private val secondarySpeedButton = JoystickButton(driverController, 2)
+    private val resetWrist = JoystickButton(gunnerController, 14)
 
     private val rumble = Trigger({ Indexer.getBeamBreak() })
     init{
@@ -46,7 +47,7 @@ object Input {
         wristStow.onTrue(SetWrist(PhysicalConstants.WRIST_SETPOINT_STOW))
         wristAmp.onTrue(SetWrist(PhysicalConstants.WRIST_SETPOINT_AMP))
         wristPodium.onTrue(SetWrist(PhysicalConstants.WRIST_SETPOINT_PODIUM))
-        wristFar.onTrue(SetWrist(PhysicalConstants.WRIST_SETPOINT_FAR))
+        wristAmpRev.whileTrue(SetFlywheel(2000.0))
 
         manualUp.whileTrue(SetClimb(1.0))
         manualDown.whileTrue(SetClimb(-1.0))
@@ -57,10 +58,11 @@ object Input {
         // manualUp.whileTrue()
         // manualDown.whileTrue()
         // visionAlign.whileTrue()
-        resetAngle.onTrue(InstantCommand({ Drivetrain.setNewPose(Pose2d())}))
+        resetAngle.onTrue(InstantCommand({ Drivetrain.setNewPose(Pose2d()) }))
         rumble.onTrue(InstantCommand({setRumble(0.8)}).andThen(WaitCommand(0.2).andThen(InstantCommand({ setRumble(0.0) }))))
 
-        visionAlign.onTrue(InstantCommand({Wrist.rezeroEncoder()}))
+        resetWrist.whileTrue(ResetWrist())
+        //visionAlign.onTrue(InstantCommand({Wrist.rezeroEncoder()}))
 
         //secondarySpeedButton.onTrue(InstantCommand({ secondarySpeedMode = !secondarySpeedMode }))
         //secondarySpeedButton.onFalse(InstantCommand({ secondarySpeedMode = !secondarySpeedMode }))
