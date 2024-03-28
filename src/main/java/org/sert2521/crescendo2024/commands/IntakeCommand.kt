@@ -25,12 +25,17 @@ class IntakeCommand : Command() {
     }
 
     override fun execute() {
+        /*
         if (Wrist.getRadians()>-0.1){
             this.end(true)
         } else {
             Intake.setMotor(0.9)
             Indexer.setMotor(0.5)
         }
+
+         */
+        Intake.setMotor(0.9)
+        Indexer.setMotor(0.5)
     }
 
     override fun isFinished(): Boolean {

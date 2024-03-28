@@ -37,6 +37,7 @@ object Wrist : SubsystemBase() {
 
         motorTwo.inverted = true
         motorOne.inverted = false
+
         val holdCommand = InstantCommand({ SetWrist(RuntimeConstants.wristSetPoint, false).schedule() })
         holdCommand.addRequirements(this)
         defaultCommand = holdCommand
@@ -50,7 +51,6 @@ object Wrist : SubsystemBase() {
 
     fun rezeroEncoder(){
         absEncoder.reset()
-        absEncoder.positionOffset = -0.2/(2*PI)
     }
     fun setSpeed(speed:Double){
         motorOne.set(speed)
@@ -64,7 +64,7 @@ object Wrist : SubsystemBase() {
 
     fun getEncoder():Double{
         //println(absEncoder.get())
-        return absEncoder.get()
+        return absEncoder.distance
     }
 
     fun getRadians():Double{
