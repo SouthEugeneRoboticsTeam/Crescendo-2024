@@ -13,7 +13,7 @@ import kotlin.math.PI
 import kotlin.math.abs
 
 class VisionAlign() : Command() {
-    /*
+
     var prevWristTarget = PhysicalConstants.WRIST_SETPOINT_STOW
     var currWristTarget = PhysicalConstants.WRIST_SETPOINT_STOW
     var drivetrainTarget:Rotation2d? = Rotation2d(0.0)
@@ -38,6 +38,7 @@ class VisionAlign() : Command() {
     }
 
     override fun execute() {
+        drivetrainTarget=Vision.getDriveAngleTarget()
         if (drivetrainTarget == null){
             RuntimeConstants.visionAligning = false
         } else {
@@ -54,7 +55,7 @@ class VisionAlign() : Command() {
 
 
 
-
+        /*
         if (wristIsTrap){
             if (wristCommand.isScheduled){
                 wristIsTrap = true
@@ -91,6 +92,8 @@ class VisionAlign() : Command() {
              */
         }
 
+         */
+
     }
 
     override fun isFinished(): Boolean {
@@ -101,6 +104,4 @@ class VisionAlign() : Command() {
         RuntimeConstants.visionRightStick = 0.0
         RuntimeConstants.visionAligning = false
     }
-
-     */
 }

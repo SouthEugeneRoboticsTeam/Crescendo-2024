@@ -264,7 +264,7 @@ object Drivetrain : SubsystemBase() {
         val positionsArray = positions.toTypedArray()
 
         pose = odometry.update(-imu.rotation2d, positionsArray)
-        /*
+
         val poseEstimation = Vision.getEstimation()
         visionPose = poseEstimator.update(-imu.rotation2d, positionsArray)
         if (!poseEstimation.isEmpty){
@@ -276,7 +276,7 @@ object Drivetrain : SubsystemBase() {
             poseEstimator.addVisionMeasurement(Pose2d(poseEstimation.get().estimatedPose.toPose2d().y,poseEstimation.get().estimatedPose.toPose2d().x,Rotation2d(-poseEstimation.get().estimatedPose.toPose2d().rotation.radians)), poseEstimation.get().timestampSeconds)
         }
 
-         */
+
 
 
 
@@ -418,6 +418,10 @@ object Drivetrain : SubsystemBase() {
 
     fun getAmps():Array<Pair<Double, Double>>{
         return arrayOf(modules[0].getAmps(), modules[1].getAmps(), modules[2].getAmps(), modules[3].getAmps())
+    }
+
+    fun getDraw():Double{
+        return modules[0].getAmps().first+modules[1].getAmps().first+modules[2].getAmps().first+modules[3].getAmps().first
     }
 
     fun getStates():Array<SwerveModuleState>{
