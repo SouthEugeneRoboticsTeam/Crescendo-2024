@@ -57,9 +57,6 @@ object Robot : TimedRobot()
     {
         CommandScheduler.getInstance().run()
         Output.update()
-        if (isDisabled && Wrist.getRadians()>4){
-            Wrist.rezeroEncoder()
-        }
     }
 
     override fun disabledExit() {
