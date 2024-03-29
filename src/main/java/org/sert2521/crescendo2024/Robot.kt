@@ -57,10 +57,16 @@ object Robot : TimedRobot()
     {
         CommandScheduler.getInstance().run()
         Output.update()
+        if (isDisabled && Wrist.getRadians()>4){
+            Wrist.rezeroEncoder()
+        }
     }
 
     override fun disabledExit() {
         Climber.reset()
+        if (Wrist.getRadians()>4){
+            Wrist.rezeroEncoder()
+        }
     }
 
     /** This method is called once each time the robot enters Disabled mode.  */
