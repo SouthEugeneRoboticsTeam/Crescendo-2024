@@ -16,7 +16,7 @@ import java.util.*
 import kotlin.math.*
 
 object Vision : SubsystemBase() {
-    /*
+
     private val cam = PhotonCamera("Left2")
     private var result: PhotonPipelineResult = cam.latestResult
 
@@ -79,5 +79,5 @@ object Vision : SubsystemBase() {
         return Rotation2d(PI/2- atan2((estimationPose.x-speakerTrans.x), (estimationPose.y-(speakerTrans.y/*-speedY*TuningConstants.VIS_DRIVE_OFFSET_MULT*/))))
     }
 
-     */
+
 }
