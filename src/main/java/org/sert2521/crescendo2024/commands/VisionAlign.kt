@@ -3,6 +3,7 @@ package org.sert2521.crescendo2024.commands
 import edu.wpi.first.math.controller.PIDController
 import edu.wpi.first.math.geometry.Rotation2d
 import edu.wpi.first.wpilibj.DriverStation
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard
 import edu.wpi.first.wpilibj2.command.Command
 import org.sert2521.crescendo2024.Input
 import org.sert2521.crescendo2024.PhysicalConstants
@@ -11,6 +12,8 @@ import org.sert2521.crescendo2024.TuningConstants
 import org.sert2521.crescendo2024.subsystems.*
 import kotlin.math.PI
 import kotlin.math.abs
+import kotlin.math.pow
+import kotlin.math.sign
 
 class VisionAlign() : Command() {
 
@@ -20,7 +23,7 @@ class VisionAlign() : Command() {
     var wristCommand:Command = SetWrist(PhysicalConstants.WRIST_SETPOINT_STOW, false)
     var commandedWristAngle = PhysicalConstants.WRIST_SETPOINT_STOW
     //DOES NOT MEAN TRAP AS IN THE STAGE THINGY
-    var wristIsTrap = false
+    var wristIsTrap = true
 
     val driveAlignPID = PIDController(TuningConstants.VISION_ALIGN_P, TuningConstants.VISION_ALIGN_I, TuningConstants.VISION_ALIGN_D)
 
@@ -35,17 +38,30 @@ class VisionAlign() : Command() {
         drivetrainTarget = Vision.getDriveAngleTarget()
         currWristTarget=Vision.getVisionWristAngle()
         RuntimeConstants.wristVision = currWristTarget
+        wristCommand = SetWrist(currWristTarget)
+        wristCommand.schedule()
+        wristIsTrap = true
     }
 
     override fun execute() {
         drivetrainTarget=Vision.getDriveAngleTarget()
         if (drivetrainTarget == null){
             RuntimeConstants.visionAligning = false
+            driveAlignPID.reset()
         } else {
 
             RuntimeConstants.visionAligning = true
             //Maybe square it or smth
-            RuntimeConstants.visionRightStick = driveAlignPID.calculate(Vision.getPose().rotation.radians-drivetrainTarget!!.radians)
+            var error = (Vision.getPose().rotation.radians-drivetrainTarget!!.radians-(PI))
+            if (error < -2*PI){
+                error += 2*PI
+            } else if (error > 2*PI){
+                error -= 2*PI
+            }
+            error += PI
+            SmartDashboard.putNumber("Error", error)
+            RuntimeConstants.visionRightStick = driveAlignPID.calculate(error.pow(2)*error.sign)+TuningConstants.VISION_ALIGN_S*error.sign
+            SmartDashboard.putNumber("Vision Right Stick", RuntimeConstants.visionRightStick)
         }
         if (driveAlignPID.atSetpoint()){
             drivetrainTarget = Vision.getDriveAngleTarget()
@@ -55,19 +71,23 @@ class VisionAlign() : Command() {
 
 
 
-        /*
+
         if (wristIsTrap){
             if (wristCommand.isScheduled){
+                println("Scheduled")
                 wristIsTrap = true
             } else {
+                println("Not Scheduled")
                 wristCommand = SetWrist(currWristTarget, false, true)
                 wristCommand.schedule()
                 wristIsTrap = false
             }
         } else {
-            wristCommand = SetWrist(currWristTarget, false, true)
-            wristCommand.schedule()
-            wristIsTrap = false
+            if (!wristCommand.isScheduled){
+                wristCommand = SetWrist(currWristTarget, false, true)
+                wristCommand.schedule()
+                wristIsTrap = false
+            }
             /*
             if (wristCommand.isScheduled){
                 //if gap is too big between target and actual wrist
@@ -92,7 +112,9 @@ class VisionAlign() : Command() {
              */
         }
 
-         */
+
+
+
 
     }
 
@@ -104,4 +126,7 @@ class VisionAlign() : Command() {
         RuntimeConstants.visionRightStick = 0.0
         RuntimeConstants.visionAligning = false
     }
+
+
+
 }

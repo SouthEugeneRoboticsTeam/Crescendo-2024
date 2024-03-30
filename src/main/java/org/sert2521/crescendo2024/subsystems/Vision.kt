@@ -45,18 +45,14 @@ object Vision : SubsystemBase() {
 
     fun getDistanceSpeaker():Double?{
         //var distance:Double
-        val estimationPose:Pose2d
+
         val speakerTrans = if (Input.getColor()==DriverStation.Alliance.Blue){
             PhysicalConstants.speakerTransBlue
         } else {
             PhysicalConstants.speakerTransRed
         }
-        if (estimation.isEmpty){
-            return null
-        } else {
-            estimationPose = estimation.get().estimatedPose.toPose2d()
-        }
-        return estimationPose.translation.getDistance(speakerTrans)
+
+        return getPose().translation.getDistance(speakerTrans)
     }
 
     fun getVisionWristAngle():Double{
