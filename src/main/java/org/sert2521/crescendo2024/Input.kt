@@ -36,6 +36,10 @@ object Input {
     private val resetAngle = JoystickButton(driverController, 4)
     private val secondarySpeedButton = JoystickButton(driverController, 2)
     private val resetWrist = JoystickButton(gunnerController, 14)
+    private val armUp = JoystickButton(gunnerController, 15)
+    private val armDown = JoystickButton(gunnerController, 16)
+    private val sourceIntake = JoystickButton(gunnerController, 11)
+    private val rezeroNote = JoystickButton(gunnerController, 12)
 
     private val rumble = Trigger({ Indexer.getBeamBreak() })
     init{
@@ -55,8 +59,13 @@ object Input {
         climb.onTrue(InstantCommand({ Drivetrain.enterClimbPos() }))
         climb.whileTrue(ClimbInitiate())
         // Make these do stuff
-        // manualUp.whileTrue()
-        // manualDown.whileTrue()
+        armUp.whileTrue(ManualArmCommand(0.5))
+        armDown.whileTrue(ManualArmCommand(-0.5))
+        sourceIntake.whileTrue(SetFlywheel(-4000.0))
+        sourceIntake.onFalse(RezeroNote())
+        rezeroNote.whileTrue(RezeroNote())
+        //manualUp.whileTrue(ManualArmCommand(0.2))
+        //manualDown.whileTrue(ManualArmCommand(-0.2))
         // visionAlign.whileTrue()
         resetAngle.onTrue(InstantCommand({ Drivetrain.setNewPose(Pose2d()) }))
         rumble.onTrue(InstantCommand({setRumble(0.8)}).andThen(WaitCommand(0.2).andThen(InstantCommand({ setRumble(0.0) }))))
