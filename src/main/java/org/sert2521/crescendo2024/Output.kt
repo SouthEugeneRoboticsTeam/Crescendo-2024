@@ -15,9 +15,9 @@ object Output : SubsystemBase() {
     private val values = mutableListOf<Pair<String, () -> Double>>()
     private val bools = mutableListOf<Pair<String, () -> Boolean>>()
     private val field = Field2d()
-    //private val visionField = Field2d()
-    //private val visionTargetPose = Field2d()
-    //private val visionEstimation = Field2d()
+    private val visionField = Field2d()
+    private val visionTargetPose = Field2d()
+    private val visionEstimation = Field2d()
     private var drivetrainAmps: Array<Pair<Double, Double>> = arrayOf()
     private var flywheelAmps = Flywheel.getAmps()
     private var wristAmps = Wrist.getAmps()
@@ -39,6 +39,8 @@ object Output : SubsystemBase() {
         values.add(Pair("Drive 2 Speed Drive") { Drivetrain.getStates()[1].speedMetersPerSecond })
         values.add(Pair("Drive 3 Speed Drive") { Drivetrain.getStates()[2].speedMetersPerSecond })
         values.add(Pair("Drive 4 Speed Drive") { Drivetrain.getStates()[3].speedMetersPerSecond })
+
+        values.add(Pair("Drive 1 Goal Drive") {Drivetrain.getGoals()[0].speedMetersPerSecond})
 
         values.add(Pair("Drive 1 Amps Drive") { drivetrainAmps[0].first })
         values.add(Pair("Drive 2 Amps Drive") { drivetrainAmps[1].first })
@@ -72,15 +74,22 @@ object Output : SubsystemBase() {
         values.add(Pair("Intake alignment") { intakeAmps.second })
 
         values.add(Pair("Total Amps") { totalAmps })
+        values.add(Pair("Vision Wrist") {Vision.getVisionWristAngle()})
+        values.add(Pair("Vision Distance") {
+            if (Vision.getDistanceSpeaker()==null){
+                return@Pair 0.0
+            }else{
+                return@Pair Vision.getDistanceSpeaker()!!
+            }})
 
         bools.add(Pair("Beambreak") { Indexer.getBeamBreak() })
 
         //values.add(Pair("Vision Wrist Angle") { Vision.getVisionWristAngle() })
 
-        //SmartDashboard.putData("Vision Field", visionField)
-        //SmartDashboard.putData("Vision Pose Target", visionTargetPose)
+        SmartDashboard.putData("Vision Field", visionField)
+        SmartDashboard.putData("Vision Pose Target", visionTargetPose)
         SmartDashboard.putData("Field", field)
-        //SmartDashboard.putData("Vision Estimation", visionEstimation)
+        SmartDashboard.putData("Vision Estimation", visionEstimation)
 
         update()
     }
@@ -103,7 +112,7 @@ object Output : SubsystemBase() {
         }
 
         field.robotPose = Drivetrain.getPose()
-        /*
+
         if (Vision.getPose() == null){
             visionField.robotPose = Pose2d(0.0, 0.0, Rotation2d(0.0))
         } else {
@@ -118,6 +127,6 @@ object Output : SubsystemBase() {
             visionEstimation.robotPose = Vision.getEstimation().get().estimatedPose.toPose2d()
         }
 
-         */
+
     }
 }

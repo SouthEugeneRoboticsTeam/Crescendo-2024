@@ -36,5 +36,6 @@ class RezeroNote : Command() {
 
     override fun end(interrupted: Boolean) {
         Indexer.stop()
+        beamBreakStatus = false
     }
 }

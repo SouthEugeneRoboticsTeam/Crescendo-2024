@@ -82,13 +82,13 @@ abstract class JoystickCommand : Command() {
         }
 
         var rot = Input.getRot()
-        if (RuntimeConstants.visionAligning){
-            rot=RuntimeConstants.visionRightStick
-        }else if (abs(rot) <= ConfigConstants.ROT_DEADBAND) {
+        if (abs(rot) <= ConfigConstants.ROT_DEADBAND) {
             rot = 0.0
         }
         rot *= (ConfigConstants.ROT_SPEED - (ConfigConstants.ROT_SECONDARY_SPEED * fast))
-
+        if (RuntimeConstants.visionAligning){
+            rot=RuntimeConstants.visionRightStick
+        }
         return Translation3d(x, y, rot)
     }
 }

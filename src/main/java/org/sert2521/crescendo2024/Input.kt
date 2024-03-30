@@ -71,6 +71,7 @@ object Input {
         rumble.onTrue(InstantCommand({setRumble(0.8)}).andThen(WaitCommand(0.2).andThen(InstantCommand({ setRumble(0.0) }))))
 
         resetWrist.whileTrue(ResetWrist())
+        visionAlign.whileTrue(VisionAlign())
         //visionAlign.onTrue(InstantCommand({Wrist.rezeroEncoder()}))
 
         //secondarySpeedButton.onTrue(InstantCommand({ secondarySpeedMode = !secondarySpeedMode }))

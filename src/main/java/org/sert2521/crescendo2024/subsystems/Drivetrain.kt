@@ -273,7 +273,7 @@ object Drivetrain : SubsystemBase() {
             } else {
                 poseEstimator.addVisionMeasurement(Pose2d(poseEstimation.get().estimatedPose.toPose2d().y,poseEstimation.get().estimatedPose.toPose2d().x,Rotation2d(-poseEstimation.get().estimatedPose.toPose2d().rotation.radians)), poseEstimation.get().timestampSeconds, TuningConstants.defaultVisionDeviations)
             }
-            poseEstimator.addVisionMeasurement(Pose2d(poseEstimation.get().estimatedPose.toPose2d().y,poseEstimation.get().estimatedPose.toPose2d().x,Rotation2d(-poseEstimation.get().estimatedPose.toPose2d().rotation.radians)), poseEstimation.get().timestampSeconds)
+            //poseEstimator.addVisionMeasurement(Pose2d(poseEstimation.get().estimatedPose.toPose2d().y,poseEstimation.get().estimatedPose.toPose2d().x,Rotation2d(-poseEstimation.get().estimatedPose.toPose2d().rotation.radians)), poseEstimation.get().timestampSeconds)
         }
 
 
