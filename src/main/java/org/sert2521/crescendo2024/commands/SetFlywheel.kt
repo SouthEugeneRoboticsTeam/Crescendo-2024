@@ -2,6 +2,7 @@ package org.sert2521.crescendo2024.commands
 
 import edu.wpi.first.math.controller.PIDController
 import edu.wpi.first.math.controller.SimpleMotorFeedforward
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard
 import edu.wpi.first.wpilibj2.command.Command
 import org.sert2521.crescendo2024.ConfigConstants
 import org.sert2521.crescendo2024.PhysicalConstants
@@ -27,8 +28,11 @@ class SetFlywheel(private val rpm:Double, private val ends: Boolean = false) : C
     }
 
     override fun execute() {
-        Flywheel.setVoltages(Pair(pidOne.calculate(Flywheel.getSpeeds().first, rpm) + feedForward.calculate(rpm), pidTwo.calculate(Flywheel.getSpeeds().second, Flywheel.getSpeeds().first) + feedForward.calculate(rpm)))
-        RuntimeConstants.flywheelRevved = min(Flywheel.getSpeeds().first, Flywheel.getSpeeds().second) > ConfigConstants.FLYWHEEL_SHOOT_SPEED-100
+        Flywheel.setVoltages(Pair(
+            pidOne.calculate(Flywheel.getSpeeds().first, rpm) + feedForward.calculate(rpm),
+            pidTwo.calculate(Flywheel.getSpeeds().second, rpm+TuningConstants.FLYWHEEL_OFFSET) + feedForward.calculate(rpm+TuningConstants.FLYWHEEL_OFFSET)))
+        RuntimeConstants.flywheelRevved = min(Flywheel.getSpeeds().first, Flywheel.getSpeeds().second) > ConfigConstants.FLYWHEEL_SHOOT_SPEED
+        SmartDashboard.putBoolean("Revved", RuntimeConstants.flywheelRevved)
     }
 
     override fun isFinished(): Boolean {

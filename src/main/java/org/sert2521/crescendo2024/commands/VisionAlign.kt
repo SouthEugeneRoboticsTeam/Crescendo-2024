@@ -10,10 +10,7 @@ import org.sert2521.crescendo2024.PhysicalConstants
 import org.sert2521.crescendo2024.RuntimeConstants
 import org.sert2521.crescendo2024.TuningConstants
 import org.sert2521.crescendo2024.subsystems.*
-import kotlin.math.PI
-import kotlin.math.abs
-import kotlin.math.pow
-import kotlin.math.sign
+import kotlin.math.*
 
 class VisionAlign() : Command() {
 
@@ -60,17 +57,20 @@ class VisionAlign() : Command() {
             }
             error += PI
             SmartDashboard.putNumber("Error", error)
-            RuntimeConstants.visionRightStick = driveAlignPID.calculate(error.pow(2)*error.sign)+TuningConstants.VISION_ALIGN_S*error.sign
+            if (error.absoluteValue<TuningConstants.VISION_TOLERANCE){
+                error = 0.0
+            }
+            RuntimeConstants.visionRightStick = driveAlignPID.calculate((error.absoluteValue).pow(1.5)*error.sign)+TuningConstants.VISION_ALIGN_S*error.sign
+
             SmartDashboard.putNumber("Vision Right Stick", RuntimeConstants.visionRightStick)
         }
         if (driveAlignPID.atSetpoint()){
             drivetrainTarget = Vision.getDriveAngleTarget()
             currWristTarget=Vision.getVisionWristAngle()
-            RuntimeConstants.wristVision = currWristTarget
         }
 
-
-
+        currWristTarget=Vision.getVisionWristAngle()
+        RuntimeConstants.wristVision = currWristTarget
 
         if (wristIsTrap){
             if (wristCommand.isScheduled){

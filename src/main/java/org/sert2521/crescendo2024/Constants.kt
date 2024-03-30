@@ -176,6 +176,10 @@ object TuningConstants {
         wristAngLookup.put(2.2, 0.165)
         wristAngLookup.put(2.5, 0.207)
         wristAngLookup.put(2.8, 0.22)
+        wristAngLookup.put(3.04, 0.256)
+        wristAngLookup.put(3.27, 0.311)
+        wristAngLookup.put(3.48, 0.33)
+        wristAngLookup.put(4.025, 0.354)
     }
 
     val defaultVisionDeviations: Matrix<N3, N1> = fill(Nat.N3(), Nat.N1(), 1.0, 1.0, 1.0)
@@ -193,13 +197,13 @@ object TuningConstants {
     const val WRIST_V = 0.0
     const val WRIST_A = 0.0
 
-    const val VISION_ALIGN_P = 10.0
+    const val VISION_ALIGN_P = 9.0
     const val VISION_ALIGN_I = 0.0
-    const val VISION_ALIGN_D = 0.0
+    const val VISION_ALIGN_D = 0.4
 
-    const val VISION_ALIGN_S = -0.15
+    const val VISION_ALIGN_S = -0.19
 
-    const val VISION_TOLERANCE = 0.0
+    const val VISION_TOLERANCE = 0.01
 
     const val WRIST_ANGLE_TOLERANCE = 0.1
     val trapConstraints = TrapezoidProfile.Constraints(5.0, 15.0)
@@ -211,6 +215,8 @@ object TuningConstants {
     const val FLYWHEEL_P_COR = 0.001
     const val FLYWHEEL_I_COR = 0.0
     const val FLYWHEEL_D_COR = 0.0
+
+    const val FLYWHEEL_OFFSET = 10.0
 
     const val FLYWHEEL_KS = 0.0
     const val FLYWHEEL_KV = 0.0015
