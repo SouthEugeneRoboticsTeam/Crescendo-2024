@@ -43,6 +43,7 @@ object PhysicalConstants{
     const val WRIST_SETPOINT_PODIUM_PLUS_HALF = 0.235
     var WRIST_SETPOINT_PODIUM_DOUBLE_PLUS = 0.2927
     const val WRIST_SETPOINT_PODIUM_TRIPLE_PLUS = 0.33
+    const val WRIST_SETPOINT_SOURCE = 0.869
 
     val aprilTagField: AprilTagFieldLayout = AprilTagFields.k2024Crescendo.loadAprilTagLayoutField()
     val FIELD_WIDTH = aprilTagField.fieldWidth
@@ -62,7 +63,7 @@ object PhysicalConstants{
     val centerPose = Transform3d(Translation3d(Units.inchesToMeters(-10.029), Units.inchesToMeters(6.081), Units.inchesToMeters(15.26)), Rotation3d(0.0, 0.349, PI))
 
     val speakerTransRed = Translation2d(aprilTagField.tags[3].pose.translation.toTranslation2d().x, aprilTagField.tags[3].pose.translation.toTranslation2d().y+0.2)
-    val speakerTransBlue = Translation2d(aprilTagField.tags[7].pose.translation.toTranslation2d().x, aprilTagField.tags[7].pose.translation.toTranslation2d().y)
+    val speakerTransBlue = Translation2d(aprilTagField.tags[7].pose.translation.toTranslation2d().x, aprilTagField.tags[7].pose.translation.toTranslation2d().y+0.2)
 
     const val FLYWHEEL_GEAR_RATIO = 3.0/2.0
 
@@ -177,9 +178,14 @@ object TuningConstants {
         wristAngLookup.put(2.5, 0.207)
         wristAngLookup.put(2.8, 0.22)
         wristAngLookup.put(3.04, 0.256)
-        wristAngLookup.put(3.27, 0.311)
-        wristAngLookup.put(3.48, 0.33)
+        wristAngLookup.put(3.23, 0.275)
+        wristAngLookup.put(3.48, 0.307)
         wristAngLookup.put(4.025, 0.354)
+        wristAngLookup.put(4.49, 0.387)
+        wristAngLookup.put(4.82, 0.4)
+        wristAngLookup.put(5.25, 0.423)
+        wristAngLookup.put(5.74, 0.43)
+        wristAngLookup.put(6.53, 0.449)
     }
 
     val defaultVisionDeviations: Matrix<N3, N1> = fill(Nat.N3(), Nat.N1(), 1.0, 1.0, 1.0)

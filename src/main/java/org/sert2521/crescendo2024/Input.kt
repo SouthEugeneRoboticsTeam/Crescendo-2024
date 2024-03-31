@@ -29,17 +29,18 @@ object Input {
     private val wristAmp = JoystickButton(gunnerController, 5)
     private val wristPodium = JoystickButton(gunnerController, 6)
     private val wristAmpRev = JoystickButton(gunnerController, 4)
-    private val manualUp = JoystickButton(gunnerController, 10)
-    private val manualDown = JoystickButton(gunnerController, 8)
-    private val climb = JoystickButton(gunnerController, 9)
+    private val manualUp = JoystickButton(gunnerController, 13)
+    private val manualDown = JoystickButton(gunnerController, 11)
+    private val climb = JoystickButton(gunnerController, 12)
     private val visionAlign = JoystickButton(driverController, 1)
     private val resetAngle = JoystickButton(driverController, 4)
     private val secondarySpeedButton = JoystickButton(driverController, 2)
-    private val resetWrist = JoystickButton(gunnerController, 14)
+    private val resetWrist = JoystickButton(gunnerController, 8)
     private val armUp = JoystickButton(gunnerController, 15)
     private val armDown = JoystickButton(gunnerController, 16)
-    private val sourceIntake = JoystickButton(gunnerController, 11)
-    private val rezeroNote = JoystickButton(gunnerController, 12)
+    private val sourceIntake = JoystickButton(gunnerController, 10)
+    private val rezeroNote = JoystickButton(gunnerController, 9)
+    private val passRev = Trigger{ gunnerController.pov==0 }
 
     private val rumble = Trigger({ Indexer.getBeamBreak() })
     init{
@@ -59,8 +60,10 @@ object Input {
         climb.onTrue(InstantCommand({ Drivetrain.enterClimbPos() }))
         climb.whileTrue(ClimbInitiate())
         // Make these do stuff
+        //TODO:UNBIND THE MANUAL ARM
         armUp.whileTrue(ManualArmCommand(0.5))
         armDown.whileTrue(ManualArmCommand(-0.5))
+        sourceIntake.onTrue(SetWrist(PhysicalConstants.WRIST_SETPOINT_SOURCE))
         sourceIntake.whileTrue(SetFlywheel(-4000.0))
         sourceIntake.onFalse(RezeroNote())
         rezeroNote.whileTrue(RezeroNote())
@@ -72,6 +75,8 @@ object Input {
 
         resetWrist.whileTrue(ResetWrist())
         visionAlign.whileTrue(VisionAlign())
+        visionAlign.onFalse(SetWrist(PhysicalConstants.WRIST_SETPOINT_STOW))
+        passRev.whileTrue(SetFlywheel(3000.0))
         //visionAlign.onTrue(InstantCommand({Wrist.rezeroEncoder()}))
 
         //secondarySpeedButton.onTrue(InstantCommand({ secondarySpeedMode = !secondarySpeedMode }))

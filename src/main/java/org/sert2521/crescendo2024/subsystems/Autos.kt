@@ -22,10 +22,7 @@ import org.sert2521.crescendo2024.ConfigConstants
 import org.sert2521.crescendo2024.PhysicalConstants
 import org.sert2521.crescendo2024.SwerveConstants
 import org.sert2521.crescendo2024.TuningConstants
-import org.sert2521.crescendo2024.commands.IntakeCommand
-import org.sert2521.crescendo2024.commands.Outtake
-import org.sert2521.crescendo2024.commands.SetFlywheel
-import org.sert2521.crescendo2024.commands.SetWrist
+import org.sert2521.crescendo2024.commands.*
 import kotlin.io.path.Path
 
 
@@ -47,6 +44,8 @@ object Autos : SubsystemBase() {
             "Wrist Podium Triple Plus" to SetWrist(PhysicalConstants.WRIST_SETPOINT_PODIUM_TRIPLE_PLUS).asProxy(),
             "Wrist Podium Plus Half" to SetWrist(PhysicalConstants.WRIST_SETPOINT_PODIUM_PLUS_HALF).asProxy(),
             "Wrist Far" to SetWrist(PhysicalConstants.WRIST_SETPOINT_FAR).asProxy(),
+            "Wrist Vision" to WristVision(),
+            "Vision Cancel" to CancelVision(),
             "Flywheel Rev" to SetFlywheel(ConfigConstants.FLYWHEEL_SHOOT_SPEED, true).asProxy(),
             "Flywheel Stop" to SetFlywheel(ConfigConstants.FLYWHEEL_IDLE_SPEED, true).asProxy(),
             "Podium Shot" to IntakeCommand().andThen(SetWrist(PhysicalConstants.WRIST_SETPOINT_PODIUM).asProxy()).andThen(Outtake().withTimeout(0.2)).andThen(SetWrist(PhysicalConstants.WRIST_SETPOINT_STOW).asProxy()),

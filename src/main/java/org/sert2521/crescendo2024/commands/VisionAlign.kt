@@ -25,7 +25,7 @@ class VisionAlign() : Command() {
     val driveAlignPID = PIDController(TuningConstants.VISION_ALIGN_P, TuningConstants.VISION_ALIGN_I, TuningConstants.VISION_ALIGN_D)
 
     init {
-
+        addRequirements(Vision)
     }
 
     override fun initialize() {

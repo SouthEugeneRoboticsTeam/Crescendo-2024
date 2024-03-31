@@ -31,7 +31,7 @@ class SetFlywheel(private val rpm:Double, private val ends: Boolean = false) : C
         Flywheel.setVoltages(Pair(
             pidOne.calculate(Flywheel.getSpeeds().first, rpm) + feedForward.calculate(rpm),
             pidTwo.calculate(Flywheel.getSpeeds().second, rpm+TuningConstants.FLYWHEEL_OFFSET) + feedForward.calculate(rpm+TuningConstants.FLYWHEEL_OFFSET)))
-        RuntimeConstants.flywheelRevved = min(Flywheel.getSpeeds().first, Flywheel.getSpeeds().second) > ConfigConstants.FLYWHEEL_SHOOT_SPEED
+        RuntimeConstants.flywheelRevved = min(Flywheel.getSpeeds().first, Flywheel.getSpeeds().second) > rpm
         SmartDashboard.putBoolean("Revved", RuntimeConstants.flywheelRevved)
     }
 
