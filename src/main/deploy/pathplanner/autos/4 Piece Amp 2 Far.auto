@@ -28,7 +28,7 @@
                     {
                       "type": "wait",
                       "data": {
-                        "waitTime": 0.4
+                        "waitTime": 0.6
                       }
                     },
                     {
@@ -47,7 +47,7 @@
                     {
                       "type": "wait",
                       "data": {
-                        "waitTime": 0.4
+                        "waitTime": 0.6
                       }
                     },
                     {
@@ -114,6 +114,12 @@
                       }
                     },
                     {
+                      "type": "named",
+                      "data": {
+                        "name": "Wrist Stow"
+                      }
+                    },
+                    {
                       "type": "wait",
                       "data": {
                         "waitTime": 0.75
@@ -174,6 +180,12 @@
                       "type": "named",
                       "data": {
                         "name": "Vision Cancel"
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "Wrist Stow"
                       }
                     },
                     {
@@ -240,6 +252,12 @@
                       }
                     },
                     {
+                      "type": "named",
+                      "data": {
+                        "name": "Wrist Stow"
+                      }
+                    },
+                    {
                       "type": "wait",
                       "data": {
                         "waitTime": 1.5
@@ -267,6 +285,12 @@
           "type": "named",
           "data": {
             "name": "Outtake"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Vision Cancel"
           }
         },
         {

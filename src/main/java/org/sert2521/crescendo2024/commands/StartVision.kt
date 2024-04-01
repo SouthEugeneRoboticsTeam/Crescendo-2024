@@ -1,10 +1,10 @@
 package org.sert2521.crescendo2024.commands
 
 import edu.wpi.first.wpilibj2.command.Command
-import edu.wpi.first.wpilibj2.command.Commands
+import edu.wpi.first.wpilibj2.command.InstantCommand
 import org.sert2521.crescendo2024.subsystems.Vision
 
-class CancelVision : Command() {
+class StartVision : Command() {
 
 
     init {
@@ -13,8 +13,9 @@ class CancelVision : Command() {
     }
 
     override fun initialize() {
+        val holdCommand = WristVision()
+        Vision.defaultCommand= holdCommand
 
-        Vision.removeDefaultCommand()
     }
 
     override fun execute() {}
