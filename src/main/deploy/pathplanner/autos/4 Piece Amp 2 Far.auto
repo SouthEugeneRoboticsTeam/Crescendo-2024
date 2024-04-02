@@ -65,7 +65,7 @@
                     {
                       "type": "named",
                       "data": {
-                        "name": "Wrist Vision"
+                        "name": "Wrist Podium Plus"
                       }
                     }
                   ]
@@ -110,7 +110,7 @@
                     {
                       "type": "named",
                       "data": {
-                        "name": "Vision Cancel"
+                        "name": "Wrist Stow"
                       }
                     },
                     {
@@ -128,7 +128,7 @@
                     {
                       "type": "named",
                       "data": {
-                        "name": "Wrist Vision"
+                        "name": "Wrist Podium Plus"
                       }
                     }
                   ]
@@ -173,7 +173,7 @@
                     {
                       "type": "named",
                       "data": {
-                        "name": "Vision Cancel"
+                        "name": "Wrist Stow"
                       }
                     },
                     {
@@ -191,7 +191,7 @@
                     {
                       "type": "named",
                       "data": {
-                        "name": "Wrist Vision"
+                        "name": "Wrist Podium Double Plus"
                       }
                     }
                   ]
@@ -236,7 +236,7 @@
                     {
                       "type": "named",
                       "data": {
-                        "name": "Vision Cancel"
+                        "name": "Wrist Stow"
                       }
                     },
                     {
@@ -254,7 +254,7 @@
                     {
                       "type": "named",
                       "data": {
-                        "name": "Wrist Vision"
+                        "name": "Wrist Podium Double Plus"
                       }
                     }
                   ]

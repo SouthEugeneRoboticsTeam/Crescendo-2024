@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard
 import edu.wpi.first.wpilibj2.command.Command
 import edu.wpi.first.wpilibj2.command.Commands
+import edu.wpi.first.wpilibj2.command.FunctionalCommand
 import edu.wpi.first.wpilibj2.command.InstantCommand
 import edu.wpi.first.wpilibj2.command.WaitCommand
 
@@ -31,7 +32,7 @@ object Autos : SubsystemBase() {
     private var extendedChooser = SendableChooser<Command>()
     val defaultAutoCommand = Commands.none()
 
-
+    var whee = false
 
     var commandList = mapOf<String, Command>(
             "Outtake" to Outtake(true).withTimeout(0.4),
@@ -44,8 +45,8 @@ object Autos : SubsystemBase() {
             "Wrist Podium Triple Plus" to SetWrist(PhysicalConstants.WRIST_SETPOINT_PODIUM_TRIPLE_PLUS).asProxy(),
             "Wrist Podium Plus Half" to SetWrist(PhysicalConstants.WRIST_SETPOINT_PODIUM_PLUS_HALF).asProxy(),
             "Wrist Far" to SetWrist(PhysicalConstants.WRIST_SETPOINT_FAR).asProxy(),
-            "Wrist Vision" to WristVision(),
-            "Vision Cancel" to CancelVision(),
+            "Wrist Vision" to WristVision(true).asProxy().alongWith(StartVision().asProxy()),
+            "Vision Cancel" to CancelVision().asProxy(),
             "Flywheel Rev" to SetFlywheel(ConfigConstants.FLYWHEEL_SHOOT_SPEED, true).asProxy(),
             "Flywheel Stop" to SetFlywheel(ConfigConstants.FLYWHEEL_IDLE_SPEED, true).asProxy(),
             "Podium Shot" to IntakeCommand().andThen(SetWrist(PhysicalConstants.WRIST_SETPOINT_PODIUM).asProxy()).andThen(Outtake().withTimeout(0.2)).andThen(SetWrist(PhysicalConstants.WRIST_SETPOINT_STOW).asProxy()),

@@ -210,6 +210,7 @@ object TuningConstants {
     const val VISION_ALIGN_S = -0.19
 
     const val VISION_TOLERANCE = 0.01
+    const val VISION_WRIST_TOLERANCE = 0.2
 
     const val WRIST_ANGLE_TOLERANCE = 0.1
     val trapConstraints = TrapezoidProfile.Constraints(5.0, 15.0)

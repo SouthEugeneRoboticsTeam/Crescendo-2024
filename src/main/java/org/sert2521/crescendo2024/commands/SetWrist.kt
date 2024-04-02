@@ -45,7 +45,6 @@ class SetWrist(private val goal:Double, private val ends:Boolean = true, private
         } else {
             if (useVision){
                 pidResult = notProfiled.calculate(wristAngle+2*PI, RuntimeConstants.wristVision+2*PI)
-                println("using vision")
             } else {
                 pidResult = notProfiled.calculate(wristAngle + 2 * PI, goal + 2 * PI)
             }

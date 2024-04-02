@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.DriverStation
 import edu.wpi.first.wpilibj.TimedRobot
 import edu.wpi.first.wpilibj2.command.Command
 import edu.wpi.first.wpilibj2.command.CommandScheduler
+import edu.wpi.first.wpilibj2.command.Commands
 import org.sert2521.crescendo2024.subsystems.*
 import kotlin.math.PI
 
@@ -100,6 +101,7 @@ object Robot : TimedRobot()
     }
 
     override fun autonomousExit() {
+        Vision.removeDefaultCommand()
         Drivetrain.setCurrentLimit(55)
         //Drivetrain.setNewPose(Pose2d(Drivetrain.getPose().translation, Rotation2d(Drivetrain.getPose().rotation.radians+PI)))
     }
