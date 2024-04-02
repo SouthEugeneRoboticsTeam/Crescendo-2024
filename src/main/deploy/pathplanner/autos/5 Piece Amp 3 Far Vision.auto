@@ -28,13 +28,19 @@
                     {
                       "type": "wait",
                       "data": {
-                        "waitTime": 0.6
+                        "waitTime": 0.4
                       }
                     },
                     {
                       "type": "path",
                       "data": {
                         "pathName": "4 Piece S1.1"
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "Vision Cancel"
                       }
                     }
                   ]
@@ -47,7 +53,7 @@
                     {
                       "type": "wait",
                       "data": {
-                        "waitTime": 0.6
+                        "waitTime": 0.4
                       }
                     },
                     {
@@ -93,6 +99,12 @@
                       "data": {
                         "pathName": "4 Piece S1.3"
                       }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "Vision Cancel"
+                      }
                     }
                   ]
                 }
@@ -105,12 +117,6 @@
                       "type": "named",
                       "data": {
                         "name": "Outtake"
-                      }
-                    },
-                    {
-                      "type": "named",
-                      "data": {
-                        "name": "Vision Cancel"
                       }
                     },
                     {
@@ -179,12 +185,6 @@
                     {
                       "type": "named",
                       "data": {
-                        "name": "Vision Cancel"
-                      }
-                    },
-                    {
-                      "type": "named",
-                      "data": {
                         "name": "Wrist Stow"
                       }
                     },
@@ -231,6 +231,12 @@
                       "data": {
                         "pathName": "4 Piece S1.7"
                       }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "Wrist Vision"
+                      }
                     }
                   ]
                 }
@@ -243,12 +249,6 @@
                       "type": "named",
                       "data": {
                         "name": "Outtake"
-                      }
-                    },
-                    {
-                      "type": "named",
-                      "data": {
-                        "name": "Vision Cancel"
                       }
                     },
                     {

@@ -57,7 +57,7 @@ class WristVision(val ends: Boolean = false) : Command() {
 
     override fun isFinished(): Boolean {
         // TODO: Make this return true when this Command no longer needs to run execute()
-        return Wrist.getRadians()>currWristTarget-TuningConstants.VISION_WRIST_TOLERANCE && Wrist.getRadians()<currWristTarget+TuningConstants.VISION_WRIST_TOLERANCE && ends
+        return Wrist.getRadians()>currWristTarget-TuningConstants.VISION_WRIST_TOLERANCE && Wrist.getRadians()<currWristTarget+TuningConstants.VISION_WRIST_TOLERANCE && RuntimeConstants.isVisionAuto
     }
 
     override fun end(interrupted: Boolean) {
