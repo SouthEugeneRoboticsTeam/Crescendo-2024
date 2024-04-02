@@ -14,7 +14,6 @@ class StartVision : Command() {
 
     override fun initialize() {
         RuntimeConstants.isVisionAuto=true
-        WristVision().schedule()
     }
 
     override fun execute() {}

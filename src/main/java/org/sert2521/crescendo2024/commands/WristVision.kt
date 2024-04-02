@@ -9,7 +9,7 @@ import org.sert2521.crescendo2024.subsystems.Vision
 import org.sert2521.crescendo2024.subsystems.Wrist
 import kotlin.math.PI
 
-class WristVision(val ends: Boolean = false) : Command() {
+class WristVision : Command() {
 
     var prevWristTarget = PhysicalConstants.WRIST_SETPOINT_STOW
     var currWristTarget = PhysicalConstants.WRIST_SETPOINT_STOW
