@@ -162,6 +162,7 @@ object RuntimeConstants{
     var visionAligning = false
     var visionRightStick = 0.0
     var wristVision = PhysicalConstants.WRIST_SETPOINT_STOW
+    var isVisionAuto = false
 }
 
 object TuningConstants {

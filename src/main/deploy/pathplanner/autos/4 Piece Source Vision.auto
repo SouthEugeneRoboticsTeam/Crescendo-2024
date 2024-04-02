@@ -2,10 +2,10 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 0.7592930197715759,
-      "y": 6.652736186981201
+      "x": 0.7671207785606384,
+      "y": 4.455070495605469
     },
-    "rotation": 60.16056848873644
+    "rotation": -59.93144963618442
   },
   "command": {
     "type": "sequential",
@@ -28,13 +28,19 @@
                     {
                       "type": "wait",
                       "data": {
-                        "waitTime": 0.4
+                        "waitTime": 0.5
                       }
                     },
                     {
                       "type": "path",
                       "data": {
-                        "pathName": "4 Piece S1.1"
+                        "pathName": "4 Source.1"
+                      }
+                    },
+                    {
+                      "type": "path",
+                      "data": {
+                        "pathName": "4 Source.2"
                       }
                     },
                     {
@@ -53,13 +59,19 @@
                     {
                       "type": "wait",
                       "data": {
-                        "waitTime": 0.4
+                        "waitTime": 0.5
                       }
                     },
                     {
                       "type": "named",
                       "data": {
                         "name": "Outtake"
+                      }
+                    },
+                    {
+                      "type": "wait",
+                      "data": {
+                        "waitTime": 0.5
                       }
                     },
                     {
@@ -91,13 +103,13 @@
                     {
                       "type": "path",
                       "data": {
-                        "pathName": "4 Piece S1.2"
+                        "pathName": "4 Source.3"
                       }
                     },
                     {
                       "type": "path",
                       "data": {
-                        "pathName": "4 Piece S1.3"
+                        "pathName": "4 Source.4"
                       }
                     },
                     {
@@ -128,7 +140,7 @@
                     {
                       "type": "wait",
                       "data": {
-                        "waitTime": 0.75
+                        "waitTime": 0.5
                       }
                     },
                     {
@@ -158,15 +170,21 @@
                 "data": {
                   "commands": [
                     {
-                      "type": "path",
+                      "type": "wait",
                       "data": {
-                        "pathName": "4 Piece S1.4"
+                        "waitTime": 0.2
                       }
                     },
                     {
                       "type": "path",
                       "data": {
-                        "pathName": "4 Piece S1.5"
+                        "pathName": "4 Source.5"
+                      }
+                    },
+                    {
+                      "type": "path",
+                      "data": {
+                        "pathName": "4 Source.6"
                       }
                     }
                   ]
@@ -191,19 +209,13 @@
                     {
                       "type": "wait",
                       "data": {
-                        "waitTime": 1.0
+                        "waitTime": 0.5
                       }
                     },
                     {
                       "type": "named",
                       "data": {
                         "name": "Intake Note"
-                      }
-                    },
-                    {
-                      "type": "named",
-                      "data": {
-                        "name": "Wrist Vision"
                       }
                     }
                   ]
@@ -217,65 +229,15 @@
           "data": {
             "commands": [
               {
-                "type": "sequential",
+                "type": "named",
                 "data": {
-                  "commands": [
-                    {
-                      "type": "path",
-                      "data": {
-                        "pathName": "4 Piece S1.6"
-                      }
-                    },
-                    {
-                      "type": "path",
-                      "data": {
-                        "pathName": "4 Piece S1.7"
-                      }
-                    },
-                    {
-                      "type": "named",
-                      "data": {
-                        "name": "Wrist Vision"
-                      }
-                    }
-                  ]
+                  "name": "Wrist Vision"
                 }
               },
               {
-                "type": "sequential",
+                "type": "named",
                 "data": {
-                  "commands": [
-                    {
-                      "type": "named",
-                      "data": {
-                        "name": "Outtake"
-                      }
-                    },
-                    {
-                      "type": "named",
-                      "data": {
-                        "name": "Wrist Stow"
-                      }
-                    },
-                    {
-                      "type": "wait",
-                      "data": {
-                        "waitTime": 1.5
-                      }
-                    },
-                    {
-                      "type": "named",
-                      "data": {
-                        "name": "Intake Note"
-                      }
-                    },
-                    {
-                      "type": "named",
-                      "data": {
-                        "name": "Wrist Vision"
-                      }
-                    }
-                  ]
+                  "name": "Vision Cancel"
                 }
               }
             ]
@@ -285,18 +247,6 @@
           "type": "named",
           "data": {
             "name": "Outtake"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "Vision Cancel"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "Flywheel Stop"
           }
         },
         {
