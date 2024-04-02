@@ -28,7 +28,7 @@
                     {
                       "type": "wait",
                       "data": {
-                        "waitTime": 0.6
+                        "waitTime": 0.4
                       }
                     },
                     {
@@ -47,7 +47,7 @@
                     {
                       "type": "wait",
                       "data": {
-                        "waitTime": 0.6
+                        "waitTime": 0.4
                       }
                     },
                     {
@@ -65,7 +65,7 @@
                     {
                       "type": "named",
                       "data": {
-                        "name": "Wrist Vision"
+                        "name": "Wrist Podium Plus"
                       }
                     }
                   ]
@@ -110,12 +110,6 @@
                     {
                       "type": "named",
                       "data": {
-                        "name": "Vision Cancel"
-                      }
-                    },
-                    {
-                      "type": "named",
-                      "data": {
                         "name": "Wrist Stow"
                       }
                     },
@@ -134,7 +128,7 @@
                     {
                       "type": "named",
                       "data": {
-                        "name": "Wrist Vision"
+                        "name": "Wrist Podium Plus"
                       }
                     }
                   ]
@@ -179,12 +173,6 @@
                     {
                       "type": "named",
                       "data": {
-                        "name": "Vision Cancel"
-                      }
-                    },
-                    {
-                      "type": "named",
-                      "data": {
                         "name": "Wrist Stow"
                       }
                     },
@@ -203,7 +191,7 @@
                     {
                       "type": "named",
                       "data": {
-                        "name": "Wrist Vision"
+                        "name": "Wrist Podium Double Plus"
                       }
                     }
                   ]
@@ -248,12 +236,6 @@
                     {
                       "type": "named",
                       "data": {
-                        "name": "Vision Cancel"
-                      }
-                    },
-                    {
-                      "type": "named",
-                      "data": {
                         "name": "Wrist Stow"
                       }
                     },
@@ -272,7 +254,7 @@
                     {
                       "type": "named",
                       "data": {
-                        "name": "Wrist Vision"
+                        "name": "Wrist Podium Double Plus"
                       }
                     }
                   ]
@@ -285,12 +267,6 @@
           "type": "named",
           "data": {
             "name": "Outtake"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "Vision Cancel"
           }
         },
         {
