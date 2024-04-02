@@ -76,12 +76,13 @@ object Autos : SubsystemBase() {
 
         NamedCommands.registerCommands(commandList)
 
-        autoChooser.addOption("5 Piece Amp Race", PathPlannerAuto("4 Piece Amp 2 Far"))
+        autoChooser.addOption("5 Piece Amp Race", PathPlannerAuto("5 Piece Amp 3 Far"))
+        autoChooser.addOption("5 Piece Amp Race Vision", PathPlannerAuto("5 Piece Amp 3 Far Vision"))
         autoChooser.addOption("6 Piece Original", PathPlannerAuto("6 Piece Center 2 Far"))
-        autoChooser.addOption("6 Piece New Order", PathPlannerAuto("6 Piece New Order"))
+        //autoChooser.addOption("6 Piece New Order", PathPlannerAuto("6 Piece New Order"))
         autoChooser.addOption("4 Piece Source", PathPlannerAuto("4 Piece Source 3 Far"))
         autoChooser.addOption("6 Piece 60 Amps", PathPlannerAuto("6 Piece 60 Amps"))
-        autoChooser.addOption("Amp Race 3rd Mid First", PathPlannerAuto("5 Amp Race 3rd First"))
+        //autoChooser.addOption("Amp Race 3rd Mid First", PathPlannerAuto("5 Amp Race 3rd First"))
         autoChooser.setDefaultOption("None", Commands.none())
         //NOT FINISHED
         /*
