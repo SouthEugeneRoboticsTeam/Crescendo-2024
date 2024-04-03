@@ -40,7 +40,7 @@
                     {
                       "type": "named",
                       "data": {
-                        "name": "Vision Cancel"
+                        "name": "Finish Vision"
                       }
                     }
                   ]
@@ -103,7 +103,7 @@
                     {
                       "type": "named",
                       "data": {
-                        "name": "Vision Cancel"
+                        "name": "Finish Vision"
                       }
                     }
                   ]
@@ -167,6 +167,12 @@
                       "type": "path",
                       "data": {
                         "pathName": "4 Piece S1.5"
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "Finish Vision"
                       }
                     }
                   ]
@@ -235,7 +241,7 @@
                     {
                       "type": "named",
                       "data": {
-                        "name": "Wrist Vision"
+                        "name": "Finish Vision"
                       }
                     }
                   ]
@@ -290,7 +296,7 @@
         {
           "type": "named",
           "data": {
-            "name": "Vision Cancel"
+            "name": "Finish Vision"
           }
         },
         {
