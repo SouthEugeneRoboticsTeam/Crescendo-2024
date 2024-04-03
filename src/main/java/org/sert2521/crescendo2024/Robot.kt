@@ -56,7 +56,7 @@ object Robot : TimedRobot()
     {
         CommandScheduler.getInstance().run()
         Output.update()
-        println(PhysicalConstants.aprilTagField.tags[0].pose)
+        //println(RuntimeConstants.isVisionAuto)
     }
 
     override fun disabledExit() {

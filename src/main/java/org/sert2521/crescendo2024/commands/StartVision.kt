@@ -14,6 +14,7 @@ class StartVision : Command() {
 
     override fun initialize() {
         RuntimeConstants.isVisionAuto=true
+        println("ran")
     }
 
     override fun execute() {}

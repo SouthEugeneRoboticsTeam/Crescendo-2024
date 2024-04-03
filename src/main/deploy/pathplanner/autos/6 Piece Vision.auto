@@ -5,7 +5,7 @@
       "x": 1.3672044277191162,
       "y": 5.544422626495361
     },
-    "rotation": -2.3296896672191085e-28
+    "rotation": -9.606793018601367e-29
   },
   "command": {
     "type": "sequential",
@@ -48,12 +48,6 @@
                       "data": {
                         "pathName": "6 Piece 60 Amps.3"
                       }
-                    },
-                    {
-                      "type": "named",
-                      "data": {
-                        "name": "Finish Vision"
-                      }
                     }
                   ]
                 }
@@ -93,9 +87,35 @@
                       }
                     },
                     {
-                      "type": "named",
+                      "type": "parallel",
                       "data": {
-                        "name": "Wrist Vision"
+                        "commands": [
+                          {
+                            "type": "named",
+                            "data": {
+                              "name": "Wrist Vision"
+                            }
+                          },
+                          {
+                            "type": "sequential",
+                            "data": {
+                              "commands": [
+                                {
+                                  "type": "wait",
+                                  "data": {
+                                    "waitTime": 0.1
+                                  }
+                                },
+                                {
+                                  "type": "named",
+                                  "data": {
+                                    "name": "Vision Cancel"
+                                  }
+                                }
+                              ]
+                            }
+                          }
+                        ]
                       }
                     }
                   ]
@@ -150,15 +170,15 @@
                       }
                     },
                     {
-                      "type": "named",
+                      "type": "wait",
                       "data": {
-                        "name": "Intake Note"
+                        "waitTime": 0.75
                       }
                     },
                     {
-                      "type": "wait",
+                      "type": "named",
                       "data": {
-                        "waitTime": 1.0
+                        "name": "Intake Note"
                       }
                     },
                     {
@@ -219,15 +239,15 @@
                       }
                     },
                     {
-                      "type": "named",
+                      "type": "wait",
                       "data": {
-                        "name": "Intake Note"
+                        "waitTime": 0.75
                       }
                     },
                     {
-                      "type": "wait",
+                      "type": "named",
                       "data": {
-                        "waitTime": 1.0
+                        "name": "Intake Note"
                       }
                     },
                     {
