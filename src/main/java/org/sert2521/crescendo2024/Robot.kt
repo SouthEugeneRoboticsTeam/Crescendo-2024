@@ -56,6 +56,7 @@ object Robot : TimedRobot()
     {
         CommandScheduler.getInstance().run()
         Output.update()
+        //println(RuntimeConstants.isVisionAuto)
     }
 
     override fun disabledExit() {

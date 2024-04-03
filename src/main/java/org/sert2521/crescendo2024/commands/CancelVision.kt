@@ -7,7 +7,6 @@ import org.sert2521.crescendo2024.subsystems.Vision
 
 class CancelVision : Command() {
 
-
     init {
         // each subsystem used by the command must be passed into the addRequirements() method
     }
@@ -16,12 +15,17 @@ class CancelVision : Command() {
         RuntimeConstants.isVisionAuto = false
     }
 
-    override fun execute() {}
+    override fun execute() {
+
+    }
 
     override fun isFinished(): Boolean {
         // TODO: Make this return true when this Command no longer needs to run execute()
+
         return true
     }
 
-    override fun end(interrupted: Boolean) {}
+    override fun end(interrupted: Boolean) {
+        RuntimeConstants.isVisionAuto=false
+    }
 }

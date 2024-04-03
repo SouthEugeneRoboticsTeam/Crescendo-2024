@@ -70,7 +70,7 @@ object Vision : SubsystemBase() {
 
     fun getDriveAngleTarget():Rotation2d{
         val estimationPose = Vision.getPose()
-        val speedY = Drivetrain.getAbsoluteSpeeds().vyMetersPerSecond
+        //val speedY = Drivetrain.getAbsoluteSpeeds().vyMetersPerSecond
         val speakerTrans = if (Input.getColor()==DriverStation.Alliance.Red){
             PhysicalConstants.speakerTransRed
         } else {
