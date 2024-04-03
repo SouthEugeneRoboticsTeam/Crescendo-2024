@@ -61,8 +61,8 @@ object Input {
         climb.whileTrue(ClimbInitiate())
         // Make these do stuff
         //TODO:UNBIND THE MANUAL ARM
-        armUp.whileTrue(ManualArmCommand(0.5))
-        armDown.whileTrue(ManualArmCommand(-0.5))
+        //armUp.whileTrue(ManualArmCommand(0.5))
+        //armDown.whileTrue(ManualArmCommand(-0.5))
         sourceIntake.onTrue(SetWrist(PhysicalConstants.WRIST_SETPOINT_SOURCE))
         sourceIntake.whileTrue(SetFlywheel(-4000.0))
         sourceIntake.onFalse(RezeroNote())
