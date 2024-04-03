@@ -56,13 +56,10 @@ class VisionAlign() : Command() {
                 error -= 2*PI
             }
             error += PI
-            SmartDashboard.putNumber("Error", error)
             if (error.absoluteValue<TuningConstants.VISION_TOLERANCE){
                 error = 0.0
             }
             RuntimeConstants.visionRightStick = driveAlignPID.calculate((error.absoluteValue).pow(1.5)*error.sign)+TuningConstants.VISION_ALIGN_S*error.sign
-
-            SmartDashboard.putNumber("Vision Right Stick", RuntimeConstants.visionRightStick)
         }
         if (driveAlignPID.atSetpoint()){
             drivetrainTarget = Vision.getDriveAngleTarget()
@@ -74,10 +71,8 @@ class VisionAlign() : Command() {
 
         if (wristIsTrap){
             if (wristCommand.isScheduled){
-                println("Scheduled")
                 wristIsTrap = true
             } else {
-                println("Not Scheduled")
                 wristCommand = SetWrist(currWristTarget, false, true)
                 wristCommand.schedule()
                 wristIsTrap = false

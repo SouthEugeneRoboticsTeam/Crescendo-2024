@@ -113,16 +113,13 @@ object Output : SubsystemBase() {
 
         field.robotPose = Drivetrain.getPose()
 
-        if (Vision.getPose() == null){
-            visionField.robotPose = Pose2d(0.0, 0.0, Rotation2d(0.0))
-        } else {
-            visionField.robotPose = Vision.getPose()
-        }
+
+        visionField.robotPose = Vision.getPose()
+
         field.robotPose = Drivetrain.getPose()
 
-        if (Vision.getDriveAngleTarget()!=null){
-            visionTargetPose.robotPose = Pose2d(Vision.getPose().translation, Vision.getDriveAngleTarget())
-        }
+        visionTargetPose.robotPose = Pose2d(Vision.getPose().translation, Vision.getDriveAngleTarget())
+
         if (!Vision.getEstimation().isEmpty){
             visionEstimation.robotPose = Vision.getEstimation().get().estimatedPose.toPose2d()
         }
