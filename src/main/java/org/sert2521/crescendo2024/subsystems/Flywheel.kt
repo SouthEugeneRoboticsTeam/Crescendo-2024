@@ -35,7 +35,7 @@ object Flywheel : SubsystemBase(){
     }
 
     override fun periodic(){
-        val shouldLimit = currentFilter.calculate(Drivetrain.getDraw()>200)
+        val shouldLimit = currentFilter.calculate(Drivetrain.getDraw()>150)
 
         if (Robot.isAutonomous && currentCurrentLimit!=50){
             flywheelMotorOne.setSmartCurrentLimit(50)
