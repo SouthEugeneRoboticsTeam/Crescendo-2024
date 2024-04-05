@@ -49,10 +49,10 @@ object Autos : SubsystemBase() {
             "Finish Vision" to CancelVision(),
             "Flywheel Rev" to SetFlywheel(ConfigConstants.FLYWHEEL_SHOOT_SPEED, true).asProxy(),
             "Flywheel Stop" to SetFlywheel(ConfigConstants.FLYWHEEL_IDLE_SPEED, true).asProxy(),
-            "Podium Shot" to IntakeCommand().andThen(SetWrist(PhysicalConstants.WRIST_SETPOINT_PODIUM).asProxy()).andThen(Outtake().withTimeout(0.2)).andThen(SetWrist(PhysicalConstants.WRIST_SETPOINT_STOW).asProxy()),
-            "Podium Minus Shot" to IntakeCommand().andThen(SetWrist(PhysicalConstants.WRIST_SETPOINT_PODIUM_MINUS).asProxy()).andThen(Outtake().withTimeout(0.2)).andThen(SetWrist(PhysicalConstants.WRIST_SETPOINT_STOW).asProxy()),
-            "Podium Plus Shot" to IntakeCommand().andThen(SetWrist(PhysicalConstants.WRIST_SETPOINT_PODIUM_PLUS).asProxy()).andThen(Outtake().withTimeout(0.2)).andThen(SetWrist(PhysicalConstants.WRIST_SETPOINT_STOW).asProxy()),
-            "Podium Double Plus Shot" to IntakeCommand().andThen(SetWrist(PhysicalConstants.WRIST_SETPOINT_PODIUM_DOUBLE_PLUS).asProxy()).andThen(Outtake().withTimeout(0.2)).andThen(SetWrist(PhysicalConstants.WRIST_SETPOINT_STOW).asProxy())
+            "Podium Shot" to IntakeCommand().andThen(SetWrist(PhysicalConstants.WRIST_SETPOINT_PODIUM).asProxy()).andThen(Outtake().withTimeout(0.3)).andThen(SetWrist(PhysicalConstants.WRIST_SETPOINT_STOW).asProxy()),
+            "Podium Minus Shot" to IntakeCommand().andThen(SetWrist(PhysicalConstants.WRIST_SETPOINT_PODIUM_MINUS).asProxy()).andThen(Outtake().withTimeout(0.3)).andThen(SetWrist(PhysicalConstants.WRIST_SETPOINT_STOW).asProxy()),
+            "Podium Plus Shot" to IntakeCommand().andThen(SetWrist(PhysicalConstants.WRIST_SETPOINT_PODIUM_PLUS).asProxy()).andThen(Outtake().withTimeout(0.3)).andThen(SetWrist(PhysicalConstants.WRIST_SETPOINT_STOW).asProxy()),
+            "Podium Double Plus Shot" to IntakeCommand().andThen(SetWrist(PhysicalConstants.WRIST_SETPOINT_PODIUM_DOUBLE_PLUS).asProxy()).andThen(Outtake().withTimeout(0.3)).andThen(SetWrist(PhysicalConstants.WRIST_SETPOINT_STOW).asProxy())
     )
 
 

@@ -92,6 +92,7 @@ object Robot : TimedRobot()
          */
         Wrist.rezeroEncoder()
         Drivetrain.setCurrentLimit(60)
+        Wrist.setCurrentLimit(30)
         autonomousCommand = Autos.getAuto()
         autonomousCommand?.schedule()
     }
@@ -104,6 +105,7 @@ object Robot : TimedRobot()
     override fun autonomousExit() {
         Vision.removeDefaultCommand()
         Drivetrain.setCurrentLimit(55)
+        Wrist.setCurrentLimit(30)
         //Drivetrain.setNewPose(Pose2d(Drivetrain.getPose().translation, Rotation2d(Drivetrain.getPose().rotation.radians+PI)))
     }
 
