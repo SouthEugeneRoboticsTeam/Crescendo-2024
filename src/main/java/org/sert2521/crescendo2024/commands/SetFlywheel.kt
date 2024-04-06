@@ -46,5 +46,6 @@ class SetFlywheel(private val rpm:Double, private val ends: Boolean = false) : C
         }
         Flywheel.setVoltages(Pair(0.0, 0.0))
         RuntimeConstants.flywheelRevved = false
+        //SetFlywheel(ConfigConstants.FLYWHEEL_IDLE_SPEED)
     }
 }

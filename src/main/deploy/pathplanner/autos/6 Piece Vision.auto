@@ -5,7 +5,7 @@
       "x": 1.3672044277191162,
       "y": 5.544422626495361
     },
-    "rotation": -9.606793018601367e-29
+    "rotation": 3.4454104234751817e-28
   },
   "command": {
     "type": "sequential",
@@ -184,7 +184,7 @@
                     {
                       "type": "named",
                       "data": {
-                        "name": "Wrist Vision"
+                        "name": "Wrist Vision Debounce"
                       }
                     }
                   ]
@@ -253,7 +253,7 @@
                     {
                       "type": "named",
                       "data": {
-                        "name": "Wrist Vision"
+                        "name": "Wrist Vision Debounce"
                       }
                     }
                   ]

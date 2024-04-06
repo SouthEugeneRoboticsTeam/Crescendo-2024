@@ -46,6 +46,7 @@ object Autos : SubsystemBase() {
             "Wrist Podium Plus Half" to SetWrist(PhysicalConstants.WRIST_SETPOINT_PODIUM_PLUS_HALF).asProxy(),
             "Wrist Far" to SetWrist(PhysicalConstants.WRIST_SETPOINT_FAR).asProxy(),
             "Wrist Vision" to StartVision().andThen(WristVision()),
+            "Wrist Vision Debounce" to StartVision().andThen(WristVision(true)),
             "Finish Vision" to CancelVision(),
             "Flywheel Rev" to SetFlywheel(ConfigConstants.FLYWHEEL_SHOOT_SPEED, true).asProxy(),
             "Flywheel Stop" to SetFlywheel(ConfigConstants.FLYWHEEL_IDLE_SPEED, true).asProxy(),

@@ -1,6 +1,7 @@
 package org.sert2521.crescendo2024
 
 import edu.wpi.first.math.geometry.Pose2d
+import edu.wpi.first.math.geometry.Rotation2d
 import edu.wpi.first.wpilibj.DriverStation
 import edu.wpi.first.wpilibj.GenericHID
 import edu.wpi.first.wpilibj.Joystick
@@ -41,18 +42,21 @@ object Input {
     private val sourceIntake = JoystickButton(gunnerController, 10)
     private val rezeroNote = JoystickButton(gunnerController, 9)
     private val passRev = Trigger{ gunnerController.pov==0 }
+    private val testButton = JoystickButton(driverController, 2)
 
     private val rumble = Trigger({ Indexer.getBeamBreak() })
     init{
         intake.whileTrue(IntakeCommand())
         intakeReverse.whileTrue(IntakeReverse())
         rev.whileTrue(SetFlywheel(ConfigConstants.FLYWHEEL_SHOOT_SPEED))
+        rev.onFalse(SetFlywheel(ConfigConstants.FLYWHEEL_IDLE_SPEED))
         outtake.whileTrue(Outtake())
 
         wristStow.onTrue(SetWrist(PhysicalConstants.WRIST_SETPOINT_STOW))
         wristAmp.onTrue(SetWrist(PhysicalConstants.WRIST_SETPOINT_AMP))
         wristPodium.onTrue(SetWrist(PhysicalConstants.WRIST_SETPOINT_PODIUM))
         wristAmpRev.whileTrue(SetFlywheel(2000.0))
+        wristAmpRev.onFalse(SetFlywheel(ConfigConstants.FLYWHEEL_IDLE_SPEED))
 
         manualUp.whileTrue(SetClimb(1.0))
         manualDown.whileTrue(SetClimb(-1.0))
@@ -65,18 +69,19 @@ object Input {
         //armDown.whileTrue(ManualArmCommand(-0.5))
         sourceIntake.onTrue(SetWrist(PhysicalConstants.WRIST_SETPOINT_SOURCE))
         sourceIntake.whileTrue(SetFlywheel(-4000.0))
-        sourceIntake.onFalse(RezeroNote())
+        sourceIntake.onFalse(RezeroNote().alongWith(SetFlywheel(ConfigConstants.FLYWHEEL_IDLE_SPEED)))
         rezeroNote.whileTrue(RezeroNote())
         //manualUp.whileTrue(ManualArmCommand(0.2))
         //manualDown.whileTrue(ManualArmCommand(-0.2))
         // visionAlign.whileTrue()
         resetAngle.onTrue(InstantCommand({ Drivetrain.setNewPose(Pose2d()) }))
         rumble.onTrue(InstantCommand({setRumble(0.8)}).andThen(WaitCommand(0.2).andThen(InstantCommand({ setRumble(0.0) }))))
-
+        //testButton.onTrue(InstantCommand({Drivetrain.setNewVisionPose(Pose2d(2.0, 3.0, Rotation2d(0.0)))}))
         resetWrist.whileTrue(ResetWrist())
         visionAlign.whileTrue(VisionAlign())
         visionAlign.onFalse(SetWrist(PhysicalConstants.WRIST_SETPOINT_STOW))
         passRev.whileTrue(SetFlywheel(3000.0))
+        passRev.onFalse(SetFlywheel(ConfigConstants.FLYWHEEL_IDLE_SPEED))
         //visionAlign.onTrue(InstantCommand({Wrist.rezeroEncoder()}))
 
         //secondarySpeedButton.onTrue(InstantCommand({ secondarySpeedMode = !secondarySpeedMode }))
