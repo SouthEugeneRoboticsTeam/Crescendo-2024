@@ -63,7 +63,7 @@ object PhysicalConstants{
     val centerPose = Transform3d(Translation3d(Units.inchesToMeters(-10.029), Units.inchesToMeters(6.081), Units.inchesToMeters(15.26)), Rotation3d(0.0, 0.349, PI))
 
     val speakerTransRed = Translation2d(aprilTagField.tags[3].pose.translation.toTranslation2d().x, aprilTagField.tags[3].pose.translation.toTranslation2d().y)
-    val speakerTransBlue = Translation2d(aprilTagField.tags[7].pose.translation.toTranslation2d().x, aprilTagField.tags[7].pose.translation.toTranslation2d().y)
+    val speakerTransBlue = Translation2d(aprilTagField.tags[7].pose.translation.toTranslation2d().x, aprilTagField.tags[7].pose.translation.toTranslation2d().y+0.5)
 
     const val FLYWHEEL_GEAR_RATIO = 3.0/2.0
 
@@ -180,7 +180,7 @@ object TuningConstants {
         wristAngLookup.put(2.8, 0.22)
         wristAngLookup.put(3.04, 0.256)
         wristAngLookup.put(3.23, 0.275)
-        wristAngLookup.put(3.48, 0.307)
+        wristAngLookup.put(3.48, 0.32)
         wristAngLookup.put(4.025, 0.354)
         wristAngLookup.put(4.49, 0.387)
         wristAngLookup.put(4.82, 0.4)
