@@ -18,6 +18,7 @@ object Output : SubsystemBase() {
     private val visionField = Field2d()
     private val visionTargetPose = Field2d()
     private val visionEstimation = Field2d()
+    private val testField = Field2d()
     private var drivetrainAmps: Array<Pair<Double, Double>> = arrayOf()
     private var flywheelAmps = Flywheel.getAmps()
     private var wristAmps = Wrist.getAmps()
@@ -90,6 +91,7 @@ object Output : SubsystemBase() {
         SmartDashboard.putData("Vision Pose Target", visionTargetPose)
         SmartDashboard.putData("Field", field)
         SmartDashboard.putData("Vision Estimation", visionEstimation)
+        SmartDashboard.putData("Test Field", testField)
 
         update()
     }
@@ -110,6 +112,8 @@ object Output : SubsystemBase() {
         for (bool in bools) {
             SmartDashboard.putBoolean("Output/${bool.first}", bool.second())
         }
+        testField.robotPose = Pose2d(PhysicalConstants.speakerTransRed, Rotation2d(0.0))
+
 
         field.robotPose = Drivetrain.getPose()
 
