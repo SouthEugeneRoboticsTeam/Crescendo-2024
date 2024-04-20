@@ -4,6 +4,7 @@
       "/FMSInfo": "FMSInfo",
       "/SmartDashboard/Auto Chooser": "String Chooser",
       "/SmartDashboard/Field": "Field2d",
+      "/SmartDashboard/Test Field": "Field2d",
       "/SmartDashboard/Vision Estimation": "Field2d",
       "/SmartDashboard/Vision Field": "Field2d",
       "/SmartDashboard/Vision Pose Target": "Field2d"

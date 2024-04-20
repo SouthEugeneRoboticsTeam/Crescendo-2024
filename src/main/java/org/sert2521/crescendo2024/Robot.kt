@@ -7,6 +7,8 @@ import edu.wpi.first.wpilibj.TimedRobot
 import edu.wpi.first.wpilibj2.command.Command
 import edu.wpi.first.wpilibj2.command.CommandScheduler
 import edu.wpi.first.wpilibj2.command.Commands
+import edu.wpi.first.wpilibj2.command.InstantCommand
+import org.sert2521.crescendo2024.commands.SetFlywheel
 import org.sert2521.crescendo2024.subsystems.*
 import kotlin.math.PI
 
@@ -93,6 +95,12 @@ object Robot : TimedRobot()
         Wrist.rezeroEncoder()
         Drivetrain.setCurrentLimit(60)
         Wrist.setCurrentLimit(30)
+
+        val holdCommand = InstantCommand({ if (RuntimeConstants.flywheelGoal != 0.0){
+            SetFlywheel(RuntimeConstants.flywheelGoal, false).schedule() }})
+        holdCommand.addRequirements(Flywheel)
+        Flywheel.defaultCommand = holdCommand
+
         autonomousCommand = Autos.getAuto()
         autonomousCommand?.schedule()
     }
@@ -114,6 +122,7 @@ object Robot : TimedRobot()
         // This makes sure that the autonomous stops running when teleop starts running. If you want the
         // autonomous to continue until interrupted by another command, remove this line or comment it out.
         Drivetrain.setCurrentLimit(55)
+        Flywheel.defaultCommand = SetFlywheel(ConfigConstants.FLYWHEEL_IDLE_SPEED)
         autonomousCommand?.cancel()
         RuntimeConstants.wristSetPoint = PhysicalConstants.WRIST_SETPOINT_STOW
     }

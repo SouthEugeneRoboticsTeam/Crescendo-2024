@@ -16,7 +16,7 @@ class VisionAlign() : Command() {
 
     var prevWristTarget = PhysicalConstants.WRIST_SETPOINT_STOW
     var currWristTarget = PhysicalConstants.WRIST_SETPOINT_STOW
-    var drivetrainTarget:Rotation2d? = Rotation2d(0.0)
+    var drivetrainTarget:Rotation2d = Rotation2d(0.0)
     var wristCommand:Command = SetWrist(PhysicalConstants.WRIST_SETPOINT_STOW, false)
     var commandedWristAngle = PhysicalConstants.WRIST_SETPOINT_STOW
     //DOES NOT MEAN TRAP AS IN THE STAGE THINGY

@@ -53,6 +53,11 @@ object Output : SubsystemBase() {
         values.add(Pair("Drive 3 Amps Angle") { drivetrainAmps[2].second })
         values.add(Pair("Drive 4 Amps Angle") { drivetrainAmps[3].second })
 
+        values.add(Pair("Drive 1 Health") {Drivetrain.getHealth(0)})
+        values.add(Pair("Drive 2 Health") {Drivetrain.getHealth(1)})
+        values.add(Pair("Drive 3 Health") {Drivetrain.getHealth(2)})
+        values.add(Pair("Drive 4 Health") {Drivetrain.getHealth(3)})
+
         values.add(Pair("Wrist Angle") { Wrist.getRadians() })
 
         values.add(Pair("Wrist 1 Amps") { wristAmps.first })

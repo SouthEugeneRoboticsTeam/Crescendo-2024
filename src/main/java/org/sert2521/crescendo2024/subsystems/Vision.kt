@@ -1,37 +1,24 @@
 package org.sert2521.crescendo2024.subsystems
 
-import edu.wpi.first.cscore.VideoSource
 import edu.wpi.first.math.geometry.Pose2d
 import edu.wpi.first.math.geometry.Rotation2d
-import edu.wpi.first.util.sendable.Sendable
-import edu.wpi.first.util.sendable.SendableBuilder
 import edu.wpi.first.wpilibj.DriverStation
-import edu.wpi.first.wpilibj.shuffleboard.SendableCameraWrapper
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard
-import edu.wpi.first.wpilibj2.command.InstantCommand
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.wpilibj2.command.SubsystemBase
 import org.photonvision.EstimatedRobotPose
 import org.photonvision.PhotonCamera
 import org.photonvision.PhotonPoseEstimator
-import org.photonvision.targeting.PhotonPipelineResult
-import org.photonvision.targeting.PhotonTrackedTarget
 import org.sert2521.crescendo2024.Input
 import org.sert2521.crescendo2024.PhysicalConstants
-import org.sert2521.crescendo2024.RuntimeConstants
 import org.sert2521.crescendo2024.TuningConstants
-import org.sert2521.crescendo2024.commands.SetWrist
-import org.sert2521.crescendo2024.commands.WristVision
 import java.util.*
-import kotlin.math.*
+import kotlin.math.PI
+import kotlin.math.abs
+import kotlin.math.atan2
 
 object Vision : SubsystemBase() {
 
     private val cam = PhotonCamera("Left2")
-    private var result: PhotonPipelineResult = cam.latestResult
 
-    private var targets:List<PhotonTrackedTarget> = result.targets
-
-    private var bestTarget:PhotonTrackedTarget? = null
 
     private val visionPoseEstimator = PhotonPoseEstimator(PhysicalConstants.usedField, PhotonPoseEstimator.PoseStrategy.MULTI_TAG_PNP_ON_COPROCESSOR, cam, PhysicalConstants.centerPose)
     private var estimation:Optional<EstimatedRobotPose>
@@ -52,7 +39,7 @@ object Vision : SubsystemBase() {
         return Drivetrain.getVisionPose()
     }
 
-    fun getDistanceSpeaker():Double?{
+    fun getDistanceSpeaker():Double{
         //var distance:Double
 
         val speakerTrans = if (Input.getColor()==DriverStation.Alliance.Blue){
@@ -65,12 +52,14 @@ object Vision : SubsystemBase() {
     }
 
     fun getVisionWristAngle():Double{
-        val distance = getDistanceSpeaker()
-        return if (distance == null){
-            PhysicalConstants.WRIST_SETPOINT_STOW
+
+        val distance:Double
+        if (Input.getColor()==DriverStation.Alliance.Red){
+            distance = getDistanceSpeaker()-(abs(getDriveAngleTarget().degrees-180.0)*TuningConstants.VISION_ANGLE_COR)
         } else {
-            TuningConstants.wristAngLookup.get(distance)
+            distance = getDistanceSpeaker()-(abs(getDriveAngleTarget().degrees)*TuningConstants.VISION_ANGLE_COR)
         }
+        return TuningConstants.wristAngLookup.get(distance)
     }
 
     fun getDriveAngleTarget():Rotation2d{
