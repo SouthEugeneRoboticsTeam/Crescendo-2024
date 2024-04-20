@@ -44,6 +44,7 @@ object PhysicalConstants{
     var WRIST_SETPOINT_PODIUM_DOUBLE_PLUS = 0.2927
     const val WRIST_SETPOINT_PODIUM_TRIPLE_PLUS = 0.33
     const val WRIST_SETPOINT_SOURCE = 0.869
+    const val WRIST_SETPOINT_PARALLEL_PASS = 0.65
 
     val aprilTagField: AprilTagFieldLayout = AprilTagFields.k2024Crescendo.loadAprilTagLayoutField()
     val FIELD_WIDTH = aprilTagField.fieldWidth
@@ -88,7 +89,7 @@ object ConfigConstants{
 
     const val DRIVE_OPTIMIZED = true
 
-    const val FLYWHEEL_IDLE_SPEED = 2000.0
+    const val FLYWHEEL_IDLE_SPEED = 3000.0
     const val FLYWHEEL_SHOOT_SPEED = 5000.0
 }
 
@@ -109,10 +110,10 @@ object SwerveConstants{
     const val ANGLE_D = 0.0
 
     val swerveModuleData = listOf(
-            SwerveModuleData(Translation2d(HALF_SIDE_LENGTH, -HALF_SIDE_LENGTH), 5, 7, 16, -0.355-1.61, false), //Back Left
-            SwerveModuleData(Translation2d(-HALF_SIDE_LENGTH, -HALF_SIDE_LENGTH), 1, 2, 15, -0.138-1.57, false), //Back Right
-            SwerveModuleData(Translation2d(HALF_SIDE_LENGTH, HALF_SIDE_LENGTH), 16, 15, 14, 2.41-1.612, false), //Front Left
-            SwerveModuleData(Translation2d(-HALF_SIDE_LENGTH, HALF_SIDE_LENGTH), 3, 12, 13, 0.059-1.568, false)) //Front Right
+            SwerveModuleData(Translation2d(HALF_SIDE_LENGTH, -HALF_SIDE_LENGTH), 5, 7, 16, -0.355-1.61-1.56+PI/2, false), //Back Left
+            SwerveModuleData(Translation2d(-HALF_SIDE_LENGTH, -HALF_SIDE_LENGTH), 1, 2, 15, -0.138-1.57-1.54+PI/2, false), //Back Right
+            SwerveModuleData(Translation2d(HALF_SIDE_LENGTH, HALF_SIDE_LENGTH), 16, 15, 14, 2.41-1.612-1.58+PI/2, false), //Front Left
+            SwerveModuleData(Translation2d(-HALF_SIDE_LENGTH, HALF_SIDE_LENGTH), 3, 12, 13, 0.059-1.568-1.575+PI/2, false)) //Front Right
 
     // Pi * diameter / gear ratio
     const val POWER_ENCODER_MULTIPLY_POSITION = PI * 0.1016 / 5.903
@@ -181,7 +182,8 @@ object TuningConstants {
         wristAngLookup.put(3.04, 0.256)
         wristAngLookup.put(3.23, 0.275)
         wristAngLookup.put(3.48, 0.32)
-        wristAngLookup.put(4.025, 0.354)
+        wristAngLookup.put(3.74, 0.35)
+        wristAngLookup.put(4.025, 0.365)
         wristAngLookup.put(4.49, 0.387)
         wristAngLookup.put(4.82, 0.4)
         wristAngLookup.put(5.25, 0.423)
@@ -230,6 +232,8 @@ object TuningConstants {
     const val FLYWHEEL_KV = 0.0015
     const val FLYWHEEL_KA = 0.0
 
+    const val FLYWHEEL_BB_AGGRO = 1.0
+
     const val FLYWHEEL_IDLE_SPEED = 0.0
 
     const val CLIMBER_FILTER = 0.0
@@ -244,4 +248,8 @@ object TuningConstants {
     const val CLIMBER_STALL_SPEED = 0.1
 
     const val CLIMB_SPEED = 0.0
+
+
+    //Good starting place 1/450, 0.00314
+    const val VISION_ANGLE_COR = 0.0
 }
