@@ -152,6 +152,10 @@ class SwerveModule(private val powerMotor: CANSparkMax,
         angleMotor.stopMotor()
     }
 
+    fun getCanHealth():Int{
+        return angleEncoder.magnetHealth.value.value
+    }
+
     override fun getDescription(): String {
         return "Swerve Module"
     }
@@ -450,6 +454,10 @@ object Drivetrain : SubsystemBase() {
         for (module in modules){
             module.setCurrentLimit(amps)
         }
+    }
+
+    fun getMagnetHealth(module:Int):Int{
+        return modules[module].getCanHealth()
     }
 
     fun stop() {
