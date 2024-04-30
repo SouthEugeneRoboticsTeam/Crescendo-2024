@@ -88,6 +88,8 @@ object Autos : SubsystemBase() {
         autoChooser.addOption("5 Piece 3-2-1", PathPlannerAuto("5 Race 3-2-1"))
         autoChooser.addOption("5 Piece 2-3-1 (F3)", PathPlannerAuto("5 Race 2-3-1"))
         autoChooser.addOption("4 Piece Source Vision", PathPlannerAuto("4 Piece Source Vision"))
+        autoChooser.addOption("4 Close", PathPlannerAuto("4 Close"))
+        autoChooser.addOption("4 Race 2-1-Exit", PathPlannerAuto("4 Race 2-1-Exit"))
         //autoChooser.addOption("Amp Race 3rd Mid First", PathPlannerAuto("5 Amp Race 3rd First"))
         autoChooser.setDefaultOption("None", Commands.none())
         //NOT FINISHED

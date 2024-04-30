@@ -41,11 +41,7 @@ object Flywheel : SubsystemBase(){
             flywheelMotorOne.setSmartCurrentLimit(50)
             flywheelMotorTwo.setSmartCurrentLimit(50)
             currentCurrentLimit=50
-        } else if (shouldLimit&&currentCurrentLimit!=15){
-            flywheelMotorOne.setSmartCurrentLimit(15)
-            flywheelMotorTwo.setSmartCurrentLimit(15)
-            currentCurrentLimit=15
-        } else if (!shouldLimit && currentCurrentLimit!=20) {
+        } else if (currentCurrentLimit!=20){
             flywheelMotorOne.setSmartCurrentLimit(20)
             flywheelMotorTwo.setSmartCurrentLimit(20)
             currentCurrentLimit=20

@@ -152,8 +152,8 @@ class SwerveModule(private val powerMotor: CANSparkMax,
         angleMotor.stopMotor()
     }
 
-    fun getCanHealth():Int{
-        return angleEncoder.magnetHealth.value.value
+    fun getHealth():Double{
+        return angleEncoder.magnetHealth.valueAsDouble
     }
 
     override fun getDescription(): String {
@@ -332,8 +332,6 @@ object Drivetrain : SubsystemBase() {
         odometry.resetPosition(-imu.rotation2d, positionsArray, pose)
     }
     fun setNewVisionPose(newPose: Pose2d) {
-        visionPose = Pose2d(newPose.y, newPose.x, -newPose.rotation)
-
         val positions = mutableListOf<SwerveModulePosition>()
 
         for (module in modules) {
@@ -343,7 +341,7 @@ object Drivetrain : SubsystemBase() {
 
         val positionsArray = positions.toTypedArray()
 
-        poseEstimator.resetPosition(-imu.rotation2d, positionsArray, visionPose)
+        poseEstimator.resetPosition(-imu.rotation2d, positionsArray, newPose)
     }
 
     fun setVisionStandardDeviations() {
@@ -450,14 +448,14 @@ object Drivetrain : SubsystemBase() {
         }
     }
 
+    fun getHealth(module:Int):Double{
+        return modules[module].getHealth()
+    }
+
     fun setCurrentLimit(amps:Int){
         for (module in modules){
             module.setCurrentLimit(amps)
         }
-    }
-
-    fun getMagnetHealth(module:Int):Int{
-        return modules[module].getCanHealth()
     }
 
     fun stop() {

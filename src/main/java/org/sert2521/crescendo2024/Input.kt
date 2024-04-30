@@ -42,6 +42,7 @@ object Input {
     private val sourceIntake = JoystickButton(gunnerController, 10)
     private val rezeroNote = JoystickButton(gunnerController, 9)
     private val passRev = Trigger{ gunnerController.pov==0 }
+    private val wristParallelPass = JoystickButton(driverController, 5)
     private val testButton = JoystickButton(driverController, 2)
 
     private val rumble = Trigger({ Indexer.getBeamBreak() })
@@ -58,6 +59,9 @@ object Input {
         wristAmpRev.whileTrue(SetFlywheel(2000.0))
         //wristAmpRev.onFalse(SetFlywheel(ConfigConstants.FLYWHEEL_IDLE_SPEED))
 
+        wristParallelPass.onTrue(SetWrist(PhysicalConstants.WRIST_SETPOINT_PARALLEL_PASS))
+        wristParallelPass.onFalse(SetWrist(PhysicalConstants.WRIST_SETPOINT_STOW))
+
         manualUp.whileTrue(SetClimb(1.0))
         manualDown.whileTrue(SetClimb(-1.0))
 
@@ -65,8 +69,8 @@ object Input {
         climb.whileTrue(ClimbInitiate())
         // Make these do stuff
         //TODO:UNBIND THE MANUAL ARM
-        //armUp.whileTrue(ManualArmCommand(0.5))
-        //armDown.whileTrue(ManualArmCommand(-0.5))
+        armUp.whileTrue(ManualArmCommand(0.5))
+        armDown.whileTrue(ManualArmCommand(-0.5))
         sourceIntake.onTrue(SetWrist(PhysicalConstants.WRIST_SETPOINT_SOURCE))
         sourceIntake.whileTrue(SetFlywheel(-4000.0))
         sourceIntake.onFalse(RezeroNote())//.alongWith(SetFlywheel(ConfigConstants.FLYWHEEL_IDLE_SPEED)))
@@ -83,6 +87,7 @@ object Input {
         passRev.whileTrue(SetFlywheel(3000.0))
         //passRev.onFalse(SetFlywheel(ConfigConstants.FLYWHEEL_IDLE_SPEED))
         //visionAlign.onTrue(InstantCommand({Wrist.rezeroEncoder()}))
+        testButton.onTrue(InstantCommand({Drivetrain.setNewVisionPose(Pose2d(4.0, 6.0, Rotation2d(1.0)))}))
 
         //secondarySpeedButton.onTrue(InstantCommand({ secondarySpeedMode = !secondarySpeedMode }))
         //secondarySpeedButton.onFalse(InstantCommand({ secondarySpeedMode = !secondarySpeedMode }))

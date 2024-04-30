@@ -83,7 +83,7 @@
                     {
                       "type": "named",
                       "data": {
-                        "name": "Wrist Vision"
+                        "name": "Wrist Vision Debounce"
                       }
                     }
                   ]
@@ -152,7 +152,7 @@
                     {
                       "type": "named",
                       "data": {
-                        "name": "Wrist Vision"
+                        "name": "Wrist Vision Debounce"
                       }
                     }
                   ]
@@ -231,7 +231,7 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "Wrist Vision"
+                  "name": "Wrist Vision Debounce"
                 }
               },
               {
