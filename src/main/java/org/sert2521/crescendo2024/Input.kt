@@ -54,7 +54,8 @@ object Input {
         outtake.whileTrue(Outtake())
 
         wristStow.onTrue(SetWrist(PhysicalConstants.WRIST_SETPOINT_STOW))
-        wristAmp.onTrue(SetWrist(PhysicalConstants.WRIST_SETPOINT_AMP))
+        // commented out for demo mode
+        // wristAmp.onTrue(SetWrist(PhysicalConstants.WRIST_SETPOINT_AMP))
         wristPodium.onTrue(SetWrist(PhysicalConstants.WRIST_SETPOINT_PODIUM))
         wristAmpRev.whileTrue(SetFlywheel(2000.0))
         //wristAmpRev.onFalse(SetFlywheel(ConfigConstants.FLYWHEEL_IDLE_SPEED))
