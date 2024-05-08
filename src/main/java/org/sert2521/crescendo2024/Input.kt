@@ -22,28 +22,32 @@ object Input {
     private val driverController = XboxController(0)
     private val gunnerController = Joystick(1)
 
-    private val intake = JoystickButton(driverController, 5)
+    private val intake = JoystickButton(driverController, 3)
+    // private val visionAlign = JoystickButton(driverController, 1)
+    private val resetAngleOne = JoystickButton(driverController, 7)
+    private val resetAngleTwo = JoystickButton(driverController, 8)
+    // private val secondarySpeedButton = JoystickButton(driverController, 2)
+    private val wristParallelPass = JoystickButton(driverController, 5)
+    private val testButton = JoystickButton(driverController, 2)
+
+
     private val intakeReverse = JoystickButton(gunnerController, 2)
     private val rev = JoystickButton(gunnerController, 3)
     private val outtake = JoystickButton(driverController, 6)
     private val wristStow = JoystickButton(gunnerController, 7)
-    //private val wristAmp = JoystickButton(gunnerController, 5)
+    // private val wristAmp = JoystickButton(gunnerController, 5)
     private val wristPodium = JoystickButton(gunnerController, 6)
     private val wristAmpRev = JoystickButton(gunnerController, 4)
     private val manualUp = JoystickButton(gunnerController, 13)
     private val manualDown = JoystickButton(gunnerController, 11)
     private val climb = JoystickButton(gunnerController, 12)
-    private val visionAlign = JoystickButton(driverController, 1)
-    private val resetAngle = JoystickButton(driverController, 4)
-    private val secondarySpeedButton = JoystickButton(driverController, 2)
     private val resetWrist = JoystickButton(gunnerController, 8)
     private val armUp = JoystickButton(gunnerController, 15)
     private val armDown = JoystickButton(gunnerController, 16)
     private val sourceIntake = JoystickButton(gunnerController, 10)
     private val rezeroNote = JoystickButton(gunnerController, 9)
     private val passRev = Trigger{ gunnerController.pov==0 }
-    private val wristParallelPass = JoystickButton(driverController, 5)
-    private val testButton = JoystickButton(driverController, 2)
+
 
     private val rumble = Trigger({ Indexer.getBeamBreak() })
     init{
@@ -79,7 +83,9 @@ object Input {
         //manualUp.whileTrue(ManualArmCommand(0.2))
         //manualDown.whileTrue(ManualArmCommand(-0.2))
         // visionAlign.whileTrue()
-        resetAngle.onTrue(InstantCommand({ Drivetrain.setNewPose(Pose2d()) }))
+        resetAngleOne.and(resetAngleTwo::getAsBoolean).onTrue(InstantCommand({ Drivetrain.setNewPose(Pose2d()) }))
+
+        //resetAngle.onTrue(InstantCommand({ Drivetrain.setNewPose(Pose2d()) }))
         rumble.onTrue(InstantCommand({setRumble(0.8)}).andThen(WaitCommand(0.2).andThen(InstantCommand({ setRumble(0.0) }))))
         //testButton.onTrue(InstantCommand({Drivetrain.setNewVisionPose(Pose2d(2.0, 3.0, Rotation2d(0.0)))}))
         resetWrist.whileTrue(ResetWrist())
