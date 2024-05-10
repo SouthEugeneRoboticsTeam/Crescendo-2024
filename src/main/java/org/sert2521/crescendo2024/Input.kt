@@ -22,17 +22,17 @@ object Input {
     private val driverController = XboxController(0)
     private val gunnerController = Joystick(1)
 
-    private val intake = JoystickButton(driverController, 3)
-    // private val visionAlign = JoystickButton(driverController, 1)
+    private val intake = JoystickButton(driverController, 5)
+    private val visionAlign = JoystickButton(driverController, 1)
     private val resetAngleOne = JoystickButton(driverController, 7)
     private val resetAngleTwo = JoystickButton(driverController, 8)
     // private val secondarySpeedButton = JoystickButton(driverController, 2)
-    private val wristParallelPass = JoystickButton(driverController, 5)
+    //private val wristParallelPass = JoystickButton(driverController, 5)
     private val testButton = JoystickButton(driverController, 2)
 
 
     private val intakeReverse = JoystickButton(gunnerController, 2)
-    private val rev = JoystickButton(gunnerController, 3)
+    private val rev = Trigger({driverController.rightTriggerAxis>0.3})
     private val outtake = JoystickButton(driverController, 6)
     private val wristStow = JoystickButton(gunnerController, 7)
     // private val wristAmp = JoystickButton(gunnerController, 5)
@@ -64,8 +64,8 @@ object Input {
         wristAmpRev.whileTrue(SetFlywheel(2000.0))
         //wristAmpRev.onFalse(SetFlywheel(ConfigConstants.FLYWHEEL_IDLE_SPEED))
 
-        wristParallelPass.onTrue(SetWrist(PhysicalConstants.WRIST_SETPOINT_PARALLEL_PASS))
-        wristParallelPass.onFalse(SetWrist(PhysicalConstants.WRIST_SETPOINT_STOW))
+        //wristParallelPass.onTrue(SetWrist(PhysicalConstants.WRIST_SETPOINT_PARALLEL_PASS))
+        //wristParallelPass.onFalse(SetWrist(PhysicalConstants.WRIST_SETPOINT_STOW))
 
         manualUp.whileTrue(SetClimb(1.0))
         manualDown.whileTrue(SetClimb(-1.0))
@@ -89,8 +89,8 @@ object Input {
         rumble.onTrue(InstantCommand({setRumble(0.8)}).andThen(WaitCommand(0.2).andThen(InstantCommand({ setRumble(0.0) }))))
         //testButton.onTrue(InstantCommand({Drivetrain.setNewVisionPose(Pose2d(2.0, 3.0, Rotation2d(0.0)))}))
         resetWrist.whileTrue(ResetWrist())
-        //visionAlign.whileTrue(VisionAlign())
-        //visionAlign.onFalse(SetWrist(PhysicalConstants.WRIST_SETPOINT_STOW))
+        visionAlign.whileTrue(VisionAlign())
+        visionAlign.onFalse(SetWrist(PhysicalConstants.WRIST_SETPOINT_STOW))
         passRev.whileTrue(SetFlywheel(3000.0))
         //passRev.onFalse(SetFlywheel(ConfigConstants.FLYWHEEL_IDLE_SPEED))
         //visionAlign.onTrue(InstantCommand({Wrist.rezeroEncoder()}))

@@ -78,9 +78,9 @@ object ConfigConstants{
     const val ROT_DEADBAND = 0.07
 
     //Drive speed constants
-    const val DRIVE_SPEED = 1.0
+    const val DRIVE_SPEED = 2.0
     const val DRIVE_SECONDARY_SPEED = 1.0
-    const val ROT_SPEED = 2.0
+    const val ROT_SPEED = 3.0
     const val ROT_SECONDARY_SPEED = 2.0
 
     //Acceleration of drivetrain
@@ -89,8 +89,8 @@ object ConfigConstants{
 
     const val DRIVE_OPTIMIZED = true
 
-    const val FLYWHEEL_IDLE_SPEED = 500.0 //What does this do
-    const val FLYWHEEL_SHOOT_SPEED = 1000.0
+    const val FLYWHEEL_IDLE_SPEED = 3000.0
+    const val FLYWHEEL_SHOOT_SPEED = 3000.0
 }
 
 object SwerveConstants{
