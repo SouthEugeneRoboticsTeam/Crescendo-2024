@@ -83,6 +83,7 @@ object Input {
         //testButton.onTrue(InstantCommand({Drivetrain.setNewVisionPose(Pose2d(2.0, 3.0, Rotation2d(0.0)))}))
         resetWrist.whileTrue(ResetWrist())
         visionAlign.whileTrue(VisionAlign())
+        visionAlign.whileTrue(SetFlywheel(5000.0 ).onlyIf(rev::getAsBoolean))
         visionAlign.onFalse(SetWrist(PhysicalConstants.WRIST_SETPOINT_STOW))
         passRev.whileTrue(SetFlywheel(3000.0))
         //passRev.onFalse(SetFlywheel(ConfigConstants.FLYWHEEL_IDLE_SPEED))
