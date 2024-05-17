@@ -22,7 +22,7 @@ object Input {
     private val driverController = XboxController(0)
     private val gunnerController = Joystick(1)
 
-    private val intake = JoystickButton(driverController, 5)
+    private val intake = JoystickButton(driverController, 6)
     private val visionAlign = JoystickButton(driverController, 1)
     private val resetAngleOne = JoystickButton(driverController, 7)
     private val resetAngleTwo = JoystickButton(driverController, 8)
@@ -32,8 +32,8 @@ object Input {
 
 
     private val intakeReverse = JoystickButton(gunnerController, 2)
-    private val rev = Trigger({driverController.rightTriggerAxis>0.3})
-    private val outtake = JoystickButton(driverController, 6)
+    //private val rev = Trigger({driverController.rightTriggerAxis>0.3})
+    private val outtake = JoystickButton(driverController, 5)
     private val wristStow = JoystickButton(gunnerController, 7)
     // private val wristAmp = JoystickButton(gunnerController, 5)
     private val wristPodium = JoystickButton(gunnerController, 6)
@@ -53,7 +53,7 @@ object Input {
     init{
         intake.whileTrue(IntakeCommand())
         intakeReverse.whileTrue(IntakeReverse())
-        rev.whileTrue(SetFlywheel(ConfigConstants.FLYWHEEL_SHOOT_SPEED))
+        //rev.whileTrue(SetFlywheel(ConfigConstants.FLYWHEEL_SHOOT_SPEED))
         //rev.onFalse(SetFlywheel(ConfigConstants.FLYWHEEL_IDLE_SPEED))
         outtake.whileTrue(Outtake())
 

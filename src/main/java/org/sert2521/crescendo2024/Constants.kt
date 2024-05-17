@@ -89,7 +89,7 @@ object ConfigConstants{
 
     const val DRIVE_OPTIMIZED = true
 
-    const val FLYWHEEL_IDLE_SPEED = 0.0
+    const val FLYWHEEL_IDLE_SPEED = 3000.0
     const val FLYWHEEL_SHOOT_SPEED = 1500.0
 }
 
@@ -234,7 +234,7 @@ object TuningConstants {
 
     const val FLYWHEEL_BB_AGGRO = 1.0
 
-    const val FLYWHEEL_IDLE_SPEED = 0.0
+    const val FLYWHEEL_IDLE_SPEED = 2000.0
 
     const val CLIMBER_FILTER = 0.0
 

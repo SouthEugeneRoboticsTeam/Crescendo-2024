@@ -27,9 +27,7 @@ class Outtake(val withoutRev:Boolean = false) : Command() {
             flywheelCommand.schedule()
             Indexer.setMotor(1.0)
         } else {
-            if (RuntimeConstants.flywheelRevved || withoutRev){
-                Indexer.setMotor(1.0)
-            }
+            Indexer.setMotor(1.0)
         }
     }
 
