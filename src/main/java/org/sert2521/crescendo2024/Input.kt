@@ -91,6 +91,7 @@ object Input {
         resetWrist.whileTrue(ResetWrist())
         visionAlign.whileTrue(VisionAlign())
         visionAlign.onFalse(SetWrist(PhysicalConstants.WRIST_SETPOINT_STOW))
+        visionAlign.whileTrue(SetFlywheel(5000.0))
         passRev.whileTrue(SetFlywheel(3000.0))
         //passRev.onFalse(SetFlywheel(ConfigConstants.FLYWHEEL_IDLE_SPEED))
         //visionAlign.onTrue(InstantCommand({Wrist.rezeroEncoder()}))
