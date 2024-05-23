@@ -79,10 +79,10 @@ object Output : SubsystemBase() {
         values.add(Pair("Intake intake Amps") { intakeAmps.first })
         values.add(Pair("Intake alignment") { intakeAmps.second })
 
-        //values.add(Pair("CAN health 1") { Drivetrain.getMagnetHealth(0).toDouble() })
-        //values.add(Pair("CAN health 2") { Drivetrain.getMagnetHealth(1).toDouble() })
-        //values.add(Pair("CAN health 3") { Drivetrain.getMagnetHealth(2).toDouble() })
-        //values.add(Pair("CAN health 4") { Drivetrain.getMagnetHealth(3).toDouble() })
+        values.add(Pair("CAN health 1") { Drivetrain.getHealth(0) })
+        values.add(Pair("CAN health 2") { Drivetrain.getHealth(1) })
+        values.add(Pair("CAN health 3") { Drivetrain.getHealth(2) })
+        values.add(Pair("CAN health 4") { Drivetrain.getHealth(3) })
 
 
         values.add(Pair("Total Amps") { totalAmps })
