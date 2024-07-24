@@ -12,36 +12,16 @@ class IntakeCommand : Command() {
     }
 
     override fun initialize() {
-        /*
-        if (Wrist.getRadians()>-0.1){
-            this.end(true)
-        } else {
-            Intake.setMotor(0.9)
-            Indexer.setMotor(0.5)
-        }
-         */
         Intake.setMotor(0.9)
         Indexer.setMotor(0.5)
     }
 
     override fun execute() {
-        /*
-        if (Wrist.getRadians()>-0.1){
-            this.end(true)
-        } else {
-            Intake.setMotor(0.9)
-            Indexer.setMotor(0.5)
-        }
-
-         */
-        Intake.setMotor(0.9)
-        Indexer.setMotor(0.5)
     }
 
     override fun isFinished(): Boolean {
         // TODO: Make this return true when this Command no longer needs to run execute(
         return Indexer.getBeamBreak()
-        //return false
     }
 
     override fun end(interrupted: Boolean) {

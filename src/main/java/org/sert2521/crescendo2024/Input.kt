@@ -48,6 +48,8 @@ object Input {
     private val rezeroNote = JoystickButton(gunnerController, 9)
     private val passRev = Trigger{ gunnerController.pov==0 }
 
+    private val setClimberPosition = JoystickButton(driverController, 10)
+
 
     private val rumble = Trigger({ Indexer.getBeamBreak() })
     init{
@@ -77,8 +79,8 @@ object Input {
         armUp.whileTrue(ManualArmCommand(0.5))
         armDown.whileTrue(ManualArmCommand(-0.5))
         //sourceIntake.onTrue(SetWrist(PhysicalConstants.WRIST_SETPOINT_SOURCE))
-        sourceIntake.whileTrue(SetFlywheel(-4000.0))
-        sourceIntake.onFalse(RezeroNote())//.alongWith(SetFlywheel(ConfigConstants.FLYWHEEL_IDLE_SPEED)))
+        sourceIntake.whileTrue(SetFlywheel(-2000.0))
+        sourceIntake.onFalse(RezeroNote())
         rezeroNote.whileTrue(RezeroNote())
         //manualUp.whileTrue(ManualArmCommand(0.2))
         //manualDown.whileTrue(ManualArmCommand(-0.2))
@@ -99,6 +101,7 @@ object Input {
 
         //secondarySpeedButton.onTrue(InstantCommand({ secondarySpeedMode = !secondarySpeedMode }))
         //secondarySpeedButton.onFalse(InstantCommand({ secondarySpeedMode = !secondarySpeedMode }))
+        setClimberPosition.whileTrue(SetClimberPosition())
     }
 
     var secondarySpeedMode = false
