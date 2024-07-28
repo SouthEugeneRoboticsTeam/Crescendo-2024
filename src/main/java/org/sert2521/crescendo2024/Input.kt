@@ -32,7 +32,7 @@ object Input {
 
 
     private val intakeReverse = JoystickButton(gunnerController, 2)
-    //private val rev = Trigger({driverController.rightTriggerAxis>0.3})
+    private val rev = Trigger({driverController.rightTriggerAxis>0.3})
     private val outtake = JoystickButton(driverController, 5)
     private val wristStow = JoystickButton(gunnerController, 7)
     private val wristAmp = JoystickButton(gunnerController, 5)
@@ -44,7 +44,7 @@ object Input {
     private val resetWrist = JoystickButton(gunnerController, 8)
     private val armUp = JoystickButton(gunnerController, 15)
     private val armDown = JoystickButton(gunnerController, 16)
-    private val sourceIntake = JoystickButton(gunnerController, 10)
+    private val sourceIntake = JoystickButton(driverController, 2)
     private val rezeroNote = JoystickButton(gunnerController, 9)
     private val passRev = Trigger{ gunnerController.pov==0 }
 
@@ -53,8 +53,8 @@ object Input {
     init{
         intake.whileTrue(IntakeCommand())
         intakeReverse.whileTrue(IntakeReverse())
-        //rev.whileTrue(SetFlywheel(ConfigConstants.FLYWHEEL_SHOOT_SPEED))
-        //rev.onFalse(SetFlywheel(ConfigConstants.FLYWHEEL_IDLE_SPEED))
+        rev.whileTrue(SetFlywheel(ConfigConstants.FLYWHEEL_SHOOT_SPEED))
+        rev.onFalse(SetFlywheel(ConfigConstants.FLYWHEEL_IDLE_SPEED))
         outtake.whileTrue(Outtake())
 
         wristStow.onTrue(SetWrist(PhysicalConstants.WRIST_SETPOINT_STOW))
@@ -77,11 +77,11 @@ object Input {
         armUp.whileTrue(ManualArmCommand(0.5))
         armDown.whileTrue(ManualArmCommand(-0.5))
         //sourceIntake.onTrue(SetWrist(PhysicalConstants.WRIST_SETPOINT_SOURCE))
-        sourceIntake.whileTrue(SetFlywheel(-4000.0))
+        sourceIntake.whileTrue(SetFlywheel(-2000.0))
         sourceIntake.onFalse(RezeroNote())//.alongWith(SetFlywheel(ConfigConstants.FLYWHEEL_IDLE_SPEED)))
         rezeroNote.whileTrue(RezeroNote())
         //manualUp.whileTrue(ManualArmCommand(0.2))
-        //manualDown.whileTrue(ManualArmCommand(-0.2))
+        //manualDown.whileTrue(ManualArmCommand(-0.2))f
         // visionAlign.whileTrue()
         resetAngleOne.and(resetAngleTwo::getAsBoolean).onTrue(InstantCommand({ Drivetrain.setNewPose(Pose2d()) }))
 
