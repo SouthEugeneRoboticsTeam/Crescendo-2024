@@ -24,7 +24,7 @@ class RezeroNote : Command() {
             Indexer.setMotor(-0.3)
             beamBreakStatus=!Indexer.getBeamBreak()
         } else {
-            Indexer.setMotor(0.3)
+            Indexer.setMotor(0.1)
         }
 
     }

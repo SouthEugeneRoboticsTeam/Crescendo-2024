@@ -17,36 +17,36 @@ import org.sert2521.crescendo2024.subsystems.Indexer
 import org.sert2521.crescendo2024.subsystems.Wrist
 import java.io.ObjectInputFilter.Config
 
-
+//TODO: Label buttons
 object Input {
     private val driverController = XboxController(0)
     private val gunnerController = Joystick(1)
 
-    private val intake = JoystickButton(driverController, 6)
-    private val visionAlign = JoystickButton(driverController, 1)
-    private val resetAngleOne = JoystickButton(driverController, 7)
-    private val resetAngleTwo = JoystickButton(driverController, 8)
+    private val intake = JoystickButton(driverController, 6) //Right Bumper (maybe left?)
+    private val visionAlign = JoystickButton(driverController, 1) //
+    private val resetAngleOne = JoystickButton(driverController, 7) //
+    private val resetAngleTwo = JoystickButton(driverController, 8) //
     // private val secondarySpeedButton = JoystickButton(driverController, 2)
     //private val wristParallelPass = JoystickButton(driverController, 5)
-    private val testButton = JoystickButton(driverController, 2)
+    private val testButton = JoystickButton(driverController, 2) //
 
 
-    private val intakeReverse = JoystickButton(gunnerController, 2)
-    private val rev = Trigger({driverController.rightTriggerAxis>0.3})
-    private val outtake = JoystickButton(driverController, 5)
-    private val wristStow = JoystickButton(gunnerController, 7)
-    private val wristAmp = JoystickButton(gunnerController, 5)
-    private val wristPodium = JoystickButton(gunnerController, 6)
-    private val wristAmpRev = JoystickButton(gunnerController, 4)
-    private val manualUp = JoystickButton(gunnerController, 13)
-    private val manualDown = JoystickButton(gunnerController, 11)
-    private val climb = JoystickButton(gunnerController, 12)
-    private val resetWrist = JoystickButton(gunnerController, 8)
-    private val armUp = JoystickButton(gunnerController, 15)
-    private val armDown = JoystickButton(gunnerController, 16)
-    private val sourceIntake = JoystickButton(driverController, 2)
-    private val rezeroNote = JoystickButton(gunnerController, 9)
-    private val passRev = Trigger{ gunnerController.pov==0 }
+    private val intakeReverse = JoystickButton(gunnerController, 2) //
+    private val rev = Trigger({driverController.rightTriggerAxis>0.3}) //Right Trigger
+    private val outtake = JoystickButton(driverController, 5) //
+    private val wristStow = JoystickButton(gunnerController, 7) //
+    private val wristAmp = JoystickButton(gunnerController, 5) //
+    private val wristPodium = JoystickButton(gunnerController, 6) //
+    private val wristAmpRev = JoystickButton(gunnerController, 4) //
+    private val manualUp = JoystickButton(gunnerController, 13) //
+    private val manualDown = JoystickButton(gunnerController, 11) //
+    private val climb = JoystickButton(gunnerController, 12) //
+    private val resetWrist = JoystickButton(gunnerController, 8) //
+    private val armUp = JoystickButton(gunnerController, 15) //
+    private val armDown = JoystickButton(gunnerController, 16) //
+    private val sourceIntake = JoystickButton(driverController, 2) //Y or B TODO: Figure out which button it is
+    private val rezeroNote = JoystickButton(gunnerController, 9) //
+    private val passRev = Trigger{ gunnerController.pov==0 } //
 
 
     private val rumble = Trigger({ Indexer.getBeamBreak() })

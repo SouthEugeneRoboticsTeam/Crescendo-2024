@@ -89,8 +89,8 @@ object ConfigConstants{
 
     const val DRIVE_OPTIMIZED = true
 
-    const val FLYWHEEL_IDLE_SPEED = 0.0
-    const val FLYWHEEL_SHOOT_SPEED = 4000.0
+    const val FLYWHEEL_IDLE_SPEED = 2000.0
+    const val FLYWHEEL_SHOOT_SPEED = 2000.0
 }
 
 object SwerveConstants{
