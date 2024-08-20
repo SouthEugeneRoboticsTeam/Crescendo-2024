@@ -93,7 +93,7 @@ object Robot : TimedRobot()
 
          */
         Wrist.rezeroEncoder()
-        Drivetrain.setCurrentLimit(60)
+        Drivetrain.setCurrentLimit(40)
         Wrist.setCurrentLimit(30)
 
         val holdCommand = InstantCommand({ if (RuntimeConstants.flywheelGoal != 0.0){
@@ -112,7 +112,7 @@ object Robot : TimedRobot()
 
     override fun autonomousExit() {
         Vision.removeDefaultCommand()
-        Drivetrain.setCurrentLimit(55)
+        Drivetrain.setCurrentLimit(40)
         Wrist.setCurrentLimit(30)
         //Drivetrain.setNewPose(Pose2d(Drivetrain.getPose().translation, Rotation2d(Drivetrain.getPose().rotation.radians+PI)))
     }
@@ -121,7 +121,7 @@ object Robot : TimedRobot()
     {
         // This makes sure that the autonomous stops running when teleop starts running. If you want the
         // autonomous to continue until interrupted by another command, remove this line or comment it out.
-        Drivetrain.setCurrentLimit(55)
+        Drivetrain.setCurrentLimit(40)
         Flywheel.defaultCommand = SetFlywheel(ConfigConstants.FLYWHEEL_IDLE_SPEED)
         autonomousCommand?.cancel()
         RuntimeConstants.wristSetPoint = PhysicalConstants.WRIST_SETPOINT_STOW
