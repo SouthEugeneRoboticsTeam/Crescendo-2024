@@ -76,20 +76,23 @@ object Autos : SubsystemBase() {
 
 
         NamedCommands.registerCommands(commandList)
-        autoChooser.addOption("6 Piece", PathPlannerAuto("6 Piece 60 Amps"))
-        autoChooser.addOption("6 Piece Vision", PathPlannerAuto("6 Piece Vision"))
-        autoChooser.addOption("5 Piece Amp Race", PathPlannerAuto("5 Piece Amp 3 Far"))
-        autoChooser.addOption("5 Piece Amp Race Vision", PathPlannerAuto("5 Piece Amp 3 Far Vision"))
+        autoChooser.addOption("6 Piece (Bad)", PathPlannerAuto("6 Piece 60 Amps"))
+        autoChooser.addOption("6 Piece (Good)", PathPlannerAuto("6 Piece Vision"))
+        autoChooser.addOption("5 Piece Amp Race (Bad)", PathPlannerAuto("5 Piece Amp 3 Far"))
+        autoChooser.addOption("5 Piece Amp Race (Good)", PathPlannerAuto("5 Piece Amp 3 Far Vision"))
         //autoChooser.addOption("6 Piece Original", PathPlannerAuto("6 Piece Center 2 Far"))
         //autoChooser.addOption("6 Piece New Order", PathPlannerAuto("6 Piece New Order"))
         autoChooser.addOption("4 Piece Source", PathPlannerAuto("4 Piece Source 3 Far"))
         autoChooser.addOption("4 Race", PathPlannerAuto("4 Race"))
-        autoChooser.addOption("5 Piece 3-1-2", PathPlannerAuto("5 Race 3-1-2"))
-        autoChooser.addOption("5 Piece 3-2-1", PathPlannerAuto("5 Race 3-2-1"))
-        autoChooser.addOption("5 Piece 2-3-1 (F3)", PathPlannerAuto("5 Race 2-3-1"))
-        autoChooser.addOption("4 Piece Source Vision", PathPlannerAuto("4 Piece Source Vision"))
+        //autoChooser.addOption("5 Piece 3-1-2", PathPlannerAuto("5 Race 3-1-2"))
+        //autoChooser.addOption("5 Piece 3-2-1", PathPlannerAuto("5 Race 3-2-1"))
+        //autoChooser.addOption("5 Piece 2-3-1 (F3)", PathPlannerAuto("5 Race 2-3-1"))
+
+        //autoChooser.addOption("4 Piece Source Vision", PathPlannerAuto("4 Piece Source Vision"))
         autoChooser.addOption("4 Close", PathPlannerAuto("4 Close"))
-        autoChooser.addOption("4 Race 2-1-Exit", PathPlannerAuto("4 Race 2-1-Exit"))
+        autoChooser.addOption("2 Center", PathPlannerAuto("2 Center"))
+        autoChooser.addOption("Source Exit", PathPlannerAuto("Source Exit"))
+        //autoChooser.addOption("4 Race 2-1-Exit", PathPlannerAuto("4 Race 2-1-Exit"))
         //autoChooser.addOption("Amp Race 3rd Mid First", PathPlannerAuto("5 Amp Race 3rd First"))
         autoChooser.setDefaultOption("None", Commands.none())
         //NOT FINISHED
@@ -116,7 +119,7 @@ object Autos : SubsystemBase() {
         autoChooser.addOption("5 Piece Amp Race w Logic",
                 (PathPlannerAuto("5 Piece Amp Race First 2.5"))
                 .andThen(
-                        (PathPlannerAuto("5 Piece Amp Race 3rd Normal").onlyIf{ Indexer.getBeamBreak() })
+                        (PathPlannerAuto("5 Piece Amp Race 3rd .  v         Normal").onlyIf{ Indexer.getBeamBreak() })
                         .alongWith(PathPlannerAuto("5 Piece Amp Race 3rd Failed").onlyIf{ !Indexer.getBeamBreak() })
                 ).andThen(
                         (PathPlannerAuto("5 Piece Amp Race 4th Normal").onlyIf{ Indexer.getBeamBreak() })

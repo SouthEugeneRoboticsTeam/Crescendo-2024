@@ -44,12 +44,13 @@ object Input {
     private val passRev = Trigger{ gunnerController.pov==0 }
     private val wristParallelPass = JoystickButton(driverController, 5)
     private val testButton = JoystickButton(driverController, 2)
+    //private val intakeSlow = JoystickButton(gunnerController, )
 
     private val rumble = Trigger({ Indexer.getBeamBreak() })
     init{
         intake.whileTrue(IntakeCommand())
         intakeReverse.whileTrue(IntakeReverse())
-        rev.whileTrue(SetFlywheel(ConfigConstants.FLYWHEEL_SHOOT_SPEED))
+        rev.whileTrue(SetFlywheel(1000.0))
         //rev.onFalse(SetFlywheel(ConfigConstants.FLYWHEEL_IDLE_SPEED))
         outtake.whileTrue(Outtake())
 

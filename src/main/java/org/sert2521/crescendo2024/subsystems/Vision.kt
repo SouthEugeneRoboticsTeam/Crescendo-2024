@@ -48,7 +48,7 @@ object Vision : SubsystemBase() {
             PhysicalConstants.speakerTransRed
         }
 
-        return getPose().translation.getDistance(speakerTrans)
+        return Drivetrain.getPose().translation.getDistance(speakerTrans)
     }
 
     fun getVisionWristAngle():Double{
@@ -63,7 +63,7 @@ object Vision : SubsystemBase() {
     }
 
     fun getDriveAngleTarget():Rotation2d{
-        val estimationPose = Vision.getPose()
+        val estimationPose = Drivetrain.getPose()
         //val speedY = Drivetrain.getAbsoluteSpeeds().vyMetersPerSecond
         val speakerTrans = if (Input.getColor()==DriverStation.Alliance.Red){
             PhysicalConstants.speakerTransRed
