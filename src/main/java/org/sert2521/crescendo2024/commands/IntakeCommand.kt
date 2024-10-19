@@ -12,7 +12,7 @@ class IntakeCommand : Command() {
     }
 
     override fun initialize() {
-        Intake.setMotor(0.9)
+        Intake.setMotor(0.6)
         Indexer.setMotor(0.5)
     }
 

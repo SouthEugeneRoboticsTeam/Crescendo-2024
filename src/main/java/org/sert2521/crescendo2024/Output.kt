@@ -87,12 +87,7 @@ object Output : SubsystemBase() {
 
         values.add(Pair("Total Amps") { totalAmps })
         values.add(Pair("Vision Wrist") {Vision.getVisionWristAngle()})
-        values.add(Pair("Vision Distance") {
-            if (Vision.getDistanceSpeaker()==null){
-                return@Pair 0.0
-            }else{
-                return@Pair Vision.getDistanceSpeaker()!!
-            }})
+        values.add(Pair("Vision Distance") {Vision.getDistanceSpeaker()})
 
         bools.add(Pair("Beambreak") { Indexer.getBeamBreak() })
 

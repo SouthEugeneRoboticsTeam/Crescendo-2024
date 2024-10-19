@@ -12,7 +12,7 @@ object Intake : SubsystemBase() {
     private val alignmentMotor = CANSparkMax(ElectronicIDs.INTAKE_ALIGNMENT_MOTOR_ID, CANSparkLowLevel.MotorType.kBrushless)
     init {
         intakeMotor.idleMode = CANSparkBase.IdleMode.kBrake
-        intakeMotor.setSmartCurrentLimit(40)
+        intakeMotor.setSmartCurrentLimit(30)
         intakeMotor.inverted = false
         alignmentMotor.idleMode = CANSparkBase.IdleMode.kBrake
         alignmentMotor.setSmartCurrentLimit(30)
