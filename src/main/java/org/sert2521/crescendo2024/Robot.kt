@@ -95,6 +95,7 @@ object Robot : TimedRobot()
         Wrist.rezeroEncoder()
         Drivetrain.setCurrentLimit(50)
         Wrist.setCurrentLimit(30)
+        Flywheel.setCurrent(50)
 
         val holdCommand = InstantCommand({ if (RuntimeConstants.flywheelGoal != 0.0){
             SetFlywheel(RuntimeConstants.flywheelGoal, false).schedule() }})
@@ -113,6 +114,7 @@ object Robot : TimedRobot()
     override fun autonomousExit() {
         Vision.removeDefaultCommand()
         Wrist.setCurrentLimit(30)
+        Flywheel.setCurrent(20)
         //Drivetrain.setNewPose(Pose2d(Drivetrain.getPose().translation, Rotation2d(Drivetrain.getPose().rotation.radians+PI)))
     }
 
