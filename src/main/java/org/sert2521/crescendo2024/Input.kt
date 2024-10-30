@@ -77,7 +77,7 @@ object Input {
         armUp.whileTrue(ManualArmCommand(0.5))
         armDown.whileTrue(ManualArmCommand(-0.5))
         //sourceIntake.onTrue(SetWrist(PhysicalConstants.WRIST_SETPOINT_SOURCE))
-        sourceIntake.whileTrue(SetFlywheel(-2000.0))
+        sourceIntake.whileTrue(SetFlywheel(-4000.0))
         sourceIntake.onFalse(RezeroNote())//.alongWith(SetFlywheel(ConfigConstants.FLYWHEEL_IDLE_SPEED)))
         rezeroNote.whileTrue(RezeroNote())
         //manualUp.whileTrue(ManualArmCommand(0.2))
