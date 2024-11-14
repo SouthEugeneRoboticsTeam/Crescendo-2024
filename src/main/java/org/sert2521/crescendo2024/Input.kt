@@ -11,11 +11,8 @@ import edu.wpi.first.wpilibj2.command.WaitCommand
 import edu.wpi.first.wpilibj2.command.button.JoystickButton
 import edu.wpi.first.wpilibj2.command.button.Trigger
 import org.sert2521.crescendo2024.commands.*
-import org.sert2521.crescendo2024.subsystems.Climber
 import org.sert2521.crescendo2024.subsystems.Drivetrain
 import org.sert2521.crescendo2024.subsystems.Indexer
-import org.sert2521.crescendo2024.subsystems.Wrist
-import java.io.ObjectInputFilter.Config
 
 
 object Input {
@@ -74,8 +71,8 @@ object Input {
         armDown.whileTrue(ManualArmCommand(-0.5))
         //sourceIntake.onTrue(SetWrist(PhysicalConstants.WRIST_SETPOINT_SOURCE))
         sourceIntake.whileTrue(SetFlywheel(-4000.0))
-        sourceIntake.onFalse(RezeroNote())//.alongWith(SetFlywheel(ConfigConstants.FLYWHEEL_IDLE_SPEED)))
-        rezeroNote.whileTrue(RezeroNote())
+        sourceIntake.onFalse(ReZeroNote())//.alongWith(SetFlywheel(ConfigConstants.FLYWHEEL_IDLE_SPEED))
+        rezeroNote.whileTrue(ReZeroNote())
         //manualUp.whileTrue(ManualArmCommand(0.2))
         //manualDown.whileTrue(ManualArmCommand(-0.2))
         // visionAlign.whileTrue()

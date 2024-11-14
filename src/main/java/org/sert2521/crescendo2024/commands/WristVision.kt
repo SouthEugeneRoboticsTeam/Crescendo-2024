@@ -8,18 +8,15 @@ import org.sert2521.crescendo2024.RuntimeConstants
 import org.sert2521.crescendo2024.TuningConstants
 import org.sert2521.crescendo2024.subsystems.Vision
 import org.sert2521.crescendo2024.subsystems.Wrist
-import kotlin.math.PI
 
-class WristVision(val debounce:Boolean=false) : Command() {
+class WristVision(private val debounce:Boolean=false) : Command() {
 
-    var prevWristTarget = PhysicalConstants.WRIST_SETPOINT_STOW
-    var currWristTarget = PhysicalConstants.WRIST_SETPOINT_STOW
-    var drivetrainTarget: Rotation2d? = Rotation2d(0.0)
-    var wristCommand:Command = SetWrist(PhysicalConstants.WRIST_SETPOINT_STOW, false).asProxy()
-    var commandedWristAngle = PhysicalConstants.WRIST_SETPOINT_STOW
-    var endFilter = Debouncer(0.2)
+    private var currWristTarget = PhysicalConstants.WRIST_SETPOINT_STOW
+    private var drivetrainTarget: Rotation2d? = Rotation2d(0.0)
+    private var wristCommand:Command = SetWrist(PhysicalConstants.WRIST_SETPOINT_STOW, false).asProxy()
+    private var endFilter = Debouncer(0.2)
     //DOES NOT MEAN TRAP AS IN THE STAGE THINGY
-    var wristIsTrap = true
+    private var wristIsTrap = true
     init {
         // each subsystem used by the command must be passed into the addRequirements() method
         addRequirements(Vision)

@@ -1,9 +1,8 @@
 package org.sert2521.crescendo2024.subsystems
 
 import com.revrobotics.CANSparkBase
-import com.revrobotics.CANSparkMax
 import com.revrobotics.CANSparkLowLevel
-import edu.wpi.first.wpilibj.CAN
+import com.revrobotics.CANSparkMax
 import edu.wpi.first.wpilibj2.command.SubsystemBase
 import org.sert2521.crescendo2024.ElectronicIDs
 

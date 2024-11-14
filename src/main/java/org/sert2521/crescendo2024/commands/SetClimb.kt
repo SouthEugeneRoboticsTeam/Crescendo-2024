@@ -1,10 +1,6 @@
 package org.sert2521.crescendo2024.commands
 
 import edu.wpi.first.wpilibj2.command.Command
-import org.sert2521.crescendo2024.PhysicalConstants
-import org.sert2521.crescendo2024.PhysicalConstants.CLIMBER_MAX
-import org.sert2521.crescendo2024.PhysicalConstants.CLIMBER_MIN
-import org.sert2521.crescendo2024.TuningConstants.CLIMB_SPEED
 import org.sert2521.crescendo2024.subsystems.Climber
 import org.sert2521.crescendo2024.subsystems.Drivetrain
 

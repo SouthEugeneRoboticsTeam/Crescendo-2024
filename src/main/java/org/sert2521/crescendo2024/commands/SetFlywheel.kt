@@ -1,24 +1,17 @@
 package org.sert2521.crescendo2024.commands
 
-import edu.wpi.first.math.controller.BangBangController
 import edu.wpi.first.math.controller.PIDController
 import edu.wpi.first.math.controller.SimpleMotorFeedforward
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard
 import edu.wpi.first.wpilibj2.command.Command
-import org.sert2521.crescendo2024.ConfigConstants
-import org.sert2521.crescendo2024.PhysicalConstants
 import org.sert2521.crescendo2024.RuntimeConstants
 import org.sert2521.crescendo2024.TuningConstants
 import org.sert2521.crescendo2024.subsystems.Flywheel
-import java.io.ObjectInputFilter.Config
 import kotlin.math.min
 
 class SetFlywheel(private val rpm:Double, private val ends: Boolean = false) : Command() {
     private val pidOne = PIDController(TuningConstants.FLYWHEEL_P, TuningConstants.FLYWHEEL_I, TuningConstants.FLYWHEEL_D)
     private val pidTwo = PIDController(TuningConstants.FLYWHEEL_P_COR, TuningConstants.FLYWHEEL_I_COR, TuningConstants.FLYWHEEL_D_COR)
-
-    private val bbOne = BangBangController(5.0)
-    private val bbTwo = BangBangController(5.0)
 
     private val feedForward = SimpleMotorFeedforward(TuningConstants.FLYWHEEL_KS, TuningConstants.FLYWHEEL_KV, TuningConstants.FLYWHEEL_KA)
 

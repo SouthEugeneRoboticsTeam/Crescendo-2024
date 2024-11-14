@@ -52,12 +52,10 @@ object Vision : SubsystemBase() {
     }
 
     fun getVisionWristAngle():Double{
-
-        val distance:Double
-        if (Input.getColor()==DriverStation.Alliance.Red){
-            distance = getDistanceSpeaker()-(abs(getDriveAngleTarget().degrees-180.0)*TuningConstants.VISION_ANGLE_COR)
+        val distance:Double = if (Input.getColor()==DriverStation.Alliance.Red){
+            getDistanceSpeaker()-(abs(getDriveAngleTarget().degrees-180.0)*TuningConstants.VISION_ANGLE_COR)
         } else {
-            distance = getDistanceSpeaker()-(abs(getDriveAngleTarget().degrees)*TuningConstants.VISION_ANGLE_COR)
+            getDistanceSpeaker()-(abs(getDriveAngleTarget().degrees)*TuningConstants.VISION_ANGLE_COR)
         }
         return TuningConstants.wristAngLookup.get(distance)
     }

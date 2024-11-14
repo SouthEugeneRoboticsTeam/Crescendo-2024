@@ -3,7 +3,7 @@ package org.sert2521.crescendo2024.commands
 import edu.wpi.first.wpilibj2.command.Command
 import org.sert2521.crescendo2024.subsystems.Indexer
 
-class RezeroNote : Command() {
+class ReZeroNote : Command() {
     private var beamBreakStatus = false
 
 

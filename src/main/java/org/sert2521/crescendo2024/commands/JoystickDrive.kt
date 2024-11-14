@@ -2,8 +2,6 @@ package org.sert2521.crescendo2024.commands
 
 import edu.wpi.first.math.kinematics.ChassisSpeeds
 import org.sert2521.crescendo2024.subsystems.Drivetrain
-import org.sert2521.crescendo2024.Input
-import org.sert2521.crescendo2024.RuntimeConstants
 
 class JoystickDrive(private val fieldOrientated: Boolean) : JoystickCommand() {
     init {

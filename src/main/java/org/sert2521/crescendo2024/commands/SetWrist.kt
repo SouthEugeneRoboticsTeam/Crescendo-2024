@@ -4,15 +4,11 @@ package org.sert2521.crescendo2024.commands
 import edu.wpi.first.math.controller.ArmFeedforward
 import edu.wpi.first.math.controller.PIDController
 import edu.wpi.first.math.controller.ProfiledPIDController
-import edu.wpi.first.math.filter.Debouncer
 import edu.wpi.first.wpilibj2.command.Command
-import org.sert2521.crescendo2024.ConfigConstants
-import org.sert2521.crescendo2024.PhysicalConstants
 import org.sert2521.crescendo2024.RuntimeConstants
 import org.sert2521.crescendo2024.TuningConstants
 import org.sert2521.crescendo2024.subsystems.Wrist
 import kotlin.math.PI
-import kotlin.math.abs
 
 class SetWrist(private val goal:Double, private val ends:Boolean = true, private val useVision:Boolean = false) : Command() {
 
@@ -38,17 +34,17 @@ class SetWrist(private val goal:Double, private val ends:Boolean = true, private
 
     override fun execute() {
         done = false
-        val pidResult:Double
         wristAngle = Wrist.getRadians()
-        if (ends){
-            pidResult =  pid.calculate(wristAngle+2*PI, goal+2*PI)
-        } else {
-            if (useVision){
-                pidResult = notProfiled.calculate(wristAngle+2*PI, RuntimeConstants.wristVision+2*PI)
+        val pidResult =
+            if (ends){
+                pid.calculate(wristAngle+2*PI, goal+2*PI)
             } else {
-                pidResult = notProfiled.calculate(wristAngle + 2 * PI, goal + 2 * PI)
+                if (useVision){
+                    notProfiled.calculate(wristAngle+2*PI, RuntimeConstants.wristVision+2*PI)
+                } else {
+                    notProfiled.calculate(wristAngle + 2 * PI, goal + 2 * PI)
+                }
             }
-        }
         val feedforwardResult = feedForward.calculate(wristAngle, pid.setpoint.velocity)
         //println(pid.setpoint.velocity)
 

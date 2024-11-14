@@ -6,7 +6,7 @@ import org.sert2521.crescendo2024.RuntimeConstants
 import org.sert2521.crescendo2024.TuningConstants
 import org.sert2521.crescendo2024.subsystems.Wrist
 
-class ManualArmCommand(val speed:Double) : Command() {
+class ManualArmCommand(private val speed:Double) : Command() {
     private val wrist = Wrist
 
     private var feedForward = ArmFeedforward(TuningConstants.WRIST_S, TuningConstants.WRIST_G, TuningConstants.WRIST_V, TuningConstants.WRIST_A)

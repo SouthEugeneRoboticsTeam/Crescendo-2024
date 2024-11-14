@@ -11,7 +11,7 @@ import kotlin.math.absoluteValue
 import kotlin.math.sin
 import kotlin.math.tan
 
-class ClimbCorrect(val startEstimateOne:Double, val startEstimateTwo: Double) : Command() {
+class ClimbCorrect(startEstimateOne:Double, startEstimateTwo: Double) : Command() {
 
     //One is the a/x climber
     //Two is the b/y climber
@@ -22,9 +22,6 @@ class ClimbCorrect(val startEstimateOne:Double, val startEstimateTwo: Double) : 
 
     private var encoderOne = {Climber.getEncoder(1)}
     private var encoderTwo = {Climber.getEncoder(2)}
-
-    private var prevEncoderOne = 0.0
-    private var prevEncoderTwo = 0.0
 
     private var angle = 0.0
     private var prevAngle = 0.0
@@ -68,7 +65,7 @@ class ClimbCorrect(val startEstimateOne:Double, val startEstimateTwo: Double) : 
 
     override fun end(interrupted: Boolean) {}
 
-    fun atSetpoint():Boolean{
+    private fun atSetpoint():Boolean{
         return (encoderOne()-estimateOne).absoluteValue <= TuningConstants.CLIMBER_TOLERANCE_ENCODER && (encoderTwo()-estimateTwo).absoluteValue <= TuningConstants.CLIMBER_TOLERANCE_ENCODER
     }
 }

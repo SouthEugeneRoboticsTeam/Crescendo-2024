@@ -1,11 +1,8 @@
 package org.sert2521.crescendo2024.subsystems
 
-import com.fasterxml.jackson.databind.util.Named
-import edu.wpi.first.wpilibj2.command.SubsystemBase
 import com.pathplanner.lib.auto.AutoBuilder
 import com.pathplanner.lib.auto.NamedCommands
 import com.pathplanner.lib.commands.PathPlannerAuto
-import com.pathplanner.lib.path.PathPlannerPath
 import com.pathplanner.lib.util.HolonomicPathFollowerConfig
 import com.pathplanner.lib.util.PIDConstants
 import com.pathplanner.lib.util.ReplanningConfig
@@ -15,27 +12,22 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard
 import edu.wpi.first.wpilibj2.command.Command
 import edu.wpi.first.wpilibj2.command.Commands
-import edu.wpi.first.wpilibj2.command.FunctionalCommand
-import edu.wpi.first.wpilibj2.command.InstantCommand
-import edu.wpi.first.wpilibj2.command.WaitCommand
-
+import edu.wpi.first.wpilibj2.command.SubsystemBase
 import org.sert2521.crescendo2024.ConfigConstants
 import org.sert2521.crescendo2024.PhysicalConstants
 import org.sert2521.crescendo2024.SwerveConstants
-import org.sert2521.crescendo2024.TuningConstants
 import org.sert2521.crescendo2024.commands.*
-import kotlin.io.path.Path
 
 
 object Autos : SubsystemBase() {
     private var autoChooser = SendableChooser<Command>()
-    private var extendedChooser = SendableChooser<Command>()
-    val defaultAutoCommand = Commands.none()
+
+    //Turn this on if you want to see all autos (this plus the other lines that have this)
+    //private var extendedChooser = SendableChooser<Command>()
+    val defaultAutoCommand: Command = Commands.none()
 
 
-    var whee = false
-
-    var commandList = mapOf<String, Command>(
+    private var commandList = mapOf<String, Command>(
             "Outtake" to Outtake(true).withTimeout(0.4),
             "Intake Note" to IntakeCommand().withTimeout(3.0),
             "Wrist Stow" to SetWrist(PhysicalConstants.WRIST_SETPOINT_STOW).asProxy(),

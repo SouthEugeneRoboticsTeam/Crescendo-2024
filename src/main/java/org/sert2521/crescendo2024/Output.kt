@@ -9,7 +9,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard
 import edu.wpi.first.wpilibj2.command.SubsystemBase
 import org.sert2521.crescendo2024.subsystems.*
 import java.io.File
-import kotlin.jvm.optionals.getOrNull
 
 object Output : SubsystemBase() {
     private val values = mutableListOf<Pair<String, () -> Double>>()
@@ -88,11 +87,8 @@ object Output : SubsystemBase() {
         values.add(Pair("Total Amps") { totalAmps })
         values.add(Pair("Vision Wrist") {Vision.getVisionWristAngle()})
         values.add(Pair("Vision Distance") {
-            if (Vision.getDistanceSpeaker()==null){
-                return@Pair 0.0
-            }else{
-                return@Pair Vision.getDistanceSpeaker()!!
-            }})
+            return@Pair Vision.getDistanceSpeaker()
+        })
 
         bools.add(Pair("Beambreak") { Indexer.getBeamBreak() })
 

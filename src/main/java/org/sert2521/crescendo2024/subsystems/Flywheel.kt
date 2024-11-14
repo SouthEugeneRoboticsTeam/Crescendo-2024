@@ -5,11 +5,11 @@ import com.revrobotics.CANSparkLowLevel
 import com.revrobotics.CANSparkMax
 import edu.wpi.first.math.filter.Debouncer
 import edu.wpi.first.wpilibj2.command.InstantCommand
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import org.sert2521.crescendo2024.*
+import edu.wpi.first.wpilibj2.command.SubsystemBase
+import org.sert2521.crescendo2024.ElectronicIDs
+import org.sert2521.crescendo2024.PhysicalConstants
+import org.sert2521.crescendo2024.RuntimeConstants
 import org.sert2521.crescendo2024.commands.SetFlywheel
-import org.sert2521.crescendo2024.commands.SetWrist
-import java.util.logging.Filter
 
 object Flywheel : SubsystemBase(){
     private val flywheelMotorOne = CANSparkMax(ElectronicIDs.FLYWHEEL_MOTOR_ONE_ID, CANSparkLowLevel.MotorType.kBrushless) //Top
@@ -35,7 +35,7 @@ object Flywheel : SubsystemBase(){
     }
 
     override fun periodic(){
-        val shouldLimit = currentFilter.calculate(Drivetrain.getDraw()>150)
+        currentFilter.calculate(Drivetrain.getDraw()>150)
 
 //        if (Robot.isAutonomous && currentCurrentLimit!=50){
 //            flywheelMotorOne.setSmartCurrentLimit(50)

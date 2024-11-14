@@ -1,19 +1,21 @@
 package org.sert2521.crescendo2024.subsystems
 
+//import org.photonvision.PhotonCamera
+//import org.photonvision.PhotonPoseEstimator
 import com.ctre.phoenix6.hardware.CANcoder
 import com.kauailabs.navx.frc.AHRS
 import com.revrobotics.CANSparkBase
-import com.revrobotics.CANSparkMax
 import com.revrobotics.CANSparkLowLevel
+import com.revrobotics.CANSparkMax
 import edu.wpi.first.math.estimator.SwerveDrivePoseEstimator
-import edu.wpi.first.math.geometry.*
+import edu.wpi.first.math.geometry.Pose2d
+import edu.wpi.first.math.geometry.Rotation2d
+import edu.wpi.first.math.geometry.Translation2d
 import edu.wpi.first.math.kinematics.*
 import edu.wpi.first.math.util.Units
 import edu.wpi.first.wpilibj.MotorSafety
 import edu.wpi.first.wpilibj.Timer
 import edu.wpi.first.wpilibj2.command.SubsystemBase
-//import org.photonvision.PhotonCamera
-//import org.photonvision.PhotonPoseEstimator
 import org.sert2521.crescendo2024.*
 import org.sert2521.crescendo2024.commands.JoystickDrive
 import kotlin.math.*
@@ -73,7 +75,7 @@ class SwerveModule(private val powerMotor: CANSparkMax,
         setMotorMode(!brakeMode)
     }
 
-    fun getAngle(): Rotation2d {
+    private fun getAngle(): Rotation2d {
         if (inverted){
             angleMotor.encoder.setPosition(angleEncoder.absolutePosition.valueAsDouble * SwerveConstants.ANGLE_ENCODER_MULTIPLY - angleOffset)
         } else {
@@ -179,8 +181,7 @@ object Drivetrain : SubsystemBase() {
     private var prevTime = Timer.getFPGATimestamp()
 
 
-    var deltaPose = Pose2d()
-        private set
+    private var deltaPose = Pose2d()
 
     // False is broken
     var doesOptimize = ConfigConstants.DRIVE_OPTIMIZED

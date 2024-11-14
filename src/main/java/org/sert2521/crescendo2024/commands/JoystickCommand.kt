@@ -36,7 +36,7 @@ abstract class JoystickCommand : Command() {
         var currY = (Input.getY()).pow(2) * Input.getY().sign
 
         // Checks if the joystick is outputting a magnitude greater than 1 and if it is it normalizes the input
-        // Otherwise it deadbands the input
+        // Otherwise it dead bands the input
         val sqrMagnitude = currX.pow(2) + currY.pow(2)
         if (sqrMagnitude > 1) {
             val magnitude = sqrt(sqrMagnitude)

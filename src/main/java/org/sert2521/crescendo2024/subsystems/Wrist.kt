@@ -1,8 +1,9 @@
 package org.sert2521.crescendo2024.subsystems
 
 import com.revrobotics.CANSparkBase
-import com.revrobotics.CANSparkMax
 import com.revrobotics.CANSparkLowLevel
+import com.revrobotics.CANSparkMax
+import com.revrobotics.RelativeEncoder
 import edu.wpi.first.wpilibj.DutyCycleEncoder
 import edu.wpi.first.wpilibj.Timer
 import edu.wpi.first.wpilibj2.command.InstantCommand
@@ -14,10 +15,10 @@ import org.sert2521.crescendo2024.commands.SetWrist
 import kotlin.math.PI
 
 object Wrist : SubsystemBase() {
-    val motorOne = CANSparkMax(ElectronicIDs.WRIST_ONE_ID, CANSparkLowLevel.MotorType.kBrushless)
-    val motorTwo = CANSparkMax(ElectronicIDs.WRIST_TWO_ID, CANSparkLowLevel.MotorType.kBrushless)
+    private val motorOne = CANSparkMax(ElectronicIDs.WRIST_ONE_ID, CANSparkLowLevel.MotorType.kBrushless)
+    private val motorTwo = CANSparkMax(ElectronicIDs.WRIST_TWO_ID, CANSparkLowLevel.MotorType.kBrushless)
 
-    val encoder = motorOne.encoder
+    val encoder: RelativeEncoder = motorOne.encoder
     val absEncoder = DutyCycleEncoder(1)
     val motorSpeed = 0.0
     var prevRot = 0.0
@@ -68,7 +69,7 @@ object Wrist : SubsystemBase() {
     }
 
     fun getRadians():Double{
-        var wristAngle = (absEncoder.distance+PI/2).mod(2*PI) - PI/2 + PhysicalConstants.WRIST_ENCODER_OFFSET
+        val wristAngle = (absEncoder.distance+PI/2).mod(2*PI) - PI/2 + PhysicalConstants.WRIST_ENCODER_OFFSET
         //println(wristAngle)
 
 

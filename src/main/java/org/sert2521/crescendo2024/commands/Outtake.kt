@@ -2,14 +2,11 @@ package org.sert2521.crescendo2024.commands
 
 import edu.wpi.first.wpilibj2.command.Command
 import org.sert2521.crescendo2024.RuntimeConstants
-import org.sert2521.crescendo2024.TuningConstants
-import org.sert2521.crescendo2024.subsystems.Flywheel
 import org.sert2521.crescendo2024.subsystems.Indexer
 import org.sert2521.crescendo2024.subsystems.Intake
 import org.sert2521.crescendo2024.subsystems.Wrist
-import kotlin.math.PI
 
-class Outtake(val withoutRev:Boolean = false) : Command() {
+class Outtake(private val withoutRev:Boolean = false) : Command() {
     private var wasRevved = false
     private val flywheelCommand = SetFlywheel(3000.0)
 

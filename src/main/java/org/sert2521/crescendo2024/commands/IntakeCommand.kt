@@ -3,7 +3,6 @@ package org.sert2521.crescendo2024.commands
 import edu.wpi.first.wpilibj2.command.Command
 import org.sert2521.crescendo2024.subsystems.Indexer
 import org.sert2521.crescendo2024.subsystems.Intake
-import org.sert2521.crescendo2024.subsystems.Wrist
 
 class IntakeCommand : Command() {
     init {
