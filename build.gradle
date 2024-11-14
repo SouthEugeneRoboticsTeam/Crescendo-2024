@@ -100,11 +100,7 @@ tasks.withType(JavaCompile) {
     options.compilerArgs.add '-XDstringConcat=inline'
 }
 
-compileKotlin {
-    kotlinOptions {
-        jvmTarget = javaVersion.toString()
-    }
-}
+//There used to be a compileKotlin task here, but it was causing problems so I removed it
 
 idea {
     project {
