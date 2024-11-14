@@ -7,9 +7,7 @@ plugins {
     id "idea"
 }
 
-def javaVersion = 11
-sourceCompatibility = javaVersion
-targetCompatibility = javaVersion
+def javaVersion = 17
 
 def ROBOT_MAIN_CLASS = "org.sert2521.crescendo2024.Main"
 
