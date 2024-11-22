@@ -235,9 +235,6 @@ object TuningConstants {
 
     const val FLYWHEEL_BB_AGGRO = 1.0
 
-    const val FLYWHEEL_IDLE_SPEED = 2000.0
-    const val FLYWHEEL_FAST_SPEED = 5000.0
-
     const val CLIMBER_FILTER = 0.0
 
     const val CLIMBER_TOLERANCE_ANGLE = 0.0

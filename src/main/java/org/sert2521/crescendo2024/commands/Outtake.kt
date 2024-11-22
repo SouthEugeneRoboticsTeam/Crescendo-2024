@@ -19,16 +19,17 @@ class Outtake(val withoutRev:Boolean = false) : Command() {
     }
 
     override fun initialize() {
-        Indexer.setMotor(0.0)
+        Indexer.setMotor(1.0)
     }
 
     override fun execute() {
-        if (Wrist.getRadians() >= 1.3){ //Just to check if its in amp range
-            flywheelCommand.schedule()
-            Indexer.setMotor(1.0)
-        } else {
-            Indexer.setMotor(1.0)
-        }
+//        if (Wrist.getRadians() >= 1.3){ //Just to check if its in amp range
+//            flywheelCommand.schedule()
+//            Indexer.setMotor(1.0)
+//        } else {
+//            Indexer.setMotor(1.0)
+//        }
+        //Indexer.setMotor(1.0)
     }
 
     override fun isFinished(): Boolean {
@@ -37,6 +38,6 @@ class Outtake(val withoutRev:Boolean = false) : Command() {
 
     override fun end(interrupted: Boolean) {
         Indexer.stop()
-        flywheelCommand.cancel()
+        //flywheelCommand.cancel()
     }
 }
