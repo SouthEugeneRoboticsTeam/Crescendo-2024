@@ -22,7 +22,7 @@ object Output : SubsystemBase() {
     private var drivetrainAmps: Array<Pair<Double, Double>> = arrayOf()
     private var flywheelAmps = Flywheel.getAmps()
     private var wristAmps = Wrist.getAmps()
-    private var climberAmps = Climber.getCurrents()
+    //private var climberAmps = Climber.getCurrents()
     private var indexerAmps = Indexer.getAmps()
     private var intakeAmps = Intake.getAmps()
     private var totalAmps = 0.0
@@ -71,8 +71,8 @@ object Output : SubsystemBase() {
         values.add(Pair("Flywheel 1 Amps") { flywheelAmps.first })
         values.add(Pair("Flywheel 2 Amps") { flywheelAmps.second })
 
-        values.add(Pair("Climber 1 Amps") { climberAmps.first })
-        values.add(Pair("Climber 2 Amps") { climberAmps.second })
+        //values.add(Pair("Climber 1 Amps") { climberAmps.first })
+        //values.add(Pair("Climber 2 Amps") { climberAmps.second })
 
         values.add(Pair("Indexer Amps") { indexerAmps })
 
@@ -105,10 +105,10 @@ object Output : SubsystemBase() {
         drivetrainAmps = Drivetrain.getAmps()
         flywheelAmps = Flywheel.getAmps()
         wristAmps = Wrist.getAmps()
-        climberAmps = Climber.getCurrents()
+        //climberAmps = Climber.getCurrents()
         indexerAmps = Indexer.getAmps()
         intakeAmps = Intake.getAmps()
-        totalAmps = drivetrainAmps[0].first+drivetrainAmps[1].first+drivetrainAmps[2].first+drivetrainAmps[3].first+drivetrainAmps[0].second+drivetrainAmps[1].second+drivetrainAmps[2].second+drivetrainAmps[3].second+flywheelAmps.first+flywheelAmps.second+wristAmps.first+wristAmps.second+climberAmps.first+climberAmps.second+indexerAmps+intakeAmps.first+intakeAmps.second
+        totalAmps = drivetrainAmps[0].first+drivetrainAmps[1].first+drivetrainAmps[2].first+drivetrainAmps[3].first+drivetrainAmps[0].second+drivetrainAmps[1].second+drivetrainAmps[2].second+drivetrainAmps[3].second+flywheelAmps.first+flywheelAmps.second+wristAmps.first+wristAmps.second+indexerAmps+intakeAmps.first+intakeAmps.second
 
 
         for (value in values) {

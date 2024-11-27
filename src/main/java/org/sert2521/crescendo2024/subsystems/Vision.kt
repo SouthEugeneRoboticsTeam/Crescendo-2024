@@ -17,26 +17,26 @@ import kotlin.math.atan2
 
 object Vision : SubsystemBase() {
 
-    private val cam = PhotonCamera("Left2")
+    //private val cam = PhotonCamera("Left2")
 
 
-    private val visionPoseEstimator = PhotonPoseEstimator(PhysicalConstants.usedField, PhotonPoseEstimator.PoseStrategy.MULTI_TAG_PNP_ON_COPROCESSOR, cam, PhysicalConstants.centerPose)
-    private var estimation:Optional<EstimatedRobotPose>
+    //private val visionPoseEstimator = PhotonPoseEstimator(PhysicalConstants.usedField, PhotonPoseEstimator.PoseStrategy.MULTI_TAG_PNP_ON_COPROCESSOR, cam, PhysicalConstants.centerPose)
+    //private var estimation:Optional<EstimatedRobotPose>
 
     init{
-        estimation = visionPoseEstimator.update()
+        //estimation = visionPoseEstimator.update()
     }
 
     override fun periodic() {
-        estimation = visionPoseEstimator.update()
+        //estimation = visionPoseEstimator.update()
     }
 
     fun getEstimation():Optional<EstimatedRobotPose>{
-        return estimation
+        return Optional.empty()
     }
 
     fun getPose():Pose2d{
-        return Drivetrain.getVisionPose()
+        return Pose2d()
     }
 
     fun getDistanceSpeaker():Double{

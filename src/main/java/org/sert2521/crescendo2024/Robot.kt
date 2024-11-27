@@ -43,7 +43,7 @@ object Robot : TimedRobot()
         Input
         Output
         Drivetrain
-        Climber
+        //Climber
         //Wrist
     }
 

@@ -67,11 +67,11 @@ object Input {
         //wristParallelPass.onTrue(SetWrist(PhysicalConstants.WRIST_SETPOINT_PARALLEL_PASS))
         //wristParallelPass.onFalse(SetWrist(PhysicalConstants.WRIST_SETPOINT_STOW))
 
-        manualUp.whileTrue(SetClimb(1.0))
-        manualDown.whileTrue(SetClimb(-1.0))
+        //manualUp.whileTrue(SetClimb(1.0))
+        //manualDown.whileTrue(SetClimb(-1.0))
 
-        climb.onTrue(InstantCommand({ Drivetrain.enterClimbPos() }))
-        climb.whileTrue(ClimbInitiate())
+        //climb.onTrue(InstantCommand({ Drivetrain.enterClimbPos() }))
+        //climb.whileTrue(ClimbInitiate())
         // Make these do stuff
         //TODO:UNBIND THE MANUAL ARM
         armUp.whileTrue(ManualArmCommand(0.5))
@@ -95,7 +95,7 @@ object Input {
         passRev.whileTrue(SetFlywheel(3000.0))
         //passRev.onFalse(SetFlywheel(ConfigConstants.FLYWHEEL_IDLE_SPEED))
         //visionAlign.onTrue(InstantCommand({Wrist.rezeroEncoder()}))
-        testButton.onTrue(InstantCommand({Drivetrain.setNewVisionPose(Pose2d(4.0, 6.0, Rotation2d(1.0)))}))
+        //testButton.onTrue(InstantCommand({Drivetrain.setNewVisionPose(Pose2d(4.0, 6.0, Rotation2d(1.0)))}))
 
         //secondarySpeedButton.onTrue(InstantCommand({ secondarySpeedMode = !secondarySpeedMode }))
         //secondarySpeedButton.onFalse(InstantCommand({ secondarySpeedMode = !secondarySpeedMode }))
