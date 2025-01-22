@@ -1,14 +1,15 @@
 package org.sert2521.crescendo2024.subsystems
 
-import com.revrobotics.CANSparkBase
-import com.revrobotics.CANSparkMax
-import com.revrobotics.CANSparkLowLevel
+import com.revrobotics.spark.CANSparkBase
+import com.revrobotics.spark.CANSparkMax
+import com.revrobotics.spark.SparkLowLevel
+import com.revrobotics.spark.SparkMax
 import edu.wpi.first.wpilibj.CAN
 import edu.wpi.first.wpilibj2.command.SubsystemBase
 import org.sert2521.crescendo2024.ElectronicIDs
 
 object Intake : SubsystemBase() {
-    private val intakeMotor = CANSparkMax(ElectronicIDs.INTAKE_MOTOR_ID, CANSparkLowLevel.MotorType.kBrushless)
+    private val intakeMotor = CANSparkMax(ElectronicIDs.INTAKE_MOTOR_ID, SparkLowLevel.MotorType.kBrushless)
     private val alignmentMotor = CANSparkMax(ElectronicIDs.INTAKE_ALIGNMENT_MOTOR_ID, CANSparkLowLevel.MotorType.kBrushless)
     init {
         intakeMotor.idleMode = CANSparkBase.IdleMode.kBrake

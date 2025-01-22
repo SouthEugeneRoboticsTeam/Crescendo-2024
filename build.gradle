@@ -1,15 +1,20 @@
-import edu.wpi.first.gradlerio.deploy.roborio.RoboRIO
+
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     id "java"
-    id "org.jetbrains.kotlin.jvm" version "1.8.0"
-    id "edu.wpi.first.GradleRIO" version "2024.3.2"
+    id "org.jetbrains.kotlin.jvm" version "2.1.0"
+    id "edu.wpi.first.GradleRIO" version "2025.1.1"
     id "idea"
 }
 
-def javaVersion = 11
-sourceCompatibility = javaVersion
-targetCompatibility = javaVersion
+def javaVersion = JavaVersion.VERSION_17
+def kotlinJvmTarget = org.jetbrains.kotlin.gradle.dsl.JvmTarget.@Companion.fromTarget(javaVersion.toString())
+
+java {
+    sourceCompatibility = javaVersion
+    targetCompatibility = javaVersion
+}
 
 def ROBOT_MAIN_CLASS = "org.sert2521.crescendo2024.Main"
 
@@ -36,6 +41,8 @@ deploy {
                 frcStaticFileDeploy(getArtifactTypeClass('FileTreeArtifact')) {
                     files = project.fileTree('src/main/deploy')
                     directory = '/home/lvuser/deploy'
+                    deleteOldFiles = false // Change to true to delete files on roboRIO that no
+                    // longer exist in deploy directory of this project
                 }
             }
         }
@@ -48,9 +55,11 @@ def deployArtifact = deploy.targets.roborio.artifacts.frcJava
 wpi.java.debugJni = false
 
 // Set this to true to enable desktop support.
+//noinspection GroovyUnusedAssignment
 def includeDesktopSupport = true
 
 dependencies {
+    annotationProcessor wpi.java.deps.wpilibAnnotations()
     implementation wpi.java.deps.wpilib()
     implementation wpi.java.vendor.java()
 
@@ -68,7 +77,8 @@ dependencies {
     nativeRelease wpi.java.vendor.jniRelease(wpi.platforms.desktop)
     simulationRelease wpi.sim.enableRelease()
 
-    testImplementation platform("org.junit:junit-bom:5.8.2")
+
+    testImplementation platform("org.junit:junit-bom:5.11.4")
     testImplementation "org.junit.jupiter:junit-jupiter-api"
     testImplementation "org.junit.jupiter:junit-jupiter-params"
     testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine"
@@ -88,6 +98,7 @@ wpi.sim.addDriverstation()
 // knows where to look for our Robot Class.
 jar {
     from { configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) } }
+    from sourceSets.main.allSource
     manifest edu.wpi.first.gradlerio.GradleRIOPlugin.javaManifest(ROBOT_MAIN_CLASS)
     duplicatesStrategy = DuplicatesStrategy.INCLUDE
 }
@@ -102,9 +113,11 @@ tasks.withType(JavaCompile) {
     options.compilerArgs.add '-XDstringConcat=inline'
 }
 
-compileKotlin {
-    kotlinOptions {
-        jvmTarget = javaVersion.toString()
+kotlin {
+    compilerOptions {
+        jvmTarget.set(kotlinJvmTarget)
+        // https://kotlinlang.org/docs/gradle-configure-project.html#gradle-java-toolchains-support
+        jvmToolchain(Integer.valueOf(javaVersion.toString()))
     }
 }
 
@@ -117,7 +130,8 @@ idea {
         // Improve development & (especially) debugging experience (and IDEA's capabilities) by having libraries' source & javadoc attached
         downloadJavadoc = true
         downloadSources = true
-        // Exclude the .vscode directory from indexing and search
+        // Exclude the following from indexing and search
+        excludeDirs+=file(".run" )
         excludeDirs+=file(".vscode" )
     }
 }

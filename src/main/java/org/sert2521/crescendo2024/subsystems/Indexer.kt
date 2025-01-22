@@ -10,14 +10,17 @@ import org.sert2521.crescendo2024.ElectronicIDs
 object Indexer : Subsystem{
     private val indexerMotor = CANSparkMax(ElectronicIDs.INDEXER_MOTOR_ID, CANSparkLowLevel.MotorType.kBrushless)
     private val beamBreakSensor = DigitalInput(ElectronicIDs.BEAMBREAK_ID)
+
     init{
         indexerMotor.idleMode = CANSparkBase.IdleMode.kBrake
         indexerMotor.setSmartCurrentLimit(30)
         indexerMotor.inverted = true
     }
+
     fun getBeamBreak():Boolean{
         return !beamBreakSensor.get()
     }
+
     fun setMotor(speed:Double){
         indexerMotor.set(speed)
     }
@@ -25,6 +28,7 @@ object Indexer : Subsystem{
     fun getAmps():Double{
         return indexerMotor.outputCurrent
     }
+
     fun stop(){
         indexerMotor.stopMotor()
     }
