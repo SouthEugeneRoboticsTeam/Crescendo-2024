@@ -1,6 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CompilerConfiguration">
-    <bytecodeTargetLevel target="11" />
+    <annotationProcessing>
+      <profile name="Gradle Imported" enabled="true">
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$PROJECT_DIR$/../../../Public/wpilib/2025/maven/edu/wpi/first/epilogue/epilogue-processor-java/2025.1.1/epilogue-processor-java-2025.1.1.jar" />
+          <entry name="$PROJECT_DIR$/../../../Public/wpilib/2025/maven/edu/wpi/first/epilogue/epilogue-runtime-java/2025.1.1/epilogue-runtime-java-2025.1.1.jar" />
+        </processorPath>
+        <module name="IdeaProjects.Crescendo-2024.main" />
+      </profile>
+      <profile name="Gradle Imported" enabled="true">
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/edu.wpi.first.epilogue/epilogue-processor-java/2025.1.1/32b6ebd68b5d0e22e680ab039429ec9f1f376820/epilogue-processor-java-2025.1.1.jar" />
+          <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/edu.wpi.first.epilogue/epilogue-runtime-java/2025.1.1/322811cf9a63dca10200cb9438a53086625ae4d3/epilogue-runtime-java-2025.1.1.jar" />
+        </processorPath>
+        <module name="Crescendo-2024.main" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel target="17" />
   </component>
 </project>

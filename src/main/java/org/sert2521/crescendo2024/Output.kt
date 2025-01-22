@@ -86,8 +86,6 @@ object Output : SubsystemBase() {
 
 
         values.add(Pair("Total Amps") { totalAmps })
-        values.add(Pair("Vision Wrist") {Vision.getVisionWristAngle()})
-        values.add(Pair("Vision Distance") {Vision.getDistanceSpeaker()})
 
         bools.add(Pair("Beambreak") { Indexer.getBeamBreak() })
 
@@ -118,21 +116,19 @@ object Output : SubsystemBase() {
         for (bool in bools) {
             SmartDashboard.putBoolean("Output/${bool.first}", bool.second())
         }
-        testField.robotPose = Pose2d(PhysicalConstants.speakerTransRed, Rotation2d(0.0))
+
+
+
+        field.robotPose = Drivetrain.getPose()
+
+
 
 
         field.robotPose = Drivetrain.getPose()
 
 
-        visionField.robotPose = Vision.getPose()
 
-        field.robotPose = Drivetrain.getPose()
 
-        visionTargetPose.robotPose = Pose2d(Vision.getPose().translation, Vision.getDriveAngleTarget())
-
-        if (!Vision.getEstimation().isEmpty){
-            visionEstimation.robotPose = Vision.getEstimation().get().estimatedPose.toPose2d()
-        }
 
 
     }

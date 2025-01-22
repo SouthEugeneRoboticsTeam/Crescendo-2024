@@ -6,7 +6,6 @@ import edu.wpi.first.wpilibj2.command.Command
 import org.sert2521.crescendo2024.PhysicalConstants
 import org.sert2521.crescendo2024.RuntimeConstants
 import org.sert2521.crescendo2024.TuningConstants
-import org.sert2521.crescendo2024.subsystems.Vision
 import org.sert2521.crescendo2024.subsystems.Wrist
 import kotlin.math.PI
 
@@ -22,13 +21,10 @@ class WristVision(val debounce:Boolean=false) : Command() {
     var wristIsTrap = true
     init {
         // each subsystem used by the command must be passed into the addRequirements() method
-        addRequirements(Vision)
+        addRequirements()
     }
 
     override fun initialize() {
-        currWristTarget = Vision.getVisionWristAngle()
-        drivetrainTarget = Vision.getDriveAngleTarget()
-        currWristTarget=Vision.getVisionWristAngle()
         RuntimeConstants.wristVision = currWristTarget
         wristCommand = SetWrist(currWristTarget).asProxy()
         wristCommand.schedule()
@@ -36,7 +32,6 @@ class WristVision(val debounce:Boolean=false) : Command() {
     }
 
     override fun execute() {
-        currWristTarget= Vision.getVisionWristAngle()
         RuntimeConstants.wristVision = currWristTarget
 
         if (wristIsTrap){

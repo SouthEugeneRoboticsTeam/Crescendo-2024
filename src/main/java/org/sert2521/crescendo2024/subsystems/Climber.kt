@@ -1,8 +1,9 @@
 package org.sert2521.crescendo2024.subsystems
 
-import com.revrobotics.CANSparkBase
-import com.revrobotics.CANSparkLowLevel
-import com.revrobotics.CANSparkMax
+import com.revrobotics.spark.SparkLowLevel
+import com.revrobotics.spark.SparkMax
+import com.revrobotics.spark.config.SparkBaseConfig
+import com.revrobotics.spark.config.SparkMaxConfig
 import edu.wpi.first.math.filter.Debouncer
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import org.sert2521.crescendo2024.ElectronicIDs
@@ -10,8 +11,11 @@ import org.sert2521.crescendo2024.PhysicalConstants
 import org.sert2521.crescendo2024.TuningConstants
 
 object Climber : SubsystemBase() {
-    private val climberMotorOne = CANSparkMax(ElectronicIDs.CLIMBER_MOTOR_ONE, CANSparkLowLevel.MotorType.kBrushless)
-    private val climberMotorTwo = CANSparkMax(ElectronicIDs.CLIMBER_MOTOR_TWO, CANSparkLowLevel.MotorType.kBrushless)
+    private val climberMotorOne = SparkMax(ElectronicIDs.CLIMBER_MOTOR_ONE, SparkLowLevel.MotorType.kBrushless)
+    private val climberMotorTwo = SparkMax(ElectronicIDs.CLIMBER_MOTOR_TWO, SparkLowLevel.MotorType.kBrushless)
+
+    private val motorOneConfig = SparkMaxConfig()
+    private val motorTwoConfig = SparkMaxConfig()
 
     private val filterOne = Debouncer(TuningConstants.CLIMBER_STALL_TOLERANCE)
     private val filterTwo = Debouncer(TuningConstants.CLIMBER_STALL_TOLERANCE)
@@ -22,19 +26,19 @@ object Climber : SubsystemBase() {
     private var stallingOne = false
     private var stallingTwo = false
     init {
-        climberMotorOne.encoder.positionConversionFactor = PhysicalConstants.CLIMBER_ENCODER_TO_METERS
-        climberMotorTwo.encoder.positionConversionFactor = PhysicalConstants.CLIMBER_ENCODER_TO_METERS
+        motorOneConfig.encoder.positionConversionFactor(PhysicalConstants.CLIMBER_ENCODER_TO_METERS)
+        motorTwoConfig.encoder.positionConversionFactor(PhysicalConstants.CLIMBER_ENCODER_TO_METERS)
 
         climberMotorOne.inverted = true
 
-        climberMotorOne.idleMode = CANSparkBase.IdleMode.kBrake
-        climberMotorTwo.idleMode = CANSparkBase.IdleMode.kBrake
+        motorOneConfig.idleMode(SparkBaseConfig.IdleMode.kBrake)
+        motorTwoConfig.idleMode(SparkBaseConfig.IdleMode.kBrake)
 
         climberMotorOne.encoder.position = 0.0
         climberMotorTwo.encoder.position = 0.0
 
-        climberMotorOne.setSmartCurrentLimit(26)
-        climberMotorTwo.setSmartCurrentLimit(26)
+        motorOneConfig.smartCurrentLimit(26)
+        motorTwoConfig.smartCurrentLimit(26)
     }
 
     override fun periodic() {
@@ -97,8 +101,8 @@ object Climber : SubsystemBase() {
     }
 
     fun setCurrentLimit(current:Int){
-        climberMotorOne.setSmartCurrentLimit(current)
-        climberMotorTwo.setSmartCurrentLimit(current)
+        motorOneConfig.smartCurrentLimit(current)
+        motorTwoConfig.smartCurrentLimit(current)
     }
 
     fun getCurrents():Pair<Double, Double>{

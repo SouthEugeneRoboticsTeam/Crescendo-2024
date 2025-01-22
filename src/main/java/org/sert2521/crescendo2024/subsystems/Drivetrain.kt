@@ -269,7 +269,6 @@ object Drivetrain : SubsystemBase() {
 
         pose = odometry.update(-imu.rotation2d, positionsArray)
 
-        val poseEstimation = Vision.getEstimation()
         visionPose = poseEstimator.update(-imu.rotation2d, positionsArray)
         if (!poseEstimation.isEmpty){
             if (RuntimeConstants.visionAligning){
