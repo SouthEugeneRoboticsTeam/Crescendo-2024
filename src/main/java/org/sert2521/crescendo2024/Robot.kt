@@ -39,7 +39,7 @@ object Robot : TimedRobot()
      */
     override fun robotInit()
     {
-        Vision
+
         Input
         Output
         Drivetrain
@@ -111,7 +111,7 @@ object Robot : TimedRobot()
     }
 
     override fun autonomousExit() {
-        Vision.removeDefaultCommand()
+
         Drivetrain.setCurrentLimit(55)
         Wrist.setCurrentLimit(30)
         //Drivetrain.setNewPose(Pose2d(Drivetrain.getPose().translation, Rotation2d(Drivetrain.getPose().rotation.radians+PI)))

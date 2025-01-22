@@ -25,15 +25,12 @@ class VisionAlign() : Command() {
     val driveAlignPID = PIDController(TuningConstants.VISION_ALIGN_P, TuningConstants.VISION_ALIGN_I, TuningConstants.VISION_ALIGN_D)
 
     init {
-        addRequirements(Vision)
+        addRequirements()
     }
 
     override fun initialize() {
         driveAlignPID.enableContinuousInput(-PI, PI)
         driveAlignPID.setTolerance(TuningConstants.VISION_TOLERANCE)
-        currWristTarget = Vision.getVisionWristAngle()
-        drivetrainTarget = Vision.getDriveAngleTarget()
-        currWristTarget=Vision.getVisionWristAngle()
         RuntimeConstants.wristVision = currWristTarget
         wristCommand = SetWrist(currWristTarget)
         wristCommand.schedule()
@@ -41,7 +38,7 @@ class VisionAlign() : Command() {
     }
 
     override fun execute() {
-        drivetrainTarget=Vision.getDriveAngleTarget()
+
         if (drivetrainTarget == null){
             RuntimeConstants.visionAligning = false
             driveAlignPID.reset()
@@ -49,7 +46,7 @@ class VisionAlign() : Command() {
 
             RuntimeConstants.visionAligning = true
             //Maybe square it or smth
-            var error = (Vision.getPose().rotation.radians-drivetrainTarget!!.radians-(PI))
+
             if (error < -2*PI){
                 error += 2*PI
             } else if (error > 2*PI){
@@ -61,12 +58,9 @@ class VisionAlign() : Command() {
             }
             RuntimeConstants.visionRightStick = driveAlignPID.calculate((error.absoluteValue).pow(1.5)*error.sign)+TuningConstants.VISION_ALIGN_S*error.sign
         }
-        if (driveAlignPID.atSetpoint()){
-            drivetrainTarget = Vision.getDriveAngleTarget()
-            currWristTarget=Vision.getVisionWristAngle()
-        }
 
-        currWristTarget=Vision.getVisionWristAngle()
+
+
         RuntimeConstants.wristVision = currWristTarget
 
         if (wristIsTrap){
