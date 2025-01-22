@@ -1,22 +1,20 @@
 package org.sert2521.crescendo2024.subsystems
 
-import com.revrobotics.spark.CANSparkBase
-import com.revrobotics.spark.CANSparkMax
-import com.revrobotics.spark.SparkLowLevel
-import com.revrobotics.spark.SparkMax
+import com.revrobotics.spark.*
+import com.revrobotics.spark.config.SparkBaseConfig
+import com.revrobotics.spark.config.SparkMaxConfig
 import edu.wpi.first.wpilibj.CAN
 import edu.wpi.first.wpilibj2.command.SubsystemBase
 import org.sert2521.crescendo2024.ElectronicIDs
 
 object Intake : SubsystemBase() {
-    private val intakeMotor = CANSparkMax(ElectronicIDs.INTAKE_MOTOR_ID, SparkLowLevel.MotorType.kBrushless)
-    private val alignmentMotor = CANSparkMax(ElectronicIDs.INTAKE_ALIGNMENT_MOTOR_ID, CANSparkLowLevel.MotorType.kBrushless)
+    private val intakeMotor = SparkMax(ElectronicIDs.INTAKE_MOTOR_ID, SparkLowLevel.MotorType.kBrushless)
+    private val alignmentMotor = SparkMax(ElectronicIDs.INTAKE_ALIGNMENT_MOTOR_ID, SparkLowLevel.MotorType.kBrushless)
+    private val config = SparkMaxConfig()
     init {
-        intakeMotor.idleMode = CANSparkBase.IdleMode.kBrake
-        intakeMotor.setSmartCurrentLimit(30)
-        intakeMotor.inverted = false
-        alignmentMotor.idleMode = CANSparkBase.IdleMode.kBrake
-        alignmentMotor.setSmartCurrentLimit(30)
+        config.idleMode(SparkBaseConfig.IdleMode.kBrake)
+        config.inverted(false)
+        config.smartCurrentLimit(30)
     }
     fun setMotor(speed:Double) {
         intakeMotor.set(speed)
