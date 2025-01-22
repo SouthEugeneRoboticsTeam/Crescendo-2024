@@ -27,10 +27,10 @@ object Flywheel : SubsystemBase(){
         motorTwoConfig.smartCurrentLimit(currentCurrentLimit)
         motorTwoConfig.idleMode(SparkBaseConfig.IdleMode.kCoast)
         flywheelMotorTwo.configure(motorTwoConfig, SparkBase.ResetMode.kResetSafeParameters, SparkBase.PersistMode.kPersistParameters)
-        flywheelMotorOne.encoder.positionConversionFactor = PhysicalConstants.FLYWHEEL_GEAR_RATIO
-        flywheelMotorOne.encoder.velocityConversionFactor = PhysicalConstants.FLYWHEEL_GEAR_RATIO
-        flywheelMotorTwo.encoder.positionConversionFactor = PhysicalConstants.FLYWHEEL_GEAR_RATIO
-        flywheelMotorTwo.encoder.velocityConversionFactor = PhysicalConstants.FLYWHEEL_GEAR_RATIO
+        motorOneConfig.encoder.positionConversionFactor(PhysicalConstants.FLYWHEEL_GEAR_RATIO)
+        motorOneConfig.encoder.velocityConversionFactor(PhysicalConstants.FLYWHEEL_GEAR_RATIO)
+        motorTwoConfig.encoder.positionConversionFactor(PhysicalConstants.FLYWHEEL_GEAR_RATIO)
+        motorTwoConfig.encoder.velocityConversionFactor(PhysicalConstants.FLYWHEEL_GEAR_RATIO)
         //defaultCommand = SetFlywheel(TuningConstants.FLYWHEEL_IDLE_SPEED)
         val holdCommand = InstantCommand({ if (RuntimeConstants.flywheelGoal != 0.0){
             SetFlywheel(RuntimeConstants.flywheelGoal, false).schedule() }})
@@ -42,12 +42,12 @@ object Flywheel : SubsystemBase(){
         val shouldLimit = currentFilter.calculate(Drivetrain.getDraw()>150)
 
         if (Robot.isAutonomous && currentCurrentLimit!=50){
-            flywheelMotorOne.setSmartCurrentLimit(50)
-            flywheelMotorTwo.setSmartCurrentLimit(50)
+            motorOneConfig.smartCurrentLimit(50)
+            motorTwoConfig.smartCurrentLimit(50)
             currentCurrentLimit=50
         } else if (currentCurrentLimit!=20){
-            flywheelMotorOne.setSmartCurrentLimit(20)
-            flywheelMotorTwo.setSmartCurrentLimit(20)
+            motorOneConfig.smartCurrentLimit(20)
+            motorTwoConfig.smartCurrentLimit(20)
             currentCurrentLimit=20
         }
     }
