@@ -1,32 +1,36 @@
 package org.sert2521.crescendo2024.subsystems
 
-import com.revrobotics.CANSparkBase
-import com.revrobotics.CANSparkLowLevel
-import com.revrobotics.CANSparkMax
+
+import com.revrobotics.spark.SparkBase
+import com.revrobotics.spark.SparkLowLevel
+import com.revrobotics.spark.SparkMax
+import com.revrobotics.spark.config.SparkBaseConfig
+import com.revrobotics.spark.config.SparkMaxConfig
 import edu.wpi.first.math.filter.Debouncer
 import edu.wpi.first.wpilibj2.command.InstantCommand
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import org.sert2521.crescendo2024.*
 import org.sert2521.crescendo2024.commands.SetFlywheel
-import org.sert2521.crescendo2024.commands.SetWrist
-import java.util.logging.Filter
 
 object Flywheel : SubsystemBase(){
-    private val flywheelMotorOne = CANSparkMax(ElectronicIDs.FLYWHEEL_MOTOR_ONE_ID, CANSparkLowLevel.MotorType.kBrushless) //Top
-    private val flywheelMotorTwo = CANSparkMax(ElectronicIDs.FLYWHEEL_MOTOR_TWO_ID, CANSparkLowLevel.MotorType.kBrushless) //Bottom
+    private val flywheelMotorOne = SparkMax(ElectronicIDs.FLYWHEEL_MOTOR_ONE_ID, SparkLowLevel.MotorType.kBrushless) //Top
+    private val flywheelMotorTwo = SparkMax(ElectronicIDs.FLYWHEEL_MOTOR_TWO_ID, SparkLowLevel.MotorType.kBrushless) //Bottom
     private val currentFilter = Debouncer(0.2)
     private var currentCurrentLimit = 40
+    private val motorOneConfig = SparkMaxConfig()
+    private val motorTwoConfig = SparkMaxConfig()
     init{
+        motorOneConfig.inverted(false)
+        motorOneConfig.smartCurrentLimit(currentCurrentLimit)
+        motorOneConfig.idleMode(SparkBaseConfig.IdleMode.kCoast)
+        flywheelMotorOne.configure(motorOneConfig, SparkBase.ResetMode.kResetSafeParameters, SparkBase.PersistMode.kPersistParameters)
+        motorTwoConfig.smartCurrentLimit(currentCurrentLimit)
+        motorTwoConfig.idleMode(SparkBaseConfig.IdleMode.kCoast)
+        flywheelMotorTwo.configure(motorTwoConfig, SparkBase.ResetMode.kResetSafeParameters, SparkBase.PersistMode.kPersistParameters)
         flywheelMotorOne.encoder.positionConversionFactor = PhysicalConstants.FLYWHEEL_GEAR_RATIO
         flywheelMotorOne.encoder.velocityConversionFactor = PhysicalConstants.FLYWHEEL_GEAR_RATIO
-        flywheelMotorOne.idleMode = CANSparkBase.IdleMode.kCoast
-        flywheelMotorOne.inverted = false
         flywheelMotorTwo.encoder.positionConversionFactor = PhysicalConstants.FLYWHEEL_GEAR_RATIO
         flywheelMotorTwo.encoder.velocityConversionFactor = PhysicalConstants.FLYWHEEL_GEAR_RATIO
-        flywheelMotorTwo.idleMode = CANSparkBase.IdleMode.kCoast
-        flywheelMotorTwo.inverted = false
-        flywheelMotorOne.setSmartCurrentLimit(40)
-        flywheelMotorTwo.setSmartCurrentLimit(40)
         //defaultCommand = SetFlywheel(TuningConstants.FLYWHEEL_IDLE_SPEED)
         val holdCommand = InstantCommand({ if (RuntimeConstants.flywheelGoal != 0.0){
             SetFlywheel(RuntimeConstants.flywheelGoal, false).schedule() }})
