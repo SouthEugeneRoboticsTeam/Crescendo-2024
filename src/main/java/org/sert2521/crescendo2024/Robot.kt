@@ -30,7 +30,7 @@ object Robot : TimedRobot()
      * the [autonomousInit] method will set it to the value selected in
      *the  AutoChooser on the dashboard.
      */
-    private var autonomousCommand: Command? = Autos.defaultAutoCommand
+
 
 
     /**
@@ -101,8 +101,8 @@ object Robot : TimedRobot()
         holdCommand.addRequirements(Flywheel)
         Flywheel.defaultCommand = holdCommand
 
-        autonomousCommand = Autos.getAuto()
-        autonomousCommand?.schedule()
+
+
     }
 
     /** This method is called periodically during autonomous.  */
@@ -123,7 +123,6 @@ object Robot : TimedRobot()
         // autonomous to continue until interrupted by another command, remove this line or comment it out.
         Drivetrain.setCurrentLimit(55)
         Flywheel.defaultCommand = SetFlywheel(ConfigConstants.FLYWHEEL_IDLE_SPEED)
-        autonomousCommand?.cancel()
         RuntimeConstants.wristSetPoint = PhysicalConstants.WRIST_SETPOINT_STOW
     }
 

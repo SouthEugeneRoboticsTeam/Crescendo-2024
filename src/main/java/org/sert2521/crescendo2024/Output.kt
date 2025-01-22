@@ -116,7 +116,7 @@ object Output : SubsystemBase() {
         for (bool in bools) {
             SmartDashboard.putBoolean("Output/${bool.first}", bool.second())
         }
-        testField.robotPose = Pose2d(PhysicalConstants.speakerTransRed, Rotation2d(0.0))
+
 
 
         field.robotPose = Drivetrain.getPose()
