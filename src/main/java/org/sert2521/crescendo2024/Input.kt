@@ -21,7 +21,6 @@ object Input {
     private val gunnerController = Joystick(1)
 
     private val intake = JoystickButton(driverController, 6) //Right Bumper (maybe left?)
-    private val visionAlign = JoystickButton(driverController, 1) //
     private val resetAngleOne = JoystickButton(driverController, 7) //
     private val resetAngleTwo = JoystickButton(driverController, 8) //
     // private val secondarySpeedButton = JoystickButton(driverController, 2)

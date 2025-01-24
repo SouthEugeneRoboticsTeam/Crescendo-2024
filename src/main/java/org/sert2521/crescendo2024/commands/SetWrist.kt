@@ -14,7 +14,7 @@ import org.sert2521.crescendo2024.subsystems.Wrist
 import kotlin.math.PI
 import kotlin.math.abs
 
-class SetWrist(private val goal:Double, private val ends:Boolean = true, private val useVision:Boolean = false) : Command() {
+class SetWrist(private val goal:Double, private val ends:Boolean = true) : Command() {
 
 
     private var wristAngle = Wrist.getRadians()
@@ -43,11 +43,7 @@ class SetWrist(private val goal:Double, private val ends:Boolean = true, private
         if (ends){
             pidResult =  pid.calculate(wristAngle+2*PI, goal+2*PI)
         } else {
-            if (useVision){
-                pidResult = notProfiled.calculate(wristAngle+2*PI, RuntimeConstants.wristVision+2*PI)
-            } else {
-                pidResult = notProfiled.calculate(wristAngle + 2 * PI, goal + 2 * PI)
-            }
+            pidResult = notProfiled.calculate(wristAngle + 2 * PI, goal + 2 * PI)
         }
         val feedforwardResult = feedForward.calculate(wristAngle, pid.setpoint.velocity)
         //println(pid.setpoint.velocity)

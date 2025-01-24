@@ -24,8 +24,6 @@ import kotlin.math.PI
  */
 
 object PhysicalConstants{
-    const val CLIMBER_MAX = 10.0
-    const val CLIMBER_MIN = 0.0
 
     const val HALF_SIDE_LENGTH = 0.0
 
@@ -45,10 +43,6 @@ object PhysicalConstants{
     const val WRIST_SETPOINT_SOURCE = 0.869
     const val WRIST_SETPOINT_PARALLEL_PASS = 0.65
 
-
-    val usedTags = listOf(2, 3, 6, 7) // -1 because indexes and shit
-    val usedFieldTags = mutableListOf<AprilTag>()
-
     init {
 
     }
@@ -58,10 +52,6 @@ object PhysicalConstants{
 
 
     const val FLYWHEEL_GEAR_RATIO = 3.0/2.0
-
-    const val CLIMBER_ENCODER_TO_METERS = 1.0
-
-    const val CLIMBER_BETWEEN_DISTANCE = 1.0
 }
 
 object ConfigConstants{
@@ -134,8 +124,6 @@ object ElectronicIDs{
     const val BEAMBREAK_ID = 3
     const val FLYWHEEL_MOTOR_ONE_ID = 8
     const val FLYWHEEL_MOTOR_TWO_ID = 11
-    const val CLIMBER_MOTOR_ONE = 6
-    const val CLIMBER_MOTOR_TWO = 14
 
     //val camData:Pair<String, Translation3d> = listOf(/*Pair("Center", PhysicalConstants.centerPose), Pair("Right2", PhysicalConstants.rightPose), Pair("Left2", PhysicalConstants.frontPose)*/)
 }
@@ -145,15 +133,9 @@ object RuntimeConstants{
     var wristSetPoint = PhysicalConstants.WRIST_SETPOINT_STOW
     var flywheelRevved = false
     var flywheelGoal = 0.0
-    var visionAligning = false
-    var visionRightStick = 0.0
-    var wristVision = PhysicalConstants.WRIST_SETPOINT_STOW
-    var isVisionAuto = false
 }
 
 object TuningConstants {
-    const val VIS_DRIVE_OFFSET_MULT = 0.0
-    const val VIS_WRIST_OFFSET_MULT = 0.0
     //Key = Meters from target, value = arm angle
     val wristAngLookup = InterpolatingDoubleTreeMap()
 
@@ -176,11 +158,6 @@ object TuningConstants {
         wristAngLookup.put(6.53, 0.449)
     }
 
-    val defaultVisionDeviations: Matrix<N3, N1> = fill(Nat.N3(), Nat.N1(), 0.4, 0.4, 3.0)
-    val alignVisionDeviations: Matrix<N3, N1> = fill(Nat.N3(), Nat.N1(),0.4, 0.4, 3.0)
-
-    const val VISION_TIMEOUT = 0.1
-
     const val WRIST_P = 30.0
     const val WRIST_I = 0.0
     const val WRIST_D = 0.0
@@ -190,15 +167,6 @@ object TuningConstants {
     const val WRIST_G = 0.365
     const val WRIST_V = 0.0
     const val WRIST_A = 0.0
-
-    const val VISION_ALIGN_P = 9.0
-    const val VISION_ALIGN_I = 0.0
-    const val VISION_ALIGN_D = 0.4
-
-    const val VISION_ALIGN_S = -0.19
-
-    const val VISION_TOLERANCE = 0.01
-    const val VISION_WRIST_TOLERANCE = 0.2
 
     const val WRIST_ANGLE_TOLERANCE = 0.1
     val trapConstraints = TrapezoidProfile.Constraints(5.0, 15.0)
@@ -219,22 +187,6 @@ object TuningConstants {
 
     const val FLYWHEEL_BB_AGGRO = 1.0
 
-    const val CLIMBER_FILTER = 0.0
-
-    const val CLIMBER_TOLERANCE_ANGLE = 0.0
-    const val CLIMBER_RESTING_TOLERANCE = 0.0
-
-    const val CLIMBER_TOLERANCE_ENCODER = 0.0
-
-    const val CLIMBER_STALL_TOLERANCE = 0.5
-    const val CLIMBER_STALL_TRY_POWER = 0.1
-    const val CLIMBER_STALL_SPEED = 0.1
-
-    const val CLIMB_SPEED = 0.0
-
-
-    //Good starting place 1/450, 0.00314
-    const val VISION_ANGLE_COR = 0.0
 }
 
 class SwerveModuleData(val position: Translation2d, val driveMotorID: Int, val angleMotorID: Int, val angleEncoderID: Int, val angleOffset: Double, val inverted: Boolean){}

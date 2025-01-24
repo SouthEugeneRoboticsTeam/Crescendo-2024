@@ -141,7 +141,6 @@ object Drivetrain : SubsystemBase() {
     private val poseEstimator: SwerveDrivePoseEstimator
 
     private var pose = Pose2d()
-    private var visionPose = Pose2d()
 
     private var prevPose = Pose2d()
     private var prevTime = Timer.getFPGATimestamp()
@@ -292,8 +291,6 @@ object Drivetrain : SubsystemBase() {
     fun getYaw(): Double { return -imu.yaw.toDouble() }
 
     fun getYawAsRotation2d(): Rotation2d { return Rotation2d.fromDegrees(-imu.angle) }
-
-    fun getVisionPose(): Pose2d { return poseEstimator.estimatedPosition }
 
     fun getRelativeSpeeds(): ChassisSpeeds { return kinematics.toChassisSpeeds(*arrayOf(modules[0].state, modules[1].state, modules[2].state, modules[3].state)) } // Yes it says that the asterisk is wrong, but it is correct.
 

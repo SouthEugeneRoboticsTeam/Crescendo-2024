@@ -54,6 +54,7 @@ abstract class JoystickCommand : Command() {
 
         // Gets the vector from the input to the current output
         val changeX = currX - x
+
         val changeY = currY - y
         val change = sqrt(changeX.pow(2) + changeY.pow(2))
 
@@ -86,9 +87,6 @@ abstract class JoystickCommand : Command() {
             rot = 0.0
         }
         rot *= (ConfigConstants.ROT_SPEED - (ConfigConstants.ROT_SECONDARY_SPEED * fast))
-        if (RuntimeConstants.visionAligning){
-            rot=RuntimeConstants.visionRightStick
-        }
         return Translation3d(x, y, rot)
     }
 }
