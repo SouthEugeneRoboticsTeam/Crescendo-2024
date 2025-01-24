@@ -1,5 +1,6 @@
 package org.sert2521.crescendo2024
 
+import com.revrobotics.spark.config.SparkMaxConfig
 import edu.wpi.first.math.geometry.Pose2d
 import edu.wpi.first.math.geometry.Rotation2d
 import edu.wpi.first.wpilibj.DriverStation
@@ -10,6 +11,7 @@ import edu.wpi.first.wpilibj2.command.Commands
 import edu.wpi.first.wpilibj2.command.InstantCommand
 import org.sert2521.crescendo2024.commands.SetFlywheel
 import org.sert2521.crescendo2024.subsystems.*
+import org.sert2521.reefscape2025.subsystems.Drivetrain
 import kotlin.math.PI
 
 
@@ -62,7 +64,6 @@ object Robot : TimedRobot()
     }
 
     override fun disabledExit() {
-        Climber.reset()
         if (Wrist.getRadians()>4){
             Wrist.rezeroEncoder()
         }
@@ -93,7 +94,7 @@ object Robot : TimedRobot()
 
          */
         Wrist.rezeroEncoder()
-        Drivetrain.setCurrentLimit(60)
+        Drivetrain.setCurrentLimit(60, SparkMaxConfig())
         Wrist.setCurrentLimit(30)
 
         val holdCommand = InstantCommand({ if (RuntimeConstants.flywheelGoal != 0.0){
@@ -112,7 +113,7 @@ object Robot : TimedRobot()
 
     override fun autonomousExit() {
 
-        Drivetrain.setCurrentLimit(55)
+        Drivetrain.setCurrentLimit(55, SparkMaxConfig())
         Wrist.setCurrentLimit(30)
         //Drivetrain.setNewPose(Pose2d(Drivetrain.getPose().translation, Rotation2d(Drivetrain.getPose().rotation.radians+PI)))
     }
@@ -121,7 +122,7 @@ object Robot : TimedRobot()
     {
         // This makes sure that the autonomous stops running when teleop starts running. If you want the
         // autonomous to continue until interrupted by another command, remove this line or comment it out.
-        Drivetrain.setCurrentLimit(55)
+        Drivetrain.setCurrentLimit(55, SparkMaxConfig())
         Flywheel.defaultCommand = SetFlywheel(ConfigConstants.FLYWHEEL_IDLE_SPEED)
         RuntimeConstants.wristSetPoint = PhysicalConstants.WRIST_SETPOINT_STOW
     }

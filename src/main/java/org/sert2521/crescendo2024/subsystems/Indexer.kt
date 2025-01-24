@@ -5,10 +5,10 @@ import com.revrobotics.spark.SparkMax
 import com.revrobotics.spark.config.SparkBaseConfig
 import com.revrobotics.spark.config.SparkMaxConfig
 import edu.wpi.first.wpilibj.DigitalInput
-import edu.wpi.first.wpilibj2.command.Subsystem;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import org.sert2521.crescendo2024.ElectronicIDs
 
-object Indexer : Subsystem{
+object Indexer: SubsystemBase() {
     private val indexerMotor = SparkMax(ElectronicIDs.INDEXER_MOTOR_ID, SparkLowLevel.MotorType.kBrushless)
     private val beamBreakSensor = DigitalInput(ElectronicIDs.BEAMBREAK_ID)
     private val config = SparkMaxConfig()

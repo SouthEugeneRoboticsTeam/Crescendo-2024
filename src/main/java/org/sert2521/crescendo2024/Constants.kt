@@ -22,7 +22,6 @@ import kotlin.math.PI
  * All String, Boolean, and numeric (Int, Long, Float, Double) constants should use
  * `const` definitions. Other constant types should use `val` definitions.
  */
-class SwerveModuleData(val position: Translation2d, val powerMotorID: Int, val angleMotorID: Int, val angleEncoderID: Int, val angleOffset: Double, val inverted: Boolean)
 
 object PhysicalConstants{
     const val CLIMBER_MAX = 10.0
@@ -90,13 +89,13 @@ object SwerveConstants{
     const val HALF_SIDE_LENGTH = 0.263525
     const val DRIVE_BASE_RADIUS = 0.37268
 
-    const val POWER_S = 0.0
-    const val POWER_V = 0.2
+    const val DRIVE_S = 0.0
+    const val DRIVE_V = 0.2
     const val POWER_A = 0.0
 
-    const val POWER_P = 0.05
-    const val POWER_I = 0.0
-    const val POWER_D = 0.0
+    const val DRIVE_P = 0.05
+    const val DRIVE_I = 0.0
+    const val DRIVE_D = 0.0
 
     const val ANGLE_P = 1.4
     const val ANGLE_I = 0.0
@@ -109,27 +108,20 @@ object SwerveConstants{
             SwerveModuleData(Translation2d(-HALF_SIDE_LENGTH, HALF_SIDE_LENGTH), 3, 12, 13, 0.059-1.568-1.575+PI/2, false)) //Front Right
 
     // Pi * diameter / gear ratio
-    const val POWER_ENCODER_MULTIPLY_POSITION = PI * 0.1016 / 5.903
+    const val DRIVE_ENCODER_MULTIPLY_POSITION = PI * 0.1016 / 5.903
     // Velocity is in rpm so needs / 60
-    const val POWER_ENCODER_MULTIPLY_VELOCITY = POWER_ENCODER_MULTIPLY_POSITION / 60.0
+    const val DRIVE_ENCODER_MULTIPLY_VELOCITY = DRIVE_ENCODER_MULTIPLY_POSITION / 60.0
 
 
     const val ANGLE_ENCODER_MULTIPLY = 2* PI
 
     const val ANGLE_MOTOR_ENCODER_MULTIPLY = 1/21.4285714 * (2*PI)
 
-    const val MAX_AUTO_SPEED = 4.0
+    const val DRIVE_MOTOR_INVERTED = false
+    const val ANGLE_MOTOR_INVERTED = false
 
-    const val AUTO_POWER_P = 2.0
-    const val AUTO_POWER_I = 0.0
-    const val AUTO_POWER_D = 0.0
-
-    const val AUTO_ANGLE_P = 2.0
-    const val AUTO_ANGLE_I = 0.0
-    const val AUTO_ANGLE_D = 0.0
-
-    const val AUTO_REPLANNING_TOTAL_ERROR = 100.0
-    const val AUTO_REPLANNING_SPIKE = 100.0
+    const val DRIVE_CURRENT_LIMIT = 50
+    const val ANGLE_CURRENT_LIMIT = 50
 
 }
 
@@ -244,3 +236,5 @@ object TuningConstants {
     //Good starting place 1/450, 0.00314
     const val VISION_ANGLE_COR = 0.0
 }
+
+class SwerveModuleData(val position: Translation2d, val driveMotorID: Int, val angleMotorID: Int, val angleEncoderID: Int, val angleOffset: Double, val inverted: Boolean){}

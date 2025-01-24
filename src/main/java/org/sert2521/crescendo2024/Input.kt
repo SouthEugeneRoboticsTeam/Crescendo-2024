@@ -11,10 +11,8 @@ import edu.wpi.first.wpilibj2.command.WaitCommand
 import edu.wpi.first.wpilibj2.command.button.JoystickButton
 import edu.wpi.first.wpilibj2.command.button.Trigger
 import org.sert2521.crescendo2024.commands.*
-import org.sert2521.crescendo2024.subsystems.Climber
-import org.sert2521.crescendo2024.subsystems.Drivetrain
 import org.sert2521.crescendo2024.subsystems.Indexer
-import org.sert2521.crescendo2024.subsystems.Wrist
+import org.sert2521.reefscape2025.subsystems.Drivetrain
 import java.io.ObjectInputFilter.Config
 
 //TODO: Label buttons

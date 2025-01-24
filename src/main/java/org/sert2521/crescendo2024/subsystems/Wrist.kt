@@ -38,8 +38,8 @@ object Wrist : SubsystemBase() {
         motorOneConfig.idleMode(SparkBaseConfig.IdleMode.kBrake)
         motorTwoConfig.idleMode(SparkBaseConfig.IdleMode.kBrake)
 
-        motorTwo.inverted = true
-        motorOne.inverted = false
+        motorOneConfig.inverted(false)
+        motorTwoConfig.inverted((true))
 
         val holdCommand = InstantCommand({ SetWrist(RuntimeConstants.wristSetPoint, false).schedule() })
         holdCommand.addRequirements(this)
