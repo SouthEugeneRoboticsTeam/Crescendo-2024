@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj2.command.InstantCommand
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import org.sert2521.crescendo2024.*
 import org.sert2521.crescendo2024.commands.SetFlywheel
-import org.sert2521.reefscape2025.subsystems.Drivetrain
+import org.sert2521.crescendo2024.subsystems.Drivetrain
 
 object Flywheel : SubsystemBase(){
     private val flywheelMotorOne = SparkMax(ElectronicIDs.FLYWHEEL_MOTOR_ONE_ID, SparkLowLevel.MotorType.kBrushless) //Top

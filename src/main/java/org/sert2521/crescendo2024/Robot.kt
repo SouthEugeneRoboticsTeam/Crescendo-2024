@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj2.command.Commands
 import edu.wpi.first.wpilibj2.command.InstantCommand
 import org.sert2521.crescendo2024.commands.SetFlywheel
 import org.sert2521.crescendo2024.subsystems.*
-import org.sert2521.reefscape2025.subsystems.Drivetrain
+import org.sert2521.crescendo2024.subsystems.Drivetrain
 import kotlin.math.PI
 
 
@@ -59,7 +59,6 @@ object Robot : TimedRobot()
     override fun robotPeriodic()
     {
         CommandScheduler.getInstance().run()
-        Output.update()
     }
 
     override fun disabledExit() {

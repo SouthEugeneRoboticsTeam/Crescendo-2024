@@ -1,4 +1,4 @@
-package org.sert2521.reefscape2025.subsystems
+package org.sert2521.crescendo2024.subsystems
 
 import com.ctre.phoenix6.hardware.CANcoder
 import com.revrobotics.spark.SparkBase
@@ -7,7 +7,6 @@ import com.revrobotics.spark.SparkMax
 import com.revrobotics.spark.config.SparkBaseConfig
 import com.revrobotics.spark.config.SparkMaxConfig
 import com.studica.frc.AHRS
-import edu.wpi.first.math.VecBuilder
 import edu.wpi.first.math.estimator.SwerveDrivePoseEstimator
 import edu.wpi.first.math.geometry.Pose2d
 import edu.wpi.first.math.geometry.Rotation2d
@@ -49,6 +48,7 @@ class SwerveModule(
         driveConfig.closedLoop.p(SwerveConstants.DRIVE_P)
         driveConfig.closedLoop.i(SwerveConstants.DRIVE_I)
         driveConfig.closedLoop.d(SwerveConstants.DRIVE_D)
+        driveConfig.closedLoop.velocityFF(SwerveConstants.DRIVE_V)
 
         driveConfig.encoder.positionConversionFactor(SwerveConstants.DRIVE_ENCODER_MULTIPLY_POSITION)
         driveConfig.encoder.velocityConversionFactor(SwerveConstants.DRIVE_ENCODER_MULTIPLY_VELOCITY)
@@ -97,6 +97,7 @@ class SwerveModule(
         goal = SwerveModuleState(wanted.speedMetersPerSecond, Rotation2d(wanted.angle.radians))
         reference = driveError.pow(2) * sign(driveError) + driveMotor.encoder.velocity
         angleMotor.closedLoopController.setReference(wanted.angle.radians, SparkBase.ControlType.kPosition)
+
     }
 
     fun getModuleGoal():SwerveModuleState { return SwerveModuleState(goal.speedMetersPerSecond, Rotation2d(goal.angle.radians)) }
@@ -146,7 +147,6 @@ object Drivetrain : SubsystemBase() {
     private var prevTime = Timer.getFPGATimestamp()
 
     var deltaPose = Pose2d()
-        private set
 
     init {
 
@@ -253,6 +253,8 @@ object Drivetrain : SubsystemBase() {
             modules[i].set(wantedStates[i])
         }
 
+
+
         feed()
 
     }
@@ -297,7 +299,9 @@ object Drivetrain : SubsystemBase() {
     fun getAbsoluteSpeeds(): ChassisSpeeds { return ChassisSpeeds.fromRobotRelativeSpeeds(getRelativeSpeeds(), getPose().rotation) }
 
     // "Fix this nonsense" -Whoever made the original code
-    fun getPose(): Pose2d { return Pose2d(pose.y, pose.x, -pose.rotation) }
+    fun getPose(): Pose2d {
+        return Pose2d(pose.y, pose.x, -pose.rotation)
+    }
 
     fun setMode(coast: Boolean, driveConfig: SparkMaxConfig, angleConfig: SparkMaxConfig) {
 
