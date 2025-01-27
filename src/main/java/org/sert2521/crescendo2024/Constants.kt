@@ -28,7 +28,7 @@ object PhysicalConstants{
     const val HALF_SIDE_LENGTH = 0.0
 
     const val WRIST_ENCODER_MULTIPLY = -2*PI
-    var WRIST_ENCODER_OFFSET = -0.197
+    var WRIST_ENCODER_OFFSET = 0.0
 
     //ESTIMATES
     const val WRIST_SETPOINT_STOW = -0.2
@@ -80,14 +80,14 @@ object SwerveConstants{
     const val DRIVE_BASE_RADIUS = 0.37268
 
     const val DRIVE_S = 0.0
-    const val DRIVE_V = 0.2
+    const val DRIVE_V = 0.2  //0.2
     const val POWER_A = 0.0
 
-    const val DRIVE_P = 0.05
+    const val DRIVE_P = 0.05 //0.05
     const val DRIVE_I = 0.0
     const val DRIVE_D = 0.0
 
-    const val ANGLE_P = 1.4
+    const val ANGLE_P = 0.4 //TODO: grease and put as 1.4
     const val ANGLE_I = 0.0
     const val ANGLE_D = 0.0
 
@@ -121,9 +121,10 @@ object ElectronicIDs{
     const val WRIST_ONE_ID = 17
     const val WRIST_TWO_ID = 4
     const val INDEXER_MOTOR_ID = 9
-    const val BEAMBREAK_ID = 3
+    const val BEAMBREAK_ID = 4
     const val FLYWHEEL_MOTOR_ONE_ID = 8
     const val FLYWHEEL_MOTOR_TWO_ID = 11
+    const val ABSOLUTE_ENCODER_ID = 2
 
     //val camData:Pair<String, Translation3d> = listOf(/*Pair("Center", PhysicalConstants.centerPose), Pair("Right2", PhysicalConstants.rightPose), Pair("Left2", PhysicalConstants.frontPose)*/)
 }

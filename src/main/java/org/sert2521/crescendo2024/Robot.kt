@@ -59,6 +59,7 @@ object Robot : TimedRobot()
     override fun robotPeriodic()
     {
         CommandScheduler.getInstance().run()
+        Output.update()
     }
 
     override fun disabledExit() {

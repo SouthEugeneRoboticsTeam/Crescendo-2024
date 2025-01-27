@@ -22,7 +22,7 @@ object Wrist : SubsystemBase() {
     private val motorTwoConfig = SparkMaxConfig()
 
     val encoder = motorOne.encoder
-    val absEncoder = DutyCycleEncoder(1)
+    val absEncoder = DutyCycleEncoder(ElectronicIDs.ABSOLUTE_ENCODER_ID)
     val motorSpeed = 0.0
     var prevRot = 0.0
     var deltaTime = Timer.getFPGATimestamp()
@@ -39,7 +39,7 @@ object Wrist : SubsystemBase() {
         motorTwoConfig.idleMode(SparkBaseConfig.IdleMode.kBrake)
 
         motorOneConfig.inverted(false)
-        motorTwoConfig.inverted((true))
+        motorTwoConfig.inverted(true)
 
         val holdCommand = InstantCommand({ SetWrist(RuntimeConstants.wristSetPoint, false).schedule() })
         holdCommand.addRequirements(this)
@@ -48,7 +48,7 @@ object Wrist : SubsystemBase() {
 
     override fun periodic(){
         //val time = Timer.getFPGATimestamp()
-        //vel = time
+        //val = time
         //println(getRadians())
     }
 
@@ -71,7 +71,7 @@ object Wrist : SubsystemBase() {
     }
 
     fun getRadians():Double{
-        var wristAngle = (getEncoder()+PI/2).mod(2*PI) - PI/2 + PhysicalConstants.WRIST_ENCODER_OFFSET
+        val wristAngle = getEncoder() + PhysicalConstants.WRIST_ENCODER_OFFSET
         //println(wristAngle)
 
 

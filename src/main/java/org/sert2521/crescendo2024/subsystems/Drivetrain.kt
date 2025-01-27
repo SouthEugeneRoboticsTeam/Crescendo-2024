@@ -70,6 +70,9 @@ class SwerveModule(
         angleConfig.encoder.positionConversionFactor(SwerveConstants.ANGLE_ENCODER_MULTIPLY)
         angleConfig.encoder.velocityConversionFactor(SwerveConstants.ANGLE_ENCODER_MULTIPLY / 60)
 
+        driveMotor.configure(driveConfig, SparkBase.ResetMode.kResetSafeParameters, SparkBase.PersistMode.kPersistParameters)
+        angleMotor.configure(angleConfig, SparkBase.ResetMode.kResetSafeParameters, SparkBase.PersistMode.kPersistParameters)
+
         position = SwerveModulePosition(driveMotor.encoder.position, getAngle())
     }
 
@@ -97,7 +100,7 @@ class SwerveModule(
         goal = SwerveModuleState(wanted.speedMetersPerSecond, Rotation2d(wanted.angle.radians))
         reference = driveError.pow(2) * sign(driveError) + driveMotor.encoder.velocity
         angleMotor.closedLoopController.setReference(wanted.angle.radians, SparkBase.ControlType.kPosition)
-
+        driveMotor.closedLoopController.setReference(reference, SparkBase.ControlType.kVelocity)
     }
 
     fun getModuleGoal():SwerveModuleState { return SwerveModuleState(goal.speedMetersPerSecond, Rotation2d(goal.angle.radians)) }
@@ -300,7 +303,7 @@ object Drivetrain : SubsystemBase() {
 
     // "Fix this nonsense" -Whoever made the original code
     fun getPose(): Pose2d {
-        return Pose2d(pose.y, pose.x, -pose.rotation)
+        return Pose2d(pose.y, pose.x, pose.rotation)
     }
 
     fun setMode(coast: Boolean, driveConfig: SparkMaxConfig, angleConfig: SparkMaxConfig) {
