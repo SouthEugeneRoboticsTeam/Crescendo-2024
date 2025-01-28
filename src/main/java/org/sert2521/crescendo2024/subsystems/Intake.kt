@@ -17,6 +17,7 @@ object Intake : SubsystemBase() {
         config.smartCurrentLimit(30)
 
         intakeMotor.configure(config, SparkBase.ResetMode.kResetSafeParameters, SparkBase.PersistMode.kPersistParameters)
+        alignmentMotor.configure(config, SparkBase.ResetMode.kResetSafeParameters, SparkBase.PersistMode.kPersistParameters)
     }
     fun setMotor(speed:Double) {
         intakeMotor.set(speed)

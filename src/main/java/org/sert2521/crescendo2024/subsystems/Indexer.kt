@@ -1,5 +1,6 @@
 package org.sert2521.crescendo2024.subsystems
 
+import com.revrobotics.spark.SparkBase
 import com.revrobotics.spark.SparkLowLevel
 import com.revrobotics.spark.SparkMax
 import com.revrobotics.spark.config.SparkBaseConfig
@@ -16,6 +17,8 @@ object Indexer: SubsystemBase() {
         config.idleMode(SparkBaseConfig.IdleMode.kBrake)
         config.smartCurrentLimit(30)
         config.inverted(true)
+
+        indexerMotor.configure(config, SparkBase.ResetMode.kResetSafeParameters, SparkBase.PersistMode.kPersistParameters)
     }
 
     fun getBeamBreak():Boolean{
