@@ -63,9 +63,6 @@ object Robot : TimedRobot()
     }
 
     override fun disabledExit() {
-        if (Wrist.getRadians()>4){
-            Wrist.rezeroEncoder()
-        }
     }
 
     /** This method is called once each time the robot enters Disabled mode.  */
@@ -80,48 +77,15 @@ object Robot : TimedRobot()
     }
 
     /** This autonomous runs the autonomous command selected by your [RobotContainer] class.  */
-    override fun autonomousInit()
-    {
-        // We store the command as a Robot property in the rare event that the selector on the dashboard
-        // is modified while the command is running since we need to access it again in teleopInit()
-        /*
-        if (Input.getColor() == DriverStation.Alliance.Blue){
-            PhysicalConstants.WRIST_SETPOINT_PODIUM_DOUBLE_PLUS = 0.29
-        } else {
-            PhysicalConstants.WRIST_SETPOINT_PODIUM_DOUBLE_PLUS = 0.29
-        }
-
-         */
-        Wrist.rezeroEncoder()
-        Drivetrain.setCurrentLimit(60, SparkMaxConfig())
-        Wrist.setCurrentLimit(30)
-
-        val holdCommand = InstantCommand({ if (RuntimeConstants.flywheelGoal != 0.0){
-            SetFlywheel(RuntimeConstants.flywheelGoal, false).schedule() }})
-        holdCommand.addRequirements(Flywheel)
-        Flywheel.defaultCommand = holdCommand
-
-
-
-    }
+    override fun autonomousInit() {}
 
     /** This method is called periodically during autonomous.  */
-    override fun autonomousPeriodic()
-    {
-    }
+    override fun autonomousPeriodic() {}
 
-    override fun autonomousExit() {
-
-        Drivetrain.setCurrentLimit(55, SparkMaxConfig())
-        Wrist.setCurrentLimit(30)
-        //Drivetrain.setNewPose(Pose2d(Drivetrain.getPose().translation, Rotation2d(Drivetrain.getPose().rotation.radians+PI)))
-    }
+    override fun autonomousExit() {}
 
     override fun teleopInit()
     {
-        // This makes sure that the autonomous stops running when teleop starts running. If you want the
-        // autonomous to continue until interrupted by another command, remove this line or comment it out.
-        Drivetrain.setCurrentLimit(55, SparkMaxConfig())
         Flywheel.defaultCommand = SetFlywheel(ConfigConstants.FLYWHEEL_IDLE_SPEED)
         RuntimeConstants.wristSetPoint = PhysicalConstants.WRIST_SETPOINT_STOW
     }

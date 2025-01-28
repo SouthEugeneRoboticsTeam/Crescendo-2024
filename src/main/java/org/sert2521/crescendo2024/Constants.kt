@@ -87,7 +87,7 @@ object SwerveConstants{
     const val DRIVE_I = 0.0
     const val DRIVE_D = 0.0
 
-    const val ANGLE_P = 0.4 //TODO: grease and put as 1.4
+    const val ANGLE_P = 0.7 //TODO: grease and put as 1.4
     const val ANGLE_I = 0.0
     const val ANGLE_D = 0.0
 

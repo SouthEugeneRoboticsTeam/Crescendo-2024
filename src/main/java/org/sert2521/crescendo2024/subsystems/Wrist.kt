@@ -1,11 +1,13 @@
 package org.sert2521.crescendo2024.subsystems
 
+import com.revrobotics.spark.SparkBase
 import com.revrobotics.spark.SparkLowLevel
 import com.revrobotics.spark.SparkMax
 import com.revrobotics.spark.config.SparkBaseConfig
 import com.revrobotics.spark.config.SparkMaxConfig
 import edu.wpi.first.wpilibj.DutyCycleEncoder
 import edu.wpi.first.wpilibj.Timer
+import edu.wpi.first.wpilibj2.command.Commands
 import edu.wpi.first.wpilibj2.command.InstantCommand
 import edu.wpi.first.wpilibj2.command.SubsystemBase
 import org.sert2521.crescendo2024.ElectronicIDs
@@ -41,8 +43,11 @@ object Wrist : SubsystemBase() {
         motorOneConfig.inverted(false)
         motorTwoConfig.inverted(true)
 
-        val holdCommand = InstantCommand({ SetWrist(RuntimeConstants.wristSetPoint, false).schedule() })
-        holdCommand.addRequirements(this)
+        motorOne.configure(motorOneConfig, SparkBase.ResetMode.kResetSafeParameters, SparkBase.PersistMode.kPersistParameters)
+        motorTwo.configure(motorTwoConfig, SparkBase.ResetMode.kResetSafeParameters, SparkBase.PersistMode.kPersistParameters)
+
+
+        val holdCommand = Commands.runOnce({ SetWrist(RuntimeConstants.wristSetPoint, false).schedule() }, this)
         defaultCommand = holdCommand
     }
 
@@ -61,8 +66,9 @@ object Wrist : SubsystemBase() {
     }
 
     fun setVoltage(voltage:Double){
-        motorOne.setVoltage(voltage)
-        motorTwo.setVoltage(voltage)
+        println(voltage)
+        //motorOne.setVoltage(voltage)
+        //motorTwo.setVoltage(voltage)
     }
 
     fun getEncoder():Double{

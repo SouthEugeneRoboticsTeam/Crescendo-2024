@@ -83,7 +83,9 @@ class SwerveModule(
             angleMotor.encoder.setPosition((-(angleEncoder.absolutePosition.valueAsDouble * SwerveConstants.ANGLE_ENCODER_MULTIPLY - angleOffset)))
         }
 
-        return Rotation2d((angleMotor.encoder.position+ PI).mod(2*PI)-PI)
+
+        //return Rotation2d((angleMotor.encoder.position+ PI).mod(2*PI)-PI)
+        return Rotation2d(angleMotor.encoder.position)
     }
 
     // Run periodically
@@ -99,7 +101,7 @@ class SwerveModule(
 
         goal = SwerveModuleState(wanted.speedMetersPerSecond, Rotation2d(wanted.angle.radians))
         reference = driveError.pow(2) * sign(driveError) + driveMotor.encoder.velocity
-        angleMotor.closedLoopController.setReference(wanted.angle.radians, SparkBase.ControlType.kPosition)
+        angleMotor.closedLoopController.setReference(goal.angle.radians, SparkBase.ControlType.kPosition)
         driveMotor.closedLoopController.setReference(reference, SparkBase.ControlType.kVelocity)
     }
 

@@ -32,11 +32,7 @@ object Flywheel : SubsystemBase(){
         motorOneConfig.encoder.velocityConversionFactor(PhysicalConstants.FLYWHEEL_GEAR_RATIO)
         motorTwoConfig.encoder.positionConversionFactor(PhysicalConstants.FLYWHEEL_GEAR_RATIO)
         motorTwoConfig.encoder.velocityConversionFactor(PhysicalConstants.FLYWHEEL_GEAR_RATIO)
-        //defaultCommand = SetFlywheel(TuningConstants.FLYWHEEL_IDLE_SPEED)
-        val holdCommand = InstantCommand({ if (RuntimeConstants.flywheelGoal != 0.0){
-            SetFlywheel(RuntimeConstants.flywheelGoal, false).schedule() }})
-        holdCommand.addRequirements(this)
-        defaultCommand = holdCommand
+        defaultCommand = SetFlywheel(ConfigConstants.FLYWHEEL_IDLE_SPEED)
     }
 
     override fun periodic(){
