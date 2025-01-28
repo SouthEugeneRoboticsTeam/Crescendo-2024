@@ -1,15 +1,7 @@
 package org.sert2521.crescendo2024
 
-import edu.wpi.first.apriltag.AprilTagFieldLayout
-import edu.wpi.first.apriltag.AprilTagFields
-import edu.wpi.first.math.MatBuilder.fill
-import edu.wpi.first.math.Matrix
-import edu.wpi.first.math.Nat
-import edu.wpi.first.math.numbers.N1
-import edu.wpi.first.math.numbers.N3
 import edu.wpi.first.math.trajectory.TrapezoidProfile
 import edu.wpi.first.math.util.Units
-import edu.wpi.first.apriltag.AprilTag
 import edu.wpi.first.math.geometry.*
 import edu.wpi.first.math.interpolation.InterpolatingDoubleTreeMap
 import kotlin.math.PI
@@ -71,7 +63,7 @@ object ConfigConstants{
     const val DRIVE_OPTIMIZED = true
 
     //TODO:CHANGE FLYWHEEL SPEED IF YOU WANT
-    const val FLYWHEEL_IDLE_SPEED = 0.0
+    const val FLYWHEEL_IDLE_SPEED = 3000.0
     const val FLYWHEEL_SHOOT_SPEED = 500.0
 }
 
@@ -103,7 +95,7 @@ object SwerveConstants{
     const val DRIVE_ENCODER_MULTIPLY_VELOCITY = DRIVE_ENCODER_MULTIPLY_POSITION / 60.0
 
 
-    const val ANGLE_ENCODER_MULTIPLY = 2* PI
+    const val ANGLE_ABSOLUTE_ENCODER_MULTIPLY = 2* PI
 
     const val ANGLE_MOTOR_ENCODER_MULTIPLY = 1/21.4285714 * (2*PI)
 

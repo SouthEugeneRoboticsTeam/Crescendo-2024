@@ -1,6 +1,7 @@
 package org.sert2521.crescendo2024.commands
 
 import edu.wpi.first.math.kinematics.ChassisSpeeds
+import edu.wpi.first.wpilibj.Timer
 import org.sert2521.crescendo2024.Input
 import org.sert2521.crescendo2024.RuntimeConstants
 import org.sert2521.crescendo2024.subsystems.Drivetrain
@@ -15,13 +16,6 @@ class JoystickDrive(private val fieldOrientated: Boolean) : JoystickCommand() {
 
         if (joystickData.x == 0.0 && joystickData.y == 0.0 && joystickData.z == 0.0) {
             Drivetrain.stop()
-            /*
-            if (Input.getBrakePos()) {
-                Drivetrain.enterBrakePos()
-            } else {
-                Drivetrain.stop()
-            }
-             */
         } else {
             if (fieldOrientated) {
                 Drivetrain.drive(ChassisSpeeds.fromFieldRelativeSpeeds(joystickData.x, joystickData.y, joystickData.z, Drivetrain.getPose().rotation))

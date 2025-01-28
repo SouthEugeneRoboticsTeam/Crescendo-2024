@@ -15,6 +15,7 @@ import edu.wpi.first.math.kinematics.*
 import edu.wpi.first.math.util.Units
 import edu.wpi.first.wpilibj.MotorSafety
 import edu.wpi.first.wpilibj.Timer
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard
 import edu.wpi.first.wpilibj2.command.SubsystemBase
 import org.sert2521.crescendo2024.SwerveConstants
 import org.sert2521.crescendo2024.SwerveModuleData
@@ -67,8 +68,8 @@ class SwerveModule(
         angleConfig.closedLoop.positionWrappingMaxInput(PI)
 
         // Angle Encoders
-        angleConfig.encoder.positionConversionFactor(SwerveConstants.ANGLE_ENCODER_MULTIPLY)
-        angleConfig.encoder.velocityConversionFactor(SwerveConstants.ANGLE_ENCODER_MULTIPLY / 60)
+        angleConfig.encoder.positionConversionFactor(SwerveConstants.ANGLE_MOTOR_ENCODER_MULTIPLY)
+        angleConfig.encoder.velocityConversionFactor(SwerveConstants.ANGLE_MOTOR_ENCODER_MULTIPLY / 60)
 
         driveMotor.configure(driveConfig, SparkBase.ResetMode.kResetSafeParameters, SparkBase.PersistMode.kPersistParameters)
         angleMotor.configure(angleConfig, SparkBase.ResetMode.kResetSafeParameters, SparkBase.PersistMode.kPersistParameters)
@@ -78,9 +79,9 @@ class SwerveModule(
 
     fun getAngle(): Rotation2d {
         if(inverted) {
-            angleMotor.encoder.setPosition(angleEncoder.absolutePosition.valueAsDouble * SwerveConstants.ANGLE_ENCODER_MULTIPLY - angleOffset)
+            angleMotor.encoder.setPosition(angleEncoder.absolutePosition.valueAsDouble * SwerveConstants.ANGLE_ABSOLUTE_ENCODER_MULTIPLY - angleOffset)
         }else{
-            angleMotor.encoder.setPosition((-(angleEncoder.absolutePosition.valueAsDouble * SwerveConstants.ANGLE_ENCODER_MULTIPLY - angleOffset)))
+            angleMotor.encoder.setPosition((-(angleEncoder.absolutePosition.valueAsDouble * SwerveConstants.ANGLE_ABSOLUTE_ENCODER_MULTIPLY - angleOffset)))
         }
 
 
@@ -101,8 +102,9 @@ class SwerveModule(
 
         goal = SwerveModuleState(wanted.speedMetersPerSecond, Rotation2d(wanted.angle.radians))
         reference = driveError.pow(2) * sign(driveError) + driveMotor.encoder.velocity
+
         angleMotor.closedLoopController.setReference(goal.angle.radians, SparkBase.ControlType.kPosition)
-        driveMotor.closedLoopController.setReference(reference, SparkBase.ControlType.kVelocity)
+        driveMotor.closedLoopController.setReference(goal.speedMetersPerSecond, SparkBase.ControlType.kVelocity)
     }
 
     fun getModuleGoal():SwerveModuleState { return SwerveModuleState(goal.speedMetersPerSecond, Rotation2d(goal.angle.radians)) }

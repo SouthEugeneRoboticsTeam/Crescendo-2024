@@ -3,6 +3,7 @@ package org.sert2521.crescendo2024.commands
 import edu.wpi.first.math.controller.BangBangController
 import edu.wpi.first.math.controller.PIDController
 import edu.wpi.first.math.controller.SimpleMotorFeedforward
+import edu.wpi.first.wpilibj.Timer
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard
 import edu.wpi.first.wpilibj2.command.Command
 import org.sert2521.crescendo2024.ConfigConstants
@@ -36,7 +37,6 @@ class SetFlywheel(private val rpm:Double, private val ends: Boolean = false) : C
             pidOne.calculate(Flywheel.getSpeeds().first, rpm) + feedForward.calculate(rpm),
             pidTwo.calculate(Flywheel.getSpeeds().second, rpm+TuningConstants.FLYWHEEL_OFFSET) + feedForward.calculate(rpm+TuningConstants.FLYWHEEL_OFFSET)))
         RuntimeConstants.flywheelRevved = min(Flywheel.getSpeeds().first, Flywheel.getSpeeds().second) > rpm
-        SmartDashboard.putBoolean("Revved", RuntimeConstants.flywheelRevved)
     }
 
     override fun isFinished(): Boolean {

@@ -66,7 +66,7 @@ object Wrist : SubsystemBase() {
     }
 
     fun setVoltage(voltage:Double){
-        println(voltage)
+        //println(voltage)
         //motorOne.setVoltage(voltage)
         //motorTwo.setVoltage(voltage)
     }

@@ -18,14 +18,6 @@ object Output : SubsystemBase() {
     private var wristAmps = Wrist.getAmps()
     init {
 
-        val storageDevices = File("/media").listFiles()
-        if (storageDevices != null) {
-            if (storageDevices.isNotEmpty()) {
-                DataLogManager.start(storageDevices[0].absolutePath)
-                DriverStation.startDataLog(DataLogManager.getLog())
-            }
-        }
-
         values.add(Pair("Drive 1 Speed Drive") { Drivetrain.getStates()[0].speedMetersPerSecond })
         values.add(Pair("Drive 2 Speed Drive") { Drivetrain.getStates()[1].speedMetersPerSecond })
         values.add(Pair("Drive 3 Speed Drive") { Drivetrain.getStates()[2].speedMetersPerSecond })
@@ -51,6 +43,5 @@ object Output : SubsystemBase() {
             SmartDashboard.putBoolean("Output/${bool.first}", bool.second())
         }
 
-        SmartDashboard.updateValues()
     }
 }

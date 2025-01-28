@@ -24,29 +24,20 @@ object Flywheel : SubsystemBase(){
         motorOneConfig.inverted(false)
         motorOneConfig.smartCurrentLimit(currentCurrentLimit)
         motorOneConfig.idleMode(SparkBaseConfig.IdleMode.kCoast)
-        flywheelMotorOne.configure(motorOneConfig, SparkBase.ResetMode.kResetSafeParameters, SparkBase.PersistMode.kPersistParameters)
+        motorTwoConfig.inverted(false)
         motorTwoConfig.smartCurrentLimit(currentCurrentLimit)
         motorTwoConfig.idleMode(SparkBaseConfig.IdleMode.kCoast)
-        flywheelMotorTwo.configure(motorTwoConfig, SparkBase.ResetMode.kResetSafeParameters, SparkBase.PersistMode.kPersistParameters)
         motorOneConfig.encoder.positionConversionFactor(PhysicalConstants.FLYWHEEL_GEAR_RATIO)
         motorOneConfig.encoder.velocityConversionFactor(PhysicalConstants.FLYWHEEL_GEAR_RATIO)
         motorTwoConfig.encoder.positionConversionFactor(PhysicalConstants.FLYWHEEL_GEAR_RATIO)
         motorTwoConfig.encoder.velocityConversionFactor(PhysicalConstants.FLYWHEEL_GEAR_RATIO)
+
+        flywheelMotorOne.configure(motorOneConfig, SparkBase.ResetMode.kResetSafeParameters, SparkBase.PersistMode.kNoPersistParameters)
+        flywheelMotorTwo.configure(motorTwoConfig, SparkBase.ResetMode.kResetSafeParameters, SparkBase.PersistMode.kNoPersistParameters)
         defaultCommand = SetFlywheel(ConfigConstants.FLYWHEEL_IDLE_SPEED)
     }
 
     override fun periodic(){
-        val shouldLimit = currentFilter.calculate(Drivetrain.getDraw()>150)
-
-        if (Robot.isAutonomous && currentCurrentLimit!=50){
-            motorOneConfig.smartCurrentLimit(50)
-            motorTwoConfig.smartCurrentLimit(50)
-            currentCurrentLimit=50
-        } else if (currentCurrentLimit!=20){
-            motorOneConfig.smartCurrentLimit(20)
-            motorTwoConfig.smartCurrentLimit(20)
-            currentCurrentLimit=20
-        }
     }
     fun getSpeeds():Pair<Double, Double>{
         return Pair(flywheelMotorOne.encoder.velocity,flywheelMotorTwo.encoder.velocity)
