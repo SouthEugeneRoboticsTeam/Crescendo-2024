@@ -119,7 +119,6 @@ class SwerveModule(
             angleConfig.idleMode(SparkBaseConfig.IdleMode.kBrake)
         }
 
-
     }
 
     fun getModuleReference(): Double { return reference }
@@ -260,8 +259,6 @@ object Drivetrain : SubsystemBase() {
             modules[i].set(wantedStates[i])
         }
 
-
-
         feed()
 
     }
@@ -306,9 +303,7 @@ object Drivetrain : SubsystemBase() {
     fun getAbsoluteSpeeds(): ChassisSpeeds { return ChassisSpeeds.fromRobotRelativeSpeeds(getRelativeSpeeds(), getPose().rotation) }
 
     // "Fix this nonsense" -Whoever made the original code
-    fun getPose(): Pose2d {
-        return Pose2d(pose.y, pose.x, pose.rotation)
-    }
+    fun getPose(): Pose2d { return Pose2d(pose.y, pose.x, pose.rotation) }
 
     fun setMode(coast: Boolean, driveConfig: SparkMaxConfig, angleConfig: SparkMaxConfig) {
 
