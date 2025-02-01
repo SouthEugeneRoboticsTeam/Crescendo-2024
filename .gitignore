@@ -1,2 +1,4 @@
 .gradle
 .idea
+./.idea
+.idea/compiler.xml
