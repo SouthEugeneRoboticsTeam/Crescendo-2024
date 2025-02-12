@@ -20,7 +20,7 @@ object PhysicalConstants{
     const val HALF_SIDE_LENGTH = 0.0
 
     const val WRIST_ENCODER_MULTIPLY = -2*PI
-    var WRIST_ENCODER_OFFSET = 0.0
+    var WRIST_ENCODER_OFFSET = 1.519
 
     //ESTIMATES
     const val WRIST_SETPOINT_STOW = -0.2
@@ -62,8 +62,8 @@ object ConfigConstants{
 
     const val DRIVE_OPTIMIZED = true
 
-    const val FLYWHEEL_IDLE_SPEED = 2000.0
-    const val FLYWHEEL_SHOOT_SPEED = 2000.0 //For demos don't change this
+    const val FLYWHEEL_IDLE_SPEED = 0.0
+    const val FLYWHEEL_SHOOT_SPEED = 0.0 //For demos don't change this
 }
 
 object SwerveConstants{
@@ -81,6 +81,14 @@ object SwerveConstants{
     const val ANGLE_P = 1.4
     const val ANGLE_I = 0.0
     const val ANGLE_D = 0.0
+
+    const val VISION_DRIVE_P = 0.01
+    const val VISION_DRIVE_I = 0.01
+    const val VISION_DRIVE_D = 0.00
+
+    const val VISION_ANGLE_P = 0.01
+    const val VISION_ANGLE_I = 0.01
+    const val VISION_ANGLE_D = 0.00
 
     val swerveModuleData = listOf(
             SwerveModuleData(Translation2d(HALF_SIDE_LENGTH, -HALF_SIDE_LENGTH), 5, 7, 16, -0.355-1.61-1.56+PI/2, false), //Back Left
@@ -178,6 +186,30 @@ object TuningConstants {
     const val FLYWHEEL_KA = 0.0
 
     const val FLYWHEEL_BB_AGGRO = 1.0
+
+}
+
+object VisionTargetPositions {
+
+    val reefPositions = mutableListOf(
+        Pose2d(3.2, 4.19, Rotation2d(0.0)),
+        Pose2d(3.2, 3.86, Rotation2d(0.0)),
+
+        Pose2d(3.7, 2.99, Rotation2d(PI/3)),
+        Pose2d(3.99, 2.83, Rotation2d(PI/3)),
+
+        Pose2d(4.99, 2.83, Rotation2d((2.0*PI)/3.0)),
+        Pose2d(5.28, 2.98, Rotation2d((2.0*PI)/3.0)),
+
+        Pose2d(5.78, 3.86, Rotation2d(PI)),
+        Pose2d(5.78, 4.19, Rotation2d(PI)),
+
+        Pose2d(5.28, 5.07, Rotation2d((-2.0*PI)/3.0)),
+        Pose2d(4.99, 5.23, Rotation2d((-2.0*PI)/3.0)),
+
+        Pose2d(3.99, 5.23, Rotation2d(-PI/3.0)),
+        Pose2d(3.70, 5.07, Rotation2d(-PI/3.0)),
+    )
 
 }
 

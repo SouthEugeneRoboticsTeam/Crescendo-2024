@@ -11,6 +11,7 @@ import org.sert2521.crescendo2024.subsystems.*
 import org.sert2521.crescendo2024.subsystems.Drivetrain
 import java.io.File
 import kotlin.jvm.optionals.getOrNull
+import kotlin.math.abs
 
 object Output : SubsystemBase() {
     private val values = mutableListOf<Pair<String, () -> Double>>()
@@ -23,11 +24,28 @@ object Output : SubsystemBase() {
         values.add(Pair("Drive 3 Speed Drive") { Drivetrain.getStates()[2].speedMetersPerSecond })
         values.add(Pair("Drive 4 Speed Drive") { Drivetrain.getStates()[3].speedMetersPerSecond })
 
+        values.add(Pair("Drive 1 Angle") { Drivetrain.getStates()[0].angle.radians })
+        values.add(Pair("Drive 2 Angle") { Drivetrain.getStates()[1].angle.radians })
+        values.add(Pair("Drive 3 Angle") { Drivetrain.getStates()[2].angle.radians })
+        values.add(Pair("Drive 4 Angle") { Drivetrain.getStates()[3].angle.radians })
+
+        values.add(Pair("Drive 1 Angle Goal") { Drivetrain.getGoals()[0].angle.radians })
+        values.add(Pair("Drive 2 Angle Goal") { Drivetrain.getGoals()[1].angle.radians })
+        values.add(Pair("Drive 3 Angle Goal") { Drivetrain.getGoals()[2].angle.radians })
+        values.add(Pair("Drive 4 Angle Goal") { Drivetrain.getGoals()[3].angle.radians })
+
+        values.add(Pair("Drive 1 Angle Error") { (Drivetrain.getStates()[0].angle.radians - Drivetrain.getGoals()[0].angle.radians) / Drivetrain.getGoals()[0].angle.radians * 100.0 })
+        values.add(Pair("Drive 2 Angle Error") { (Drivetrain.getStates()[1].angle.radians - Drivetrain.getGoals()[1].angle.radians) / Drivetrain.getGoals()[1].angle.radians * 100.0 })
+        values.add(Pair("Drive 3 Angle Error") { (Drivetrain.getStates()[2].angle.radians - Drivetrain.getGoals()[2].angle.radians) / Drivetrain.getGoals()[2].angle.radians * 100.0 })
+        values.add(Pair("Drive 4 Angle Error") { (Drivetrain.getStates()[3].angle.radians - Drivetrain.getGoals()[3].angle.radians) / Drivetrain.getGoals()[3].angle.radians * 100.0 })
+
         values.add(Pair("Wrist 1 Amps") { wristAmps.first })
         values.add(Pair("Wrist 2 Amps") { wristAmps.second })
 
         values.add(Pair("Flywheel Speed 1") { Flywheel.getSpeeds().first })
         values.add(Pair("Flywheel Speed 2") { Flywheel.getSpeeds().second })
+
+        values.add(Pair("Wrist Angle") { Wrist.getRadians() })
 
         bools.add(Pair("Beambreak") { Indexer.getBeamBreak() })
 

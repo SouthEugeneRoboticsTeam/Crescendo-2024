@@ -7,7 +7,6 @@ import com.revrobotics.spark.SparkMax
 import com.revrobotics.spark.config.SparkBaseConfig
 import com.revrobotics.spark.config.SparkMaxConfig
 import com.studica.frc.AHRS
-import edu.wpi.first.math.VecBuilder
 import edu.wpi.first.math.estimator.SwerveDrivePoseEstimator
 import edu.wpi.first.math.geometry.Pose2d
 import edu.wpi.first.math.geometry.Rotation2d
@@ -16,12 +15,11 @@ import edu.wpi.first.math.kinematics.*
 import edu.wpi.first.math.util.Units
 import edu.wpi.first.wpilibj.MotorSafety
 import edu.wpi.first.wpilibj.Timer
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard
 import edu.wpi.first.wpilibj2.command.SubsystemBase
 import org.sert2521.crescendo2024.SwerveConstants
 import org.sert2521.crescendo2024.SwerveModuleData
+import org.sert2521.crescendo2024.VisionTargetPositions
 import org.sert2521.crescendo2024.commands.JoystickDrive
-import org.sert2521.crescendo2024.libraries.LimelightHelpers
 import kotlin.math.*
 
 
@@ -221,7 +219,7 @@ object Drivetrain : SubsystemBase() {
         val deltaTime = currTime - prevTime
 
         poseEstimator.update(getYawAsRotation2d(), positionsArray)
-        visionEstimate()
+        //visionEstimate()
 
         deltaPose = Pose2d((pose.y - prevPose.y) / deltaTime, (pose.x - prevPose.x) / deltaTime, -(pose.rotation - prevPose.rotation) / deltaTime)
 
@@ -322,7 +320,7 @@ object Drivetrain : SubsystemBase() {
         }
     }
 
-    fun visionEstimate() {
+    /*fun visionEstimate() {
 
         var robotYaw = getYaw()
         LimelightHelpers.SetRobotOrientation("", robotYaw, 0.0, 0.0, 0.0, 0.0, 0.0)
@@ -332,7 +330,12 @@ object Drivetrain : SubsystemBase() {
         poseEstimator.setVisionMeasurementStdDevs(VecBuilder.fill(0.5, 0.5, 9999999999999.0))
         poseEstimator.addVisionMeasurement(limelightMeasurement.pose, limelightMeasurement.timestampSeconds)
 
-    }
+    }*/
+
+    fun getNearestTarget(): Pose2d { return getVisionPose().nearest(VisionTargetPositions.reefPositions) }
+
+    fun getVisionPose(): Pose2d { return poseEstimator.estimatedPosition }
+
 
     fun stop() {
 
