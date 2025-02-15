@@ -82,8 +82,8 @@ object SwerveConstants{
     const val ANGLE_I = 0.0
     const val ANGLE_D = 0.0
 
-    const val VISION_DRIVE_P = 0.01
-    const val VISION_DRIVE_I = 0.01
+    const val VISION_DRIVE_P = 0.64
+    const val VISION_DRIVE_I = 0.00
     const val VISION_DRIVE_D = 0.00
 
     const val VISION_ANGLE_P = 0.01

@@ -7,6 +7,7 @@ import com.revrobotics.spark.SparkMax
 import com.revrobotics.spark.config.SparkBaseConfig
 import com.revrobotics.spark.config.SparkMaxConfig
 import com.studica.frc.AHRS
+import edu.wpi.first.math.VecBuilder
 import edu.wpi.first.math.estimator.SwerveDrivePoseEstimator
 import edu.wpi.first.math.geometry.Pose2d
 import edu.wpi.first.math.geometry.Rotation2d
@@ -20,6 +21,7 @@ import org.sert2521.crescendo2024.SwerveConstants
 import org.sert2521.crescendo2024.SwerveModuleData
 import org.sert2521.crescendo2024.VisionTargetPositions
 import org.sert2521.crescendo2024.commands.JoystickDrive
+import org.sert2521.crescendo2024.libraries.LimelightHelpers
 import kotlin.math.*
 
 
@@ -219,7 +221,7 @@ object Drivetrain : SubsystemBase() {
         val deltaTime = currTime - prevTime
 
         poseEstimator.update(getYawAsRotation2d(), positionsArray)
-        //visionEstimate()
+        visionEstimate()
 
         deltaPose = Pose2d((pose.y - prevPose.y) / deltaTime, (pose.x - prevPose.x) / deltaTime, -(pose.rotation - prevPose.rotation) / deltaTime)
 
@@ -320,21 +322,39 @@ object Drivetrain : SubsystemBase() {
         }
     }
 
-    /*fun visionEstimate() {
+    fun visionEstimate() {
 
-        var robotYaw = getYaw()
-        LimelightHelpers.SetRobotOrientation("", robotYaw, 0.0, 0.0, 0.0, 0.0, 0.0)
-
-        val limelightMeasurement: LimelightHelpers.PoseEstimate = LimelightHelpers.getBotPoseEstimate_wpiBlue("")
-
-        poseEstimator.setVisionMeasurementStdDevs(VecBuilder.fill(0.5, 0.5, 9999999999999.0))
-        poseEstimator.addVisionMeasurement(limelightMeasurement.pose, limelightMeasurement.timestampSeconds)
-
-    }*/
+        var doRejectUpdate = false
+        LimelightHelpers.SetRobotOrientation(
+            "limelight",
+            pose.rotation.degrees,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+        )
+        val mt2:LimelightHelpers.PoseEstimate? = LimelightHelpers.getBotPoseEstimate_wpiBlue_MegaTag2("limelight")
+        if (Math.abs(imu.rate) > 720)  // if our angular velocity is greater than 720 degrees per second, ignore vision updates
+        {
+            doRejectUpdate = true
+        } else if (mt2 == null){
+            doRejectUpdate = true
+        } else if (mt2.tagCount == 0){
+            doRejectUpdate = true
+        }
+        if (!doRejectUpdate) {
+            poseEstimator.setVisionMeasurementStdDevs(VecBuilder.fill(.7, .7, 9999999.0))
+            poseEstimator.addVisionMeasurement(
+                mt2!!.pose,
+                mt2.timestampSeconds
+            )
+        }
+    }
 
     fun getNearestTarget(): Pose2d { return getVisionPose().nearest(VisionTargetPositions.reefPositions) }
 
-    fun getVisionPose(): Pose2d { return poseEstimator.estimatedPosition }
+    fun getVisionPose(): Pose2d { return Pose2d(poseEstimator.estimatedPosition.x, poseEstimator.estimatedPosition.y, pose.rotation) }
 
 
     fun stop() {

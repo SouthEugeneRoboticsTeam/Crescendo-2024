@@ -17,7 +17,6 @@ class VisionAlign(): Command() {
 
     private var xError = 0.0
     private var yError = 0.0
-    private var angleError = 0.0
     private var error = 0.0
 
     private var angleTarget = 0.0
@@ -27,6 +26,7 @@ class VisionAlign(): Command() {
     private var xResult = 0.0
     private var yResult = 0.0
     private var angleResult = 0.0
+
 
     init{ addRequirements(Drivetrain)}
 
@@ -38,22 +38,25 @@ class VisionAlign(): Command() {
 
     }
 
+    fun getPositionError(): Double { return error}
+
     override fun execute() {
 
         xError = xTarget - Drivetrain.getVisionPose().x
         yError = yTarget - Drivetrain.getVisionPose().y
-        angleError = angleTarget - Drivetrain.getVisionPose().rotation.radians
 
         angle = atan2(yError, xError)
         error = sqrt( xError.pow(2) + yError.pow(2) )
 
         pidResult = drivePID.calculate(error, 0.0)
-        angleResult = anglePID.calculate(Drivetrain.getVisionPose().rotation.radians, angleTarget)
+        //angleResult = anglePID.calculate(Drivetrain.getVisionPose().rotation.radians - PI/2, angleTarget)
 
         xResult = pidResult * cos(angle)
         yResult = pidResult * sin(angle)
 
-        Drivetrain.drive(ChassisSpeeds(xResult, yResult, angleResult))
+        println("$xResult, $yResult")
+
+        Drivetrain.drive(ChassisSpeeds(-yResult, xResult, angleResult))
 
     }
 }

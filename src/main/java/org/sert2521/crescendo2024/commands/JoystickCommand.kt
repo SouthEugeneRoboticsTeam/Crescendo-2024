@@ -37,15 +37,8 @@ abstract class JoystickCommand : Command() {
 
         // Checks if the joystick is outputting a magnitude greater than 1 and if it is it normalizes the input
         // Otherwise it deadbands the input
-        val sqrMagnitude = currX.pow(2) + currY.pow(2)
-        if (sqrMagnitude > 1) {
-            val magnitude = sqrt(sqrMagnitude)
-            currX /= magnitude
-            currY /= magnitude
-        } else if (sqrMagnitude <= ConfigConstants.POWER_DEADBAND.pow(2)) {
-            currX = 0.0
-            currY = 0.0
-        }
+
+
 
         // Converts the x and y input into m/s so the rate limiters apply in m/s
         val trueSpeed = ConfigConstants.DRIVE_SPEED - (ConfigConstants.DRIVE_SECONDARY_SPEED * fast)
