@@ -256,7 +256,7 @@ object Drivetrain : SubsystemBase() {
 
     fun drive(chassisSpeeds: ChassisSpeeds) {
 
-        val wantedStates = kinematics.toSwerveModuleStates(ChassisSpeeds(chassisSpeeds.vyMetersPerSecond, chassisSpeeds.vxMetersPerSecond, -chassisSpeeds.omegaRadiansPerSecond))
+        val wantedStates = kinematics.toSwerveModuleStates(chassisSpeeds)
 
         for (i in wantedStates.indices) {
             modules[i].set(wantedStates[i])

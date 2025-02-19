@@ -56,7 +56,7 @@ class VisionAlign(): Command() {
 
         println("$xResult, $yResult")
 
-        Drivetrain.drive(ChassisSpeeds(-yResult, xResult, angleResult))
+        Drivetrain.drive(ChassisSpeeds(xResult, -yResult, angleResult))
 
     }
 }
