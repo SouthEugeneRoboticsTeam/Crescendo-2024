@@ -6,15 +6,12 @@ import edu.wpi.first.math.controller.SimpleMotorFeedforward
 import edu.wpi.first.wpilibj.Timer
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard
 import edu.wpi.first.wpilibj2.command.Command
-import org.sert2521.crescendo2024.ConfigConstants
-import org.sert2521.crescendo2024.PhysicalConstants
-import org.sert2521.crescendo2024.RuntimeConstants
-import org.sert2521.crescendo2024.TuningConstants
+import org.sert2521.crescendo2024.*
 import org.sert2521.crescendo2024.subsystems.Flywheel
 import java.io.ObjectInputFilter.Config
 import kotlin.math.min
 
-class SetFlywheel(private val rpm:Double, private val ends: Boolean = false) : Command() {
+class SetFlywheel(private var rpm: Double) : Command() {
     private val pidOne = PIDController(TuningConstants.FLYWHEEL_P, TuningConstants.FLYWHEEL_I, TuningConstants.FLYWHEEL_D)
     private val pidTwo = PIDController(TuningConstants.FLYWHEEL_P_COR, TuningConstants.FLYWHEEL_I_COR, TuningConstants.FLYWHEEL_D_COR)
 
@@ -34,14 +31,14 @@ class SetFlywheel(private val rpm:Double, private val ends: Boolean = false) : C
 
     override fun execute() {
         Flywheel.setVoltages(Pair(
-            pidOne.calculate(Flywheel.getSpeeds().first, rpm) + feedForward.calculate(rpm),
-            pidTwo.calculate(Flywheel.getSpeeds().second, rpm+TuningConstants.FLYWHEEL_OFFSET) + feedForward.calculate(rpm+TuningConstants.FLYWHEEL_OFFSET)))
-        RuntimeConstants.flywheelRevved = min(Flywheel.getSpeeds().first, Flywheel.getSpeeds().second) > rpm
+            pidOne.calculate(Flywheel.getSpeeds().first, Input.getRightTrigger(0.1) * rpm) + feedForward.calculate(Input.getRightTrigger(0.1) * rpm),
+            pidTwo.calculate(Flywheel.getSpeeds().second, Input.getRightTrigger(0.1) * rpm + TuningConstants.FLYWHEEL_OFFSET) + feedForward.calculate(Input.getRightTrigger(0.1) * rpm + TuningConstants.FLYWHEEL_OFFSET)))
+        RuntimeConstants.flywheelRevved = min(Flywheel.getSpeeds().first, Flywheel.getSpeeds().second) > Input.getRightTrigger(0.1) * rpm
     }
 
     override fun isFinished(): Boolean {
         // TODO: Make this return true when this Command no longer needs to run execute()
-        return RuntimeConstants.flywheelRevved && ends
+        return false
     }
 //36:24
     override fun end(interrupted: Boolean) {

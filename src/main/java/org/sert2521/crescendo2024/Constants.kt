@@ -53,8 +53,8 @@ object ConfigConstants{
     //Drive speed constants
     const val DRIVE_SPEED = 2.0
     const val DRIVE_SECONDARY_SPEED = 2.0
-    const val ROT_SPEED = 2.0
-    const val ROT_SECONDARY_SPEED = 2.0
+    const val ROT_SPEED = 1.0
+    const val ROT_SECONDARY_SPEED = 1.0
 
     //Acceleration of drivetrain
     const val DRIVE_ACCEL = 35.0
@@ -62,10 +62,10 @@ object ConfigConstants{
 
     const val DRIVE_OPTIMIZED = true
 
-    const val FLYWHEEL_MAX_SPEED = 2000.0
+    const val FLYWHEEL_MAX_SPEED = 4000.0
     const val FLYWHEEL_MIN_SPEED = 10.0
 
-    const val FLYWHEEL_REVERSE_SPEED = 0.0
+    const val FLYWHEEL_REVERSE_SPEED = -1000.0
 
 }
 

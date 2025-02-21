@@ -86,8 +86,8 @@ object Robot : TimedRobot()
 
     override fun teleopInit()
     {
-        Flywheel.defaultCommand = SetFlywheel(ConfigConstants.FLYWHEEL_IDLE_SPEED)
-        RuntimeConstants.wristSetPoint = PhysicalConstants.WRIST_SETPOINT_STOW
+        Flywheel.defaultCommand = SetFlywheel(0.0)
+        //RuntimeConstants.wristSetPoint = PhysicalConstants.WRIST_SETPOINT_STOW
     }
 
     override fun testInit()

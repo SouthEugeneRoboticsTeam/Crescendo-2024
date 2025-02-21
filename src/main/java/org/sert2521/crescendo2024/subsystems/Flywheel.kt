@@ -23,10 +23,10 @@ object Flywheel : SubsystemBase(){
     init{
         motorOneConfig.inverted(false)
         motorOneConfig.smartCurrentLimit(currentCurrentLimit)
-        motorOneConfig.idleMode(SparkBaseConfig.IdleMode.kCoast)
+        motorOneConfig.idleMode(SparkBaseConfig.IdleMode.kBrake)
         motorTwoConfig.inverted(false)
         motorTwoConfig.smartCurrentLimit(currentCurrentLimit)
-        motorTwoConfig.idleMode(SparkBaseConfig.IdleMode.kCoast)
+        motorTwoConfig.idleMode(SparkBaseConfig.IdleMode.kBrake)
         motorOneConfig.encoder.positionConversionFactor(PhysicalConstants.FLYWHEEL_GEAR_RATIO)
         motorOneConfig.encoder.velocityConversionFactor(PhysicalConstants.FLYWHEEL_GEAR_RATIO)
         motorTwoConfig.encoder.positionConversionFactor(PhysicalConstants.FLYWHEEL_GEAR_RATIO)
@@ -37,8 +37,8 @@ object Flywheel : SubsystemBase(){
         defaultCommand = SetFlywheel(0.0)
     }
 
-    override fun periodic(){
-    }
+    override fun periodic(){}
+
     fun getSpeeds():Pair<Double, Double>{
         return Pair(flywheelMotorOne.encoder.velocity,flywheelMotorTwo.encoder.velocity)
     }

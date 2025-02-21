@@ -16,29 +16,22 @@ import org.sert2521.crescendo2024.subsystems.Drivetrain
 //TODO: Label buttons
 object Input {
     private val driverController = CommandXboxController(0)
-    private val gunnerController = Joystick(1)
 
-    private var flywheelTrigger = driverController.rightTriggerAxis
+    private var flywheelTrigger = driverController::getRightTriggerAxis
     private var fire = driverController.a()
     private var flywheelIntake = driverController.leftBumper()
     private var resetNote = driverController.x()
+    private val flywheelShoot = Trigger{ driverController.rightTriggerAxis > 0.1 }
 
     init{
         flywheelIntake.whileTrue(SetFlywheel(ConfigConstants.FLYWHEEL_REVERSE_SPEED))
-        fire.onTrue(Outtake())
+        fire.whileTrue(Outtake())
         resetNote.onTrue(RezeroNote())
-
+        flywheelShoot.whileTrue(SetFlywheel(ConfigConstants.FLYWHEEL_MAX_SPEED))
     }
 
     fun getRightTrigger(deadband: Double): Double {
-        var result = 0.0
-        when {
-            flywheelTrigger <= deadband -> { result =  0.0 }
-            flywheelTrigger >  deadband -> {
-                result =  flywheelTrigger
-            }
-        }
-        return result
+        return flywheelTrigger()
     }
 
     var secondarySpeedMode = false
