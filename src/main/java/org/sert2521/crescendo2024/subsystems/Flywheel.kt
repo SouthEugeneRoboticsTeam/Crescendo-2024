@@ -34,7 +34,7 @@ object Flywheel : SubsystemBase(){
 
         flywheelMotorOne.configure(motorOneConfig, SparkBase.ResetMode.kResetSafeParameters, SparkBase.PersistMode.kNoPersistParameters)
         flywheelMotorTwo.configure(motorTwoConfig, SparkBase.ResetMode.kResetSafeParameters, SparkBase.PersistMode.kNoPersistParameters)
-        defaultCommand = SetFlywheel(ConfigConstants.FLYWHEEL_IDLE_SPEED)
+        defaultCommand = SetFlywheel(0.0)
     }
 
     override fun periodic(){
