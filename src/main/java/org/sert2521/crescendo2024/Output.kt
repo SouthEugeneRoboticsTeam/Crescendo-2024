@@ -20,6 +20,8 @@ object Output : SubsystemBase() {
 
     init {
 
+        values.add(Pair("Joystick Rotation") { Input.getZ() })
+
         values.add(Pair("Drive 1 Speed Drive") { Drivetrain.getStates()[0].speedMetersPerSecond })
         values.add(Pair("Drive 2 Speed Drive") { Drivetrain.getStates()[1].speedMetersPerSecond })
         values.add(Pair("Drive 3 Speed Drive") { Drivetrain.getStates()[2].speedMetersPerSecond })

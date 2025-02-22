@@ -5,7 +5,6 @@ import edu.wpi.first.wpilibj.Timer
 import edu.wpi.first.wpilibj2.command.Command
 import org.sert2521.crescendo2024.ConfigConstants
 import org.sert2521.crescendo2024.Input
-import org.sert2521.crescendo2024.RuntimeConstants
 import kotlin.math.abs
 import kotlin.math.pow
 import kotlin.math.sign
@@ -75,7 +74,7 @@ abstract class JoystickCommand : Command() {
             }
         }
 
-        var rot = Input.getRot()
+        var rot = Input.getZ()
         if (abs(rot) <= ConfigConstants.ROT_DEADBAND) {
             rot = 0.0
         }
