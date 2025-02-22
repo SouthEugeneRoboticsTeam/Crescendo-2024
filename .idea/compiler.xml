@@ -13,8 +13,8 @@
       <profile name="Gradle Imported" enabled="true">
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="false">
-          <entry name="$PROJECT_DIR$/../../../Public/wpilib/2025/maven/edu/wpi/first/epilogue/epilogue-processor-java/2025.2.1/epilogue-processor-java-2025.2.1.jar" />
-          <entry name="$PROJECT_DIR$/../../../Public/wpilib/2025/maven/edu/wpi/first/epilogue/epilogue-runtime-java/2025.2.1/epilogue-runtime-java-2025.2.1.jar" />
+          <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/edu.wpi.first.epilogue/epilogue-processor-java/2025.3.1/ff799829098ab00775a8dfc5135089f408df595c/epilogue-processor-java-2025.3.1.jar" />
+          <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/edu.wpi.first.epilogue/epilogue-runtime-java/2025.3.1/1893f52706c36e8280c63e9349fdd4773c2035a8/epilogue-runtime-java-2025.3.1.jar" />
         </processorPath>
         <module name="Crescendo-2024.main" />
       </profile>

@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.smartdashboard.Field2d
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard
 import edu.wpi.first.wpilibj2.command.SubsystemBase
 import org.sert2521.crescendo2024.subsystems.*
+import kotlin.math.abs
 
 
 object Output : SubsystemBase() {
@@ -16,8 +17,6 @@ object Output : SubsystemBase() {
     private val visionTargetPose = Field2d()
     private val visionEstimation = Field2d()
     private val testField = Field2d()
-
-    private var visionError = 0.0
 
     init {
 
@@ -46,6 +45,7 @@ object Output : SubsystemBase() {
 
         values.add(Pair("Flywheel Speed 1") { Flywheel.getSpeeds().first })
         values.add(Pair("Flywheel Speed 2") { Flywheel.getSpeeds().second })
+        values.add(Pair("Flywheel Speed Difference") { abs(Flywheel.getSpeeds().first - Flywheel.getSpeeds().second) })
 
         values.add(Pair("Wrist Angle") { Wrist.getRadians() })
 
@@ -89,10 +89,6 @@ object Output : SubsystemBase() {
 
         testField.robotPose = Pose2d(Drivetrain.getPose().translation, Rotation2d(0.0))
         field.robotPose = Drivetrain.getPose()
-        visionField.robotPose = Drivetrain.getVisionPose()
         field.robotPose = Drivetrain.getPose()
-        visionTargetPose.robotPose = Pose2d(Drivetrain.getVisionPose().translation, Drivetrain.getVisionPose().rotation)
-
-
     }
 }
