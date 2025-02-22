@@ -51,15 +51,15 @@ object Input {
     }
 
     fun getX(): Double {
-        return -driverController.leftX
-    }
-
-    fun getY(): Double {
         return -driverController.leftY
     }
 
+    fun getY(): Double {
+        return -driverController.leftX
+    }
+
     fun getRot(): Double {
-        return -driverController.rightX
+        return driverController.rightX
     }
 
     fun getColor(): DriverStation.Alliance {
