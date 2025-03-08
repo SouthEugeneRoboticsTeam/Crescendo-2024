@@ -1,6 +1,7 @@
 package org.sert2521.crescendo2024
 
 import com.revrobotics.spark.config.SparkMaxConfig
+import edu.wpi.first.cameraserver.CameraServer
 import edu.wpi.first.math.geometry.Pose2d
 import edu.wpi.first.math.geometry.Rotation2d
 import edu.wpi.first.wpilibj.DriverStation
@@ -41,12 +42,9 @@ object Robot : TimedRobot()
      */
     override fun robotInit()
     {
-
         Input
         Output
         Drivetrain
-        //Climber
-        //Wrist
     }
 
     /**

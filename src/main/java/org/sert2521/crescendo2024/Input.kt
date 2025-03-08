@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.GenericHID
 import edu.wpi.first.wpilibj.Joystick
 import edu.wpi.first.wpilibj2.command.Commands.runOnce
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController
+import edu.wpi.first.wpilibj2.command.button.Trigger
 import org.sert2521.crescendo2024.commands.*
 import org.sert2521.crescendo2024.subsystems.Drivetrain
 
@@ -13,6 +14,9 @@ import org.sert2521.crescendo2024.subsystems.Drivetrain
 object Input {
     private val driverController = CommandXboxController(0)
     private val gunnerController = Joystick(1)
+
+    private val robotOrientedMode = Trigger{driverController.leftTriggerAxis>0.3}
+
 
     private val intake = driverController.rightBumper()
     private val resetAngle = driverController.start()
@@ -28,6 +32,8 @@ object Input {
         intake.whileTrue(IntakeCommand())
         //intakeReverse.whileTrue(IntakeReverse())
         rev.whileTrue(SetFlywheel(ConfigConstants.FLYWHEEL_SHOOT_SPEED))
+
+        robotOrientedMode.whileTrue(OldJoystickDrive(false))
 
         sourceIntake.whileTrue(SetFlywheel(-4000.0))
         sourceIntake.onFalse(RezeroNote())//.alongWith(SetFlywheel(ConfigConstants.FLYWHEEL_IDLE_SPEED)))

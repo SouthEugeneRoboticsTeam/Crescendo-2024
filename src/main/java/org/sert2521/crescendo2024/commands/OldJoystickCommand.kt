@@ -10,7 +10,7 @@ import kotlin.math.pow
 import kotlin.math.sign
 import kotlin.math.sqrt
 
-abstract class JoystickCommand : Command() {
+abstract class OldJoystickCommand : Command() {
     private var x = 0.0
     private var y = 0.0
     private var prevTime = 0.0
@@ -75,7 +75,7 @@ abstract class JoystickCommand : Command() {
         }
 
         var rot = Input.getZ()
-        if (abs(rot) <= ConfigConstants.ROT_DEADBAND) {
+        if (abs(rot) <= ConfigConstants.CONTROLLER_DEADBAND) {
             rot = 0.0
         }
         rot *= (ConfigConstants.ROT_SPEED - (ConfigConstants.ROT_SECONDARY_SPEED * fast))

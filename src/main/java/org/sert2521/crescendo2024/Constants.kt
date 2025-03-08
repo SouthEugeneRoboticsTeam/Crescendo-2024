@@ -47,8 +47,7 @@ object PhysicalConstants{
 }
 
 object ConfigConstants{
-    const val POWER_DEADBAND = 0.05
-    const val ROT_DEADBAND = 0.07
+    const val CONTROLLER_DEADBAND = 0.05
 
     //Drive speed constants
     const val DRIVE_SPEED = 2.0
@@ -62,8 +61,10 @@ object ConfigConstants{
 
     const val DRIVE_OPTIMIZED = true
 
-    const val FLYWHEEL_IDLE_SPEED = 2000.0
-    const val FLYWHEEL_SHOOT_SPEED = 0.0 //For demos don't change this
+    const val INPUT_ROT_OFFSET = 0.0
+
+    const val FLYWHEEL_IDLE_SPEED = 0.0
+    const val FLYWHEEL_SHOOT_SPEED = 0.0 // 1000.0
 }
 
 object SwerveConstants{
