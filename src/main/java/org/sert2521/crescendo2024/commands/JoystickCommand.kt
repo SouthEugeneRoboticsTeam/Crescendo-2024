@@ -10,7 +10,7 @@ import kotlin.math.pow
 import kotlin.math.sign
 import kotlin.math.sqrt
 
-abstract class OldJoystickCommand : Command() {
+abstract class JoystickCommand : Command() {
     private var x = 0.0
     private var y = 0.0
     private var prevTime = 0.0

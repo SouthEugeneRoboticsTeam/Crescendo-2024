@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController
 import edu.wpi.first.wpilibj2.command.button.Trigger
 import org.sert2521.crescendo2024.commands.*
 import org.sert2521.crescendo2024.subsystems.Drivetrain
+import org.sert2521.reefscape2025.commands.drivetrain.JoystickDrive
 
 //TODO: Label buttons
 object Input {
@@ -33,7 +34,7 @@ object Input {
         //intakeReverse.whileTrue(IntakeReverse())
         rev.whileTrue(SetFlywheel(ConfigConstants.FLYWHEEL_SHOOT_SPEED))
 
-        robotOrientedMode.whileTrue(OldJoystickDrive(false))
+        robotOrientedMode.whileTrue(Drivetrain.drive(JoystickDrive))
 
         sourceIntake.whileTrue(SetFlywheel(-4000.0))
         sourceIntake.onFalse(RezeroNote())//.alongWith(SetFlywheel(ConfigConstants.FLYWHEEL_IDLE_SPEED)))
