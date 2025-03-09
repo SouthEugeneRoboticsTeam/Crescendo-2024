@@ -33,12 +33,14 @@ object Input {
         //intakeReverse.whileTrue(IntakeReverse())
         rev.whileTrue(SetFlywheel(ConfigConstants.FLYWHEEL_SHOOT_SPEED))
 
-        robotOrientedMode.whileTrue(Drivetrain.drive(JoystickCommand()))
+        //robotOrientedMode.whileTrue(Drivetrain.drive(JoystickCommand()))
 
         sourceIntake.whileTrue(SetFlywheel(-4000.0))
         sourceIntake.onFalse(RezeroNote())//.alongWith(SetFlywheel(ConfigConstants.FLYWHEEL_IDLE_SPEED)))
         rezeroNote.whileTrue(RezeroNote())
         resetAngle.onTrue(runOnce({ Drivetrain.setNewPose(Pose2d()) }))
+
+        robotOrientedMode.whileTrue(JoystickDrive(false))
 
         shoot.whileTrue(Outtake())
     }

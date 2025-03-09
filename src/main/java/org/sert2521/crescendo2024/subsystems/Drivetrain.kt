@@ -18,6 +18,7 @@ import edu.wpi.first.wpilibj.Timer
 import edu.wpi.first.wpilibj2.command.SubsystemBase
 import org.sert2521.crescendo2024.SwerveConstants
 import org.sert2521.crescendo2024.SwerveModuleData
+import org.sert2521.crescendo2024.commands.JoystickDrive
 import kotlin.math.*
 
 
@@ -182,7 +183,7 @@ object Drivetrain : SubsystemBase() {
         odometry = SwerveDriveOdometry(kinematics, getYawAsRotation2d(), positionsArray, Pose2d())
         poseEstimator = SwerveDrivePoseEstimator(kinematics, getYawAsRotation2d(), positionsArray, Pose2d())
 
-        Drivetrain.defaultCommand = OldJoystickDrive(true)
+        Drivetrain.defaultCommand = JoystickDrive(true)
 
     }
 
