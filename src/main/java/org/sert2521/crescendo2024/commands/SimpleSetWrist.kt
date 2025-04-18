@@ -5,24 +5,28 @@ import edu.wpi.first.math.controller.PIDController
 import edu.wpi.first.math.controller.ProfiledPIDController
 import edu.wpi.first.math.trajectory.TrapezoidProfile
 import edu.wpi.first.wpilibj2.command.Command
+import org.sert2521.crescendo2024.TuningConstants
 import org.sert2521.crescendo2024.subsystems.Wrist
+import kotlin.math.PI
 
 class SimpleSetWrist(private val targetPosition:Double) : Command() {
-    private val pidLoop = ProfiledPIDController(1.0, 0.0, 0.0,
-        TrapezoidProfile.Constraints(1.0, 2.0))
-    private val feedforward = ArmFeedforward(0.3, 2.4, 1.0, 0.2)
+    private var pidLoop = ProfiledPIDController(TuningConstants.WRIST_P, TuningConstants.WRIST_I, TuningConstants.WRIST_D, TuningConstants.trapConstraints)
+
+    private var feedforward = ArmFeedforward(TuningConstants.WRIST_S, TuningConstants.WRIST_G, TuningConstants.WRIST_V, TuningConstants.WRIST_A)
 
     init {
         // each subsystem used by the command must be passed into the addRequirements() method
         addRequirements(Wrist)
     }
 
-    override fun initialize() {}
+    override fun initialize() {
+        pidLoop.reset(Wrist.getRadians()+2* PI)
+    }
 
     override fun execute() {
 
-        val pidOutput = pidLoop.calculate(Wrist.getRadians(), targetPosition)
-        val feedforwardOutput = feedforward.calculate(pidLoop.setpoint.position, pidLoop.setpoint.velocity)
+        val pidOutput = pidLoop.calculate(Wrist.getRadians()+2*PI, targetPosition+2*PI)
+        val feedforwardOutput = feedforward.calculate(Wrist.getRadians(), pidLoop.setpoint.velocity)
 
         Wrist.setVoltage(pidOutput+feedforwardOutput)
     }

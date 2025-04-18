@@ -139,7 +139,7 @@ class SwerveModule(
 
 object Drivetrain : SubsystemBase() {
 
-    private val imu = AHRS(AHRS.NavXComType.kMXP_SPI)
+    private val imu = AHRS(AHRS.NavXComType.kUSB2)
 
     private val kinematics: SwerveDriveKinematics
     private var modules: Array<SwerveModule>

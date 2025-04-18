@@ -5,6 +5,7 @@ import com.revrobotics.spark.SparkLowLevel
 import com.revrobotics.spark.SparkMax
 import com.revrobotics.spark.config.SparkBaseConfig
 import com.revrobotics.spark.config.SparkMaxConfig
+import edu.wpi.first.math.MathUtil
 import edu.wpi.first.wpilibj.DutyCycleEncoder
 import edu.wpi.first.wpilibj.Timer
 import edu.wpi.first.wpilibj2.command.Commands
@@ -14,6 +15,7 @@ import org.sert2521.crescendo2024.ElectronicIDs
 import org.sert2521.crescendo2024.PhysicalConstants
 import org.sert2521.crescendo2024.RuntimeConstants
 import org.sert2521.crescendo2024.commands.SetWrist
+import org.sert2521.crescendo2024.commands.SimpleSetWrist
 import kotlin.math.PI
 
 object Wrist : SubsystemBase() {
@@ -26,17 +28,14 @@ object Wrist : SubsystemBase() {
     val encoder = motorOne.encoder
     val absEncoder = DutyCycleEncoder(ElectronicIDs.ABSOLUTE_ENCODER_ID)
     val motorSpeed = 0.0
-    var prevRot = 0.0
     var deltaTime = Timer.getFPGATimestamp()
     var vel = 0.0
 
     init{
         motorOneConfig.smartCurrentLimit(30)
         motorTwoConfig.smartCurrentLimit(30)
-        //defaultCommand= RunWrist()
-        //motor.inverted = true
 
-        prevRot = getRadians()
+
         motorOneConfig.idleMode(SparkBaseConfig.IdleMode.kBrake)
         motorTwoConfig.idleMode(SparkBaseConfig.IdleMode.kBrake)
 
@@ -46,9 +45,7 @@ object Wrist : SubsystemBase() {
         motorOne.configure(motorOneConfig, SparkBase.ResetMode.kResetSafeParameters, SparkBase.PersistMode.kPersistParameters)
         motorTwo.configure(motorTwoConfig, SparkBase.ResetMode.kResetSafeParameters, SparkBase.PersistMode.kPersistParameters)
 
-
-        val holdCommand = Commands.runOnce({ SetWrist(RuntimeConstants.wristSetPoint, false).schedule() }, this)
-        defaultCommand = holdCommand
+        defaultCommand = SimpleSetWrist(PhysicalConstants.WRIST_SETPOINT_STOW)
     }
 
     override fun periodic(){
@@ -66,9 +63,9 @@ object Wrist : SubsystemBase() {
     }
 
     fun setVoltage(voltage:Double){
-        //println(voltage)
-        //motorOne.setVoltage(voltage)
-        //motorTwo.setVoltage(voltage)
+
+        motorOne.setVoltage(voltage)
+        motorTwo.setVoltage(voltage)
     }
 
     fun getEncoder():Double{
@@ -78,14 +75,8 @@ object Wrist : SubsystemBase() {
 
     fun getRadians():Double{
         val wristAngle = getEncoder() + PhysicalConstants.WRIST_ENCODER_OFFSET
-        //println(wristAngle)
 
-
-        return wristAngle
-    }
-
-    fun getVelocity():Double{
-        return getRadians()- prevRot
+        return MathUtil.inputModulus(wristAngle, -PI, PI)
     }
 
     fun getAmps():Pair<Double, Double>{

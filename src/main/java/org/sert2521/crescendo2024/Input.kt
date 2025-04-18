@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.GenericHID
 import edu.wpi.first.wpilibj.Joystick
 import edu.wpi.first.wpilibj2.command.Commands.runOnce
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController
+import edu.wpi.first.wpilibj2.command.button.JoystickButton
 import edu.wpi.first.wpilibj2.command.button.Trigger
 import org.sert2521.crescendo2024.commands.*
 import org.sert2521.crescendo2024.subsystems.Drivetrain
@@ -26,6 +27,10 @@ object Input {
     private val sourceIntake = driverController.b()
     private val rezeroNote = driverController.y()
 
+    private val wristStow = JoystickButton(gunnerController, 7)
+    private val wristPodium = JoystickButton(gunnerController, 6)
+    private val wristAmp = JoystickButton(gunnerController, 5)
+
     private val shoot = driverController.leftBumper()
 
     init{
@@ -34,6 +39,10 @@ object Input {
         rev.whileTrue(SetFlywheel(ConfigConstants.FLYWHEEL_SHOOT_SPEED))
 
         //robotOrientedMode.whileTrue(Drivetrain.drive(JoystickCommand()))
+
+        wristStow.onTrue(SimpleSetWrist(PhysicalConstants.WRIST_SETPOINT_STOW))
+        wristPodium.onTrue(SimpleSetWrist(PhysicalConstants.WRIST_SETPOINT_PODIUM))
+        wristAmp.onTrue(SimpleSetWrist(PhysicalConstants.WRIST_SETPOINT_AMP))
 
         sourceIntake.whileTrue(SetFlywheel(-4000.0))
         sourceIntake.onFalse(RezeroNote())//.alongWith(SetFlywheel(ConfigConstants.FLYWHEEL_IDLE_SPEED)))

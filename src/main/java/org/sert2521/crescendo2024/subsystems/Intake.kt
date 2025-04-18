@@ -14,7 +14,7 @@ object Intake : SubsystemBase() {
     init {
         config.idleMode(SparkBaseConfig.IdleMode.kBrake)
         config.inverted(false)
-        config.smartCurrentLimit(30)
+        config.smartCurrentLimit(40)
 
         intakeMotor.configure(config, SparkBase.ResetMode.kResetSafeParameters, SparkBase.PersistMode.kPersistParameters)
         alignmentMotor.configure(config, SparkBase.ResetMode.kResetSafeParameters, SparkBase.PersistMode.kPersistParameters)

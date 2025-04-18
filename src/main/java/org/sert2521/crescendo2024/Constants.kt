@@ -20,7 +20,7 @@ object PhysicalConstants{
     const val HALF_SIDE_LENGTH = 0.0
 
     const val WRIST_ENCODER_MULTIPLY = -2*PI
-    var WRIST_ENCODER_OFFSET = 1.519
+    var WRIST_ENCODER_OFFSET = 1.716-0.197 //current angle with zero offset - normal stow position
 
     //ESTIMATES
     const val WRIST_SETPOINT_STOW = -0.2
@@ -50,7 +50,7 @@ object ConfigConstants{
     const val CONTROLLER_DEADBAND = 0.05
 
     //Drive speed constants
-    const val DRIVE_SPEED = 5.3
+    const val DRIVE_SPEED = 1.2
     const val DRIVE_SECONDARY_SPEED = 2.25
     const val ROT_SPEED = 6.0
     const val ROT_SECONDARY_SPEED = 2.25
@@ -63,7 +63,7 @@ object ConfigConstants{
 
     const val INPUT_ROT_OFFSET = 0.0
 
-    const val FLYWHEEL_IDLE_SPEED = 0.0
+    const val FLYWHEEL_IDLE_SPEED = 1500.0
     const val FLYWHEEL_SHOOT_SPEED = 0.0 // 1000.0
 }
 
@@ -75,7 +75,7 @@ object SwerveConstants{
     const val DRIVE_V = 0.2  //0.2
     const val POWER_A = 0.0
 
-    const val DRIVE_P = 0.05 //0.05
+    const val DRIVE_P = 0.0 //0.05
     const val DRIVE_I = 0.0
     const val DRIVE_D = 0.0
 
@@ -110,8 +110,8 @@ object SwerveConstants{
     const val DRIVE_MOTOR_INVERTED = false
     const val ANGLE_MOTOR_INVERTED = false
 
-    const val DRIVE_CURRENT_LIMIT = 50
-    const val ANGLE_CURRENT_LIMIT = 50
+    const val DRIVE_CURRENT_LIMIT = 40
+    const val ANGLE_CURRENT_LIMIT = 40
 
 }
 

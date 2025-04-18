@@ -45,6 +45,7 @@ object Robot : TimedRobot()
         Input
         Output
         Drivetrain
+        CommandScheduler.getInstance().setPeriod(1.0)
     }
 
     /**
