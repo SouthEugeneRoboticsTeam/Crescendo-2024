@@ -29,7 +29,7 @@ object Input {
 
     private val wristStow = JoystickButton(gunnerController, 7)
     private val wristPodium = JoystickButton(gunnerController, 6)
-    private val wristAmp = JoystickButton(gunnerController, 5)
+    // private val wristAmp = JoystickButton(gunnerController, 5)
 
     private val shoot = driverController.leftBumper()
 
@@ -42,7 +42,7 @@ object Input {
 
         wristStow.onTrue(SimpleSetWrist(PhysicalConstants.WRIST_SETPOINT_STOW))
         wristPodium.onTrue(SimpleSetWrist(PhysicalConstants.WRIST_SETPOINT_PODIUM))
-        wristAmp.onTrue(SimpleSetWrist(PhysicalConstants.WRIST_SETPOINT_AMP))
+        // wristAmp.onTrue(SimpleSetWrist(PhysicalConstants.WRIST_SETPOINT_AMP))
 
         sourceIntake.whileTrue(SetFlywheel(-4000.0))
         sourceIntake.onFalse(RezeroNote())//.alongWith(SetFlywheel(ConfigConstants.FLYWHEEL_IDLE_SPEED)))

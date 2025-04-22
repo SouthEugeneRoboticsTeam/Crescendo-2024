@@ -15,6 +15,7 @@ import edu.wpi.first.math.kinematics.*
 import edu.wpi.first.math.util.Units
 import edu.wpi.first.wpilibj.MotorSafety
 import edu.wpi.first.wpilibj.Timer
+import edu.wpi.first.wpilibj2.command.Commands
 import edu.wpi.first.wpilibj2.command.SubsystemBase
 import org.sert2521.crescendo2024.SwerveConstants
 import org.sert2521.crescendo2024.SwerveModuleData
@@ -183,7 +184,7 @@ object Drivetrain : SubsystemBase() {
         odometry = SwerveDriveOdometry(kinematics, getYawAsRotation2d(), positionsArray, Pose2d())
         poseEstimator = SwerveDrivePoseEstimator(kinematics, getYawAsRotation2d(), positionsArray, Pose2d())
 
-        Drivetrain.defaultCommand = JoystickDrive(true)
+        Drivetrain.defaultCommand = run{}
 
     }
 
