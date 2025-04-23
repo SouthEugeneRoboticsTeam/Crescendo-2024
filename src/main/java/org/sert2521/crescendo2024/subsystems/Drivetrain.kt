@@ -140,7 +140,7 @@ class SwerveModule(
 
 object Drivetrain : SubsystemBase() {
 
-    private val imu = AHRS(AHRS.NavXComType.kUSB2)
+    private val imu = AHRS(AHRS.NavXComType.kMXP_SPI) //If gyro isn't connecting switch to USB2
 
     private val kinematics: SwerveDriveKinematics
     private var modules: Array<SwerveModule>

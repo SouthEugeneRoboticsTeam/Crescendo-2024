@@ -4,12 +4,14 @@ import edu.wpi.first.math.geometry.Pose2d
 import edu.wpi.first.wpilibj.DriverStation
 import edu.wpi.first.wpilibj.GenericHID
 import edu.wpi.first.wpilibj.Joystick
+import edu.wpi.first.wpilibj2.command.Commands
 import edu.wpi.first.wpilibj2.command.Commands.runOnce
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController
 import edu.wpi.first.wpilibj2.command.button.JoystickButton
 import edu.wpi.first.wpilibj2.command.button.Trigger
 import org.sert2521.crescendo2024.commands.*
 import org.sert2521.crescendo2024.subsystems.Drivetrain
+import org.sert2521.crescendo2024.subsystems.Indexer
 
 //TODO: Label buttons
 object Input {
@@ -45,7 +47,7 @@ object Input {
         // wristAmp.onTrue(SimpleSetWrist(PhysicalConstants.WRIST_SETPOINT_AMP))
 
         sourceIntake.whileTrue(SetFlywheel(-4000.0))
-        sourceIntake.onFalse(RezeroNote())//.alongWith(SetFlywheel(ConfigConstants.FLYWHEEL_IDLE_SPEED)))
+        sourceIntake.whileTrue(Commands.waitUntil{Indexer.getBeamBreak()}.andThen(RezeroNote()))
         rezeroNote.whileTrue(RezeroNote())
         resetAngle.onTrue(runOnce({ Drivetrain.setNewPose(Pose2d()) }))
 
