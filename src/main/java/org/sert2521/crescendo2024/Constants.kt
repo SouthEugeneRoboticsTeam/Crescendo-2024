@@ -63,8 +63,8 @@ object ConfigConstants{
 
     const val INPUT_ROT_OFFSET = 0.0
 
-    const val FLYWHEEL_IDLE_SPEED = 1500.0
-    const val FLYWHEEL_SHOOT_SPEED = 0.0 // 1000.0
+    const val FLYWHEEL_IDLE_SPEED = 0.0
+    const val FLYWHEEL_SHOOT_SPEED = 3000.0 // 1000.0
 }
 
 object SwerveConstants{
