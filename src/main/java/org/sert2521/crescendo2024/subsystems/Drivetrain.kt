@@ -184,7 +184,7 @@ object Drivetrain : SubsystemBase() {
         odometry = SwerveDriveOdometry(kinematics, getYawAsRotation2d(), positionsArray, Pose2d())
         poseEstimator = SwerveDrivePoseEstimator(kinematics, getYawAsRotation2d(), positionsArray, Pose2d())
 
-        Drivetrain.defaultCommand = run{}
+        Drivetrain.defaultCommand = JoystickDrive(true)
 
     }
 
