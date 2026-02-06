@@ -50,9 +50,9 @@ object ConfigConstants{
     const val CONTROLLER_DEADBAND = 0.05
 
     //Drive speed constants
-    const val DRIVE_SPEED = 1.0
+    const val DRIVE_SPEED = 0.7
     const val DRIVE_SECONDARY_SPEED = 1.0
-    const val ROT_SPEED = 3.0
+    const val ROT_SPEED = 1.0
     const val ROT_SECONDARY_SPEED = 3.0
 
     //Acceleration of drivetrain
@@ -63,7 +63,7 @@ object ConfigConstants{
 
     const val INPUT_ROT_OFFSET = 0.0
 
-    const val FLYWHEEL_IDLE_SPEED = 0.0
+    const val FLYWHEEL_IDLE_SPEED = 2000.0
     const val FLYWHEEL_SHOOT_SPEED = 2000.0 // 1000.0
 }
 
@@ -187,30 +187,6 @@ object TuningConstants {
     const val FLYWHEEL_KA = 0.0
 
     const val FLYWHEEL_BB_AGGRO = 1.0
-
-}
-
-object VisionTargetPositions {
-
-    val reefPositions = mutableListOf(
-        Pose2d(3.2, 4.19, Rotation2d(0.0)),
-        Pose2d(3.2, 3.86, Rotation2d(0.0)),
-
-        Pose2d(3.7, 2.99, Rotation2d(PI/3)),
-        Pose2d(3.99, 2.83, Rotation2d(PI/3)),
-
-        Pose2d(4.99, 2.83, Rotation2d((2.0*PI)/3.0)),
-        Pose2d(5.28, 2.98, Rotation2d((2.0*PI)/3.0)),
-
-        Pose2d(5.78, 3.86, Rotation2d(PI)),
-        Pose2d(5.78, 4.19, Rotation2d(PI)),
-
-        Pose2d(5.28, 5.07, Rotation2d((-2.0*PI)/3.0)),
-        Pose2d(4.99, 5.23, Rotation2d((-2.0*PI)/3.0)),
-
-        Pose2d(3.99, 5.23, Rotation2d(-PI/3.0)),
-        Pose2d(3.70, 5.07, Rotation2d(-PI/3.0)),
-    )
 
 }
 

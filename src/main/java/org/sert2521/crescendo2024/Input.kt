@@ -25,6 +25,7 @@ object Input {
     private val resetAngle = driverController.start()
 
     private val intakeReverse = driverController.x()
+    private val drivetrainModuleLock = driverController.a()
     private val rev = driverController.rightTrigger(0.3)
     private val sourceIntake = driverController.b()
     private val rezeroNote = driverController.y()
@@ -87,5 +88,9 @@ object Input {
 
     fun setRumble(amount: Double) {
         driverController.setRumble(GenericHID.RumbleType.kBothRumble, amount)
+    }
+
+    fun getDrivetrainLock(): Boolean {
+        return drivetrainModuleLock.asBoolean
     }
 }

@@ -17,6 +17,7 @@ import edu.wpi.first.wpilibj.MotorSafety
 import edu.wpi.first.wpilibj.Timer
 import edu.wpi.first.wpilibj2.command.Commands
 import edu.wpi.first.wpilibj2.command.SubsystemBase
+import org.sert2521.crescendo2024.Input
 import org.sert2521.crescendo2024.SwerveConstants
 import org.sert2521.crescendo2024.SwerveModuleData
 import org.sert2521.crescendo2024.commands.JoystickDrive
@@ -102,8 +103,9 @@ class SwerveModule(
 
         goal = SwerveModuleState(wanted.speedMetersPerSecond, Rotation2d(wanted.angle.radians))
         reference = driveError.pow(2) * sign(driveError) + driveMotor.encoder.velocity
-
-        angleMotor.closedLoopController.setReference(goal.angle.radians, SparkBase.ControlType.kPosition)
+        if (!Input.getDrivetrainLock()){
+            angleMotor.closedLoopController.setReference(goal.angle.radians, SparkBase.ControlType.kPosition)
+        }
         driveMotor.closedLoopController.setReference(goal.speedMetersPerSecond, SparkBase.ControlType.kVelocity)
     }
 
