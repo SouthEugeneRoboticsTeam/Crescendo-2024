@@ -3,4 +3,11 @@
   <component name="CompilerConfiguration">
     <bytecodeTargetLevel target="18" />
   </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="Crescendo-2024" options="-XDstringConcat=inline" />
+      <module name="Crescendo-2024.test" options="-XDstringConcat=inline" />
+      <module name="IdeaProjects.Crescendo-2024.main" options="-XDstringConcat=inline" />
+    </option>
+  </component>
 </project>
